@@ -1,6 +1,7 @@
 from flask import Flask,jsonify,request
 import pymysql 
 from flask_cors import CORS
+from flask_bcrypt import Bcrypt
 
 def get_blog():
     db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
@@ -40,12 +41,20 @@ def post_blog(content):
     db.close()
     return result
 
-
-
-
 app = Flask(__name__)
-
+bcrypt = Bcrypt(app)
 CORS(app)
+
+
+def login(loginData):
+    # db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+    # cursor = db.cursor()
+    # sql = '''
+
+    # '''
+    pwd = bcrypt.generate_password_hash(loginData['password'])
+    print(bcrypt.check_password_hash(pwd,'abcd1234'))
+    return pwd.decode('utf-8')
 
 
 @app.route('/',methods=['GET'])
@@ -60,6 +69,12 @@ def blog_post():
         print(value)
         post_blog(value)
         return jsonify({'result':'success','data': get_blog(),'msg': 'blog 생성!'})
+
+@app.route('/login',methods=['POST'])
+def login_post():
+    if request.method == 'POST':
+        value = request.json
+        return jsonify({'result':'success','data': login(value),'msg': '로그인 성공!'})
 
 if __name__ == '__main__':
     app.run(debug=True)
