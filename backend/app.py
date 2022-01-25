@@ -45,6 +45,15 @@ app = Flask(__name__)
 bcrypt = Bcrypt(app)
 CORS(app)
 
+def get_user(uid):
+    db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+    cursor = db.cursor(pymysql.cursors.DictCursor)
+    sql = '''SELECT * FROM user where id="%s";''' % uid
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    db.close()
+    return result
+
 
 def login(loginData):
     # db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
@@ -52,9 +61,13 @@ def login(loginData):
     # sql = '''
 
     # '''
-    pwd = bcrypt.generate_password_hash(loginData['password'])
-    print(bcrypt.check_password_hash(pwd,'abcd1234'))
-    return pwd.decode('utf-8')
+    i = get_user(loginData['id'])
+    if len(i) == 0:
+        return "존재하지 않는 id입니다"
+    # pwd = bcrypt.generate_password_hash(loginData['password']).decode('utf-8') #암호화 후 디코딩 해서 json으로 전송 가능
+    if bcrypt.check_password_hash(i[0]['password'].encode(),loginData['password']) == True:
+        return "로그인 성공"
+    return "로그인 실패;;"
 
 
 @app.route('/',methods=['GET'])
