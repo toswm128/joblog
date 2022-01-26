@@ -64,8 +64,8 @@ def login(loginData):
     if bcrypt.check_password_hash(userId[0]['password'].encode(),loginData['password']) == True:
         token = jwt.encode(userId[0],"secret", algorithm="HS256")
         # js = jwt.decode(token,"secret", algorithms="HS256")
-        return token
-    return "로그인 실패;;"
+        return jsonify({'result':'success','data': token, 'msg': '로그인 성공!'})
+    return "로그인 실패;;",404
 
 
 @app.route('/',methods=['GET'])
@@ -85,7 +85,7 @@ def blog_post():
 def login_post():
     if request.method == 'POST':
         value = request.json
-        return jsonify({'result':'success','data': login(value),'msg': '로그인 성공!'})
+        return login(value)
 
 if __name__ == '__main__':
     app.run(debug=True)
