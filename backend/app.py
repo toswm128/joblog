@@ -2,6 +2,7 @@ from flask import Flask,jsonify,request
 import pymysql 
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
+import jwt
 
 def get_blog():
     db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
@@ -45,10 +46,10 @@ app = Flask(__name__)
 bcrypt = Bcrypt(app)
 CORS(app)
 
-def get_user(uid):
+def get_user(userId):
     db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
     cursor = db.cursor(pymysql.cursors.DictCursor)
-    sql = '''SELECT * FROM user where id="%s";''' % uid
+    sql = '''SELECT * FROM user where id="%s";''' % userId
     cursor.execute(sql)
     result = cursor.fetchall()
     db.close()
@@ -56,17 +57,14 @@ def get_user(uid):
 
 
 def login(loginData):
-    # db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
-    # cursor = db.cursor()
-    # sql = '''
-
-    # '''
-    i = get_user(loginData['id'])
-    if len(i) == 0:
+    userId = get_user(loginData['id'])
+    if len(userId) == 0:
         return "존재하지 않는 id입니다"
     # pwd = bcrypt.generate_password_hash(loginData['password']).decode('utf-8') #암호화 후 디코딩 해서 json으로 전송 가능
-    if bcrypt.check_password_hash(i[0]['password'].encode(),loginData['password']) == True:
-        return "로그인 성공"
+    if bcrypt.check_password_hash(userId[0]['password'].encode(),loginData['password']) == True:
+        token = jwt.encode(userId[0],"secret", algorithm="HS256")
+        # js = jwt.decode(token,"secret", algorithms="HS256")
+        return token
     return "로그인 실패;;"
 
 
