@@ -2,7 +2,7 @@ from flask import request, jsonify
 
 
 def create_blog_endpoints(app, services):
-    blog_service  = services.blog_service
+    blog_service  = services
 
     @app.route('/',methods=['GET'])
     def index():
