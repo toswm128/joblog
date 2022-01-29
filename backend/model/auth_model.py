@@ -6,7 +6,8 @@ class authModel:
 
     def get_user(self,userId):
         cursor = self.db.cursor(pymysql.cursors.DictCursor)
-        sql = '''SELECT * FROM user where id="%s";''' % userId
+        sql = '''SELECT * FROM user where idx="%s";''' % userId
+        print(sql)
         cursor.execute(sql)
         result = cursor.fetchall()
         self.db.close()
