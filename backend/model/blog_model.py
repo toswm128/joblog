@@ -9,7 +9,6 @@ class blogModel:
         sql = '''SELECT * FROM blog;'''
         cursor.execute(sql)
         result = cursor.fetchall()
-        self.db.close()
         return result
     
     def post_blog(self,content):
@@ -37,8 +36,5 @@ class blogModel:
         cursor.execute(sql)
         result = cursor.fetchall()
         self.db.commit()
-        self.db.close()
         return result
     
-    def a(self):
-        return "aa"

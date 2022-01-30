@@ -4,6 +4,6 @@ class authService:
     def __init__(self, authModel):
         self.auth_model = authModel 
         
-    def get_all_user(self,userId):
-        resurt = self.auth_model.get_user(userId)
+    def try_login(self,userId):
+        resurt = self.auth_model.get_user_to_id(userId)
         return resurt

@@ -4,12 +4,10 @@ class authModel:
     def __init__(self, database):
         self.db = database
 
-    def get_user(self,userId):
+    def get_user_to_id(self,userId):
         cursor = self.db.cursor(pymysql.cursors.DictCursor)
-        sql = '''SELECT * FROM user where idx="%s";''' % userId
-        print(sql)
+        sql = '''SELECT * FROM user where id="%s";''' % userId
         cursor.execute(sql)
         result = cursor.fetchall()
-        self.db.close()
+        print(sql,result)
         return result
-        

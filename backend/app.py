@@ -2,28 +2,33 @@ from flask import Flask,jsonify,request
 import pymysql 
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
-import jwt
+
 
 from model import blogModel,authModel
 from service import blogService,authService
 from view import create_blog_endpoints,create_auth_endpoints
 
 
-app = Flask(__name__)
-bcrypt = Bcrypt(app)
-CORS(app)
+class Services:
+    pass
 
-database = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+def create_app(test_config = None):
+    app = Flask(__name__)
+    app.config['JSON_AS_ASCII'] = False
+    CORS(app)
 
-blog_Model = blogModel(database)
-auth_Model = authModel(database)
+    database = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
 
-blogServices = blogService(blog_Model)
-authServices = authService(auth_Model)
+    blog_Model = blogModel(database)
+    auth_Model = authModel(database)
 
-create_blog_endpoints(app,blogServices)
-create_auth_endpoints(app,authServices)
+    blog_services=Services
+    auth_services=Services
 
-if __name__ == '__main__':
-    app.run(debug=True)
-    
+    blog_services.blogServices = blogService(blog_Model)
+    auth_services.authServices = authService(auth_Model)
+
+    create_blog_endpoints(app,blog_services)
+    create_auth_endpoints(app,auth_services)
+
+    return app
