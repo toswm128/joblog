@@ -9,13 +9,16 @@ def create_auth_endpoints(app, services):
     def loginPost():
         if request.method == 'POST':
             value = request.json
-            loginUser = user_service.try_login(value['id'])
+            loginUser = user_service.try_login(value['id'],value['password'])
 
 
-            # if loginUser:
-            #     loginUser
-            return jsonify({'message':'OK!','data':loginUser}), 200
-            # return jsonify({'message':'I cant find user to this one!'}), 404
+            if loginUser == 404:
+                return jsonify({"msg":"아이디를 찾을 수 없습니다."}),404
+            elif loginUser == 400:
+                return jsonify({"msg":"비밀번호가 일치하지 않습니다."}),400
+            else:
+                return jsonify({'message':'OK!','data':loginUser}), 200
+            return jsonify({"msg":"예기치 못한 오류"}),500
 
     @app.route('/user',methods=['GET'])
     def getUserToId():

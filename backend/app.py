@@ -4,6 +4,7 @@ from flask_cors import CORS
 from flask_bcrypt import Bcrypt
 
 
+
 from model import blogModel,authModel
 from service import blogService,authService
 from view import create_blog_endpoints,create_auth_endpoints
