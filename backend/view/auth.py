@@ -24,3 +24,9 @@ def create_auth_endpoints(app, services):
     def getUserToId():
         if request.method == 'GET':
             return jsonify({'result':'success','data': user_service.try_login('minsu10'),'msg': '유저 정보 가져오기'})
+
+    @app.route('/join',methods=['POST'])
+    def Join():
+        if request.method == 'POST':
+            value = request.json
+            return jsonify({'result':'success','data': user_service.try_join(value),'msg': '유저 정보 가져오기'})

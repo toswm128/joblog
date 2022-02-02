@@ -16,3 +16,8 @@ class authService:
                 return jwt.encode(resurt,"fromis", algorithm="HS256")
             return 400
         return 404
+
+    def try_join(self,userData):
+        userData['password'] = bcrypt.hashpw(userData['password'].encode("utf-8"), bcrypt.gensalt()).decode('utf-8')
+        resurt = self.auth_model.insert_user(userData)
+        return resurt
