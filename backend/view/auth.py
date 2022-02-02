@@ -29,4 +29,8 @@ def create_auth_endpoints(app, services):
     def Join():
         if request.method == 'POST':
             value = request.json
-            return jsonify({'result':'success','data': user_service.try_join(value),'msg': '유저 정보 가져오기'})
+            joinInfo = user_service.try_join(value)
+            if joinInfo == 400:
+                return jsonify({'msg': '입력하지 않은 값이 있습니다'}),400
+            else:
+                return jsonify({'result':'success','data': joinInfo,'msg': '유저 정보 가져오기'})

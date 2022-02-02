@@ -18,6 +18,9 @@ class authService:
         return 404
 
     def try_join(self,userData):
-        userData['password'] = bcrypt.hashpw(userData['password'].encode("utf-8"), bcrypt.gensalt()).decode('utf-8')
-        resurt = self.auth_model.insert_user(userData)
-        return resurt
+        if userData['id'] and userData['password'] and userData['name']:
+            userData['password'] = bcrypt.hashpw(userData['password'].encode("utf-8"), bcrypt.gensalt()).decode('utf-8')
+            resurt = self.auth_model.insert_user(userData)
+            return resurt
+        else:
+            return 400
