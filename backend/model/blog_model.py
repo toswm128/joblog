@@ -10,6 +10,13 @@ class blogModel:
         cursor.execute(sql)
         result = cursor.fetchall()
         return result
+
+    def get_board_idx(self,idx):
+        cursor = self.db.cursor(pymysql.cursors.DictCursor)
+        sql = '''SELECT * FROM blog where idx=%d;''' % int(idx)
+        cursor.execute(sql)
+        result = cursor.fetchone()
+        return result
     
     def post_blog(self,content):
         cursor = self.db.cursor()

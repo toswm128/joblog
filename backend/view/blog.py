@@ -15,3 +15,10 @@ def create_blog_endpoints(app, services):
             value = request.json
             blog_service.post_blog(value)
             return jsonify({'result':'success','data': blog_service.get_Blog(),'msg': 'blog 생성!'})
+
+    @app.route('/blog/board',methods=['GET'])
+    def getBoard():
+        if request.method == 'GET':
+            idx = request.args.get('idx')
+            board = blog_service.get_select_board(idx)
+            return jsonify({'result':'success','data': board,'msg': 'blog 불러오기'})
