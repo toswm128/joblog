@@ -1,11 +1,12 @@
 import React from "react";
 import Header from "components/header";
+import BoardItem from "components/BoardItem";
 
 const MainPage = () => {
   return (
     <div>
       <Header />
-      <div>main</div>
+      <BoardItem />
     </div>
   );
 };
