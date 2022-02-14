@@ -1,6 +1,10 @@
 import React from "react";
 import Header from "components/header";
-import { DetailPageContainer, DetailPageContent } from "./DetailPageStyle";
+import {
+  DetailPageContainer,
+  DetailPageContent,
+  DetailCommentsList,
+} from "./DetailPageStyle";
 import heart from "assets/png/heart.png";
 import Comment from "components/Comment";
 
@@ -329,7 +333,20 @@ const DetailPage = () => {
               </p>
             </div>
           </div>
-          <Comment />
+          <DetailCommentsList>
+            <p>
+              <div></div>
+              <text>{4}개의 댓글</text>
+            </p>
+
+            <Comment />
+            <Comment />
+            <Comment />
+            <Comment />
+            <Comment />
+            <Comment />
+            <Comment />
+          </DetailCommentsList>
         </DetailPageContent>
       </DetailPageContainer>
     </>

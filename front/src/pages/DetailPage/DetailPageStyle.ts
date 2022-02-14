@@ -56,3 +56,25 @@ export const DetailPageContent = styled.div`
     flex-direction: column;
   }
 `;
+
+export const DetailCommentsList = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+
+  & > p {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    div {
+      width: 100%;
+      border: 1px solid black;
+    }
+    text {
+      padding: 0 6px;
+      position: absolute;
+      background-color: white;
+    }
+  }
+`;
