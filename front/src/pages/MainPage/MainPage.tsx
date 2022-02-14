@@ -5,7 +5,7 @@ import { MainContainer } from "./MainPageStyle";
 
 const MainPage = () => {
   return (
-    <div>
+    <>
       <Header />
       <MainContainer>
         <BoardItem />
@@ -16,7 +16,7 @@ const MainPage = () => {
         <BoardItem />
         <BoardItem />
       </MainContainer>
-    </div>
+    </>
   );
 };
 
