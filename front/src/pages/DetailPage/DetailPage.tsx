@@ -7,6 +7,8 @@ import {
 } from "./DetailPageStyle";
 import heart from "assets/png/heart.png";
 import Comment from "components/Comment";
+import { MainPageContainer } from "pages/MainPage/MainPageStyle";
+import BoardItem from "components/BoardItem";
 
 const DetailPage = () => {
   return (
@@ -338,7 +340,6 @@ const DetailPage = () => {
               <div></div>
               <text>{4}개의 댓글</text>
             </p>
-
             <Comment />
             <Comment />
             <Comment />
@@ -346,8 +347,23 @@ const DetailPage = () => {
             <Comment />
             <Comment />
             <Comment />
+            <p>
+              <div></div>
+              <text>다른 게시글</text>
+            </p>
           </DetailCommentsList>
         </DetailPageContent>
+        <MainPageContainer>
+          <BoardItem />
+          <BoardItem />
+          <BoardItem />
+          <BoardItem />
+          <BoardItem />
+          <BoardItem />
+          <BoardItem />
+          <BoardItem />
+          <BoardItem />
+        </MainPageContainer>
       </DetailPageContainer>
     </>
   );

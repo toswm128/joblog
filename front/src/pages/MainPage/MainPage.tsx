@@ -1,13 +1,13 @@
 import React from "react";
 import Header from "components/header";
 import BoardItem from "components/BoardItem";
-import { MainContainer } from "./MainPageStyle";
+import { MainPageContainer } from "./MainPageStyle";
 
 const MainPage = () => {
   return (
     <>
       <Header />
-      <MainContainer>
+      <MainPageContainer>
         <BoardItem />
         <BoardItem />
         <BoardItem />
@@ -15,7 +15,7 @@ const MainPage = () => {
         <BoardItem />
         <BoardItem />
         <BoardItem />
-      </MainContainer>
+      </MainPageContainer>
     </>
   );
 };
