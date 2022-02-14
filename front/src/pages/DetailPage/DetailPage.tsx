@@ -2,6 +2,7 @@ import React from "react";
 import Header from "components/header";
 import { DetailPageContainer, DetailPageContent } from "./DetailPageStyle";
 import heart from "assets/png/heart.png";
+import Comment from "components/Comment";
 
 const DetailPage = () => {
   return (
@@ -9,6 +10,7 @@ const DetailPage = () => {
       <Header />
       <DetailPageContainer>
         <img
+          className="banner"
           src="https://4.bp.blogspot.com/-Q4xvnaN8nRA/XQSar7IrP4I/AAAAAAAABFM/4snWrZNx_18pgJKIJJHczXMIPtpfCznpACLcBGAs/s1600/fromis-20190614-224241-001.jpg"
           alt=""
         />
@@ -327,6 +329,7 @@ const DetailPage = () => {
               </p>
             </div>
           </div>
+          <Comment />
         </DetailPageContent>
       </DetailPageContainer>
     </>
