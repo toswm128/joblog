@@ -12,3 +12,17 @@ export const WriteButton = styled.button`
   outline: none;
   cursor: pointer;
 `;
+
+export const AuthButton = styled.button`
+  /* 레이아웃 */
+  height: 36px;
+  padding: 0 16px;
+  /* 고급 */
+  font-size: 14px;
+  color: white;
+  border-radius: 3px;
+  border: 0px;
+  outline: none;
+  background-color: #303134;
+  cursor: pointer;
+`;

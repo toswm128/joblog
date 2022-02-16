@@ -14,3 +14,20 @@ export const CommentInput = styled.input`
     color: #c4c4c4;
   }
 `;
+
+export const AuthInput = styled.input`
+  /* 레이아웃 */
+  width: 552px;
+  height: 53px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  /* 고급 */
+  font-size: 20px;
+  border: 2.5px solid black;
+  outline: none;
+  border-radius: 66px;
+  &::placeholder {
+    color: black;
+  }
+`;

@@ -22,10 +22,10 @@ const LoginPage = () => {
           <input type="text" placeholder="검색어를 입력해 주세요" />
           <button>검색</button>
         </div>
-        <Link to={"/"} className="header-authBtn">
+        <Link to={"/login"} className="header-authBtn">
           로그인
         </Link>
-        <Link to={"/"} className="header-authBtn">
+        <Link to={"/join"} className="header-authBtn">
           회원가입
         </Link>
       </HeaderRight>
