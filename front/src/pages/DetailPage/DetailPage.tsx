@@ -9,6 +9,8 @@ import heart from "assets/png/heart.png";
 import Comment from "components/Comment";
 import { MainPageContainer } from "pages/MainPage/MainPageStyle";
 import BoardItem from "components/BoardItem";
+import { CommentInput } from "components/common/InputStyle";
+import { WriteButton } from "components/common/ButtonStyle";
 
 const DetailPage = () => {
   return (
@@ -336,6 +338,19 @@ const DetailPage = () => {
             </div>
           </div>
           <DetailCommentsList>
+            <div className="commentForm">
+              <div>
+                <img
+                  className="profilImg"
+                  src="https://thumbs.gfycat.com/UnluckyQualifiedArabianwildcat-size_restricted.gif"
+                  alt=""
+                />
+                <CommentInput placeholder="댓글을 입력해 주세요" />
+              </div>
+              <div>
+                <WriteButton>작성하기</WriteButton>
+              </div>
+            </div>
             <p>
               <div></div>
               <text>{4}개의 댓글</text>

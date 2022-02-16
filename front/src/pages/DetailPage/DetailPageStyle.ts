@@ -6,7 +6,7 @@ export const DetailPageContainer = styled.div`
   flex-direction: column;
   gap: 20px;
 
-  img {
+  & > img {
     /* 레이아웃 */
     width: 100%;
     height: 320px;
@@ -20,6 +20,10 @@ export const DetailPageContent = styled.div`
   flex-direction: column;
   width: 800px;
   margin: 0 auto 0 auto;
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 
   .profil {
     /* 레이아웃 */
@@ -47,6 +51,7 @@ export const DetailPageContent = styled.div`
       /* 레이아웃 */
       width: 40px;
       height: 40px;
+      object-fit: cover;
     }
   }
 
@@ -83,6 +88,26 @@ export const DetailCommentsList = styled.div`
       padding: 0 6px;
       /* 고급 */
       background-color: white;
+    }
+  }
+
+  .commentForm {
+    display: flex;
+    flex-direction: column;
+    margin: 16px 0;
+    gap: 6px;
+
+    & > div {
+      display: flex;
+      justify-content: flex-end;
+      gap: 6px;
+      img {
+        /* 레이아웃 */
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
     }
   }
 `;
