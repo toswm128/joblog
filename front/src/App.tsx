@@ -4,6 +4,7 @@ import MainPage from "pages/MainPage";
 import LoginPage from "pages/LoginPage";
 import DetailPage from "pages/DetailPage";
 import JoinPage from "pages/JoinPage";
+import WritePage from "pages/WritePage";
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/detail" element={<DetailPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="join" element={<JoinPage />} />
+        <Route path="/join" element={<JoinPage />} />
+        <Route path="/write" element={<WritePage />} />
       </Routes>
     </Router>
   );

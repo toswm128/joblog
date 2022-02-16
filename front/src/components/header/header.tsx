@@ -3,7 +3,7 @@ import { HeaderContaier, HeaderLeft, HeaderRight } from "./headerStyle";
 import logo from "../../assets/png/jobl_logo.png";
 import { Link } from "react-router-dom";
 
-const LoginPage = () => {
+const Header = () => {
   return (
     <HeaderContaier>
       <HeaderLeft>
@@ -33,4 +33,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default Header;
