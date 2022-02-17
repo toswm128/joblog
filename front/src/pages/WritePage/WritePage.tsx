@@ -1,5 +1,5 @@
 import Header from "components/header";
-import WriteEditer from "components/WriteEditer";
+import WriteEditor from "components/WriteEditor";
 import useWrite from "hooks/write";
 import React, { useState } from "react";
 import { useEffect } from "react";
@@ -18,7 +18,7 @@ const WritePage = () => {
         <label htmlFor="banner">이미지 없음</label>
         <input type="file" id="banner" style={{ width: "0px" }} />
         <WirtePageContainer>
-          <WriteEditer />
+          <WriteEditor />
         </WirtePageContainer>
       </WritePageContainer>
     </>
