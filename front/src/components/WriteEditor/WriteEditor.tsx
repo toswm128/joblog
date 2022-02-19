@@ -7,6 +7,9 @@ import { line } from "Store/WriteEditorStore/type";
 const WriteEditor = () => {
   const title = useWrite();
   const { WriteEditorState } = useWrite();
+  useEffect(() => {
+    console.log(WriteEditorState);
+  });
   return (
     <>
       <input
