@@ -5,6 +5,9 @@ export type line = {
   isFocus: boolean;
 };
 
+export type focusLine = number;
+
 export type WriteEditorStateType = {
   body: line[];
+  focusLine: focusLine;
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import useWrite from "hooks/write";
 import { lineData } from "./WriteEditorType";
 import EditorInputter from "./EditorItem/EditorInputtor";
@@ -7,9 +7,7 @@ import { line } from "Store/WriteEditorStore/type";
 const WriteEditor = () => {
   const title = useWrite();
   const { WriteEditorState } = useWrite();
-  useEffect(() => {
-    console.log(WriteEditorState);
-  });
+
   return (
     <>
       <input
@@ -20,8 +18,8 @@ const WriteEditor = () => {
         value={title.text}
       />
 
-      {WriteEditorState.body.map((current: line) => (
-        <EditorInputter data={current} />
+      {WriteEditorState.body.map((current: line, key: React.Key) => (
+        <EditorInputter data={current} key={key} />
       ))}
     </>
   );

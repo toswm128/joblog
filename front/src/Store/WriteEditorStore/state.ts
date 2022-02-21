@@ -21,6 +21,7 @@ const WriteEditorState: WriteEditorStateType = {
       isFocus: false,
     },
   ],
+  focusLine: 0,
 };
 
 export default WriteEditorState;

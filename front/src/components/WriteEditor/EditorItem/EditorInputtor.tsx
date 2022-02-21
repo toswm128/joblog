@@ -1,16 +1,22 @@
 import useWrite from "hooks/write";
 import React from "react";
+import { useRef } from "react";
 import { useEffect } from "react";
+import { line } from "Store/WriteEditorStore/type";
 import { lineData } from "../WriteEditorType";
 
-const EditorInputter = ({ data }: { data: lineData }) => {
-  const inputText = useWrite();
+const EditorInputter = ({ data }: { data: line }) => {
+  const inputHook = useWrite(data);
+  const inpuuterRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    inputText.setText(data.text);
-  }, []);
-
-  useEffect(() => {}, []);
+    if (inputHook.WriteEditorState.body[data.id].text !== inputHook.text)
+      inputHook.setLineText();
+    if (!inpuuterRef.current) {
+      return;
+    }
+    inpuuterRef.current.focus();
+  }, [inputHook.WriteEditorState.focusLine]);
 
   return (
     <>
@@ -18,12 +24,18 @@ const EditorInputter = ({ data }: { data: lineData }) => {
         <input
           className="title"
           type="text"
-          onChange={e => inputText.changeText(e)}
-          value={inputText.text}
+          onChange={e => inputHook.changeText(e)}
+          value={inputHook.text}
+          ref={inpuuterRef}
         />
       ) : (
-        <div className="title" onClick={() => inputText.clickInputter(data.id)}>
-          {inputText.text}
+        <div
+          className="title"
+          onClick={() => {
+            inputHook.clickInputter();
+          }}
+        >
+          {inputHook.text}
         </div>
       )}
     </>

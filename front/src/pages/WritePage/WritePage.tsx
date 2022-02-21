@@ -2,7 +2,6 @@ import Header from "components/header";
 import WriteEditor from "components/WriteEditor";
 import useWrite from "hooks/write";
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { WritePageContainer, WirtePageContainer } from "./WritePageStyle";
 
 const WritePage = () => {

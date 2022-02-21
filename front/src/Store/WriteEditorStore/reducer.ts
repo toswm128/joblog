@@ -11,11 +11,10 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     }),
   [FOCUS_LINE]: (state, action) =>
     produce(state, draft => {
-      // 전체 포커스를 false지정
+      draft.focusLine = action.payload;
       draft.body.forEach(line => {
         line.isFocus = false;
       });
-      // 이후 클릭한 line을 focus
-      draft.body[action.payload].isFocus = true;
+      draft.body[draft.focusLine].isFocus = true;
     }),
 });
