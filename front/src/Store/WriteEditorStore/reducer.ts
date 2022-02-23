@@ -15,6 +15,6 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     }),
   // [ADD_LINE]:(state,action) =>
   // produce(state,draft=>{
-  //   draft
+  //   draft.body
   // })
 });
