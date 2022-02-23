@@ -1,6 +1,6 @@
 import WriteEditorState from "./state";
 import produce from "immer";
-import { FOCUS_LINE, SET_LINE_TEXT } from "./actions";
+import { ADD_LINE, FOCUS_LINE, SET_LINE_TEXT } from "./actions";
 import { WriteEditorStateType } from "./type";
 import { createReducer } from "typesafe-actions";
 
@@ -12,9 +12,9 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
   [FOCUS_LINE]: (state, action) =>
     produce(state, draft => {
       draft.focusLine = action.payload;
-      draft.body.forEach(line => {
-        line.isFocus = false;
-      });
-      draft.body[draft.focusLine].isFocus = true;
     }),
+  // [ADD_LINE]:(state,action) =>
+  // produce(state,draft=>{
+  //   draft
+  // })
 });

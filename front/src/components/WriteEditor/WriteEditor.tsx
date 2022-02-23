@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import useWrite from "hooks/write";
-import { lineData } from "./WriteEditorType";
 import EditorInputter from "./EditorItem/EditorInputtor";
 import { line } from "Store/WriteEditorStore/type";
 

@@ -3,7 +3,6 @@ import React from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
 import { line } from "Store/WriteEditorStore/type";
-import { lineData } from "../WriteEditorType";
 
 const EditorInputter = ({ data }: { data: line }) => {
   const inputHook = useWrite(data);
@@ -20,13 +19,14 @@ const EditorInputter = ({ data }: { data: line }) => {
 
   return (
     <>
-      {data.isFocus ? (
+      {data.id === inputHook.WriteEditorState.focusLine ? (
         <input
           className="title"
           type="text"
           onChange={e => inputHook.changeText(e)}
           value={inputHook.text}
           ref={inpuuterRef}
+          onKeyPress={e => e.key === "Enter" && console.log("en")}
         />
       ) : (
         <div
