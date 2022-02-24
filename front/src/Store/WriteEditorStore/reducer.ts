@@ -13,8 +13,18 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     produce(state, draft => {
       draft.focusLine = action.payload;
     }),
-  // [ADD_LINE]:(state,action) =>
-  // produce(state,draft=>{
-  //   draft.body
-  // })
+  [ADD_LINE]: (state, action) =>
+    produce(state, draft => {
+      draft.focusLine = draft.body.length;
+      draft.body.push({
+        id: draft.body.length,
+        text: "",
+        tag: "div",
+        next: action.payload.next,
+      });
+      draft.body.find(bodyData => {
+        if (bodyData.id === action.payload.id)
+          bodyData.next = draft.body.length - 1;
+      });
+    }),
 });

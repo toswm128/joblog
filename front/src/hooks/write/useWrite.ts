@@ -1,37 +1,47 @@
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "Store/rootReducer";
-import { FOCUS_LINE, SET_LINE_TEXT } from "Store/WriteEditorStore/actions";
+import {
+  ADD_LINE,
+  FOCUS_LINE,
+  SET_LINE_TEXT,
+} from "Store/WriteEditorStore/actions";
 import { line } from "Store/WriteEditorStore/type";
 
-const useWrite = (data?: line) => {
+const useWrite = () => {
   const dispatch = useDispatch();
   const WriteEditorState = useTypedSelector(state => state.WriteEditor);
-  const [text, setText] = useState<string | undefined>(data && data.text);
 
-  const changeText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
-  };
-
-  const setLineText = () => {
+  const setLineText = (text: string | undefined, id: number) => {
     dispatch({
       type: SET_LINE_TEXT,
-      payload: { text: text, id: data && data.id },
+      payload: { text, id },
     });
   };
 
-  const clickInputter = useCallback(() => {
-    dispatch({
-      type: FOCUS_LINE,
-      payload: data && data.id,
-    });
-  }, [dispatch]);
+  const clickInputter = useCallback(
+    (id: number) => {
+      dispatch({
+        type: FOCUS_LINE,
+        payload: id,
+      });
+    },
+    [dispatch]
+  );
+
+  const enterInputter = useCallback(
+    (id: number, next: number | null) => {
+      dispatch({
+        type: ADD_LINE,
+        payload: { id, next },
+      });
+    },
+    [dispatch]
+  );
 
   return {
     clickInputter,
-    text,
-    setText,
-    changeText,
+    enterInputter,
     setLineText,
     WriteEditorState,
   };

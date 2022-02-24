@@ -2,9 +2,10 @@ import React from "react";
 import useWrite from "hooks/write";
 import EditorInputter from "./EditorItem/EditorInputtor";
 import { line } from "Store/WriteEditorStore/type";
+import { useState } from "react";
 
 const WriteEditor = () => {
-  const title = useWrite();
+  const [title, setTitle] = useState("");
   const { WriteEditorState } = useWrite();
 
   // const bodyChek = () => {
@@ -23,8 +24,8 @@ const WriteEditor = () => {
         type="text"
         className="title"
         placeholder="제목을 입력해주세요..."
-        onChange={e => title.changeText(e)}
-        value={title.text}
+        onChange={e => setTitle(e.target.value)}
+        value={title}
       />
 
       {/* {WriteEditorState.body.map((current: line, key: React.Key) => (
@@ -35,6 +36,7 @@ const WriteEditor = () => {
         if (key === 0) {
           next = WriteEditorState.body[WriteEditorState.head].next;
           snext = next;
+          // console.log(WriteEditorState.body[WriteEditorState.head]);
           return (
             <EditorInputter
               data={WriteEditorState.body[WriteEditorState.head]}
@@ -44,6 +46,7 @@ const WriteEditor = () => {
         }
         if (next !== null) {
           snext = WriteEditorState.body[next].next;
+          // console.log(WriteEditorState.body[next]);
           return (
             <EditorInputter data={WriteEditorState.body[next]} key={key} />
           );

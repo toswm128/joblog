@@ -1,6 +1,6 @@
 export type line = {
   id: number;
-  text: string | undefined;
+  text: string;
   tag: string;
   next: number | null;
 };

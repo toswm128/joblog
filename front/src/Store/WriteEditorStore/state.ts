@@ -4,25 +4,19 @@ const WriteEditorState: WriteEditorStateType = {
   body: [
     {
       id: 0,
-      text: "신기해",
-      tag: "div",
-      next: 3,
-    },
-    {
-      id: 1,
-      text: "팔다리가 앞뒤로 막 막",
+      text: "궁금하다면",
       tag: "div",
       next: 2,
     },
     {
-      id: 2,
-      text: "움 움 움직이는게",
+      id: 1,
+      text: "팔로우",
       tag: "div",
       next: null,
     },
     {
-      id: 3,
-      text: "연결리스트",
+      id: 2,
+      text: "아무말도마 어어우",
       tag: "div",
       next: 1,
     },

@@ -1,43 +1,57 @@
 import useWrite from "hooks/write";
 import React from "react";
+import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
+import ContentEditable from "react-contenteditable";
 import { line } from "Store/WriteEditorStore/type";
 
 const EditorInputter = ({ data }: { data: line }) => {
-  const inputHook = useWrite(data);
-  const inpuuterRef = useRef<HTMLInputElement>(null);
+  const [text, setText] = useState(data.text);
+  const inputHook = useWrite();
+  const inputterRef = useRef<HTMLInputElement>(null);
+
+  // useEffect(() => {
+  //   if (inputHook.WriteEditorState.body[data.id].text !== text)
+  //     inputHook.setLineText(text, data.id);
+  //   // console.log(text);
+  // }, [inputHook.WriteEditorState.focusLine]);
 
   useEffect(() => {
-    if (inputHook.WriteEditorState.body[data.id].text !== inputHook.text)
-      inputHook.setLineText();
-    if (!inpuuterRef.current) {
-      return;
-    }
-    inpuuterRef.current.focus();
-  }, [inputHook.WriteEditorState.focusLine]);
+    setText(data.text);
+    if (data.id === inputHook.WriteEditorState.focusLine && inputterRef.current)
+      inputterRef.current.focus();
+  }, [inputHook.WriteEditorState.body.length]);
 
   return (
     <>
-      {data.id === inputHook.WriteEditorState.focusLine ? (
-        <input
-          className="title"
-          type="text"
-          onChange={e => inputHook.changeText(e)}
-          value={inputHook.text}
-          ref={inpuuterRef}
-          onKeyPress={e => e.key === "Enter" && console.log("en")}
-        />
-      ) : (
-        <div
-          className="title"
-          onClick={() => {
-            inputHook.clickInputter();
-          }}
-        >
-          {inputHook.text}
-        </div>
-      )}
+      <input
+        className="title"
+        value={text}
+        ref={inputterRef}
+        disabled={false}
+        onKeyPress={e => {
+          // inputHook.setLineText(text, data.id);
+          // inputHook.enterInputter(data.id, data.next);
+          // if (e.key === "Backspace" && text.length > 0) {
+          //   console.log(text.length);
+          // }
+          if (e.key === "Enter") {
+            inputHook.setLineText(text, data.id);
+            inputHook.enterInputter(data.id, data.next);
+            e.preventDefault();
+          }
+        }}
+        onClick={() => {
+          inputHook.clickInputter(data.id);
+        }}
+        onChange={e => {
+          setText(e.target.value);
+        }}
+        onBlur={() => {
+          inputHook.setLineText(text, data.id);
+        }}
+      />
     </>
   );
 };
