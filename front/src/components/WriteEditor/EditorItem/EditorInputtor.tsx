@@ -11,17 +11,14 @@ const EditorInputter = ({ data }: { data: line }) => {
   const inputHook = useWrite();
   const inputterRef = useRef<HTMLInputElement>(null);
 
-  // useEffect(() => {
-  //   if (inputHook.WriteEditorState.body[data.id].text !== text)
-  //     inputHook.setLineText(text, data.id);
-  //   // console.log(text);
-  // }, [inputHook.WriteEditorState.focusLine]);
-
   useEffect(() => {
     setText(data.text);
     if (data.id === inputHook.WriteEditorState.focusLine && inputterRef.current)
       inputterRef.current.focus();
-  }, [inputHook.WriteEditorState.body.length]);
+  }, [
+    inputHook.WriteEditorState.body.length,
+    inputHook.WriteEditorState.trashList,
+  ]);
 
   return (
     <>
@@ -30,12 +27,16 @@ const EditorInputter = ({ data }: { data: line }) => {
         value={text}
         ref={inputterRef}
         disabled={false}
+        onKeyDown={e => {
+          if (e.key === "Backspace" && text.length === 0) {
+            if (
+              data.next !== null ||
+              inputHook.WriteEditorState.head !== data.id
+            )
+              inputHook.removeLine(data.id, data.next);
+          }
+        }}
         onKeyPress={e => {
-          // inputHook.setLineText(text, data.id);
-          // inputHook.enterInputter(data.id, data.next);
-          // if (e.key === "Backspace" && text.length > 0) {
-          //   console.log(text.length);
-          // }
           if (e.key === "Enter") {
             inputHook.setLineText(text, data.id);
             inputHook.enterInputter(data.id, data.next);

@@ -1,6 +1,6 @@
 import WriteEditorState from "./state";
 import produce from "immer";
-import { ADD_LINE, FOCUS_LINE, SET_LINE_TEXT } from "./actions";
+import { ADD_LINE, FOCUS_LINE, REMOVE_LINE, SET_LINE_TEXT } from "./actions";
 import { WriteEditorStateType } from "./type";
 import { createReducer } from "typesafe-actions";
 
@@ -26,5 +26,24 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
         if (bodyData.id === action.payload.id)
           bodyData.next = draft.body.length - 1;
       });
+    }),
+  [REMOVE_LINE]: (state, action) =>
+    produce(state, draft => {
+      if (draft.head !== action.payload.id) {
+        draft.body.find(bodyData => {
+          if (bodyData.next === action.payload.id)
+            bodyData.next = action.payload.next;
+          else if (bodyData.id === action.payload.id) {
+            draft.trashList.push(bodyData);
+          }
+        });
+      } else {
+        draft.head = action.payload.next;
+        draft.body.find(bodyData => {
+          if (bodyData.id === action.payload.id) {
+            draft.trashList.push(bodyData);
+          }
+        });
+      }
     }),
 });

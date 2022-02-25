@@ -4,6 +4,7 @@ import { useTypedSelector } from "Store/rootReducer";
 import {
   ADD_LINE,
   FOCUS_LINE,
+  REMOVE_LINE,
   SET_LINE_TEXT,
 } from "Store/WriteEditorStore/actions";
 import { line } from "Store/WriteEditorStore/type";
@@ -39,10 +40,21 @@ const useWrite = () => {
     [dispatch]
   );
 
+  const removeLine = useCallback(
+    (id: number, next: number | null) => {
+      dispatch({
+        type: REMOVE_LINE,
+        payload: { id, next },
+      });
+    },
+    [dispatch]
+  );
+
   return {
     clickInputter,
     enterInputter,
     setLineText,
+    removeLine,
     WriteEditorState,
   };
 };

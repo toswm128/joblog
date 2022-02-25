@@ -31,7 +31,7 @@ const WriteEditor = () => {
       {/* {WriteEditorState.body.map((current: line, key: React.Key) => (
         <EditorInputter data={current} key={key} />
       ))} */}
-      {WriteEditorState.body.map((current: line, key: React.Key) => {
+      {WriteEditorState.body.map((current: line, key: number) => {
         next = snext;
         if (key === 0) {
           next = WriteEditorState.body[WriteEditorState.head].next;

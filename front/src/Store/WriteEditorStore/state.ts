@@ -21,6 +21,7 @@ const WriteEditorState: WriteEditorStateType = {
       next: 1,
     },
   ],
+  trashList: [],
   focusLine: 0,
   head: 0,
 };
