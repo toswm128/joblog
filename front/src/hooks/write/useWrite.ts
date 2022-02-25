@@ -41,10 +41,10 @@ const useWrite = () => {
   );
 
   const removeLine = useCallback(
-    (id: number, next: number | null) => {
+    (id: number, next: number | null, prev: number | null) => {
       dispatch({
         type: REMOVE_LINE,
-        payload: { id, next },
+        payload: { id, next, prev },
       });
     },
     [dispatch]

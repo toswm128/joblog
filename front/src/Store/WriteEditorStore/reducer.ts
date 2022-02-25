@@ -21,29 +21,25 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
         text: "",
         tag: "div",
         next: action.payload.next,
+        prev: action.payload.id,
       });
-      draft.body.find(bodyData => {
-        if (bodyData.id === action.payload.id)
-          bodyData.next = draft.body.length - 1;
-      });
+      draft.body[action.payload.id].next = draft.body.length - 1;
+      if (action.payload.next !== null)
+        draft.body[action.payload.next].prev = draft.body.length - 1;
     }),
   [REMOVE_LINE]: (state, action) =>
     produce(state, draft => {
       if (draft.head !== action.payload.id) {
-        draft.body.find(bodyData => {
-          if (bodyData.next === action.payload.id)
-            bodyData.next = action.payload.next;
-          else if (bodyData.id === action.payload.id) {
-            draft.trashList.push(bodyData);
-          }
-        });
+        draft.body[action.payload.prev].next = action.payload.next;
+        if (action.payload.next !== null)
+          draft.body[action.payload.next].prev = action.payload.prev;
+        draft.trashList.push(draft.body[action.payload.id]);
+        draft.focusLine = action.payload.prev;
       } else {
         draft.head = action.payload.next;
-        draft.body.find(bodyData => {
-          if (bodyData.id === action.payload.id) {
-            draft.trashList.push(bodyData);
-          }
-        });
+        draft.trashList.push(draft.body[action.payload.id]);
+
+        draft.focusLine = action.payload.next;
       }
     }),
 });

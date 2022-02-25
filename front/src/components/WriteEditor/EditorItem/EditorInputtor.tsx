@@ -8,17 +8,26 @@ import { line } from "Store/WriteEditorStore/type";
 
 const EditorInputter = ({ data }: { data: line }) => {
   const [text, setText] = useState(data.text);
+  const [flag, setFlag] = useState(false);
   const inputHook = useWrite();
   const inputterRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setText(data.text);
-    if (data.id === inputHook.WriteEditorState.focusLine && inputterRef.current)
-      inputterRef.current.focus();
+    setFlag(!flag);
   }, [
     inputHook.WriteEditorState.body.length,
     inputHook.WriteEditorState.trashList,
   ]);
+
+  useEffect(() => {
+    if (
+      data.id === inputHook.WriteEditorState.focusLine &&
+      inputterRef.current
+    ) {
+      inputterRef.current.focus();
+    }
+  }, [flag]);
 
   return (
     <>
@@ -33,11 +42,12 @@ const EditorInputter = ({ data }: { data: line }) => {
               data.next !== null ||
               inputHook.WriteEditorState.head !== data.id
             )
-              inputHook.removeLine(data.id, data.next);
+              inputHook.removeLine(data.id, data.next, data.prev);
           }
         }}
         onKeyPress={e => {
           if (e.key === "Enter") {
+            console.log("a");
             inputHook.setLineText(text, data.id);
             inputHook.enterInputter(data.id, data.next);
             e.preventDefault();

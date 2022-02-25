@@ -3,6 +3,7 @@ export type line = {
   text: string;
   tag: string;
   next: number | null;
+  prev: number | null;
 };
 
 export type focusLine = number;
