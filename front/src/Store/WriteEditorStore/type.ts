@@ -4,9 +4,11 @@ export type line = {
   tag: string;
   next: number | null;
   prev: number | null;
+  src: string;
+  isImg: boolean;
 };
 
-export type focusLine = number;
+export type focusLine = number | null;
 export type head = number;
 
 export type WriteEditorStateType = {

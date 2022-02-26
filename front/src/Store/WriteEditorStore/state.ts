@@ -8,6 +8,8 @@ const WriteEditorState: WriteEditorStateType = {
       tag: "div",
       next: 2,
       prev: null,
+      src: "",
+      isImg: false,
     },
     {
       id: 1,
@@ -15,6 +17,8 @@ const WriteEditorState: WriteEditorStateType = {
       tag: "div",
       next: null,
       prev: 2,
+      src: "",
+      isImg: false,
     },
     {
       id: 2,
@@ -22,6 +26,8 @@ const WriteEditorState: WriteEditorStateType = {
       tag: "div",
       next: 1,
       prev: 0,
+      src: "",
+      isImg: false,
     },
   ],
   trashList: [],

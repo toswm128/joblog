@@ -1,6 +1,12 @@
 import WriteEditorState from "./state";
 import produce from "immer";
-import { ADD_LINE, FOCUS_LINE, REMOVE_LINE, SET_LINE_TEXT } from "./actions";
+import {
+  ADD_LINE,
+  FOCUS_LINE,
+  REMOVE_LINE,
+  SET_IMG,
+  SET_LINE_TEXT,
+} from "./actions";
 import { WriteEditorStateType } from "./type";
 import { createReducer } from "typesafe-actions";
 
@@ -22,6 +28,8 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
         tag: "div",
         next: action.payload.next,
         prev: action.payload.id,
+        src: "",
+        isImg: false,
       });
       draft.body[action.payload.id].next = draft.body.length - 1;
       if (action.payload.next !== null)
@@ -41,5 +49,14 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
 
         draft.focusLine = action.payload.next;
       }
+    }),
+  [SET_IMG]: (state, action) =>
+    produce(state, draft => {
+      draft.trashList.push(draft.body[action.payload.id]);
+      draft.body[action.payload.id].isImg = true;
+      draft.body[action.payload.id].src = action.payload.src;
+      if (draft.body[action.payload.id].next !== null)
+        draft.focusLine = draft.body[action.payload.id].next;
+      else draft.focusLine = draft.body[action.payload.id].prev;
     }),
 });

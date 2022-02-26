@@ -5,6 +5,7 @@ import {
   ADD_LINE,
   FOCUS_LINE,
   REMOVE_LINE,
+  SET_IMG,
   SET_LINE_TEXT,
 } from "Store/WriteEditorStore/actions";
 import { line } from "Store/WriteEditorStore/type";
@@ -50,11 +51,22 @@ const useWrite = () => {
     [dispatch]
   );
 
+  const setImg = useCallback(
+    (id: number, src: string) => {
+      dispatch({
+        type: SET_IMG,
+        payload: { id, src },
+      });
+    },
+    [dispatch]
+  );
+
   return {
     clickInputter,
     enterInputter,
     setLineText,
     removeLine,
+    setImg,
     WriteEditorState,
   };
 };
