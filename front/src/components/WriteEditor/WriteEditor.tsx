@@ -37,6 +37,16 @@ const WriteEditor = () => {
           next = WriteEditorState.body[WriteEditorState.head].next;
           snext = next;
           // console.log(WriteEditorState.body[WriteEditorState.head]);
+          if (WriteEditorState.body[WriteEditorState.head].tag == "ul") {
+            return (
+              <ul key={key} className="tab">
+                <EditorInputter
+                  data={WriteEditorState.body[WriteEditorState.head]}
+                  key={key}
+                />
+              </ul>
+            );
+          }
           return (
             <EditorInputter
               data={WriteEditorState.body[WriteEditorState.head]}
@@ -47,6 +57,13 @@ const WriteEditor = () => {
         if (next !== null) {
           snext = WriteEditorState.body[next].next;
           // console.log(WriteEditorState.body[next]);
+          if (WriteEditorState.body[next].tag == "ul") {
+            return (
+              <ul key={key} className="tab">
+                <EditorInputter data={WriteEditorState.body[next]} key={key} />
+              </ul>
+            );
+          }
           return (
             <EditorInputter data={WriteEditorState.body[next]} key={key} />
           );

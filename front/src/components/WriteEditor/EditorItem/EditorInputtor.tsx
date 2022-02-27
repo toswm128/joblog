@@ -49,6 +49,10 @@ const EditorInputter = ({ data }: { data: line }) => {
           ref={inputterRef}
           disabled={false}
           onKeyDown={e => {
+            if (e.key === "Tab") {
+              e.preventDefault();
+              data.tag !== "ul" && inputHook.setTag2Ul(data.id);
+            }
             if (e.key === "Backspace" && text.length === 0) {
               if (
                 data.next !== null ||

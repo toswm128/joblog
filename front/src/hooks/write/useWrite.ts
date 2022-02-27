@@ -7,6 +7,7 @@ import {
   REMOVE_LINE,
   SET_IMG,
   SET_LINE_TEXT,
+  SET_TAG_TO_UL,
   UNSET_IMG,
 } from "Store/WriteEditorStore/actions";
 import { line } from "Store/WriteEditorStore/type";
@@ -71,6 +72,16 @@ const useWrite = () => {
     [dispatch]
   );
 
+  const setTag2Ul = useCallback(
+    (id: number) => {
+      dispatch({
+        type: SET_TAG_TO_UL,
+        payload: id,
+      });
+    },
+    [dispatch]
+  );
+
   return {
     clickInputter,
     enterInputter,
@@ -78,6 +89,7 @@ const useWrite = () => {
     removeLine,
     setImg,
     unsetImg,
+    setTag2Ul,
     WriteEditorState,
   };
 };

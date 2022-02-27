@@ -45,6 +45,9 @@ export const WirtePageContainer = styled.div`
     outline: none;
     cursor: text;
   }
+  .tab {
+    margin: 0;
+  }
   .title::placeholder {
     /* 고급 */
     font-size: 48px;

@@ -6,6 +6,7 @@ import {
   REMOVE_LINE,
   SET_IMG,
   SET_LINE_TEXT,
+  SET_TAG_TO_UL,
   UNSET_IMG,
 } from "./actions";
 import { WriteEditorStateType } from "./type";
@@ -65,5 +66,9 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
       draft.trashList.push(draft.body[action.payload]);
       draft.body[action.payload].isImg = false;
       draft.focusLine = action.payload;
+    }),
+  [SET_TAG_TO_UL]: (state, action) =>
+    produce(state, draft => {
+      draft.body[action.payload].tag = "ul";
     }),
 });
