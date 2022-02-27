@@ -7,3 +7,4 @@ export const REMOVE_LINE = "WriteEditor/REMOVE_LINE";
 export const FOCUS_LINE = "WriteEditor/FOCUS_LINE";
 
 export const SET_IMG = "WriteEditor/SET_IMG";
+export const UNSET_IMG = "WriteEditor/UNSET_IMG";

@@ -33,9 +33,11 @@ export const WirtePageContainer = styled.div`
 
   .title {
     /* 레이아웃 */
+    resize: none;
+    overflow-y: hidden;
     display: flex;
     align-items: center;
-    height: 48px;
+    height: auto;
     padding: 1px 2px;
     /* 고급 */
     font-size: 48px;

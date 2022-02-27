@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
+import ReactTextareaAutosize from "react-textarea-autosize";
 import { line } from "Store/WriteEditorStore/type";
 
 const EditorInputter = ({ data }: { data: line }) => {
@@ -10,7 +11,7 @@ const EditorInputter = ({ data }: { data: line }) => {
   const [flag, setFlag] = useState(false);
   const [src, setSrc] = useState("");
   const inputHook = useWrite();
-  const inputterRef = useRef<HTMLInputElement>(null);
+  const inputterRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     setText(data.text);
@@ -32,7 +33,17 @@ const EditorInputter = ({ data }: { data: line }) => {
   return (
     <>
       {data.isImg === false ? (
-        <input
+        <ReactTextareaAutosize
+          cacheMeasurements
+          onDrop={e => {
+            e.preventDefault();
+            if (e.dataTransfer.files[0] !== undefined) {
+              inputHook.setImg(
+                data.id,
+                URL.createObjectURL(e.dataTransfer.files[0])
+              );
+            }
+          }}
           className="title"
           value={text}
           ref={inputterRef}
@@ -55,7 +66,7 @@ const EditorInputter = ({ data }: { data: line }) => {
             }
           }}
           onKeyPress={e => {
-            if (e.key === "Enter") {
+            if (e.key === "Enter" && e.shiftKey === false) {
               console.log("a");
               inputHook.setLineText(text, data.id);
               inputHook.enterInputter(data.id, data.next);
@@ -69,11 +80,15 @@ const EditorInputter = ({ data }: { data: line }) => {
             setText(e.target.value);
           }}
           onBlur={() => {
-            inputHook.setLineText(text, data.id);
+            if (text !== data.text) inputHook.setLineText(text, data.id);
           }}
         />
       ) : (
-        <img src={data.src} alt="" />
+        <img
+          src={data.src}
+          alt=""
+          onClick={() => inputHook.unsetImg(data.id)}
+        />
       )}
     </>
   );

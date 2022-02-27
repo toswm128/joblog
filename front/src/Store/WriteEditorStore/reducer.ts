@@ -6,6 +6,7 @@ import {
   REMOVE_LINE,
   SET_IMG,
   SET_LINE_TEXT,
+  UNSET_IMG,
 } from "./actions";
 import { WriteEditorStateType } from "./type";
 import { createReducer } from "typesafe-actions";
@@ -58,5 +59,11 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
       if (draft.body[action.payload.id].next !== null)
         draft.focusLine = draft.body[action.payload.id].next;
       else draft.focusLine = draft.body[action.payload.id].prev;
+    }),
+  [UNSET_IMG]: (state, action) =>
+    produce(state, draft => {
+      draft.trashList.push(draft.body[action.payload]);
+      draft.body[action.payload].isImg = false;
+      draft.focusLine = action.payload;
     }),
 });

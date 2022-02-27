@@ -7,6 +7,7 @@ import {
   REMOVE_LINE,
   SET_IMG,
   SET_LINE_TEXT,
+  UNSET_IMG,
 } from "Store/WriteEditorStore/actions";
 import { line } from "Store/WriteEditorStore/type";
 
@@ -60,6 +61,15 @@ const useWrite = () => {
     },
     [dispatch]
   );
+  const unsetImg = useCallback(
+    (id: number) => {
+      dispatch({
+        type: UNSET_IMG,
+        payload: id,
+      });
+    },
+    [dispatch]
+  );
 
   return {
     clickInputter,
@@ -67,6 +77,7 @@ const useWrite = () => {
     setLineText,
     removeLine,
     setImg,
+    unsetImg,
     WriteEditorState,
   };
 };
