@@ -18,6 +18,25 @@ const WriteEditor = () => {
   let next: number | null;
   let snext: number | null;
 
+  const tagTranslator = (data: line, key: number) => {
+    switch (data.tag) {
+      case "div":
+        return (
+          <div>
+            <EditorInputter data={data} key={key} />
+          </div>
+        );
+      case "ul":
+        return (
+          <ul className="tab">
+            <EditorInputter data={data} key={key} />
+          </ul>
+        );
+      case "img":
+        return <EditorInputter data={data} key={key} />;
+    }
+  };
+
   return (
     <>
       <input
@@ -36,37 +55,14 @@ const WriteEditor = () => {
         if (key === 0) {
           next = WriteEditorState.body[WriteEditorState.head].next;
           snext = next;
-          // console.log(WriteEditorState.body[WriteEditorState.head]);
-          if (WriteEditorState.body[WriteEditorState.head].tag == "ul") {
-            return (
-              <ul key={key} className="tab">
-                <EditorInputter
-                  data={WriteEditorState.body[WriteEditorState.head]}
-                  key={key}
-                />
-              </ul>
-            );
-          }
-          return (
-            <EditorInputter
-              data={WriteEditorState.body[WriteEditorState.head]}
-              key={key}
-            />
+          return tagTranslator(
+            WriteEditorState.body[WriteEditorState.head],
+            key
           );
         }
         if (next !== null) {
           snext = WriteEditorState.body[next].next;
-          // console.log(WriteEditorState.body[next]);
-          if (WriteEditorState.body[next].tag == "ul") {
-            return (
-              <ul key={key} className="tab">
-                <EditorInputter data={WriteEditorState.body[next]} key={key} />
-              </ul>
-            );
-          }
-          return (
-            <EditorInputter data={WriteEditorState.body[next]} key={key} />
-          );
+          return tagTranslator(WriteEditorState.body[next], key);
         }
       })}
     </>
