@@ -13,7 +13,7 @@ export type head = number;
 
 export type WriteEditorStateType = {
   body: line[];
-  trashList: line[];
+  trashList: { line: line; focusLine: focusLine }[];
   focusLine: focusLine;
   head: head;
 };

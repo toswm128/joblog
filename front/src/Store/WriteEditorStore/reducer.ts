@@ -3,6 +3,8 @@ import produce from "immer";
 import {
   ADD_LINE,
   FOCUS_LINE,
+  FOCUS_NEXT_LINE,
+  FOCUS_PREV_LINE,
   REMOVE_LINE,
   SET_IMG,
   SET_LINE_TEXT,
@@ -43,18 +45,26 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
         draft.body[action.payload.prev].next = action.payload.next;
         if (action.payload.next !== null)
           draft.body[action.payload.next].prev = action.payload.prev;
-        draft.trashList.push(draft.body[action.payload.id]);
         draft.focusLine = action.payload.prev;
+        draft.trashList.push({
+          line: draft.body[action.payload.id],
+          focusLine: draft.focusLine,
+        });
       } else {
         draft.head = action.payload.next;
-        draft.trashList.push(draft.body[action.payload.id]);
-
         draft.focusLine = action.payload.next;
+        draft.trashList.push({
+          line: draft.body[action.payload.id],
+          focusLine: draft.focusLine,
+        });
       }
     }),
   [SET_IMG]: (state, action) =>
     produce(state, draft => {
-      draft.trashList.push(draft.body[action.payload.id]);
+      draft.trashList.push({
+        line: draft.body[action.payload.id],
+        focusLine: draft.focusLine,
+      });
       draft.body[action.payload.id].isImg = true;
       draft.body[action.payload.id].src = action.payload.src;
       if (draft.body[action.payload.id].next !== null)
@@ -63,12 +73,31 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     }),
   [UNSET_IMG]: (state, action) =>
     produce(state, draft => {
-      draft.trashList.push(draft.body[action.payload]);
+      draft.trashList.push({
+        line: draft.body[action.payload],
+        focusLine: draft.focusLine,
+      });
       draft.body[action.payload].isImg = false;
       draft.focusLine = action.payload;
     }),
   [SET_TAG_TO_UL]: (state, action) =>
     produce(state, draft => {
       draft.body[action.payload].tag = "ul";
+    }),
+  [FOCUS_NEXT_LINE]: (state, action) =>
+    produce(state, draft => {
+      draft.focusLine = draft.body[action.payload].next;
+      draft.trashList.push({
+        line: draft.body[action.payload],
+        focusLine: draft.focusLine,
+      });
+    }),
+  [FOCUS_PREV_LINE]: (state, action) =>
+    produce(state, draft => {
+      draft.focusLine = draft.body[action.payload].prev;
+      draft.trashList.push({
+        line: draft.body[action.payload],
+        focusLine: draft.focusLine,
+      });
     }),
 });

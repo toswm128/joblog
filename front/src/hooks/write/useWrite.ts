@@ -4,6 +4,8 @@ import { useTypedSelector } from "Store/rootReducer";
 import {
   ADD_LINE,
   FOCUS_LINE,
+  FOCUS_NEXT_LINE,
+  FOCUS_PREV_LINE,
   REMOVE_LINE,
   SET_IMG,
   SET_LINE_TEXT,
@@ -82,6 +84,25 @@ const useWrite = () => {
     [dispatch]
   );
 
+  const focusNextLine = useCallback(
+    (id: number) => {
+      dispatch({
+        type: FOCUS_NEXT_LINE,
+        payload: id,
+      });
+    },
+    [dispatch]
+  );
+  const focusPrevLine = useCallback(
+    (id: number) => {
+      dispatch({
+        type: FOCUS_PREV_LINE,
+        payload: id,
+      });
+    },
+    [dispatch]
+  );
+
   return {
     clickInputter,
     enterInputter,
@@ -90,6 +111,8 @@ const useWrite = () => {
     setImg,
     unsetImg,
     setTag2Ul,
+    focusNextLine,
+    focusPrevLine,
     WriteEditorState,
   };
 };

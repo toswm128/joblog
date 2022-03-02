@@ -50,6 +50,12 @@ const EditorInputter = ({ data }: { data: line }) => {
           ref={inputterRef}
           disabled={false}
           onKeyDown={e => {
+            if (e.key === "ArrowUp") {
+              inputHook.focusPrevLine(data.id);
+            }
+            if (e.key === "ArrowDown") {
+              inputHook.focusNextLine(data.id);
+            }
             if (e.key === "Tab") {
               e.preventDefault();
               inputHook.setLineText(text, data.id);
