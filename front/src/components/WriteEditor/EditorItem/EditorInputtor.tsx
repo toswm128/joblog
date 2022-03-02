@@ -37,6 +37,7 @@ const EditorInputter = ({ data }: { data: line }) => {
           cacheMeasurements
           onDrop={e => {
             e.preventDefault();
+            inputHook.setLineText(text, data.id);
             if (e.dataTransfer.files[0] !== undefined) {
               inputHook.setImg(
                 data.id,
@@ -51,6 +52,7 @@ const EditorInputter = ({ data }: { data: line }) => {
           onKeyDown={e => {
             if (e.key === "Tab") {
               e.preventDefault();
+              inputHook.setLineText(text, data.id);
               data.tag !== "ul" && inputHook.setTag2Ul(data.id);
             }
             if (e.key === "Backspace" && text.length === 0) {
@@ -63,6 +65,7 @@ const EditorInputter = ({ data }: { data: line }) => {
           }}
           onPaste={e => {
             if (e.clipboardData.files[0] !== undefined) {
+              inputHook.setLineText(text, data.id);
               inputHook.setImg(
                 data.id,
                 URL.createObjectURL(e.clipboardData.files[0])
@@ -71,7 +74,6 @@ const EditorInputter = ({ data }: { data: line }) => {
           }}
           onKeyPress={e => {
             if (e.key === "Enter" && e.shiftKey === false) {
-              console.log("a");
               inputHook.setLineText(text, data.id);
               inputHook.enterInputter(data.id, data.next);
               e.preventDefault();

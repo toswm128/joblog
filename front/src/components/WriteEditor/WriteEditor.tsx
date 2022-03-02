@@ -22,13 +22,13 @@ const WriteEditor = () => {
     switch (data.tag) {
       case "div":
         return (
-          <div>
+          <div key={key}>
             <EditorInputter data={data} key={key} />
           </div>
         );
       case "ul":
         return (
-          <ul className="tab">
+          <ul className="tab" key={key}>
             <EditorInputter data={data} key={key} />
           </ul>
         );
