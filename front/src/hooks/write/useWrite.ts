@@ -85,19 +85,19 @@ const useWrite = () => {
   );
 
   const focusNextLine = useCallback(
-    (id: number) => {
+    (id: number, focusInde: number) => {
       dispatch({
         type: FOCUS_NEXT_LINE,
-        payload: id,
+        payload: { id, focusInde },
       });
     },
     [dispatch]
   );
   const focusPrevLine = useCallback(
-    (id: number) => {
+    (id: number, focusInde: number) => {
       dispatch({
         type: FOCUS_PREV_LINE,
-        payload: id,
+        payload: { id, focusInde },
       });
     },
     [dispatch]

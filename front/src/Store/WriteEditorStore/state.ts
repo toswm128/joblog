@@ -33,6 +33,7 @@ const WriteEditorState: WriteEditorStateType = {
   trashList: [],
   focusLine: 0,
   head: 0,
+  focusIndex: 0,
 };
 
 export default WriteEditorState;

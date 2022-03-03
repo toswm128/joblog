@@ -26,6 +26,10 @@ const EditorInputter = ({ data }: { data: line }) => {
       data.id === inputHook.WriteEditorState.focusLine &&
       inputterRef.current
     ) {
+      inputterRef.current.setSelectionRange(
+        inputHook.WriteEditorState.focusIndex,
+        inputHook.WriteEditorState.focusIndex
+      );
       inputterRef.current.focus();
     }
   }, [flag]);
@@ -51,15 +55,36 @@ const EditorInputter = ({ data }: { data: line }) => {
           disabled={false}
           onKeyDown={e => {
             if (e.key === "ArrowUp") {
-              inputHook.focusPrevLine(data.id);
+              if (text !== data.text) inputHook.setLineText(text, data.id);
+              if (inputterRef.current)
+                inputHook.focusPrevLine(
+                  data.id,
+                  inputHook.WriteEditorState.focusIndex <
+                    inputterRef.current.selectionEnd
+                    ? inputterRef.current.selectionEnd
+                    : inputHook.WriteEditorState.focusIndex
+                );
             }
             if (e.key === "ArrowDown") {
-              inputHook.focusNextLine(data.id);
+              if (text !== data.text) inputHook.setLineText(text, data.id);
+              if (inputterRef.current)
+                inputHook.focusNextLine(
+                  data.id,
+                  inputHook.WriteEditorState.focusIndex <
+                    inputterRef.current.selectionEnd
+                    ? inputterRef.current.selectionEnd
+                    : inputHook.WriteEditorState.focusIndex
+                );
             }
             if (e.key === "Tab") {
               e.preventDefault();
-              inputHook.setLineText(text, data.id);
-              data.tag !== "ul" && inputHook.setTag2Ul(data.id);
+              if (data.tag !== "ul") {
+                if (text !== data.text) inputHook.setLineText(text, data.id);
+                inputHook.setTag2Ul(data.id);
+              } else if (data.prev !== null) {
+                inputHook.WriteEditorState.body[data.prev].tag == "ul" &&
+                  inputHook.setTag2Ul(data.id);
+              }
             }
             if (e.key === "Backspace" && text.length === 0) {
               if (
@@ -71,7 +96,7 @@ const EditorInputter = ({ data }: { data: line }) => {
           }}
           onPaste={e => {
             if (e.clipboardData.files[0] !== undefined) {
-              inputHook.setLineText(text, data.id);
+              if (text !== data.text) inputHook.setLineText(text, data.id);
               inputHook.setImg(
                 data.id,
                 URL.createObjectURL(e.clipboardData.files[0])
@@ -80,7 +105,7 @@ const EditorInputter = ({ data }: { data: line }) => {
           }}
           onKeyPress={e => {
             if (e.key === "Enter" && e.shiftKey === false) {
-              inputHook.setLineText(text, data.id);
+              if (text !== data.text) inputHook.setLineText(text, data.id);
               inputHook.enterInputter(data.id, data.next);
               e.preventDefault();
             }

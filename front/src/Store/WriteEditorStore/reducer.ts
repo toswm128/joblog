@@ -18,6 +18,7 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
   [SET_LINE_TEXT]: (state, action) =>
     produce(state, draft => {
       draft.body[action.payload.id].text = action.payload.text;
+      draft.focusIndex = action.payload.index;
     }),
   [FOCUS_LINE]: (state, action) =>
     produce(state, draft => {
@@ -86,7 +87,8 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     }),
   [FOCUS_NEXT_LINE]: (state, action) =>
     produce(state, draft => {
-      draft.focusLine = draft.body[action.payload].next;
+      draft.focusLine = draft.body[action.payload.id].next;
+      draft.focusIndex = action.payload.focusInde;
       draft.trashList.push({
         line: draft.body[action.payload],
         focusLine: draft.focusLine,
@@ -94,9 +96,10 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     }),
   [FOCUS_PREV_LINE]: (state, action) =>
     produce(state, draft => {
-      draft.focusLine = draft.body[action.payload].prev;
+      draft.focusLine = draft.body[action.payload.id].prev;
+      draft.focusIndex = action.payload.focusInde;
       draft.trashList.push({
-        line: draft.body[action.payload],
+        line: draft.body[action.payload.id],
         focusLine: draft.focusLine,
       });
     }),
