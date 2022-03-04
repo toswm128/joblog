@@ -6,6 +6,7 @@ import {
   FOCUS_NEXT_LINE,
   FOCUS_PREV_LINE,
   REMOVE_LINE,
+  REMOVE_LINE_ONLY,
   SET_IMG,
   SET_LINE_TEXT,
   SET_TAG_TO_UL,
@@ -42,6 +43,7 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     }),
   [REMOVE_LINE]: (state, action) =>
     produce(state, draft => {
+      draft.focusIndex = 999999;
       if (draft.head !== action.payload.id) {
         draft.body[action.payload.prev].next = action.payload.next;
         if (action.payload.next !== null)
@@ -60,6 +62,23 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
         });
       }
     }),
+  [REMOVE_LINE_ONLY]: (state, action) =>
+    produce(state, draft => {
+      if (draft.head !== action.payload.id) {
+        draft.focusIndex = draft.body[action.payload.prev].text.length;
+        draft.body[action.payload.prev].text +=
+          draft.body[action.payload.id].text;
+        draft.body[action.payload.prev].next = action.payload.next;
+        if (action.payload.next !== null)
+          draft.body[action.payload.next].prev = action.payload.prev;
+        draft.focusLine = action.payload.prev;
+        draft.trashList.push({
+          line: draft.body[action.payload.id],
+          focusLine: draft.focusLine,
+        });
+      }
+    }),
+
   [SET_IMG]: (state, action) =>
     produce(state, draft => {
       draft.trashList.push({
@@ -83,12 +102,13 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     }),
   [SET_TAG_TO_UL]: (state, action) =>
     produce(state, draft => {
-      draft.body[action.payload].tag = "ul";
+      draft.body[action.payload.id].tag = "ul";
+      draft.focusIndex = action.payload.focusIndex;
     }),
   [FOCUS_NEXT_LINE]: (state, action) =>
     produce(state, draft => {
       draft.focusLine = draft.body[action.payload.id].next;
-      draft.focusIndex = action.payload.focusInde;
+      draft.focusIndex = action.payload.focusIndex;
       draft.trashList.push({
         line: draft.body[action.payload],
         focusLine: draft.focusLine,
@@ -97,7 +117,7 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
   [FOCUS_PREV_LINE]: (state, action) =>
     produce(state, draft => {
       draft.focusLine = draft.body[action.payload.id].prev;
-      draft.focusIndex = action.payload.focusInde;
+      draft.focusIndex = action.payload.focusIndex;
       draft.trashList.push({
         line: draft.body[action.payload.id],
         focusLine: draft.focusLine,

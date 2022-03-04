@@ -7,12 +7,12 @@ import {
   FOCUS_NEXT_LINE,
   FOCUS_PREV_LINE,
   REMOVE_LINE,
+  REMOVE_LINE_ONLY,
   SET_IMG,
   SET_LINE_TEXT,
   SET_TAG_TO_UL,
   UNSET_IMG,
 } from "Store/WriteEditorStore/actions";
-import { line } from "Store/WriteEditorStore/type";
 
 const useWrite = () => {
   const dispatch = useDispatch();
@@ -55,6 +55,16 @@ const useWrite = () => {
     [dispatch]
   );
 
+  const removeLineOnly = useCallback(
+    (id: number, next: number | null, prev: number | null) => {
+      dispatch({
+        type: REMOVE_LINE_ONLY,
+        payload: { id, next, prev },
+      });
+    },
+    [dispatch]
+  );
+
   const setImg = useCallback(
     (id: number, src: string) => {
       dispatch({
@@ -75,29 +85,29 @@ const useWrite = () => {
   );
 
   const setTag2Ul = useCallback(
-    (id: number) => {
+    (id: number, focusIndex: number) => {
       dispatch({
         type: SET_TAG_TO_UL,
-        payload: id,
+        payload: { id, focusIndex },
       });
     },
     [dispatch]
   );
 
   const focusNextLine = useCallback(
-    (id: number, focusInde: number) => {
+    (id: number, focusIndex: number) => {
       dispatch({
         type: FOCUS_NEXT_LINE,
-        payload: { id, focusInde },
+        payload: { id, focusIndex },
       });
     },
     [dispatch]
   );
   const focusPrevLine = useCallback(
-    (id: number, focusInde: number) => {
+    (id: number, focusIndex: number) => {
       dispatch({
         type: FOCUS_PREV_LINE,
-        payload: { id, focusInde },
+        payload: { id, focusIndex },
       });
     },
     [dispatch]
@@ -108,6 +118,7 @@ const useWrite = () => {
     enterInputter,
     setLineText,
     removeLine,
+    removeLineOnly,
     setImg,
     unsetImg,
     setTag2Ul,

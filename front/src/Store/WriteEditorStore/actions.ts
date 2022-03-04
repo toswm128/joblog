@@ -3,6 +3,7 @@ export const SET_LINE_TAG = "WriteEditor/SET_LINE_TAG";
 
 export const ADD_LINE = "WriteEditor/ADD_LINE";
 export const REMOVE_LINE = "WriteEditor/REMOVE_LINE";
+export const REMOVE_LINE_ONLY = "WriteEditor/REMOVE_LINE_ONLY";
 
 export const FOCUS_LINE = "WriteEditor/FOCUS_LINE";
 

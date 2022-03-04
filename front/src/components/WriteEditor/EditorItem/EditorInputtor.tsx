@@ -11,24 +11,20 @@ const EditorInputter = ({ data }: { data: line }) => {
   const [flag, setFlag] = useState(false);
   const [src, setSrc] = useState("");
   const inputHook = useWrite();
+  const { WriteEditorState } = useWrite();
   const inputterRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     setText(data.text);
-    setFlag(!flag);
-  }, [
-    inputHook.WriteEditorState.body.length,
-    inputHook.WriteEditorState.trashList,
-  ]);
+    data.id === WriteEditorState.focusLine && setFlag(!flag);
+  }, [WriteEditorState.body.length, WriteEditorState.trashList]);
 
   useEffect(() => {
-    if (
-      data.id === inputHook.WriteEditorState.focusLine &&
-      inputterRef.current
-    ) {
+    console.log(WriteEditorState.focusIndex);
+    if (data.id === WriteEditorState.focusLine && inputterRef.current) {
       inputterRef.current.setSelectionRange(
-        inputHook.WriteEditorState.focusIndex,
-        inputHook.WriteEditorState.focusIndex
+        WriteEditorState.focusIndex,
+        WriteEditorState.focusIndex
       );
       inputterRef.current.focus();
     }
@@ -38,6 +34,7 @@ const EditorInputter = ({ data }: { data: line }) => {
     <>
       {data.isImg === false ? (
         <ReactTextareaAutosize
+          spellCheck={false}
           cacheMeasurements
           onDrop={e => {
             e.preventDefault();
@@ -59,10 +56,7 @@ const EditorInputter = ({ data }: { data: line }) => {
               if (inputterRef.current)
                 inputHook.focusPrevLine(
                   data.id,
-                  inputHook.WriteEditorState.focusIndex <
-                    inputterRef.current.selectionEnd
-                    ? inputterRef.current.selectionEnd
-                    : inputHook.WriteEditorState.focusIndex
+                  inputterRef.current.selectionEnd
                 );
             }
             if (e.key === "ArrowDown") {
@@ -70,28 +64,33 @@ const EditorInputter = ({ data }: { data: line }) => {
               if (inputterRef.current)
                 inputHook.focusNextLine(
                   data.id,
-                  inputHook.WriteEditorState.focusIndex <
-                    inputterRef.current.selectionEnd
-                    ? inputterRef.current.selectionEnd
-                    : inputHook.WriteEditorState.focusIndex
+                  inputterRef.current.selectionEnd
                 );
             }
             if (e.key === "Tab") {
               e.preventDefault();
               if (data.tag !== "ul") {
                 if (text !== data.text) inputHook.setLineText(text, data.id);
-                inputHook.setTag2Ul(data.id);
-              } else if (data.prev !== null) {
-                inputHook.WriteEditorState.body[data.prev].tag == "ul" &&
-                  inputHook.setTag2Ul(data.id);
+                inputterRef.current &&
+                  inputHook.setTag2Ul(
+                    data.id,
+                    inputterRef.current.selectionEnd
+                  );
               }
             }
-            if (e.key === "Backspace" && text.length === 0) {
-              if (
-                data.next !== null ||
-                inputHook.WriteEditorState.head !== data.id
-              )
-                inputHook.removeLine(data.id, data.next, data.prev);
+            if (e.key === "Backspace") {
+              if (data.next !== null || WriteEditorState.head !== data.id) {
+                if (
+                  inputterRef.current &&
+                  inputterRef.current.selectionEnd +
+                    inputterRef.current.selectionStart ===
+                    0
+                ) {
+                  inputHook.removeLineOnly(data.id, data.next, data.prev);
+                }
+                if (text.length === 0)
+                  inputHook.removeLine(data.id, data.next, data.prev);
+              }
             }
           }}
           onPaste={e => {
