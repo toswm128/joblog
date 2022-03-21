@@ -3,8 +3,11 @@ import React from "react";
 import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
+import { configure, HotKeys } from "react-hotkeys";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { line } from "Store/WriteEditorStore/type";
+
+configure({ ignoreTags: ["input"] });
 
 const EditorInputter = ({ data }: { data: line }) => {
   const [text, setText] = useState(data.text);
@@ -30,8 +33,16 @@ const EditorInputter = ({ data }: { data: line }) => {
     }
   }, [flag]);
 
+  const keyMap = {
+    MOVE_UP: "up",
+  };
+
+  const handlers = {
+    MOVE_UP: () => console.log("Move up hotkey called!"),
+  };
+
   return (
-    <>
+    <HotKeys keyMap={keyMap} handlers={handlers}>
       {data.isImg === false ? (
         <ReactTextareaAutosize
           spellCheck={false}
@@ -126,7 +137,7 @@ const EditorInputter = ({ data }: { data: line }) => {
           onClick={() => inputHook.unsetImg(data.id)}
         />
       )}
-    </>
+    </HotKeys>
   );
 };
 
