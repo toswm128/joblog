@@ -14,7 +14,7 @@ export type focusIndex = number;
 
 export type WriteEditorStateType = {
   body: line[];
-  trashList: { line: line; focusLine: focusLine }[];
+  trashList: { body?: line[]; focusLine: focusLine }[];
   focusLine: focusLine;
   head: head;
   focusIndex: focusIndex;

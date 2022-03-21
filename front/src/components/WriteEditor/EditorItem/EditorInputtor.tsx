@@ -34,11 +34,11 @@ const EditorInputter = ({ data }: { data: line }) => {
   }, [flag]);
 
   const keyMap = {
-    MOVE_UP: "up",
+    MOVE_UP: "command+z",
   };
 
   const handlers = {
-    MOVE_UP: () => console.log("Move up hotkey called!"),
+    MOVE_UP: (e: any) => console.log("Move up hotkey called!", e),
   };
 
   return (
@@ -49,12 +49,15 @@ const EditorInputter = ({ data }: { data: line }) => {
           cacheMeasurements
           onDrop={e => {
             e.preventDefault();
+            console.log(e.dataTransfer.getData("url"));
             inputHook.setLineText(text, data.id);
             if (e.dataTransfer.files[0] !== undefined) {
               inputHook.setImg(
                 data.id,
                 URL.createObjectURL(e.dataTransfer.files[0])
               );
+            } else if (e.dataTransfer.getData("url") !== undefined) {
+              inputHook.setImg(data.id, e.dataTransfer.getData("url"));
             }
           }}
           className="title"
@@ -131,11 +134,19 @@ const EditorInputter = ({ data }: { data: line }) => {
           }}
         />
       ) : (
-        <img
-          src={data.src}
-          alt=""
-          onClick={() => inputHook.unsetImg(data.id)}
-        />
+        <>
+          <img
+            src={data.src}
+            alt=""
+            onError={() => {
+              console.log("error");
+            }}
+            onClick={() => inputHook.unsetImg(data.id)}
+          />
+          <a target="_blank" href={data.src}>
+            하이퍼
+          </a>
+        </>
       )}
     </HotKeys>
   );
