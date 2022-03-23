@@ -67,7 +67,9 @@ const EditorInputter = ({ data }: { data: line }) => {
                 break;
               case "Backspace":
                 if (data.next !== null || WriteEditorState.head !== data.id) {
-                  if (
+                  if (text.length === 0)
+                    inputHook.removeLine(data.id, data.next, data.prev);
+                  else if (
                     inputterRef.current &&
                     inputterRef.current.selectionEnd +
                       inputterRef.current.selectionStart ===
@@ -75,8 +77,6 @@ const EditorInputter = ({ data }: { data: line }) => {
                   ) {
                     inputHook.removeLineOnly(data.id, data.next, data.prev);
                   }
-                  if (text.length === 0)
-                    inputHook.removeLine(data.id, data.next, data.prev);
                 }
                 break;
             }
@@ -135,7 +135,7 @@ const EditorInputter = ({ data }: { data: line }) => {
             onClick={() => inputHook.unsetImg(data.id)}
           />
           <a target="_blank" href={data.src}>
-            하이퍼
+            {data.src}
           </a>
         </>
       )}
