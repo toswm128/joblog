@@ -3,12 +3,8 @@ import React from "react";
 import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
-import { configure, HotKeys } from "react-hotkeys";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { line } from "Store/WriteEditorStore/type";
-import { keyMap } from "./hotkeys";
-
-configure({ ignoreTags: ["input"], allowCombinationSubmatches: false });
 
 const EditorInputter = ({ data }: { data: line }) => {
   const [text, setText] = useState(data.text);
@@ -24,6 +20,7 @@ const EditorInputter = ({ data }: { data: line }) => {
   }, [WriteEditorState.body.length, WriteEditorState.trashList]);
 
   useEffect(() => {
+    console.log(WriteEditorState.focusIndex);
     if (data.id === WriteEditorState.focusLine && inputterRef.current) {
       inputterRef.current.setSelectionRange(
         WriteEditorState.focusIndex,
@@ -33,54 +30,57 @@ const EditorInputter = ({ data }: { data: line }) => {
     }
   }, [flag]);
 
-  const handlers = {
-    UP: () => {
-      console.log(text, data.text);
-      if (text !== data.text) inputHook.setLineText(text, data.id);
-      if (inputterRef.current)
-        inputHook.focusPrevLine(data.id, inputterRef.current.selectionEnd);
-    },
-    DOWN: () => {
-      if (text !== data.text) inputHook.setLineText(text, data.id);
-      if (inputterRef.current)
-        inputHook.focusNextLine(data.id, inputterRef.current.selectionEnd);
-    },
-    TAB: (e: any) => {
-      e.preventDefault();
-      if (data.tag !== "ul") {
-        if (text !== data.text) inputHook.setLineText(text, data.id);
-        inputterRef.current &&
-          inputHook.setTag2Ul(data.id, inputterRef.current.selectionEnd);
-      }
-    },
-    BACK: () => {
-      if (data.next !== null || WriteEditorState.head !== data.id) {
-        if (
-          inputterRef.current &&
-          inputterRef.current.selectionEnd +
-            inputterRef.current.selectionStart ===
-            0
-        ) {
-          inputHook.removeLineOnly(data.id, data.next, data.prev);
-        }
-        if (text.length === 0)
-          inputHook.removeLine(data.id, data.next, data.prev);
-      }
-    },
-    ENTER: (e: any) => {
-      if (text !== data.text) inputHook.setLineText(text, data.id);
-      inputHook.enterInputter(data.id, data.next);
-      e.preventDefault();
-    },
-    shift: () => console.log("shift"),
-  };
-
   return (
-    <HotKeys keyMap={keyMap} handlers={handlers}>
+    <>
       {data.isImg === false ? (
         <ReactTextareaAutosize
           spellCheck={false}
           cacheMeasurements
+          onKeyDown={e => {
+            switch (e.key) {
+              case "ArrowUp":
+                if (text !== data.text) inputHook.setLineText(text, data.id);
+                if (inputterRef.current)
+                  inputHook.focusPrevLine(
+                    data.id,
+                    inputterRef.current.selectionEnd
+                  );
+                break;
+              case "ArrowDown":
+                if (text !== data.text) inputHook.setLineText(text, data.id);
+                if (inputterRef.current)
+                  inputHook.focusNextLine(
+                    data.id,
+                    inputterRef.current.selectionEnd
+                  );
+                break;
+              case "Tab":
+                e.preventDefault();
+                if (data.tag !== "ul") {
+                  if (text !== data.text) inputHook.setLineText(text, data.id);
+                  inputterRef.current &&
+                    inputHook.setTag2Ul(
+                      data.id,
+                      inputterRef.current.selectionEnd
+                    );
+                }
+                break;
+              case "Backspace":
+                if (data.next !== null || WriteEditorState.head !== data.id) {
+                  if (
+                    inputterRef.current &&
+                    inputterRef.current.selectionEnd +
+                      inputterRef.current.selectionStart ===
+                      0
+                  ) {
+                    inputHook.removeLineOnly(data.id, data.next, data.prev);
+                  }
+                  if (text.length === 0)
+                    inputHook.removeLine(data.id, data.next, data.prev);
+                }
+                break;
+            }
+          }}
           onDrop={e => {
             e.preventDefault();
             console.log(e.dataTransfer.getData("url"));
@@ -105,6 +105,13 @@ const EditorInputter = ({ data }: { data: line }) => {
                 data.id,
                 URL.createObjectURL(e.clipboardData.files[0])
               );
+            }
+          }}
+          onKeyPress={e => {
+            if (e.key === "Enter" && e.shiftKey === false) {
+              if (text !== data.text) inputHook.setLineText(text, data.id);
+              inputHook.enterInputter(data.id, data.next);
+              e.preventDefault();
             }
           }}
           onClick={() => {
@@ -132,7 +139,7 @@ const EditorInputter = ({ data }: { data: line }) => {
           </a>
         </>
       )}
-    </HotKeys>
+    </>
   );
 };
 
