@@ -34,10 +34,13 @@ const EditorInputter = ({ data }: { data: line }) => {
     <>
       {data.isImg === false ? (
         <ReactTextareaAutosize
+          placeholder={
+            data.id === WriteEditorState.focusLine ? "내용을 입력해 주세요" : ""
+          }
           spellCheck={false}
           cacheMeasurements
           onKeyDown={e => {
-            switch (e.key) {
+            switch (e.code) {
               case "ArrowUp":
                 if (text !== data.text) inputHook.setLineText(text, data.id);
                 if (inputterRef.current)
@@ -75,9 +78,15 @@ const EditorInputter = ({ data }: { data: line }) => {
                       inputterRef.current.selectionStart ===
                       0
                   ) {
+                    if (text !== data.text)
+                      inputHook.setLineText(text, data.id);
                     inputHook.removeLineOnly(data.id, data.next, data.prev);
                   }
                 }
+                break;
+              case "KeyZ":
+                if (e.metaKey === true || e.ctrlKey === true)
+                  console.log("cmd+z");
                 break;
             }
           }}
