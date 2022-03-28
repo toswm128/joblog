@@ -38,9 +38,27 @@ export const WirtePageContainer = styled.div`
     display: flex;
     align-items: center;
     height: auto;
-    padding: 1px 2px;
+    padding: 6px 1px;
     /* 고급 */
     font-size: 48px;
+    border: 0;
+    outline: none;
+    cursor: text;
+  }
+  .content {
+    /* 레이아웃 */
+    width: 100%;
+    resize: none;
+    overflow-y: hidden;
+    display: flex;
+    align-items: center;
+    height: auto;
+    padding: 6px 2px;
+    /* 고급 */
+    font-size: 16px;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji",
+      "Segoe UI Symbol";
     border: 0;
     outline: none;
     cursor: text;

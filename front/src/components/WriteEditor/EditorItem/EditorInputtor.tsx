@@ -1,3 +1,4 @@
+import { css, jsx } from "@emotion/react";
 import useWrite from "hooks/write";
 import React from "react";
 import { useState } from "react";
@@ -10,6 +11,7 @@ const EditorInputter = ({ data }: { data: line }) => {
   const [text, setText] = useState(data.text);
   const [flag, setFlag] = useState(false);
   const [src, setSrc] = useState("");
+  const [drogOver, setDrogOver] = useState(false);
   const inputHook = useWrite();
   const { WriteEditorState } = useWrite();
   const inputterRef = useRef<HTMLTextAreaElement>(null);
@@ -43,6 +45,7 @@ const EditorInputter = ({ data }: { data: line }) => {
           }
           spellCheck={false}
           cacheMeasurements
+          style={drogOver ? { borderBottom: "5px solid #c4e3f0" } : {}}
           onKeyDown={e => {
             switch (e.code) {
               case "Space":
@@ -118,16 +121,29 @@ const EditorInputter = ({ data }: { data: line }) => {
             e.preventDefault();
             console.log(e.dataTransfer.getData("url"));
             inputHook.setLineText(text, data.id);
+            setDrogOver(false);
             if (e.dataTransfer.files[0] !== undefined) {
-              inputHook.setImg(
+              inputHook.dropImg(
                 data.id,
                 URL.createObjectURL(e.dataTransfer.files[0])
               );
             } else if (e.dataTransfer.getData("url") !== undefined) {
-              inputHook.setImg(data.id, e.dataTransfer.getData("url"));
+              inputHook.dropImg(data.id, e.dataTransfer.getData("url"));
             }
           }}
-          className="title"
+          onDragOver={e => {
+            setDrogOver(true);
+            console.log(
+              "over!!!",
+              css`
+                border-bottom: 5px solid #c4e3f0;
+              `
+            );
+          }}
+          onDragLeave={e => {
+            setDrogOver(false);
+          }}
+          className="content"
           value={text}
           ref={inputterRef}
           disabled={false}

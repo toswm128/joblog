@@ -10,6 +10,8 @@ export const FOCUS_LINE = "WriteEditor/FOCUS_LINE";
 export const SET_IMG = "WriteEditor/SET_IMG";
 export const UNSET_IMG = "WriteEditor/UNSET_IMG";
 
+export const DROP_IMG = "WriteEditor/DROP_IMG";
+
 export const SET_TAG_TO_UL = "WriteEditor/SET_TAG_TO_UL";
 
 export const FOCUS_NEXT_LINE = "WriteEditor/FOCUS_NEXT_LINE";

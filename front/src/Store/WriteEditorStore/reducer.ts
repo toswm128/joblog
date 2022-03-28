@@ -2,6 +2,7 @@ import WriteEditorState from "./state";
 import produce from "immer";
 import {
   ADD_LINE,
+  DROP_IMG,
   FOCUS_LINE,
   FOCUS_NEXT_LINE,
   FOCUS_PREV_LINE,
@@ -111,7 +112,6 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
         );
         draft.updatter = 1;
       }
-      draft.trashList.push({ body: draft.body, focusLine: draft.focusLine });
       draft.body[action.payload.id].isImg = true;
       draft.body[action.payload.id].src = action.payload.src;
       if (draft.body[action.payload.id].next !== null)
@@ -128,9 +128,36 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
         );
         draft.updatter = 1;
       }
-      draft.trashList.push({ body: draft.body, focusLine: draft.focusLine });
       draft.body[action.payload].isImg = false;
       draft.focusLine = action.payload;
+    }),
+  [DROP_IMG]: (state, action) =>
+    produce(state, draft => {
+      draft.trashList.push({ body: draft.body, focusLine: draft.focusLine });
+      if (draft.updatter !== 1) {
+        draft.trashList.splice(
+          draft.trashList.length - draft.updatter,
+          draft.trashList.length - 1
+        );
+        draft.updatter = 1;
+      }
+      draft.body.push({
+        id: draft.body.length,
+        text: "",
+        tag: "img",
+        next: draft.body[action.payload.id].next,
+        prev: action.payload.id,
+        src: action.payload.src,
+        isImg: true,
+      });
+      draft.body[action.payload.id].next = draft.body.length - 1;
+      if (draft.body[action.payload.id].next !== null)
+        draft.body[draft.body[action.payload.id].next!].prev =
+          draft.body.length - 1;
+
+      if (draft.body[action.payload.id].next !== null)
+        draft.focusLine = draft.body[action.payload.id].next;
+      else draft.focusLine = draft.body[action.payload.id].prev;
     }),
   [SET_TAG_TO_UL]: (state, action) =>
     produce(state, draft => {

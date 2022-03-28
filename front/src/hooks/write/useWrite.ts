@@ -14,6 +14,7 @@ import {
   SET_TAG_TO_UL,
   UNSET_IMG,
   REDO,
+  DROP_IMG,
 } from "Store/WriteEditorStore/actions";
 
 const useWrite = () => {
@@ -90,6 +91,16 @@ const useWrite = () => {
     [dispatch]
   );
 
+  const dropImg = useCallback(
+    (id: number, src: string) => {
+      dispatch({
+        type: DROP_IMG,
+        payload: { id, src },
+      });
+    },
+    [dispatch]
+  );
+
   const setTag2Ul = useCallback(
     (id: number, focusIndex: number) => {
       dispatch({
@@ -124,6 +135,7 @@ const useWrite = () => {
       type: UNDO,
     });
   }, [dispatch]);
+
   const redo = useCallback(() => {
     dispatch({
       type: REDO,
@@ -137,6 +149,7 @@ const useWrite = () => {
     removeLine,
     removeLineOnly,
     setImg,
+    dropImg,
     unsetImg,
     setTag2Ul,
     focusNextLine,
