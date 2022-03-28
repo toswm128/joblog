@@ -17,7 +17,6 @@ const EditorInputter = ({ data }: { data: line }) => {
   useEffect(() => {
     setText(data.text);
     data.id === WriteEditorState.focusLine && setFlag(!flag);
-    console.log("aa");
   }, [
     WriteEditorState.body.length,
     WriteEditorState.trashList,
@@ -46,6 +45,15 @@ const EditorInputter = ({ data }: { data: line }) => {
           cacheMeasurements
           onKeyDown={e => {
             switch (e.code) {
+              case "Space":
+                if (inputterRef.current)
+                  inputHook.setLineText(
+                    text,
+                    data.id,
+                    inputterRef.current.selectionEnd
+                  );
+                console.log("spacee");
+                break;
               case "ArrowUp":
                 if (text !== data.text) inputHook.setLineText(text, data.id);
                 if (inputterRef.current)
@@ -92,12 +100,16 @@ const EditorInputter = ({ data }: { data: line }) => {
               case "KeyZ":
                 if (e.metaKey === true || e.ctrlKey === true) {
                   e.preventDefault();
-                  console.log("cmd+z");
-                  inputHook.ctrlZ();
-                  console.log(
-                    WriteEditorState.body,
-                    WriteEditorState.trashList
-                  );
+                  if (e.shiftKey === true) {
+                    inputHook.redo();
+                  } else {
+                    console.log("cmd+z");
+                    inputHook.undo();
+                    console.log(
+                      WriteEditorState.body,
+                      WriteEditorState.trashList
+                    );
+                  }
                 }
                 break;
             }

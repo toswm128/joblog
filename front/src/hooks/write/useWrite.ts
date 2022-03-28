@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useTypedSelector } from "Store/rootReducer";
 import {
   ADD_LINE,
-  CTRL_Z,
+  UNDO,
   FOCUS_LINE,
   FOCUS_NEXT_LINE,
   FOCUS_PREV_LINE,
@@ -13,16 +13,21 @@ import {
   SET_LINE_TEXT,
   SET_TAG_TO_UL,
   UNSET_IMG,
+  REDO,
 } from "Store/WriteEditorStore/actions";
 
 const useWrite = () => {
   const dispatch = useDispatch();
   const WriteEditorState = useTypedSelector(state => state.WriteEditor);
 
-  const setLineText = (text: string | undefined, id: number) => {
+  const setLineText = (
+    text: string | undefined,
+    id: number,
+    index?: number
+  ) => {
     dispatch({
       type: SET_LINE_TEXT,
-      payload: { text, id },
+      payload: { text, id, index },
     });
   };
 
@@ -114,9 +119,14 @@ const useWrite = () => {
     [dispatch]
   );
 
-  const ctrlZ = useCallback(() => {
+  const undo = useCallback(() => {
     dispatch({
-      type: CTRL_Z,
+      type: UNDO,
+    });
+  }, [dispatch]);
+  const redo = useCallback(() => {
+    dispatch({
+      type: REDO,
     });
   }, [dispatch]);
 
@@ -131,7 +141,8 @@ const useWrite = () => {
     setTag2Ul,
     focusNextLine,
     focusPrevLine,
-    ctrlZ,
+    undo,
+    redo,
     WriteEditorState,
   };
 };
