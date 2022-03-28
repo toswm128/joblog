@@ -11,11 +11,13 @@ export type line = {
 export type focusLine = number | null;
 export type head = number;
 export type focusIndex = number;
+export type updater = number;
 
 export type WriteEditorStateType = {
   body: line[];
-  trashList: { body?: line[]; focusLine: focusLine }[];
+  trashList: { body: line[]; focusLine: focusLine }[];
   focusLine: focusLine;
   head: head;
   focusIndex: focusIndex;
+  updatter: updater;
 };

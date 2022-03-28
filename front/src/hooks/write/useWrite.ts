@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useTypedSelector } from "Store/rootReducer";
 import {
   ADD_LINE,
+  CTRL_Z,
   FOCUS_LINE,
   FOCUS_NEXT_LINE,
   FOCUS_PREV_LINE,
@@ -113,6 +114,12 @@ const useWrite = () => {
     [dispatch]
   );
 
+  const ctrlZ = useCallback(() => {
+    dispatch({
+      type: CTRL_Z,
+    });
+  }, [dispatch]);
+
   return {
     clickInputter,
     enterInputter,
@@ -124,6 +131,7 @@ const useWrite = () => {
     setTag2Ul,
     focusNextLine,
     focusPrevLine,
+    ctrlZ,
     WriteEditorState,
   };
 };

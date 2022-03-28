@@ -17,7 +17,12 @@ const EditorInputter = ({ data }: { data: line }) => {
   useEffect(() => {
     setText(data.text);
     data.id === WriteEditorState.focusLine && setFlag(!flag);
-  }, [WriteEditorState.body.length, WriteEditorState.trashList]);
+    console.log("aa");
+  }, [
+    WriteEditorState.body.length,
+    WriteEditorState.trashList,
+    WriteEditorState.updatter,
+  ]);
 
   useEffect(() => {
     console.log(WriteEditorState.focusIndex);
@@ -85,8 +90,15 @@ const EditorInputter = ({ data }: { data: line }) => {
                 }
                 break;
               case "KeyZ":
-                if (e.metaKey === true || e.ctrlKey === true)
+                if (e.metaKey === true || e.ctrlKey === true) {
+                  e.preventDefault();
                   console.log("cmd+z");
+                  inputHook.ctrlZ();
+                  console.log(
+                    WriteEditorState.body,
+                    WriteEditorState.trashList
+                  );
+                }
                 break;
             }
           }}

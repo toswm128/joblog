@@ -14,3 +14,5 @@ export const SET_TAG_TO_UL = "WriteEditor/SET_TAG_TO_UL";
 
 export const FOCUS_NEXT_LINE = "WriteEditor/FOCUS_NEXT_LINE";
 export const FOCUS_PREV_LINE = "WriteEditor/FOCUS_PREV_LINE";
+
+export const CTRL_Z = "WriteEditor/CTRL_Z";

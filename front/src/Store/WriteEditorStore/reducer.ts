@@ -2,6 +2,7 @@ import WriteEditorState from "./state";
 import produce from "immer";
 import {
   ADD_LINE,
+  CTRL_Z,
   FOCUS_LINE,
   FOCUS_NEXT_LINE,
   FOCUS_PREV_LINE,
@@ -18,6 +19,8 @@ import { createReducer } from "typesafe-actions";
 export default createReducer<WriteEditorStateType>(WriteEditorState, {
   [SET_LINE_TEXT]: (state, action) =>
     produce(state, draft => {
+      draft.trashList.push({ body: draft.body, focusLine: draft.focusLine });
+      draft.updatter = 1;
       draft.body[action.payload.id].text = action.payload.text;
       draft.focusIndex = action.payload.index;
     }),
@@ -27,6 +30,14 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     }),
   [ADD_LINE]: (state, action) =>
     produce(state, draft => {
+      draft.trashList.push({ body: draft.body, focusLine: draft.focusLine });
+      if (draft.updatter !== 1) {
+        draft.trashList.splice(
+          draft.trashList.length - draft.updatter,
+          draft.trashList.length - 1
+        );
+        draft.updatter = 1;
+      }
       draft.focusLine = draft.body.length;
       draft.body.push({
         id: draft.body.length,
@@ -40,7 +51,6 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
       draft.body[action.payload.id].next = draft.body.length - 1;
       if (action.payload.next !== null)
         draft.body[action.payload.next].prev = draft.body.length - 1;
-      draft.trashList.push({ body: draft.body, focusLine: draft.focusLine });
     }),
   [REMOVE_LINE]: (state, action) =>
     produce(state, draft => {
@@ -95,12 +105,21 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     produce(state, draft => {
       draft.focusLine = draft.body[action.payload.id].next;
       draft.focusIndex = action.payload.focusIndex;
-      draft.trashList.push({ focusLine: draft.focusLine });
+      draft.trashList.push({ body: draft.body, focusLine: draft.focusLine });
     }),
   [FOCUS_PREV_LINE]: (state, action) =>
     produce(state, draft => {
       draft.focusLine = draft.body[action.payload.id].prev;
       draft.focusIndex = action.payload.focusIndex;
-      draft.trashList.push({ focusLine: draft.focusLine });
+      draft.trashList.push({ body: draft.body, focusLine: draft.focusLine });
+    }),
+
+  [CTRL_Z]: (state, action) =>
+    produce(state, draft => {
+      draft.body =
+        draft.trashList[draft.trashList.length - draft.updatter].body;
+      draft.focusLine =
+        draft.trashList[draft.trashList.length - draft.updatter].focusLine;
+      draft.updatter += 1;
     }),
 });
