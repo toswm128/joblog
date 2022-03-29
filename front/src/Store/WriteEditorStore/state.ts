@@ -67,7 +67,9 @@ const WriteEditorState: WriteEditorStateType = {
   updatter: 1,
   focusLine: 0,
   head: 0,
-  focusIndex: 0,
+  focusIndex: 999999,
+  setTexter: false,
+  setFocuser: false,
 };
 
 export default WriteEditorState;

@@ -20,4 +20,6 @@ export type WriteEditorStateType = {
   head: head;
   focusIndex: focusIndex;
   updatter: updater;
+  setTexter: boolean;
+  setFocuser: Boolean;
 };

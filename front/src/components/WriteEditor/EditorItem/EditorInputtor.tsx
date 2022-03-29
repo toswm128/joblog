@@ -17,21 +17,21 @@ const EditorInputter = ({ data }: { data: line }) => {
   const inputterRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
+    console.log("setText");
     setText(data.text);
     data.id === WriteEditorState.focusLine && setFlag(!flag);
   }, [
     WriteEditorState.body.length,
-    WriteEditorState.trashList,
     WriteEditorState.updatter,
+    WriteEditorState.setTexter,
   ]);
+  useEffect(() => {
+    data.id === WriteEditorState.focusLine && setFlag(!flag);
+  }, [WriteEditorState.updatter, WriteEditorState.setFocuser]);
 
   useEffect(() => {
-    console.log(WriteEditorState.focusIndex);
     if (data.id === WriteEditorState.focusLine && inputterRef.current) {
-      inputterRef.current.setSelectionRange(
-        WriteEditorState.focusIndex,
-        WriteEditorState.focusIndex
-      );
+      inputterRef.current.setSelectionRange(9999, 9999);
       inputterRef.current.focus();
     }
   }, [flag]);
@@ -49,13 +49,14 @@ const EditorInputter = ({ data }: { data: line }) => {
           onKeyDown={e => {
             switch (e.code) {
               case "Space":
+                console.log(text, 1);
                 if (inputterRef.current)
                   inputHook.setLineText(
                     text,
                     data.id,
                     inputterRef.current.selectionEnd
                   );
-                console.log("spacee");
+                console.log(text, 2);
                 break;
               case "ArrowUp":
                 if (text !== data.text) inputHook.setLineText(text, data.id);
@@ -66,6 +67,7 @@ const EditorInputter = ({ data }: { data: line }) => {
                   );
                 break;
               case "ArrowDown":
+                console.log("down");
                 if (text !== data.text) inputHook.setLineText(text, data.id);
                 if (inputterRef.current)
                   inputHook.focusNextLine(
@@ -94,8 +96,7 @@ const EditorInputter = ({ data }: { data: line }) => {
                       inputterRef.current.selectionStart ===
                       0
                   ) {
-                    if (text !== data.text)
-                      inputHook.setLineText(text, data.id);
+                    inputHook.setLineText(text, data.id);
                     inputHook.removeLineOnly(data.id, data.next, data.prev);
                   }
                 }
@@ -106,7 +107,6 @@ const EditorInputter = ({ data }: { data: line }) => {
                   if (e.shiftKey === true) {
                     inputHook.redo();
                   } else {
-                    console.log("cmd+z");
                     inputHook.undo();
                     console.log(
                       WriteEditorState.body,
@@ -119,7 +119,6 @@ const EditorInputter = ({ data }: { data: line }) => {
           }}
           onDrop={e => {
             e.preventDefault();
-            console.log(e.dataTransfer.getData("url"));
             inputHook.setLineText(text, data.id);
             setDrogOver(false);
             if (e.dataTransfer.files[0] !== undefined) {
@@ -133,12 +132,6 @@ const EditorInputter = ({ data }: { data: line }) => {
           }}
           onDragOver={e => {
             setDrogOver(true);
-            console.log(
-              "over!!!",
-              css`
-                border-bottom: 5px solid #c4e3f0;
-              `
-            );
           }}
           onDragLeave={e => {
             setDrogOver(false);
@@ -170,7 +163,7 @@ const EditorInputter = ({ data }: { data: line }) => {
             setText(e.target.value);
           }}
           onBlur={() => {
-            if (text !== data.text) inputHook.setLineText(text, data.id);
+            // if (text !== data.text) inputHook.setLineText(text, data.id);
           }}
         />
       ) : (
