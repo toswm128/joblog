@@ -61,7 +61,7 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     }),
   [REMOVE_LINE]: (state, action) =>
     produce(state, draft => {
-      draft.focusIndex = 99999999;
+      draft.focusIndex = 9999;
       draft.trashList.push({ body: draft.body, focusLine: draft.focusLine });
       if (draft.updatter !== 1) {
         draft.trashList.splice(
@@ -173,20 +173,20 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     }),
   [FOCUS_NEXT_LINE]: (state, action) =>
     produce(state, draft => {
+      draft.setFocuser = !draft.setFocuser;
+      draft.trashList.push({ body: draft.body, focusLine: draft.focusLine });
       draft.focusLine = draft.body[action.payload.id].next;
       draft.focusIndex = action.payload.focusIndex;
-      draft.trashList.push({ body: draft.body, focusLine: draft.focusLine });
-      draft.setFocuser = !draft.setFocuser;
     }),
   [FOCUS_PREV_LINE]: (state, action) =>
     produce(state, draft => {
+      draft.setFocuser = !draft.setFocuser;
+      draft.trashList.push({ body: draft.body, focusLine: draft.focusLine });
       draft.focusLine = draft.body[action.payload.id].prev;
       draft.focusIndex = action.payload.focusIndex;
-      draft.trashList.push({ body: draft.body, focusLine: draft.focusLine });
-      draft.setFocuser = !draft.setFocuser;
     }),
 
-  [UNDO]: (state, action) =>
+  [UNDO]: state =>
     produce(state, draft => {
       if (draft.trashList.length >= draft.updatter) {
         draft.body =
@@ -196,7 +196,7 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
         draft.updatter += 1;
       }
     }),
-  [REDO]: (state, action) =>
+  [REDO]: state =>
     produce(state, draft => {
       if (draft.updatter > 1) {
         draft.updatter -= 1;

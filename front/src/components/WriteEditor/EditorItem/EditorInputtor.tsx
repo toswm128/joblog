@@ -18,18 +18,20 @@ const EditorInputter = ({ data }: { data: line }) => {
 
   useEffect(() => {
     console.log("setText");
-    setText(data.text);
+    // setText(data.text);
     data.id === WriteEditorState.focusLine && setFlag(!flag);
   }, [
-    WriteEditorState.body.length,
-    WriteEditorState.updatter,
+    // WriteEditorState.body.length,
+    // WriteEditorState.updatter,
     WriteEditorState.setTexter,
   ]);
   useEffect(() => {
     data.id === WriteEditorState.focusLine && setFlag(!flag);
-  }, [WriteEditorState.updatter, WriteEditorState.setFocuser]);
+    data.id === WriteEditorState.focusLine && console.log("flag");
+  }, [WriteEditorState.setFocuser]);
 
   useEffect(() => {
+    console.log("focus");
     if (data.id === WriteEditorState.focusLine && inputterRef.current) {
       inputterRef.current.setSelectionRange(9999, 9999);
       inputterRef.current.focus();
@@ -44,21 +46,21 @@ const EditorInputter = ({ data }: { data: line }) => {
             data.id === WriteEditorState.focusLine ? "내용을 입력해 주세요" : ""
           }
           spellCheck={false}
-          cacheMeasurements
+          // cacheMeasurements
           style={drogOver ? { borderBottom: "5px solid #c4e3f0" } : {}}
           onKeyDown={e => {
+            console.log(e.code);
             switch (e.code) {
               case "Space":
-                console.log(text, 1);
                 if (inputterRef.current)
                   inputHook.setLineText(
                     text,
                     data.id,
                     inputterRef.current.selectionEnd
                   );
-                console.log(text, 2);
                 break;
               case "ArrowUp":
+                e.preventDefault();
                 if (text !== data.text) inputHook.setLineText(text, data.id);
                 if (inputterRef.current)
                   inputHook.focusPrevLine(
@@ -66,8 +68,9 @@ const EditorInputter = ({ data }: { data: line }) => {
                     inputterRef.current.selectionEnd
                   );
                 break;
+              // 시작 커맨드 뭐야 내가 수정할테니까 확인해봐
               case "ArrowDown":
-                console.log("down");
+                e.preventDefault();
                 if (text !== data.text) inputHook.setLineText(text, data.id);
                 if (inputterRef.current)
                   inputHook.focusNextLine(
@@ -149,21 +152,22 @@ const EditorInputter = ({ data }: { data: line }) => {
               );
             }
           }}
-          onKeyPress={e => {
-            if (e.key === "Enter" && e.shiftKey === false) {
-              if (text !== data.text) inputHook.setLineText(text, data.id);
-              inputHook.enterInputter(data.id, data.next);
-              e.preventDefault();
-            }
-          }}
+          // onKeyPress={e => {
+          //   if (e.key === "Enter" && e.shiftKey === false) {
+          //     if (text !== data.text) inputHook.setLineText(text, data.id);
+          //     inputHook.enterInputter(data.id, data.next);
+          //     e.preventDefault();
+          //   }
+          // }}
           onClick={() => {
             inputHook.clickInputter(data.id);
           }}
           onChange={e => {
+            console.log(e);
             setText(e.target.value);
           }}
           onBlur={() => {
-            // if (text !== data.text) inputHook.setLineText(text, data.id);
+            if (text !== data.text) inputHook.setLineText(text, data.id);
           }}
         />
       ) : (
