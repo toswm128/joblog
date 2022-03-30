@@ -9,7 +9,6 @@ const WriteEditorState: WriteEditorStateType = {
       next: 2,
       prev: null,
       src: "",
-      isImg: false,
     },
     {
       id: 1,
@@ -18,7 +17,6 @@ const WriteEditorState: WriteEditorStateType = {
       next: null,
       prev: 2,
       src: "",
-      isImg: false,
     },
     {
       id: 2,
@@ -27,7 +25,6 @@ const WriteEditorState: WriteEditorStateType = {
       next: 1,
       prev: 0,
       src: "",
-      isImg: false,
     },
   ],
   trashList: [
@@ -40,7 +37,6 @@ const WriteEditorState: WriteEditorStateType = {
           next: 2,
           prev: null,
           src: "",
-          isImg: false,
         },
         {
           id: 1,
@@ -49,7 +45,6 @@ const WriteEditorState: WriteEditorStateType = {
           next: null,
           prev: 2,
           src: "",
-          isImg: false,
         },
         {
           id: 2,
@@ -58,7 +53,6 @@ const WriteEditorState: WriteEditorStateType = {
           next: 1,
           prev: 0,
           src: "",
-          isImg: false,
         },
       ],
       focusLine: 0,

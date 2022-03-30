@@ -53,7 +53,6 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
         next: action.payload.next,
         prev: action.payload.id,
         src: "",
-        isImg: false,
       });
       draft.body[action.payload.id].next = draft.body.length - 1;
       if (action.payload.next !== null)
@@ -112,7 +111,6 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
         );
         draft.updatter = 1;
       }
-      draft.body[action.payload.id].isImg = true;
       draft.body[action.payload.id].src = action.payload.src;
       if (draft.body[action.payload.id].next !== null)
         draft.focusLine = draft.body[action.payload.id].next;
@@ -128,7 +126,7 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
         );
         draft.updatter = 1;
       }
-      draft.body[action.payload].isImg = false;
+      draft.body[action.payload].tag = "div";
       draft.focusLine = action.payload;
     }),
   [DROP_IMG]: (state, action) =>
@@ -144,14 +142,14 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
         );
         draft.updatter = 1;
       }
+      console.log(action.payload.isA);
       draft.body.push({
         id: draft.body.length,
         text: "",
-        tag: "img",
+        tag: action.payload.isA ? "img" : "a",
         next: draft.body[action.payload.id].next,
         prev: action.payload.id,
         src: action.payload.src,
-        isImg: true,
       });
       draft.body[action.payload.id].next = draft.body.length - 1;
       if (draft.body[action.payload.id].next !== null)

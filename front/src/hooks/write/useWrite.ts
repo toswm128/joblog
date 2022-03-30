@@ -92,10 +92,10 @@ const useWrite = () => {
   );
 
   const dropImg = useCallback(
-    (id: number, src: string) => {
+    (id: number, src: string, isA?: boolean) => {
       dispatch({
         type: DROP_IMG,
-        payload: { id, src },
+        payload: { id, src, isA },
       });
     },
     [dispatch]

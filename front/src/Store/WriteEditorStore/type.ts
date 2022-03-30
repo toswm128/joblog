@@ -5,7 +5,6 @@ export type line = {
   next: number | null;
   prev: number | null;
   src: string;
-  isImg: boolean;
 };
 
 export type focusLine = number | null;

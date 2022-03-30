@@ -3,10 +3,11 @@ import useWrite from "hooks/write";
 import EditorInputter from "./EditorItem/EditorInputtor";
 import { line } from "Store/WriteEditorStore/type";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const WriteEditor = () => {
   const [title, setTitle] = useState("");
-  const { WriteEditorState } = useWrite();
+  const { WriteEditorState, unsetImg } = useWrite();
 
   // const bodyChek = () => {
   //   let next;
@@ -33,7 +34,23 @@ const WriteEditor = () => {
           </ul>
         );
       case "img":
-        return <EditorInputter data={data} key={key} />;
+        return (
+          <img
+            src={data.src}
+            alt=""
+            onError={() => {
+              console.log("error");
+            }}
+            key={key}
+            onClick={() => unsetImg(data.id)}
+          />
+        );
+      case "a":
+        return (
+          <Link target="_blank" to={data.src} key={key}>
+            {data.src}
+          </Link>
+        );
     }
   };
 
