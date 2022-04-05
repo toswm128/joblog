@@ -56,25 +56,24 @@ const EditorInputter = ({ data }: { data: line }) => {
                   inputterRef.current.selectionEnd
                 );
               break;
-            case "ArrowUp":
-              e.preventDefault();
-              if (text !== data.text) inputHook.setLineText(text, data.id);
-              if (inputterRef.current)
-                inputHook.focusPrevLine(
-                  data.id,
-                  inputterRef.current.selectionEnd
-                );
-              break;
-            // 시작 커맨드 뭐야 내가 수정할테니까 확인해봐
-            case "ArrowDown":
-              e.preventDefault();
-              if (text !== data.text) inputHook.setLineText(text, data.id);
-              if (inputterRef.current)
-                inputHook.focusNextLine(
-                  data.id,
-                  inputterRef.current.selectionEnd
-                );
-              break;
+            //   e.preventDefault();
+            //   if (text !== data.text) inputHook.setLineText(text, data.id);
+            //   if (inputterRef.current)
+            //     inputHook.focusPrevLine(
+            //       data.id,
+            //       inputterRef.current.selectionEnd
+            //     );
+            //   break;
+            // // 시작 커맨드 뭐야 내가 수정할테니까 확인해봐
+            // case "ArrowDown":
+            //   e.preventDefault();
+            //   if (text !== data.text) inputHook.setLineText(text, data.id);
+            //   if (inputterRef.current)
+            //     inputHook.focusNextLine(
+            //       data.id,
+            //       inputterRef.current.selectionEnd
+            //     );
+            //   break;
             case "Tab":
               e.preventDefault();
               if (data.tag !== "ul") {
