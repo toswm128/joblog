@@ -5,11 +5,13 @@ import { AuthInput } from "components/common/InputStyle";
 import { AuthButton } from "components/common/ButtonStyle";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import AuthAPI from "assets/API/AuthAPI";
 
 const LoginPage = () => {
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
   const navigate = useNavigate();
+  const { Login } = new AuthAPI();
 
   return (
     <LoginPageContainer>
@@ -29,19 +31,17 @@ const LoginPage = () => {
         <div>
           <AuthButton
             onClick={async () => {
-              const result = await axios.post("http://127.0.0.1:5000/login", {
-                id,
-                password: pwd,
-              });
-              if (result.status == 200) {
+              const result = await Login(id, pwd);
+              if (result == 200) {
                 navigate("/");
-                localStorage.setItem("AccessToken", result.data.data);
               }
             }}
           >
             로그인
           </AuthButton>
-          <AuthButton>회원가입 하러 가기</AuthButton>
+          <AuthButton onClick={() => navigate("/join")}>
+            회원가입 하러 가기
+          </AuthButton>
         </div>
       </LoginPageContent>
     </LoginPageContainer>
