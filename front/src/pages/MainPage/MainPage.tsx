@@ -7,7 +7,7 @@ import useBlog from "hooks/blog";
 
 const MainPage = () => {
   const { getBlog } = new BlogAPI();
-  const { getBlogs } = useBlog();
+  const { getBlogs, blogs } = useBlog();
   useEffect(() => {
     getBlog().then(result => result && getBlogs(result.data.data));
   }, [getBlog]);
@@ -15,13 +15,9 @@ const MainPage = () => {
     <>
       <Header />
       <MainPageContainer>
-        <BoardItem />
-        <BoardItem />
-        <BoardItem />
-        <BoardItem />
-        <BoardItem />
-        <BoardItem />
-        <BoardItem />
+        {blogs.blogList?.map(current => (
+          <BoardItem data={current} />
+        ))}
       </MainPageContainer>
     </>
   );

@@ -67,6 +67,7 @@ const DetailPage = () => {
           </DetailCommentsList>
         </DetailPageContent>
         <MainPageContainer>
+          {/* <BoardItem />
           <BoardItem />
           <BoardItem />
           <BoardItem />
@@ -74,8 +75,7 @@ const DetailPage = () => {
           <BoardItem />
           <BoardItem />
           <BoardItem />
-          <BoardItem />
-          <BoardItem />
+          <BoardItem /> */}
         </MainPageContainer>
       </DetailPageContainer>
     </>

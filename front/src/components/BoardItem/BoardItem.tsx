@@ -2,7 +2,9 @@ import React from "react";
 import { BoardItemContainer, BoardItemContent } from "./BoardItemStyle";
 import heart from "assets/png/heart.png";
 import comment from "assets/png/comment.png";
-const BoardItem = () => {
+import { blog } from "Store/BlogStore/type";
+
+const BoardItem = ({ data }: { data: blog }) => {
   return (
     <BoardItemContainer>
       <img
@@ -10,21 +12,21 @@ const BoardItem = () => {
         alt=""
       />
       <BoardItemContent>
-        <div className="title">제목</div>
+        <div className="title">{data.title}</div>
         <div className="info">
           <div>
             <p>
               <img src={heart} alt="" />
-              좋아요
+              {data.likes}
             </p>
             <p>
               <img src={comment} alt="" />
               댓글
             </p>
           </div>
-          <div className="writer">작성자</div>
+          <div className="writer">{data.writer}</div>
         </div>
-        <div className="date">날짜</div>
+        <div className="date">{data.regdata}</div>
       </BoardItemContent>
     </BoardItemContainer>
   );
