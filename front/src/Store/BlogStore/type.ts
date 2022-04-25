@@ -1,4 +1,5 @@
 export type blog = {
+  banner: string;
   idx: number;
   title: string;
   context: string;

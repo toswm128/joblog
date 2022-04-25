@@ -13,7 +13,8 @@ def create_blog_endpoints(app, services):
     def blogPost():
         if request.method == 'POST':
             value = request.json
-            blog_service.post_blog(value)
+            print(value)
+            blog_service.post_new_blog(value)
             return jsonify({'result':'success','data': blog_service.get_Blog(),'msg': 'blog 생성!'})
 
     @app.route('/blog/board',methods=['GET'])

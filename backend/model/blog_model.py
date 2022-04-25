@@ -22,24 +22,10 @@ class blogModel:
         cursor = self.db.cursor()
         sql = '''
             INSERT INTO `joblog`.`blog`
-            (`idx`,
-            `userIdx`,
-            `context`,
-            `views`,
-            `likes`,
-            `regdate`,
-            `title`,
-            `writer`)
+            (`idx`,`userIdx`,`context`,`views`,`likes`,`regdate`,`title`,`writer`,`banner`)
             VALUES
-            (Null,
-            %d,
-            '%s',
-            0,
-            0,
-            now(),
-            '%s',
-            '%s');
-            ''' % (content['userIdx'],content['context'],content['title'],content['writer'])
+            (Null,%d,'%s',0,0,now(),'%s','%s','%s');
+            ''' % (content['userIdx'],content['context'],content['title'],content['writer'],content['banner'])
         cursor.execute(sql)
         result = cursor.fetchall()
         self.db.commit()

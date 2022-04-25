@@ -7,10 +7,7 @@ import { blog } from "Store/BlogStore/type";
 const BoardItem = ({ data }: { data: blog }) => {
   return (
     <BoardItemContainer>
-      <img
-        src="https://3.bp.blogspot.com/-mPLdHCrx-Fs/X17EWTj9zrI/AAAAAAAAYSw/t19XT88JH7EuC6R3VmVHACfL-FGMnYKJgCLcBGAsYHQ/s1600/6_1.jpg"
-        alt=""
-      />
+      <img src={data.banner} alt="" />
       <BoardItemContent>
         <div className="title">{data.title}</div>
         <div className="info">
