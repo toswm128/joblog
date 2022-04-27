@@ -70,19 +70,19 @@ export const DetailCommentsList = styled.div`
 
   /* '---content---' 구성 */
   /* '---' 와같은 선 중간에 택스처 배치를 위한 css */
-  & > p {
+  & > .listTtile {
     /* 레이아웃 */
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    div {
+    p {
       /* 레이아웃 */
       width: 100%;
       /* 고급 */
       border: 1px solid black;
     }
-    text {
+    span {
       /* 레이아웃 */
       position: absolute;
       padding: 0 6px;

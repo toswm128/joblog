@@ -63,10 +63,10 @@ const DetailPage = () => {
                     <WriteButton>작성하기</WriteButton>
                   </div>
                 </div>
-                <p>
-                  <div></div>
-                  <text>{4}개의 댓글</text>
-                </p>
+                <div className="listTtile">
+                  <p></p>
+                  <span>{4}개의 댓글</span>
+                </div>
                 <Comment />
                 <Comment />
                 <Comment />
@@ -74,10 +74,10 @@ const DetailPage = () => {
                 <Comment />
                 <Comment />
                 <Comment />
-                <p>
-                  <div></div>
-                  <text>다른 게시글</text>
-                </p>
+                <div className="listTtile">
+                  <p></p>
+                  <span>다른 게시글</span>
+                </div>
               </DetailCommentsList>
             </DetailPageContent>
             <MainPageContainer>
@@ -121,10 +121,10 @@ const DetailPage = () => {
                     <WriteButton>작성하기</WriteButton>
                   </div>
                 </div>
-                <p>
-                  <div></div>
-                  <text>{0}개의 댓글</text>
-                </p>
+                <div className="listTtile">
+                  <p></p>
+                  <span>{0}개의 댓글</span>
+                </div>
                 <Comment />
                 <Comment />
                 <Comment />
@@ -132,10 +132,10 @@ const DetailPage = () => {
                 <Comment />
                 <Comment />
                 <Comment />
-                <p>
-                  <div></div>
-                  <text>다른 게시글</text>
-                </p>
+                <div className="listTtile">
+                  <p></p>
+                  <span>다른 게시글</span>
+                </div>
               </DetailCommentsList>
             </DetailPageContent>
           </>
