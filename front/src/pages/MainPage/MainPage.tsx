@@ -6,6 +6,7 @@ import BlogAPI from "assets/API/BlogAPI";
 import useBlog from "hooks/blog";
 import { useQuery } from "react-query";
 import { blog } from "Store/BlogStore/type";
+import { Link } from "react-router-dom";
 
 const MainPage = () => {
   const { getBlog } = new BlogAPI();
@@ -20,7 +21,9 @@ const MainPage = () => {
       <MainPageContainer>
         {data?.data.data.map(
           (current: blog, key: React.Key | null | undefined) => (
-            <BoardItem data={current} key={key} />
+            <Link to={`/detail/${current.idx}`} key={key}>
+              <BoardItem data={current} />
+            </Link>
           )
         )}
       </MainPageContainer>

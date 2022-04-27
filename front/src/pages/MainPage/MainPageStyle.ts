@@ -8,6 +8,11 @@ export const MainPageContainer = styled.div`
   max-width: 1692px;
   margin: 0 auto 0 auto;
 
+  a {
+    color: black;
+    text-decoration: none;
+  }
+
   /* 미디어 쿼리 */
   @media (max-width: 1738px) {
     max-width: 1349px;

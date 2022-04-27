@@ -9,6 +9,8 @@ import axios from "axios";
 import SERVER from "config/config.json";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { persistQueryClient } from "react-query/persistQueryClient-experimental";
+import { createWebStoragePersistor } from "react-query/createWebStoragePersistor-experimental";
 
 const store = createStore(rootReducer, composeWithDevTools());
 const token = localStorage.getItem("AccessToken");
@@ -16,7 +18,22 @@ const token = localStorage.getItem("AccessToken");
 axios.defaults.baseURL = SERVER.SERVER;
 if (token) axios.defaults.headers.common["Authorization"] = token;
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      cacheTime: 1000 * 60 * 60 * 24, // 24 hours
+    },
+  },
+});
+
+const localStoragePersistor = createWebStoragePersistor({
+  storage: window.localStorage,
+});
+
+persistQueryClient({
+  queryClient,
+  persistor: localStoragePersistor,
+});
 
 ReactDOM.render(
   <React.StrictMode>
