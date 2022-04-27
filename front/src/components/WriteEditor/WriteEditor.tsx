@@ -4,11 +4,13 @@ import EditorInputter from "./EditorItem/EditorInputtor";
 import { line } from "Store/WriteEditorStore/type";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import BlogAPI from "assets/API/BlogAPI";
 
 const WriteEditor = () => {
   const [title, setTitle] = useState("");
   const { WriteEditorState, unsetImg } = useWrite();
   const dom: any = [];
+  const { postBoard } = new BlogAPI();
 
   // const bodyChek = () => {
   //   let next;
@@ -87,7 +89,15 @@ const WriteEditor = () => {
       })}
       <button
         onClick={() => {
-          JSON.stringify(dom);
+          const data = {
+            userIdx: 0,
+            context: JSON.stringify(dom),
+            title: "test",
+            writer: "조민수",
+            banner:
+              "https://dispatch.cdnser.be/wp-content/uploads/2018/12/bb3e3ac98f5ac653a8c07412d561dafc.jpg",
+          };
+          postBoard(data);
         }}
       >
         작성하기

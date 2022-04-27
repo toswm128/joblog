@@ -23,9 +23,9 @@ class BlogAPI {
       console.log(e);
     }
   }
-  async postBoard(idx: string | undefined) {
+  async postBoard(data: any) {
     try {
-      const result = await axios.post(`/blog/post`);
+      const result = await axios.post(`/blog/post`, data);
       if (result.status === 200) {
         return result;
       }

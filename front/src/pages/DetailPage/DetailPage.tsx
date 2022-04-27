@@ -14,6 +14,7 @@ import { WriteButton } from "components/common/ButtonStyle";
 import { useQuery, useQueryClient } from "react-query";
 import BlogAPI from "assets/API/BlogAPI";
 import { useParams } from "react-router-dom";
+import BoardContext from "components/BoardContext";
 
 const DetailPage = () => {
   const { idx } = useParams();
@@ -47,7 +48,9 @@ const DetailPage = () => {
                 </div>
                 <img src={heart} alt="" />
               </div>
-              <div className="content">{board?.data.data.context}</div>
+              <div className="content">
+                <BoardContext context={board?.data.data.context} />
+              </div>
               <DetailCommentsList>
                 <div className="commentForm">
                   <div>
