@@ -8,13 +8,15 @@ const Header = () => {
     <HeaderContaier>
       <HeaderLeft>
         <div className="header-logo">
-          <img src={logo} alt="" />
+          <Link to={"/"}>
+            <img src={logo} alt="" />
+          </Link>
         </div>
         <div className="header-nav">
           <Link to={"/"}>내 블로그</Link>
         </div>
         <div className="header-nav">
-          <Link to={"/"}>글쓰기</Link>
+          <Link to={"/write"}>글쓰기</Link>
         </div>
       </HeaderLeft>
       <HeaderRight>

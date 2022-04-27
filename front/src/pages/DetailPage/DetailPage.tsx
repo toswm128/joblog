@@ -27,7 +27,6 @@ const DetailPage = () => {
       cacheTime: 0,
     }
   );
-  console.log(isFetched);
   return (
     <>
       <Header />

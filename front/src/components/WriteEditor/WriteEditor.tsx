@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 const WriteEditor = () => {
   const [title, setTitle] = useState("");
   const { WriteEditorState, unsetImg } = useWrite();
+  const dom: any = [];
 
   // const bodyChek = () => {
   //   let next;
@@ -72,6 +73,7 @@ const WriteEditor = () => {
         if (key === 0) {
           next = WriteEditorState.body[WriteEditorState.head].next;
           snext = next;
+          dom.push(WriteEditorState.body[WriteEditorState.head]);
           return tagTranslator(
             WriteEditorState.body[WriteEditorState.head],
             key
@@ -79,9 +81,17 @@ const WriteEditor = () => {
         }
         if (next !== null) {
           snext = WriteEditorState.body[next].next;
+          dom.push(WriteEditorState.body[next]);
           return tagTranslator(WriteEditorState.body[next], key);
         }
       })}
+      <button
+        onClick={() => {
+          JSON.stringify(dom);
+        }}
+      >
+        작성하기
+      </button>
     </>
   );
 };

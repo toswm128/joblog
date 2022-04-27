@@ -10,11 +10,7 @@ import { Link } from "react-router-dom";
 
 const MainPage = () => {
   const { getBlog } = new BlogAPI();
-  // const { getBlogs, blogs } = useBlog();
   const { data } = useQuery("getBoard", getBlog);
-  // useEffect(() => {
-  //   getBlog().then(result => result && getBlogs(result.data.data));
-  // }, [getBlog]);
   return (
     <>
       <Header />
