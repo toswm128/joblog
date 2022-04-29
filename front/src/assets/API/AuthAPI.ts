@@ -6,7 +6,7 @@ class AuthAPI {
     if (result.status === 200) {
       localStorage.setItem("AccessToken", result.data.data);
     }
-    return result.status;
+    return result;
   }
 
   async Join(id: string, pwd: string, name: string) {

@@ -6,12 +6,14 @@ import { AuthButton } from "components/common/ButtonStyle";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AuthAPI from "assets/API/AuthAPI";
+import useUser from "hooks/user";
 
 const LoginPage = () => {
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
   const navigate = useNavigate();
   const { Login } = new AuthAPI();
+  const { setUser } = useUser();
 
   return (
     <LoginPageContainer>
@@ -32,7 +34,9 @@ const LoginPage = () => {
           <AuthButton
             onClick={async () => {
               const result = await Login(id, pwd);
-              if (result == 200) {
+              if (result.status == 200) {
+                const { idx, name } = result.data.data;
+                setUser({ userId: idx, name });
                 navigate("/");
               }
             }}

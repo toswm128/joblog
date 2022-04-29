@@ -9,11 +9,12 @@ class authService:
         
     def try_login(self,userId,userPwd):
         resurt = self.auth_model.get_user_to_id(userId)
+        print(resurt)
         if resurt:
             # pp= bcrypt.hashpw(userPwd.encode("utf-8"), bcrypt.gensalt())
             if bcrypt.checkpw(userPwd.encode('utf-8'),resurt['password'].encode('utf-8')):
                 # print(pp,pp.decode('utf-8'))
-                return jwt.encode(resurt,"fromis", algorithm="HS256")
+                return {"token":jwt.encode(resurt,"fromis", algorithm="HS256"),"idx":resurt["idx"],"name":resurt["name"]}
             return 400
         return 404
 
