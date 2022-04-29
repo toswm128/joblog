@@ -58,6 +58,7 @@ const WriteEditorState: WriteEditorStateType = {
       focusLine: 0,
     },
   ],
+  banner: undefined,
   updatter: 1,
   focusLine: 0,
   head: 0,

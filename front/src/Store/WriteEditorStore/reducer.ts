@@ -9,6 +9,7 @@ import {
   REDO,
   REMOVE_LINE,
   REMOVE_LINE_ONLY,
+  SET_BANNER,
   SET_IMG,
   SET_LINE_TEXT,
   SET_TAG_TO_UL,
@@ -203,5 +204,9 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
         draft.focusLine =
           draft.trashList[draft.trashList.length - draft.updatter].focusLine;
       }
+    }),
+  [SET_BANNER]: (state, action) =>
+    produce(state, draft => {
+      draft.banner = action.payload;
     }),
 });

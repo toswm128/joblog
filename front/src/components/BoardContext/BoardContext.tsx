@@ -1,4 +1,5 @@
 import { ReactChild, ReactFragment, ReactPortal } from "react";
+import { Link } from "react-router-dom";
 import { line } from "Store/WriteEditorStore/type";
 import {
   BoardContextContainer,
@@ -24,6 +25,13 @@ const BoardContext = ({ context }: { context: string }) => {
             );
           case "img":
             return <BoardContextImgTag key={key} src={current.src} alt="" />;
+
+          case "a":
+            return (
+              <Link target="_blank" to={current.src} key={key}>
+                {current.src}
+              </Link>
+            );
         }
       })}
     </BoardContextContainer>

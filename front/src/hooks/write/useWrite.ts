@@ -15,6 +15,7 @@ import {
   UNSET_IMG,
   REDO,
   DROP_IMG,
+  SET_BANNER,
 } from "Store/WriteEditorStore/actions";
 
 const useWrite = () => {
@@ -142,6 +143,17 @@ const useWrite = () => {
     });
   }, [dispatch]);
 
+  const setBanner = useCallback(
+    (file: File) => {
+      console.log(file);
+      dispatch({
+        type: SET_BANNER,
+        payload: file,
+      });
+    },
+    [dispatch]
+  );
+
   return {
     clickInputter,
     enterInputter,
@@ -156,6 +168,7 @@ const useWrite = () => {
     focusPrevLine,
     undo,
     redo,
+    setBanner,
     WriteEditorState,
   };
 };

@@ -1,11 +1,18 @@
 import Header from "components/header";
 import WriteEditor from "components/WriteEditor";
-import React, { useState } from "react";
+import useWrite from "hooks/write";
+import React, { useEffect, useState } from "react";
 import { WritePageContainer, WirtePageContainer } from "./WritePageStyle";
 
 const WritePage = () => {
-  const [file, setFile] = useState<File>();
+  const { WriteEditorState, setBanner } = useWrite();
+  const { banner } = WriteEditorState;
   const [src, setSrc] = useState<string>();
+
+  useEffect(() => {
+    banner && setSrc(URL.createObjectURL(banner));
+  }, [banner]);
+
   return (
     <>
       <Header />
@@ -27,13 +34,13 @@ const WritePage = () => {
           onDrop={e => {
             e.preventDefault();
             console.log(e);
-            setFile(e.dataTransfer.files[0]);
+            setBanner(e.dataTransfer.files[0]);
             setSrc(URL.createObjectURL(e.dataTransfer.files[0]));
           }}
           onChange={e => {
             if (e.target.files && e.target.files.length) {
               let fileData = e.target.files[0];
-              setFile(fileData);
+              setBanner(fileData);
               setSrc(URL.createObjectURL(fileData));
             }
           }}

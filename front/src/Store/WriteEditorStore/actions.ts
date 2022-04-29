@@ -19,3 +19,5 @@ export const FOCUS_PREV_LINE = "WriteEditor/FOCUS_PREV_LINE";
 
 export const UNDO = "WriteEditor/UNDO";
 export const REDO = "WriteEditor/REDO";
+
+export const SET_BANNER = "WriteEditor/SET_BANNER";
