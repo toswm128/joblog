@@ -13,6 +13,7 @@ import {
   SET_IMG,
   SET_LINE_TEXT,
   SET_TAG_TO_UL,
+  SET_TITLE,
   UNDO,
   UNSET_IMG,
 } from "./actions";
@@ -208,5 +209,9 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
   [SET_BANNER]: (state, action) =>
     produce(state, draft => {
       draft.banner = action.payload;
+    }),
+  [SET_TITLE]: (state, action) =>
+    produce(state, draft => {
+      draft.title = action.payload;
     }),
 });

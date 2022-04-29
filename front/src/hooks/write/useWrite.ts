@@ -16,6 +16,7 @@ import {
   REDO,
   DROP_IMG,
   SET_BANNER,
+  SET_TITLE,
 } from "Store/WriteEditorStore/actions";
 
 const useWrite = () => {
@@ -145,10 +146,18 @@ const useWrite = () => {
 
   const setBanner = useCallback(
     (file: File) => {
-      console.log(file);
       dispatch({
         type: SET_BANNER,
         payload: file,
+      });
+    },
+    [dispatch]
+  );
+  const setTitle = useCallback(
+    (text: string) => {
+      dispatch({
+        type: SET_TITLE,
+        payload: text,
       });
     },
     [dispatch]
@@ -169,6 +178,7 @@ const useWrite = () => {
     undo,
     redo,
     setBanner,
+    setTitle,
     WriteEditorState,
   };
 };

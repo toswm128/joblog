@@ -7,8 +7,9 @@ import { Link } from "react-router-dom";
 import BlogAPI from "assets/API/BlogAPI";
 
 const WriteEditor = () => {
-  const [title, setTitle] = useState("");
-  const { WriteEditorState, unsetImg } = useWrite();
+  // const [title, setTitle] = useState("");
+  const { WriteEditorState, unsetImg, setTitle } = useWrite();
+  const { body, head, title, banner } = WriteEditorState;
   const dom: any = [];
   const { postBoard } = new BlogAPI();
 
@@ -70,21 +71,18 @@ const WriteEditor = () => {
       {/* {WriteEditorState.body.map((current: line, key: React.Key) => (
         <EditorInputter data={current} key={key} />
       ))} */}
-      {WriteEditorState.body.map((current: line, key: number) => {
+      {body.map((_, key: number) => {
         next = snext;
         if (key === 0) {
-          next = WriteEditorState.body[WriteEditorState.head].next;
+          next = body[head].next;
           snext = next;
-          dom.push(WriteEditorState.body[WriteEditorState.head]);
-          return tagTranslator(
-            WriteEditorState.body[WriteEditorState.head],
-            key
-          );
+          dom.push(body[head]);
+          return tagTranslator(body[head], key);
         }
         if (next !== null) {
-          snext = WriteEditorState.body[next].next;
-          dom.push(WriteEditorState.body[next]);
-          return tagTranslator(WriteEditorState.body[next], key);
+          snext = body[next].next;
+          dom.push(body[next]);
+          return tagTranslator(body[next], key);
         }
       })}
       <button
@@ -92,10 +90,9 @@ const WriteEditor = () => {
           const data = {
             userIdx: 0,
             context: JSON.stringify(dom),
-            title: "test",
+            title,
             writer: "조민수",
-            banner:
-              "https://dispatch.cdnser.be/wp-content/uploads/2018/12/bb3e3ac98f5ac653a8c07412d561dafc.jpg",
+            banner,
           };
           postBoard(data);
         }}

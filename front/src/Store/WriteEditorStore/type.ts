@@ -12,13 +12,15 @@ export type head = number;
 export type focusIndex = number;
 export type updater = number;
 export type banner = File | undefined;
+export type title = string;
 
 export type WriteEditorStateType = {
+  title: title;
+  banner: banner;
   body: line[];
   trashList: { body: line[]; focusLine: focusLine }[];
   focusLine: focusLine;
   head: head;
-  banner: banner;
   focusIndex: focusIndex;
   updatter: updater;
   setTexter: boolean;
