@@ -11,7 +11,7 @@ export type focusLine = number | null;
 export type head = number;
 export type focusIndex = number;
 export type updater = number;
-export type banner = File | undefined;
+export type banner = Blob | undefined;
 export type title = string;
 
 export type WriteEditorStateType = {

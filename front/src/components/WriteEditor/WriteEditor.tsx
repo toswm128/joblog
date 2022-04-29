@@ -5,6 +5,7 @@ import { line } from "Store/WriteEditorStore/type";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import BlogAPI from "assets/API/BlogAPI";
+import useUser from "hooks/user";
 
 const WriteEditor = () => {
   // const [title, setTitle] = useState("");
@@ -12,6 +13,7 @@ const WriteEditor = () => {
   const { body, head, title, banner } = WriteEditorState;
   const dom: any = [];
   const { postBoard } = new BlogAPI();
+  const { user } = useUser();
 
   // const bodyChek = () => {
   //   let next;
@@ -88,13 +90,21 @@ const WriteEditor = () => {
       <button
         onClick={() => {
           const data = {
-            userIdx: 0,
+            userIdx: user.userId,
             context: JSON.stringify(dom),
             title,
-            writer: "조민수",
+            writer: user.name,
             banner,
           };
-          postBoard(data);
+          const formData = new FormData();
+          user.userId && formData.append("userIdx", user.userId.toString());
+          formData.append("context", JSON.stringify(dom));
+          formData.append("title", title);
+          user.name && formData.append("writer", user.name);
+          banner && formData.append("banner", banner);
+
+          console.log(banner);
+          postBoard(formData);
         }}
       >
         작성하기

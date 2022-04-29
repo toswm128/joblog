@@ -1,4 +1,6 @@
-from flask import request, jsonify
+from flask import request, jsonify, send_file
+import os
+from werkzeug.utils import secure_filename
 
 
 def create_blog_endpoints(app, services):
@@ -12,9 +14,10 @@ def create_blog_endpoints(app, services):
     @app.route('/blog/post',methods=['POST'])
     def blogPost():
         if request.method == 'POST':
-            value = request.json
-            print(value)
-            blog_service.post_new_blog(value)
+            file = request.files["banner"]
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config["IMAGE_UPLOADS"],file.filename))
+            # blog_service.post_new_blog(value)
             return jsonify({'result':'success','data': blog_service.get_Blog(),'msg': 'blog 생성!'})
 
     @app.route('/blog/board',methods=['GET'])
@@ -30,3 +33,9 @@ def create_blog_endpoints(app, services):
             value = request.json
             print(value)
             return jsonify({'result':'success'})
+
+    @app.route('/image',methods=['GET'])
+    def showImg():
+        if request.method == 'GET':
+            fileName = request.args.get('file')
+            return send_file(os.path.join(app.config["IMAGE_UPLOADS"],fileName),mimetype='image/gif',attachment_filename="download")
