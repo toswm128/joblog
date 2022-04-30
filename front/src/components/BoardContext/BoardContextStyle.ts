@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 export const BoardContextContainer = styled.div`
   width: 100%;
+  white-space: pre-line;
 `;
 
 export const BoardContextDivTag = styled.div`

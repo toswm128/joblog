@@ -89,20 +89,17 @@ const WriteEditor = () => {
       })}
       <button
         onClick={() => {
-          const data = {
-            userIdx: user.userId,
-            context: JSON.stringify(dom),
-            title,
-            writer: user.name,
-            banner,
-          };
           const formData = new FormData();
           user.userId && formData.append("userIdx", user.userId.toString());
-          formData.append("context", JSON.stringify(dom));
+          formData.append(
+            "context",
+            JSON.stringify(dom).replaceAll("\\n", "\\\\n")
+          );
           formData.append("title", title);
           user.name && formData.append("writer", user.name);
           banner && formData.append("banner", banner);
 
+          console.log(formData.get("context"));
           console.log(banner);
           postBoard(formData);
         }}

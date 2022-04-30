@@ -108,6 +108,22 @@ export const DetailCommentsList = styled.div`
         object-fit: cover;
         border-radius: 50%;
       }
+      .commentTextarea {
+        /* 레이아웃 */
+        width: 100%;
+        border-radius: 9px;
+        resize: none;
+        height: auto;
+        overflow-y: hidden;
+        padding: 0 3px;
+        /* 고급 */
+        font-size: 1rem;
+        border: 1px solid #c4c4c4;
+        &::placeholder {
+          /* 고급 */
+          color: #c4c4c4;
+        }
+      }
     }
   }
 `;

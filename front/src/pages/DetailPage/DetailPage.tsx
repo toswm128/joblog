@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "components/header";
 import {
   DetailPageContainer,
@@ -8,17 +8,18 @@ import {
 import heart from "assets/png/heart.png";
 import Comment from "components/Comment";
 import { MainPageContainer } from "pages/MainPage/MainPageStyle";
-import BoardItem from "components/BoardItem";
 import { CommentInput } from "components/common/InputStyle";
 import { WriteButton } from "components/common/ButtonStyle";
 import { useQuery, useQueryClient } from "react-query";
 import BlogAPI from "assets/API/BlogAPI";
 import { useParams } from "react-router-dom";
 import BoardContext from "components/BoardContext";
+import ReactTextareaAutosize from "react-textarea-autosize";
 
 const DetailPage = () => {
   const { idx } = useParams();
   const { getBoard } = new BlogAPI();
+  const [comment, setComment] = useState("");
   const { isFetched, data: board } = useQuery(
     "Detail/board",
     () => getBoard(idx),
@@ -59,7 +60,14 @@ const DetailPage = () => {
                       src="https://thumbs.gfycat.com/UnluckyQualifiedArabianwildcat-size_restricted.gif"
                       alt=""
                     />
-                    <CommentInput placeholder="댓글을 입력해 주세요" />
+                    <ReactTextareaAutosize
+                      className="commentTextarea"
+                      spellCheck={false}
+                      minRows={2}
+                      value={comment}
+                      onChange={e => setComment(e.target.value)}
+                      placeholder="댓글을 입력해 주세요"
+                    />
                   </div>
                   <div>
                     <WriteButton>작성하기</WriteButton>
