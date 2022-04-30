@@ -1,6 +1,8 @@
 from flask import request, jsonify, send_file
 import os
 from werkzeug.utils import secure_filename
+import uuid
+
 
 
 def create_blog_endpoints(app, services):
@@ -16,9 +18,9 @@ def create_blog_endpoints(app, services):
         if request.method == 'POST':
             value = request.form
             file = request.files["banner"]
-
-            file.save(os.path.join(app.config["IMAGE_UPLOADS"],file.filename))
-            url = "http://localhost:5000/image?file="+file.filename
+            fileName = str(uuid.uuid4())+'.'+file.filename.split('.')[1]
+            file.save(os.path.join(app.config["IMAGE_UPLOADS"],fileName))
+            url = "http://localhost:5000/image?file="+fileName
             blog_service.post_new_blog(value,url)
             return jsonify({'result':'success','data': blog_service.get_Blog(),'msg': 'blog 생성!'})
 
