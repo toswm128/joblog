@@ -4,10 +4,9 @@ class blogService:
     def __init__(self, blogModel):
         self.blog_model = blogModel 
         
-    def post_new_blog(self, contents):  
-        print(contents)
-        # blog = self.blog_model.post_blog(contents)
-        return 'a'
+    def post_new_blog(self, value,url): 
+        blog = self.blog_model.post_blog(value,url)
+        return blog
 
     def get_Blog(self):
         blog = self.blog_model.get_blog()

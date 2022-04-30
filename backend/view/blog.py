@@ -14,10 +14,12 @@ def create_blog_endpoints(app, services):
     @app.route('/blog/post',methods=['POST'])
     def blogPost():
         if request.method == 'POST':
+            value = request.form
             file = request.files["banner"]
-            filename = secure_filename(file.filename)
+
             file.save(os.path.join(app.config["IMAGE_UPLOADS"],file.filename))
-            # blog_service.post_new_blog(value)
+            url = "http://localhost:5000/image?file="+file.filename
+            blog_service.post_new_blog(value,url)
             return jsonify({'result':'success','data': blog_service.get_Blog(),'msg': 'blog 생성!'})
 
     @app.route('/blog/board',methods=['GET'])
