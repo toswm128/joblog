@@ -42,4 +42,8 @@ def create_blog_endpoints(app, services):
     def showImg():
         if request.method == 'GET':
             fileName = request.args.get('file')
-            return send_file(os.path.join(app.config["IMAGE_UPLOADS"],fileName),mimetype='image/gif',attachment_filename="download")
+            if fileName:
+                if os.path.isfile(os.path.join(app.config["IMAGE_UPLOADS"],fileName)):
+                    return send_file(os.path.join(app.config["IMAGE_UPLOADS"],fileName),mimetype='image/gif',attachment_filename="download")
+                else:
+                    return jsonify({"msg":"이미지를 찾을 수 없습니다."}),404
