@@ -21,8 +21,11 @@ def create_blog_endpoints(app, services):
             fileName = str(uuid.uuid4())+'.'+file.filename.split('.')[1]
             file.save(os.path.join(app.config["IMAGE_UPLOADS"],fileName))
             url = "http://localhost:5000/image?file="+fileName
-            blog_service.post_new_blog(value,url)
-            return jsonify({'result':'success','data': blog_service.get_Blog(),'msg': 'blog 생성!'})
+            status = blog_service.post_new_blog(value,url)
+            if status == 400:
+                return jsonify({'msg': '포함되지 않는 데이터가 있습니다'}),400
+            else:
+                return jsonify({'result':'success','data': blog_service.get_Blog(),'msg': 'blog 생성!'})
 
     @app.route('/blog/board',methods=['GET'])
     def getBoard():

@@ -5,8 +5,11 @@ class blogService:
         self.blog_model = blogModel 
         
     def post_new_blog(self, value,url): 
-        blog = self.blog_model.post_blog(value,url)
-        return blog
+        if value['userIdx'] and value['context'] and value['title'] and value['writer'] and url:
+            blog = self.blog_model.post_blog(value,url)
+            return blog
+        else:
+            return 400
 
     def get_Blog(self):
         blog = self.blog_model.get_blog()
