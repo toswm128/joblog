@@ -50,3 +50,14 @@ def create_blog_endpoints(app, services):
                     return send_file(os.path.join(app.config["IMAGE_UPLOADS"],fileName),mimetype='image/gif',attachment_filename="download")
                 else:
                     return jsonify({"msg":"이미지를 찾을 수 없습니다."}),404
+
+    @app.route('/blog/comment',methods=['POST'])
+    def comment():
+        if request.method == 'POST':
+            data = request.json
+            status = blog_service.post_comment(data)
+            if status == 400:
+                return jsonify({"msg":"포함되지 않는 데이터가 있습니다"}),400
+            else:
+                return jsonify({'result':'success','msg': '댓글 작성'})
+                

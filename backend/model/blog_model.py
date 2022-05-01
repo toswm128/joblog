@@ -30,4 +30,18 @@ class blogModel:
         result = cursor.fetchall()
         self.db.commit()
         return result
+
+    def post_comment(self,blogId,userId,text):
+        cursor = self.db.cursor()
+        sql = '''
+            INSERT INTO `joblog`.`comment`
+            (`idx`,`blogId`,`userId`,`text`)
+            VALUES
+            (Null,%d,%d,'%s');
+            ''' % (blogId,userId,text)
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        self.db.commit()
+        return result
+
     
