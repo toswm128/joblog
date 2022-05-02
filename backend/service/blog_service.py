@@ -5,8 +5,11 @@ class blogService:
         self.blog_model = blogModel 
         
     def post_new_blog(self, value,url): 
-        if value['userIdx'] and value['context'] and value['title'] and value['writer'] and url:
-            blog = self.blog_model.post_blog(value,url)
+        if value['userIdx'] and value['context'] and value['title'] and url:
+            userIdx = int(value['userIdx'])
+            context = value['context']
+            title = value['title']
+            blog = self.blog_model.post_blog(userIdx,context,title,url)
             return blog
         else:
             return 400

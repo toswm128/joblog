@@ -13,19 +13,32 @@ class blogModel:
 
     def get_board_idx(self,idx):
         cursor = self.db.cursor(pymysql.cursors.DictCursor)
-        sql = '''SELECT * FROM blog where idx=%d;''' % int(idx)
-        cursor.execute(sql)
-        result = cursor.fetchone()
+        blogSql = '''select * from blog where idx = %d;''' % int(idx)
+        commentSql = '''select userId,text from comment where blogId = %d;''' % int(idx)
+        userSql = '''select name from user where idx = 7;''' 
+        cursor.execute(blogSql)
+        blog_data = cursor.fetchone()
+        cursor.execute(commentSql)
+        comment_data = cursor.fetchall()
+        cursor.execute(userSql)
+        user_data = cursor.fetchone()
+
+        result = dict()
+        result['blog'] = blog_data
+        result['comments'] = comment_data
+        result['user'] = user_data
+        print(result)
+
         return result
     
-    def post_blog(self,value,url):
+    def post_blog(self,userIdx,context,title,url):
         cursor = self.db.cursor()
         sql = '''
             INSERT INTO `joblog`.`blog`
-            (`idx`,`userIdx`,`context`,`views`,`likes`,`regdate`,`title`,`writer`,`banner`)
+            (`idx`,`userIdx`,`context`,`regdate`,`title`,`banner`)
             VALUES
-            (Null,%d,'%s',0,0,now(),'%s','%s','%s');
-            ''' % (int(value['userIdx']),value['context'],value['title'],value['writer'],url)
+            (Null,%d,'%s',now(),'%s','%s');
+            ''' % (userIdx,context,title,url)
         cursor.execute(sql)
         result = cursor.fetchall()
         self.db.commit()
