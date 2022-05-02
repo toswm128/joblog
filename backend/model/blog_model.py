@@ -14,7 +14,12 @@ class blogModel:
     def get_board_idx(self,idx,userIdx):
         cursor = self.db.cursor(pymysql.cursors.DictCursor)
         blogSql = '''select * from blog where idx = %d;''' % int(idx)
-        commentSql = '''select userId,text from comment where blogId = %d;''' % int(idx)
+        commentSql = '''
+            select c1.text, u1.name, u1.profile  from comment c1
+            JOIN user u1
+            ON c1.userId = u1.idx
+            where c1.blogId = %d;
+            ''' % int(idx)
         userSql = '''select name, profile from user where idx = %d;''' % int(userIdx)
         cursor.execute(blogSql)
         blog_data = cursor.fetchone()
