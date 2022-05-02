@@ -12,20 +12,14 @@ class authModel:
         print(sql,result)
         return result
 
-    def insert_user(self,userData):
+    def insert_user(self,userData,url):
         cursor = self.db.cursor()
         sql = '''
         INSERT INTO `joblog`.`user`
-        (`idx`,
-        `id`,
-        `password`,
-        `name`)
+        (`idx`,`id`,`password`,`name`,`profile`)
         VALUES
-        (Null,
-        '%s',
-        '%s',
-        '%s');
-        ''' % (userData['id'],userData['password'],userData['name'])
+        (Null,'%s','%s','%s','%s');
+        ''' % (userData['id'],userData['password'],userData['name'],url)
         cursor.execute(sql)
         result = cursor.fetchall()
         self.db.commit()

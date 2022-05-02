@@ -30,8 +30,9 @@ def create_blog_endpoints(app, services):
     @app.route('/blog/board',methods=['GET'])
     def getBoard():
         if request.method == 'GET':
+            token = request.headers['Authorization']
             idx = request.args.get('idx')
-            board = blog_service.get_select_board(idx)
+            board = blog_service.get_select_board(idx,token)
             return jsonify({'result':'success','data': board,'msg': 'blog 불러오기'})
             
     @app.route('/m',methods=['POST'])

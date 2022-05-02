@@ -4,7 +4,7 @@ class AuthAPI {
   async Login(id: string, pwd: string) {
     const result = await axios.post("login", { id, password: pwd });
     if (result.status === 200) {
-      localStorage.setItem("AccessToken", result.data.data);
+      localStorage.setItem("AccessToken", result.data.data.token);
     }
     return result;
   }

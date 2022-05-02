@@ -1,6 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 import useBlog from "hooks/blog";
 import { board } from "pages/DetailPage/type";
+import { UserStateType } from "Store/UserStore/type";
+import { banner } from "Store/WriteEditorStore/type";
 
 class BlogAPI {
   async getBlog() {
@@ -26,9 +28,19 @@ class BlogAPI {
       console.log(e);
     }
   }
-  async postBoard(data: any) {
+  async postBoard(
+    user: UserStateType,
+    dom: any,
+    title: string,
+    banner: banner
+  ) {
+    const formData = new FormData();
+    user.userId && formData.append("userIdx", user.userId.toString());
+    formData.append("context", JSON.stringify(dom).replaceAll("\\n", "\\\\n"));
+    formData.append("title", title);
+    banner && formData.append("banner", banner);
     try {
-      const result = await axios.post(`/blog/post`, data);
+      const result = await axios.post(`/blog/post`, formData);
       if (result.status === 200) {
         return result;
       }

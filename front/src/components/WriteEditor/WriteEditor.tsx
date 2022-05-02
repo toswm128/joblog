@@ -89,16 +89,9 @@ const WriteEditor = () => {
       })}
       <button
         onClick={() => {
-          const formData = new FormData();
-          user.userId && formData.append("userIdx", user.userId.toString());
-          formData.append(
-            "context",
-            JSON.stringify(dom).replaceAll("\\n", "\\\\n")
-          );
-          formData.append("title", title);
-          banner && formData.append("banner", banner);
-          
-          postBoard(formData);
+          user && dom && title && banner
+            ? postBoard(user, dom, title, banner)
+            : alert("작성 다 하셈");
         }}
       >
         작성하기
