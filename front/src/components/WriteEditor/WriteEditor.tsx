@@ -96,11 +96,8 @@ const WriteEditor = () => {
             JSON.stringify(dom).replaceAll("\\n", "\\\\n")
           );
           formData.append("title", title);
-          user.name && formData.append("writer", user.name);
           banner && formData.append("banner", banner);
-
-          console.log(formData.get("context"));
-          console.log(banner);
+          
           postBoard(formData);
         }}
       >

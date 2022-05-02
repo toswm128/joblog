@@ -1,7 +1,7 @@
 import React from "react";
 import { CommentContainer } from "./CommentStyle";
 
-const Comment = () => {
+const Comment = ({ text }: { text: string }) => {
   return (
     <CommentContainer>
       <div className="comment-info">
@@ -14,7 +14,7 @@ const Comment = () => {
           <div className="comment-date">2020.02.12</div>
         </div>
       </div>
-      <div className="comment-content">내용이 아주 실하네요...</div>
+      <div className="comment-content">{text}</div>
     </CommentContainer>
   );
 };

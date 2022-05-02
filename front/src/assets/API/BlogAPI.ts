@@ -1,5 +1,6 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import useBlog from "hooks/blog";
+import { board } from "pages/DetailPage/type";
 
 class BlogAPI {
   async getBlog() {
@@ -15,7 +16,9 @@ class BlogAPI {
 
   async getBoard(idx: string | undefined) {
     try {
-      const result = await axios.get(`/blog/board?idx=${idx}`);
+      const result: AxiosResponse<board, any> = await axios.get(
+        `/blog/board?idx=${idx}`
+      );
       if (result.status === 200) {
         return result;
       }

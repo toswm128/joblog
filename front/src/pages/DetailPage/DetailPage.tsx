@@ -15,12 +15,13 @@ import BlogAPI from "assets/API/BlogAPI";
 import { useParams } from "react-router-dom";
 import BoardContext from "components/BoardContext";
 import ReactTextareaAutosize from "react-textarea-autosize";
+import { board } from "./type";
 
 const DetailPage = () => {
   const { idx } = useParams();
   const { getBoard } = new BlogAPI();
-  const [comment, setComment] = useState("");
-  const { isFetched, data: board } = useQuery(
+  const [commentText, setCommentText] = useState("");
+  const { isFetched, data: { data: board } = {} } = useQuery(
     "Detail/board",
     () => getBoard(idx),
     {
@@ -29,15 +30,17 @@ const DetailPage = () => {
       cacheTime: 0,
     }
   );
+  console.log(board);
+
   return (
     <>
       <Header />
       <DetailPageContainer>
-        {isFetched === true ? (
+        {isFetched && board ? (
           <>
-            <img className="banner" src={board?.data.data.banner} alt="" />
+            <img className="banner" src={board.data.blog.banner} alt="" />
             <DetailPageContent>
-              <div className="title">{board?.data.data.title}</div>
+              <div className="title">{board.data.blog.title}</div>
               <div className="info">
                 <div className="profil">
                   <img
@@ -45,12 +48,12 @@ const DetailPage = () => {
                     src="https://thumbs.gfycat.com/UnluckyQualifiedArabianwildcat-size_restricted.gif"
                     alt=""
                   />
-                  <p>{board?.data.data.regdate}</p>
+                  <p>{board.data.blog.regdate}</p>
                 </div>
                 <img src={heart} alt="" />
               </div>
               <div className="content">
-                <BoardContext context={board?.data.data.context} />
+                <BoardContext context={board.data.blog.context} />
               </div>
               <DetailCommentsList>
                 <div className="commentForm">
@@ -64,8 +67,8 @@ const DetailPage = () => {
                       className="commentTextarea"
                       spellCheck={false}
                       minRows={2}
-                      value={comment}
-                      onChange={e => setComment(e.target.value)}
+                      value={commentText}
+                      onChange={e => setCommentText(e.target.value)}
                       placeholder="댓글을 입력해 주세요"
                     />
                   </div>
@@ -75,15 +78,11 @@ const DetailPage = () => {
                 </div>
                 <div className="listTtile">
                   <p></p>
-                  <span>{4}개의 댓글</span>
+                  <span>{board.data.comments.length}개의 댓글</span>
                 </div>
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
+                {board.data.comments.map(comment => (
+                  <Comment text={comment.text} />
+                ))}
                 <div className="listTtile">
                   <p></p>
                   <span>다른 게시글</span>
@@ -135,13 +134,6 @@ const DetailPage = () => {
                   <p></p>
                   <span>{0}개의 댓글</span>
                 </div>
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
                 <div className="listTtile">
                   <p></p>
                   <span>다른 게시글</span>
