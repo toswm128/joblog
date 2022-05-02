@@ -89,8 +89,8 @@ const WriteEditor = () => {
       })}
       <button
         onClick={() => {
-          user && dom && title && banner
-            ? postBoard(user, dom, title, banner)
+          dom && title && banner
+            ? postBoard(dom, title, banner)
             : alert("작성 다 하셈");
         }}
       >

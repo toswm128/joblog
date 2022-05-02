@@ -28,14 +28,8 @@ class BlogAPI {
       console.log(e);
     }
   }
-  async postBoard(
-    user: UserStateType,
-    dom: any,
-    title: string,
-    banner: banner
-  ) {
+  async postBoard(dom: any, title: string, banner: banner) {
     const formData = new FormData();
-    user.userId && formData.append("userIdx", user.userId.toString());
     formData.append("context", JSON.stringify(dom).replaceAll("\\n", "\\\\n"));
     formData.append("title", title);
     banner && formData.append("banner", banner);

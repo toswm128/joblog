@@ -17,11 +17,12 @@ def create_blog_endpoints(app, services):
     def blogPost():
         if request.method == 'POST':
             value = request.form
+            token = request.headers['Authorization']
             file = request.files["banner"]
             fileName = str(uuid.uuid4())+'.'+file.filename.split('.')[1]
             file.save(os.path.join(app.config["IMAGE_UPLOADS"],fileName))
             url = "http://localhost:5000/image?file="+fileName
-            status = blog_service.post_new_blog(value,url)
+            status = blog_service.post_new_blog(value,url,token)
             if status == 400:
                 return jsonify({'msg': '포함되지 않는 데이터가 있습니다'}),400
             else:
@@ -30,8 +31,8 @@ def create_blog_endpoints(app, services):
     @app.route('/blog/board',methods=['GET'])
     def getBoard():
         if request.method == 'GET':
-            token = request.headers['Authorization']
             idx = request.args.get('idx')
+            token = request.headers['Authorization']
             board = blog_service.get_select_board(idx,token)
             return jsonify({'result':'success','data': board,'msg': 'blog 불러오기'})
             

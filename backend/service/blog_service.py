@@ -6,9 +6,10 @@ class blogService:
         self.blog_model = blogModel 
         self.tools = tokenTool()
         
-    def post_new_blog(self, value,url): 
-        if value['userIdx'] and value['context'] and value['title'] and url:
-            userIdx = int(value['userIdx'])
+    def post_new_blog(self, value,url,token):
+        userIdx = self.tools.get_data(token)['idx']
+        print(userIdx)
+        if userIdx and value['context'] and value['title'] and url:
             context = value['context']
             title = value['title']
             blog = self.blog_model.post_blog(userIdx,context,title,url)
@@ -20,8 +21,8 @@ class blogService:
         blog = self.blog_model.get_blog()
         return blog
     def get_select_board(self,idx,token):
-        self.tools.get_data(token)
-        blog = self.blog_model.get_board_idx(idx)
+        userIdx = self.tools.get_data(token)['idx']
+        blog = self.blog_model.get_board_idx(idx,userIdx)
         return blog
 
     def post_comment(self,data):
