@@ -25,10 +25,10 @@ class blogService:
         blog = self.blog_model.get_board_idx(idx,userIdx)
         return blog
 
-    def post_comment(self,data):
-        if data['blogId'] and data['userId'] and data['text']:
+    def post_comment(self,data,token):
+        userId = self.tools.get_data(token)['idx']
+        if data['blogId'] and userId and data['text']:
             blogId = data['blogId']
-            userId = data['userId']
             text = data['text']
             blog = self.blog_model.post_comment(blogId,userId,text)
             return blog

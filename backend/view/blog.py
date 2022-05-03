@@ -57,7 +57,8 @@ def create_blog_endpoints(app, services):
     def comment():
         if request.method == 'POST':
             data = request.json
-            status = blog_service.post_comment(data)
+            token = request.headers['Authorization']
+            status = blog_service.post_comment(data,token)
             if status == 400:
                 return jsonify({"msg":"포함되지 않는 데이터가 있습니다"}),400
             else:
