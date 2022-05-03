@@ -21,6 +21,7 @@ const DetailPage = () => {
   const { idx } = useParams();
   const { getBoard, postComment } = new BlogAPI();
   const [commentText, setCommentText] = useState("");
+  const queryClient = useQueryClient();
   const { isFetched, data: { data: board } = {} } = useQuery(
     `Detail/board/${idx}`,
     () => getBoard(idx)
@@ -69,9 +70,10 @@ const DetailPage = () => {
                   </div>
                   <div>
                     <WriteButton
-                      onClick={() => {
-                        postComment(board.data.blog.idx, commentText);
+                      onClick={async () => {
+                        await postComment(board.data.blog.idx, commentText);
                         setCommentText("");
+                        queryClient.invalidateQueries(`Detail/board/${idx}`);
                       }}
                     >
                       작성하기
