@@ -42,6 +42,23 @@ class BlogAPI {
       console.log(e);
     }
   }
+
+  async postComment(blogId: number, text: string) {
+    try {
+      const result: AxiosResponse<board, any> = await axios.post(
+        `/blog/comment`,
+        {
+          blogId,
+          text,
+        }
+      );
+      if (result.status === 200) {
+        return result;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 export default BlogAPI;

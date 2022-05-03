@@ -19,7 +19,7 @@ import { board } from "./type";
 
 const DetailPage = () => {
   const { idx } = useParams();
-  const { getBoard } = new BlogAPI();
+  const { getBoard, postComment } = new BlogAPI();
   const [commentText, setCommentText] = useState("");
   const { isFetched, data: { data: board } = {} } = useQuery(
     "Detail/board",
@@ -73,7 +73,13 @@ const DetailPage = () => {
                     />
                   </div>
                   <div>
-                    <WriteButton>작성하기</WriteButton>
+                    <WriteButton
+                      onClick={() =>
+                        postComment(board.data.blog.idx, commentText)
+                      }
+                    >
+                      작성하기
+                    </WriteButton>
                   </div>
                 </div>
                 <div className="listTtile">
