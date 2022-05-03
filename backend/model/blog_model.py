@@ -15,7 +15,7 @@ class blogModel:
         cursor = self.db.cursor(pymysql.cursors.DictCursor)
         blogSql = '''select * from blog where idx = %d;''' % int(idx)
         commentSql = '''
-            select c1.text, u1.name, u1.profile  from comment c1
+            select c1.text, c1.regdate, u1.name, u1.profile  from comment c1
             JOIN user u1
             ON c1.userId = u1.idx
             where c1.blogId = %d;
@@ -53,9 +53,9 @@ class blogModel:
         cursor = self.db.cursor()
         sql = '''
             INSERT INTO `joblog`.`comment`
-            (`idx`,`blogId`,`userId`,`text`)
+            (`idx`,`blogId`,`userId`,`text`,regdate)
             VALUES
-            (Null,%d,%d,'%s');
+            (Null,%d,%d,'%s',now());
             ''' % (blogId,userId,text)
         cursor.execute(sql)
         result = cursor.fetchall()

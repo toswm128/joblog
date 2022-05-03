@@ -1,17 +1,14 @@
-import React from "react";
+import { comment } from "pages/DetailPage/type";
 import { CommentContainer } from "./CommentStyle";
 
-const Comment = ({ text }: { text: string }) => {
+const Comment = ({ text, profile, name, regdate }: comment) => {
   return (
     <CommentContainer>
       <div className="comment-info">
-        <img
-          src="https://thumbs.gfycat.com/UnluckyQualifiedArabianwildcat-size_restricted.gif"
-          alt=""
-        />
+        <img src={profile} alt="" />
         <div className="comment-info-content">
-          <div className="comment-title">조민수</div>
-          <div className="comment-date">2020.02.12</div>
+          <div className="comment-title">{name}</div>
+          <div className="comment-date">{regdate}</div>
         </div>
       </div>
       <div className="comment-content">{text}</div>

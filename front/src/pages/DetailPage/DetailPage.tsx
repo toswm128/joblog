@@ -45,7 +45,7 @@ const DetailPage = () => {
                 <div className="profil">
                   <img
                     className="profilImg"
-                    src="https://thumbs.gfycat.com/UnluckyQualifiedArabianwildcat-size_restricted.gif"
+                    src={board.data.user.profile}
                     alt=""
                   />
                   <p>{board.data.blog.regdate}</p>
@@ -81,7 +81,12 @@ const DetailPage = () => {
                   <span>{board.data.comments.length}개의 댓글</span>
                 </div>
                 {board.data.comments.map(comment => (
-                  <Comment text={comment.text} />
+                  <Comment
+                    text={comment.text}
+                    profile={comment.profile}
+                    name={comment.name}
+                    regdate={comment.regdate}
+                  />
                 ))}
                 <div className="listTtile">
                   <p></p>

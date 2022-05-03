@@ -19,6 +19,13 @@ export type blog = {
   userIdx: number;
 };
 
-export type comments = [{ text: string; userId: number }];
+export type comments = [comment];
 
-export type user = { name: string };
+export type comment = {
+  text: string;
+  name: string;
+  profile: string;
+  regdate: string;
+};
+
+export type user = { name: string; profile: string };
