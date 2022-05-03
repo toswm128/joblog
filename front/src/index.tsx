@@ -18,22 +18,7 @@ const token = localStorage.getItem("AccessToken");
 axios.defaults.baseURL = SERVER.SERVER;
 if (token) axios.defaults.headers.common["Authorization"] = token;
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      cacheTime: 1000 * 60 * 60 * 24, // 24 hours
-    },
-  },
-});
-
-const localStoragePersistor = createWebStoragePersistor({
-  storage: window.localStorage,
-});
-
-persistQueryClient({
-  queryClient,
-  persistor: localStoragePersistor,
-});
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>

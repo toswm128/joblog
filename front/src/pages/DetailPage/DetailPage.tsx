@@ -22,13 +22,8 @@ const DetailPage = () => {
   const { getBoard, postComment } = new BlogAPI();
   const [commentText, setCommentText] = useState("");
   const { isFetched, data: { data: board } = {} } = useQuery(
-    "Detail/board",
-    () => getBoard(idx),
-    {
-      refetchOnWindowFocus: false,
-      retry: false,
-      cacheTime: 0,
-    }
+    `Detail/board/${idx}`,
+    () => getBoard(idx)
   );
   console.log(board);
 
@@ -74,9 +69,10 @@ const DetailPage = () => {
                   </div>
                   <div>
                     <WriteButton
-                      onClick={() =>
-                        postComment(board.data.blog.idx, commentText)
-                      }
+                      onClick={() => {
+                        postComment(board.data.blog.idx, commentText);
+                        setCommentText("");
+                      }}
                     >
                       작성하기
                     </WriteButton>
