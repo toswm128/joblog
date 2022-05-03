@@ -18,13 +18,19 @@ const token = localStorage.getItem("AccessToken");
 axios.defaults.baseURL = SERVER.SERVER;
 if (token) axios.defaults.headers.common["Authorization"] = token;
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5,
+    },
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-        {/* <ReactQueryDevtools initialIsOpen={true} /> */}
+        <ReactQueryDevtools initialIsOpen={true} />
         <App />
       </QueryClientProvider>
     </Provider>
