@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 
-export const LoginPageContainer = styled.div`
+export const AuthContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 `;
 
-export const LoginPageContent = styled.div`
+export const AuthComponents = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;

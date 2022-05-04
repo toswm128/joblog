@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import Header from "components/header";
+import Header from "components/common/header";
 import {
   DetailPageContainer,
   DetailPageContent,
   DetailCommentsList,
 } from "./DetailPageStyle";
 import heart from "assets/png/heart.png";
-import Comment from "components/Comment";
+import Comment from "components/Board/Comments/Comment";
 import { MainPageContainer } from "pages/MainPage/MainPageStyle";
-import { CommentInput } from "components/common/InputStyle";
-import { WriteButton } from "components/common/ButtonStyle";
+import { CommentInput } from "components/common/styleObject/InputStyle";
+import { WriteButton } from "components/common/styleObject/ButtonStyle";
 import { useQuery, useQueryClient } from "react-query";
 import BlogAPI from "assets/API/BlogAPI";
 import { useParams } from "react-router-dom";
-import BoardContext from "components/BoardContext";
+import BoardContext from "components/Board/Content/BoardContext";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { board } from "./type";
 

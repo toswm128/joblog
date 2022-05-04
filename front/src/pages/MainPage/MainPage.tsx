@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Header from "components/header";
-import BoardItem from "components/BoardItem";
+import Header from "components/common/header";
+import BoardItem from "components/Board/BoardList/BoardItem";
 import { MainPageContainer } from "./MainPageStyle";
 import BlogAPI from "assets/API/BlogAPI";
 import useBlog from "hooks/blog";
