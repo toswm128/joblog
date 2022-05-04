@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import logo from "assets/png/jobl_logo.png";
-import { AuthInput } from "components/common/InputStyle";
-import { AuthButton } from "components/common/ButtonStyle";
+import { AuthInput } from "components/common/styleObject/InputStyle";
+import { AuthButton } from "components/common/styleObject/ButtonStyle";
 import {
   LoginPageContainer as JoinPageContainer,
   LoginPageContent as JoinPageContent,

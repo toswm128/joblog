@@ -1,4 +1,4 @@
-import { comment } from "pages/DetailPage/type";
+import { comment } from "pages/Board/DetailPage/type";
 import { CommentContainer } from "./CommentStyle";
 
 const Comment = ({ text, profile, name, regdate }: comment) => {
