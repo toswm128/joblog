@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import BlogAPI from "assets/API/BlogAPI";
 import useUser from "hooks/user";
+import { useQueryClient } from "react-query";
 
 const WriteEditor = () => {
   // const [title, setTitle] = useState("");
@@ -14,6 +15,7 @@ const WriteEditor = () => {
   const dom: any = [];
   const { postBoard } = new BlogAPI();
   const { user } = useUser();
+  const queryClient = useQueryClient();
 
   // const bodyChek = () => {
   //   let next;
@@ -90,7 +92,9 @@ const WriteEditor = () => {
       <button
         onClick={() => {
           dom && title && banner
-            ? postBoard(dom, title, banner)
+            ? postBoard(dom, title, banner).then(() =>
+                queryClient.invalidateQueries("getBoard")
+              )
             : alert("작성 다 하셈");
         }}
       >
