@@ -1,9 +1,9 @@
-import { comment } from "pages/Board/DetailPage/type";
-import { CommentContainer } from "./CommentStyle";
+import { comment } from "pages/Blog/BoardPage/type";
+import { CommentItemContainer } from "./CommentStyle";
 
-const Comment = ({ text, profile, name, regdate }: comment) => {
+const CommentItem = ({ text, profile, name, regdate }: comment) => {
   return (
-    <CommentContainer>
+    <CommentItemContainer>
       <div className="comment-info">
         <img src={profile} alt="" />
         <div className="comment-info-content">
@@ -12,8 +12,8 @@ const Comment = ({ text, profile, name, regdate }: comment) => {
         </div>
       </div>
       <div className="comment-content">{text}</div>
-    </CommentContainer>
+    </CommentItemContainer>
   );
 };
 
-export default Comment;
+export default CommentItem;

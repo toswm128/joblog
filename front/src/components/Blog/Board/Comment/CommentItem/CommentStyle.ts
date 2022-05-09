@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const CommentContainer = styled.div`
+export const CommentItemContainer = styled.div`
   /* 레이아웃 */
   display: flex;
   flex-direction: column;

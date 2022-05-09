@@ -19,7 +19,7 @@ export type blog = {
   userIdx: number;
 };
 
-export type comments = [comment];
+export type comments = comment[];
 
 export type comment = {
   text: string;

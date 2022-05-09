@@ -9,13 +9,10 @@ import {
 } from "./BoardContextStyle";
 
 const BoardContext = ({ context }: { context: string }) => {
-  console.log(context);
   const contextDom = JSON.parse(context);
-  console.log(contextDom);
   return (
     <BoardContextContainer>
       {contextDom.map((current: line, key: any) => {
-        console.log(current.tag);
         switch (current.tag) {
           case "div":
             return (
