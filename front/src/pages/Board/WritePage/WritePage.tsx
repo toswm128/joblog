@@ -1,5 +1,5 @@
 import Header from "components/common/header";
-import WriteEditor from "components/Board/Content/WriteEditor";
+import WriteEditor from "components/Blog/Board/Content/WriteEditor";
 import useWrite from "hooks/write";
 import React, { useEffect, useState } from "react";
 import { WritePageContainer, WirtePageContainer } from "./WritePageStyle";

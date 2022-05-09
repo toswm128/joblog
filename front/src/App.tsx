@@ -10,7 +10,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* <Route path="/" element={<MainPage />} /> */}
+        <Route path="/" element={<MainPage />} />
         {/* <Route path="/detail/:idx" element={<DetailPage />} /> */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/join" element={<JoinPage />} />

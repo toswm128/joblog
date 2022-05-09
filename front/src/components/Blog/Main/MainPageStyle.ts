@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const MainPageContainer = styled.div`
+export const MainContainer = styled.div`
   /* 레이아웃 */
   display: flex;
   flex-wrap: wrap;

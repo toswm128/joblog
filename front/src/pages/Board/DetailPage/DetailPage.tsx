@@ -6,16 +6,14 @@ import {
   DetailCommentsList,
 } from "./DetailPageStyle";
 import heart from "assets/png/heart.png";
-import Comment from "components/Board/Comments/Comment";
-import { MainPageContainer } from "pages/MainPage/MainPageStyle";
+import Comment from "components/Blog/Board/Comments/Comment";
 import { CommentInput } from "components/common/styleObject/InputStyle";
 import { WriteButton } from "components/common/styleObject/ButtonStyle";
 import { useQuery, useQueryClient } from "react-query";
 import BlogAPI from "assets/API/BlogAPI";
 import { useParams } from "react-router-dom";
-import BoardContext from "components/Board/Content/BoardContext";
+import BoardContext from "components/Blog/Board/Content/BoardContext";
 import ReactTextareaAutosize from "react-textarea-autosize";
-import { board } from "./type";
 
 const DetailPage = () => {
   const { idx } = useParams();
@@ -98,8 +96,8 @@ const DetailPage = () => {
                 </div>
               </DetailCommentsList>
             </DetailPageContent>
-            <MainPageContainer>
-              {/* <BoardItem />
+            {/* <MainContainer>
+              <BoardItem />
           <BoardItem />
           <BoardItem />
           <BoardItem />
@@ -107,8 +105,8 @@ const DetailPage = () => {
           <BoardItem />
           <BoardItem />
           <BoardItem />
-          <BoardItem /> */}
-            </MainPageContainer>
+          <BoardItem />
+            </MainContainer> */}
           </>
         ) : (
           <>
@@ -151,8 +149,7 @@ const DetailPage = () => {
             </DetailPageContent>
           </>
         )}
-        <MainPageContainer>
-          {/* <BoardItem />
+        {/* <MainPageContainer>
           <BoardItem />
           <BoardItem />
           <BoardItem />
@@ -160,8 +157,9 @@ const DetailPage = () => {
           <BoardItem />
           <BoardItem />
           <BoardItem />
-          <BoardItem /> */}
-        </MainPageContainer>
+          <BoardItem />
+          <BoardItem />
+        </MainPageContainer> */}
       </DetailPageContainer>
     </>
   );
