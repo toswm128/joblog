@@ -1,5 +1,5 @@
 import BlogAPI from "assets/API/BlogAPI";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import BoardContext from "./Content/BoardContext";
 import { BoardContainer, BoardContent } from "./BoardStyle";
 import heart from "assets/png/heart.png";

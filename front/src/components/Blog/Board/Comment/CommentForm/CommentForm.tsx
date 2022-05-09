@@ -1,5 +1,6 @@
 import BlogAPI from "assets/API/BlogAPI";
 import { WriteButton } from "components/common/styleObject/ButtonStyle";
+import useUser from "hooks/user";
 import { useState } from "react";
 import { useQueryClient } from "react-query";
 import ReactTextareaAutosize from "react-textarea-autosize";
@@ -10,17 +11,14 @@ interface ICommentForm {
 }
 
 const CommentForm = ({ blogIdx }: ICommentForm) => {
+  const { user } = useUser();
   const { postComment } = new BlogAPI();
   const queryClient = useQueryClient();
   const [commentText, setCommentText] = useState("");
   return (
     <CommentFormContainer>
       <div>
-        <img
-          className="profilImg"
-          src="https://thumbs.gfycat.com/UnluckyQualifiedArabianwildcat-size_restricted.gif"
-          alt=""
-        />
+        <img className="profilImg" src={user.profile && user.profile} alt="" />
         <ReactTextareaAutosize
           className="commentTextarea"
           spellCheck={false}

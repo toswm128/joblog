@@ -9,5 +9,6 @@ export default createReducer<UserStateType>(UserState, {
     produce(state, draft => {
       draft.userId = action.payload.userId;
       draft.name = action.payload.name;
+      draft.profile = action.payload.profile;
     }),
 });

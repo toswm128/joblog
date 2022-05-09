@@ -14,7 +14,7 @@ class authService:
             # pp= bcrypt.hashpw(userPwd.encode("utf-8"), bcrypt.gensalt())
             if bcrypt.checkpw(userPwd.encode('utf-8'),resurt['password'].encode('utf-8')):
                 # print(pp,pp.decode('utf-8'))
-                return {"token":jwt.encode(resurt,"fromis", algorithm="HS256"),"idx":resurt["idx"],"name":resurt["name"]}
+                return {"token":jwt.encode(resurt,"fromis", algorithm="HS256"),"idx":resurt["idx"],"name":resurt["name"],"profile":resurt["profile"]}
             return 400
         return 404
 

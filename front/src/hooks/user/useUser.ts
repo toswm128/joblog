@@ -9,10 +9,10 @@ const useUser = () => {
   const user = useTypedSelector(state => state.User);
 
   const setUser = useCallback(
-    ({ userId, name }: UserStateType) => {
+    ({ userId, name, profile }: UserStateType) => {
       dispatch({
         type: SET_USER,
-        payload: { userId, name },
+        payload: { userId, name, profile },
       });
     },
     [dispatch]
