@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const WritePageContainer = styled.div`
+export const WriteContainer = styled.div`
   /* 레이아웃 */
   width: 100%;
   display: flex;
@@ -21,7 +21,7 @@ export const WritePageContainer = styled.div`
   }
 `;
 
-export const WirtePageContainer = styled.div`
+export const WriteComponent = styled.div`
   /* 레이아웃 */
   display: flex;
   flex-direction: column;
