@@ -1,6 +1,6 @@
 import BlogAPI from "assets/API/BlogAPI";
+import Loader from "components/common/Loader";
 import { useQuery } from "react-query";
-import { blog } from "Store/BlogStore/type";
 import BoardList from "./BoardList";
 import { MainContainer } from "./MainPageStyle";
 
@@ -9,11 +9,7 @@ const Main = () => {
   const { data, isLoading } = useQuery("getBoard", getBlog);
   return (
     <MainContainer>
-      {isLoading ? (
-        <div>loading</div>
-      ) : (
-        <BoardList blogList={data?.data.data} />
-      )}
+      {isLoading ? <Loader /> : <BoardList blogList={data?.data.data} />}
     </MainContainer>
   );
 };
