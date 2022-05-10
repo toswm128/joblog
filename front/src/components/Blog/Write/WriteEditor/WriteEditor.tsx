@@ -27,7 +27,7 @@ const WriteEditor = () => {
   let next: number | null;
   let snext: number | null;
 
-  const tagTranslator = (data: line, key: number) => {
+  const tagTranslator = (data: line) => {
     switch (data.tag) {
       case "div":
         return (
@@ -81,12 +81,12 @@ const WriteEditor = () => {
           next = body[head].next;
           snext = next;
           dom.push(body[head]);
-          return tagTranslator(body[head], key);
+          return tagTranslator(body[head]);
         }
         if (next !== null) {
           snext = body[next].next;
           dom.push(body[next]);
-          return tagTranslator(body[next], key);
+          return tagTranslator(body[next]);
         }
       })}
       <button
