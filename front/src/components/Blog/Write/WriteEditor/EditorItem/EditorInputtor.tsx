@@ -17,7 +17,7 @@ const EditorInputter = ({ data }: { data: line }) => {
   const inputterRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    setText(data.text);
+    // setText(data.text);
     data.id === WriteEditorState.focusLine && setFlag(!flag);
   }, [
     WriteEditorState.body.length,

@@ -1,6 +1,6 @@
 import BlogAPI from "assets/API/BlogAPI";
 import { useQuery } from "react-query";
-import BoardContext from "./Content/BoardContext";
+import BoardContext from "./BoardContext";
 import { BoardContainer, BoardContent } from "./BoardStyle";
 import heart from "assets/png/heart.png";
 import Loader from "components/common/Loader";
@@ -31,6 +31,7 @@ const Board = ({ idx }: IBoard) => {
                   src={board.data.user.profile}
                   alt=""
                 />
+                <h4>{board.data.user.name}</h4>
                 <p>{board.data.blog.regdate}</p>
               </div>
               <img src={heart} alt="" />

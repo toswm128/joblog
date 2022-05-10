@@ -31,14 +31,14 @@ const WriteEditor = () => {
     switch (data.tag) {
       case "div":
         return (
-          <div key={key}>
-            <EditorInputter data={data} key={key} />
+          <div key={data.id}>
+            <EditorInputter data={data} key={data.id} />
           </div>
         );
       case "ul":
         return (
-          <ul className="tab" key={key}>
-            <EditorInputter data={data} key={key} />
+          <ul className="tab" key={data.id}>
+            <EditorInputter data={data} key={data.id} />
           </ul>
         );
       case "img":
@@ -49,13 +49,13 @@ const WriteEditor = () => {
             onError={() => {
               console.log("error");
             }}
-            key={key}
+            key={data.id}
             onClick={() => unsetImg(data.id)}
           />
         );
       case "a":
         return (
-          <Link target="_blank" to={data.src} key={key}>
+          <Link target="_blank" to={data.src} key={data.id}>
             {data.src}
           </Link>
         );

@@ -4,7 +4,7 @@ import {
   WriteComponent,
 } from "components/Blog/Write/WriteStyle";
 import { useEffect, useState } from "react";
-import WriteEditor from "../Board/Content/WriteEditor";
+import WriteEditor from "./WriteEditor";
 
 const Write = () => {
   const { WriteEditorState, setBanner } = useWrite();
