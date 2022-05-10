@@ -26,11 +26,9 @@ const EditorInputter = ({ data }: { data: line }) => {
   ]);
   useEffect(() => {
     data.id === WriteEditorState.focusLine && setFlag(!flag);
-    data.id === WriteEditorState.focusLine && console.log("flag");
   }, [WriteEditorState.setFocuser]);
 
   useEffect(() => {
-    console.log("focus");
     if (data.id === WriteEditorState.focusLine && inputterRef.current) {
       inputterRef.current.setSelectionRange(9999, 9999);
       inputterRef.current.focus();
@@ -47,74 +45,75 @@ const EditorInputter = ({ data }: { data: line }) => {
         // cacheMeasurements
         style={drogOver ? { borderBottom: "5px solid #c4e3f0" } : {}}
         onKeyDown={e => {
-          switch (e.code) {
-            case "Space":
-              if (inputterRef.current)
-                inputHook.setLineText(
-                  text,
-                  data.id,
-                  inputterRef.current.selectionEnd
-                );
-              break;
-            case "ArrowUp":
-              e.preventDefault();
-              if (text !== data.text) inputHook.setLineText(text, data.id);
-              if (inputterRef.current)
-                inputHook.focusPrevLine(
-                  data.id,
-                  inputterRef.current.selectionEnd
-                );
-              break;
-            case "ArrowDown":
-              e.preventDefault();
-              if (text !== data.text) inputHook.setLineText(text, data.id);
-              if (inputterRef.current)
-                inputHook.focusNextLine(
-                  data.id,
-                  inputterRef.current.selectionEnd
-                );
-              break;
-            case "Tab":
-              e.preventDefault();
-              if (data.tag !== "ul") {
+          if (!e.nativeEvent.isComposing)
+            switch (e.code) {
+              // case "Space":
+              //   if (inputterRef.current)
+              //     inputHook.setLineText(
+              //       text,
+              //       data.id,
+              //       inputterRef.current.selectionEnd
+              //     );
+              //   break;
+              case "ArrowUp":
+                e.preventDefault();
                 if (text !== data.text) inputHook.setLineText(text, data.id);
-                inputterRef.current &&
-                  inputHook.setTag2Ul(
+                if (inputterRef.current)
+                  inputHook.focusPrevLine(
                     data.id,
                     inputterRef.current.selectionEnd
                   );
-              }
-              break;
-            case "Backspace":
-              if (data.next !== null || WriteEditorState.head !== data.id) {
-                if (text.length === 0)
-                  inputHook.removeLine(data.id, data.next, data.prev);
-                else if (
-                  inputterRef.current &&
-                  inputterRef.current.selectionEnd +
-                    inputterRef.current.selectionStart ===
-                    0
-                ) {
-                  inputHook.setLineText(text, data.id);
-                  inputHook.removeLineOnly(data.id, data.next, data.prev);
-                }
-              }
-              break;
-            case "KeyZ":
-              if (e.metaKey === true || e.ctrlKey === true) {
+                break;
+              case "ArrowDown":
                 e.preventDefault();
-                if (e.shiftKey === true) {
-                  inputHook.redo();
-                } else {
-                  inputHook.undo();
-                  console.log(
-                    WriteEditorState.body,
-                    WriteEditorState.trashList
+                if (text !== data.text) inputHook.setLineText(text, data.id);
+                if (inputterRef.current)
+                  inputHook.focusNextLine(
+                    data.id,
+                    inputterRef.current.selectionEnd
                   );
+                break;
+              case "Tab":
+                e.preventDefault();
+                if (data.tag !== "ul") {
+                  if (text !== data.text) inputHook.setLineText(text, data.id);
+                  inputterRef.current &&
+                    inputHook.setTag2Ul(
+                      data.id,
+                      inputterRef.current.selectionEnd
+                    );
                 }
-              }
-              break;
-          }
+                break;
+              case "Backspace":
+                if (data.next !== null || WriteEditorState.head !== data.id) {
+                  if (text.length === 0)
+                    inputHook.removeLine(data.id, data.next, data.prev);
+                  else if (
+                    inputterRef.current &&
+                    inputterRef.current.selectionEnd +
+                      inputterRef.current.selectionStart ===
+                      0
+                  ) {
+                    inputHook.setLineText(text, data.id);
+                    inputHook.removeLineOnly(data.id, data.next, data.prev);
+                  }
+                }
+                break;
+              case "KeyZ":
+                if (e.metaKey === true || e.ctrlKey === true) {
+                  e.preventDefault();
+                  if (e.shiftKey === true) {
+                    inputHook.redo();
+                  } else {
+                    inputHook.undo();
+                    console.log(
+                      WriteEditorState.body,
+                      WriteEditorState.trashList
+                    );
+                  }
+                }
+                break;
+            }
         }}
         onDrop={e => {
           e.preventDefault();
