@@ -17,13 +17,10 @@ const EditorInputter = ({ data }: { data: line }) => {
   const inputterRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    // setText(data.text);
+    console.log(data.text);
+    setText(data.text);
     data.id === WriteEditorState.focusLine && setFlag(!flag);
-  }, [
-    WriteEditorState.body.length,
-    WriteEditorState.updatter,
-    WriteEditorState.setTexter,
-  ]);
+  }, [WriteEditorState.updatter]);
   useEffect(() => {
     data.id === WriteEditorState.focusLine && setFlag(!flag);
   }, [WriteEditorState.setFocuser]);
@@ -45,79 +42,73 @@ const EditorInputter = ({ data }: { data: line }) => {
         // cacheMeasurements
         style={drogOver ? { borderBottom: "5px solid #c4e3f0" } : {}}
         onKeyDown={e => {
-          if (!e.nativeEvent.isComposing)
-            switch (e.code) {
-              // case "Space":
-              //   if (inputterRef.current)
-              //     inputHook.setLineText(
-              //       text,
-              //       data.id,
-              //       inputterRef.current.selectionEnd
-              //     );
-              //   break;
-              case "ArrowUp":
-                e.preventDefault();
-                if (text !== data.text) inputHook.setLineText(text, data.id);
-                if (inputterRef.current)
-                  inputHook.focusPrevLine(
+          switch (e.code) {
+            case "Space":
+              console.log(inputterRef.current);
+              if (inputterRef.current)
+                inputHook.setLineText(
+                  text,
+                  data.id,
+                  inputterRef.current.selectionEnd
+                );
+              break;
+            case "ArrowUp":
+              e.preventDefault();
+              if (inputterRef.current && !e.nativeEvent.isComposing)
+                inputHook.focusPrevLine(
+                  data.id,
+                  inputterRef.current.selectionEnd
+                );
+              break;
+            case "ArrowDown":
+              e.preventDefault();
+              if (inputterRef.current && !e.nativeEvent.isComposing)
+                inputHook.focusNextLine(
+                  data.id,
+                  inputterRef.current.selectionEnd
+                );
+              break;
+            case "Tab":
+              e.preventDefault();
+              if (data.tag !== "ul") {
+                inputterRef.current &&
+                  inputHook.setTag2Ul(
                     data.id,
                     inputterRef.current.selectionEnd
                   );
-                break;
-              case "ArrowDown":
-                e.preventDefault();
-                if (text !== data.text) inputHook.setLineText(text, data.id);
-                if (inputterRef.current)
-                  inputHook.focusNextLine(
-                    data.id,
-                    inputterRef.current.selectionEnd
-                  );
-                break;
-              case "Tab":
-                e.preventDefault();
-                if (data.tag !== "ul") {
-                  if (text !== data.text) inputHook.setLineText(text, data.id);
+              }
+              break;
+            case "Backspace":
+              if (data.next !== null || WriteEditorState.head !== data.id) {
+                if (text.length === 0)
+                  inputHook.removeLine(data.id, data.next, data.prev);
+                else if (
                   inputterRef.current &&
-                    inputHook.setTag2Ul(
-                      data.id,
-                      inputterRef.current.selectionEnd
-                    );
+                  inputterRef.current.selectionEnd +
+                    inputterRef.current.selectionStart ===
+                    0
+                ) {
+                  inputHook.removeLineOnly(data.id, data.next, data.prev);
                 }
-                break;
-              case "Backspace":
-                if (data.next !== null || WriteEditorState.head !== data.id) {
-                  if (text.length === 0)
-                    inputHook.removeLine(data.id, data.next, data.prev);
-                  else if (
-                    inputterRef.current &&
-                    inputterRef.current.selectionEnd +
-                      inputterRef.current.selectionStart ===
-                      0
-                  ) {
-                    inputHook.setLineText(text, data.id);
-                    inputHook.removeLineOnly(data.id, data.next, data.prev);
-                  }
-                }
-                break;
-              case "KeyZ":
-                if (e.metaKey === true || e.ctrlKey === true) {
+              }
+              break;
+            case "KeyZ":
+              if (e.metaKey === true || e.ctrlKey === true) {
+                if (!e.nativeEvent.isComposing) {
                   e.preventDefault();
                   if (e.shiftKey === true) {
                     inputHook.redo();
                   } else {
+                    text !== data.text && inputHook.setLineText(text, data.id);
                     inputHook.undo();
-                    console.log(
-                      WriteEditorState.body,
-                      WriteEditorState.trashList
-                    );
                   }
                 }
-                break;
-            }
+              }
+              break;
+          }
         }}
         onDrop={e => {
           e.preventDefault();
-          inputHook.setLineText(text, data.id);
           setDrogOver(false);
           if (e.dataTransfer.files[0] !== undefined) {
             inputHook.dropImg(
@@ -142,7 +133,6 @@ const EditorInputter = ({ data }: { data: line }) => {
         disabled={false}
         onPaste={e => {
           if (e.clipboardData.files[0] !== undefined) {
-            if (text !== data.text) inputHook.setLineText(text, data.id);
             inputHook.setImg(
               data.id,
               URL.createObjectURL(e.clipboardData.files[0])
@@ -151,7 +141,6 @@ const EditorInputter = ({ data }: { data: line }) => {
         }}
         onKeyPress={e => {
           if (e.key === "Enter" && e.shiftKey === false) {
-            if (text !== data.text) inputHook.setLineText(text, data.id);
             inputHook.enterInputter(data.id, data.next);
             e.preventDefault();
           }

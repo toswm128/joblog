@@ -18,7 +18,7 @@ export type WriteEditorStateType = {
   title: title;
   banner: banner;
   body: line[];
-  trashList: { body: line[]; focusLine: focusLine }[];
+  trashList: { type: string; payload: any }[];
   focusLine: focusLine;
   head: head;
   focusIndex: focusIndex;

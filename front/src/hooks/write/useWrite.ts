@@ -122,6 +122,7 @@ const useWrite = () => {
     },
     [dispatch]
   );
+
   const focusPrevLine = useCallback(
     (id: number, focusIndex: number) => {
       dispatch({
