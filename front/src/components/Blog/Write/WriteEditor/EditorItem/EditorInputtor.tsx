@@ -147,6 +147,7 @@ const EditorInputter = ({ data }: { data: line }) => {
         }}
         onKeyPress={e => {
           if (e.key === "Enter" && e.shiftKey === false) {
+            inputHook.setLineText(text, data.id);
             inputHook.enterInputter(data.id, data.next);
             e.preventDefault();
           }

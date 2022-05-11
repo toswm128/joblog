@@ -23,6 +23,7 @@ import { createReducer } from "typesafe-actions";
 export default createReducer<WriteEditorStateType>(WriteEditorState, {
   [SET_LINE_TEXT]: (state, action) =>
     produce(state, draft => {
+      draft.body[action.payload.id].text = action.payload.text;
       draft.trashList.push({
         type: SET_LINE_TEXT,
         payload: {
@@ -30,7 +31,6 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
           text: draft.body[action.payload.id].text,
         },
       });
-      draft.body[action.payload.id].text = action.payload.text;
     }),
   [FOCUS_LINE]: (state, action) =>
     produce(state, draft => {
@@ -50,6 +50,14 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
       draft.body[action.payload.id].next = draft.body.length - 1;
       if (action.payload.next !== null)
         draft.body[action.payload.next].prev = draft.body.length - 1;
+      draft.trashList.push({
+        type: ADD_LINE,
+        payload: {
+          id: draft.body.length - 1,
+          next: action.payload.next,
+          prev: action.payload.id,
+        },
+      });
     }),
   [REMOVE_LINE]: (state, action) =>
     produce(state, draft => {
@@ -141,8 +149,14 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
       draft.trashList.length &&
         draft.recycleList.push(draft.trashList[draft.trashList.length - 1]);
       const trash = draft.trashList.pop();
-      if (trash?.type === SET_LINE_TEXT) {
-        draft.body[trash.payload.id].text = trash.payload.text;
+      switch (trash?.type) {
+        case SET_LINE_TEXT:
+          draft.body[trash.payload.id].text = trash.payload.text;
+          draft.focusLine = trash.payload.id;
+          break;
+        case ADD_LINE:
+          draft.body[trash.payload.prev].next = trash.payload.next;
+          draft.body[trash.payload.next].prev = trash.payload.prev;
       }
 
       draft.updatter += 1;
@@ -152,8 +166,14 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
       draft.recycleList.length &&
         draft.trashList.push(draft.recycleList[draft.recycleList.length - 1]);
       const recyclables = draft.recycleList.pop();
-      if (recyclables?.type === SET_LINE_TEXT) {
-        draft.body[recyclables.payload.id].text = recyclables.payload.text;
+      switch (recyclables?.type) {
+        case SET_LINE_TEXT:
+          draft.body[recyclables.payload.id].text = recyclables.payload.text;
+          draft.focusLine = recyclables.payload.id;
+          break;
+        case ADD_LINE:
+          draft.body[recyclables.payload.prev].next = recyclables.payload.id;
+          draft.body[recyclables.payload.next].prev = recyclables.payload.id;
       }
 
       draft.updatter += 1;
