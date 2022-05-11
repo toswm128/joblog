@@ -28,6 +28,7 @@ const WriteEditorState: WriteEditorStateType = {
     },
   ],
   trashList: [],
+  recycleList: [],
   title: "",
   banner: undefined,
   updatter: 1,

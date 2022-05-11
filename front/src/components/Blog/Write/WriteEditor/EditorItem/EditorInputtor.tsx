@@ -15,9 +15,9 @@ const EditorInputter = ({ data }: { data: line }) => {
   const inputHook = useWrite();
   const { WriteEditorState } = useWrite();
   const inputterRef = useRef<HTMLTextAreaElement>(null);
+  const spaceFlag = useRef<boolean>(false);
 
   useEffect(() => {
-    console.log(data.text);
     setText(data.text);
     data.id === WriteEditorState.focusLine && setFlag(!flag);
   }, [WriteEditorState.updatter]);
@@ -45,12 +45,15 @@ const EditorInputter = ({ data }: { data: line }) => {
           switch (e.code) {
             case "Space":
               console.log(inputterRef.current);
-              if (inputterRef.current)
+
+              if (inputterRef.current) {
                 inputHook.setLineText(
                   text,
                   data.id,
                   inputterRef.current.selectionEnd
                 );
+                spaceFlag.current = true;
+              }
               break;
             case "ArrowUp":
               e.preventDefault();
@@ -89,6 +92,9 @@ const EditorInputter = ({ data }: { data: line }) => {
                     0
                 ) {
                   inputHook.removeLineOnly(data.id, data.next, data.prev);
+                } else {
+                  spaceFlag.current && inputHook.setLineText(text, data.id);
+                  spaceFlag.current = false;
                 }
               }
               break;

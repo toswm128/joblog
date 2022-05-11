@@ -138,6 +138,8 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
 
   [UNDO]: state =>
     produce(state, draft => {
+      draft.trashList.length &&
+        draft.recycleList.push(draft.trashList[draft.trashList.length - 1]);
       const trash = draft.trashList.pop();
       if (trash?.type === SET_LINE_TEXT) {
         draft.body[trash.payload.id].text = trash.payload.text;
@@ -145,7 +147,17 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
 
       draft.updatter += 1;
     }),
-  [REDO]: state => produce(state, draft => {}),
+  [REDO]: state =>
+    produce(state, draft => {
+      draft.recycleList.length &&
+        draft.trashList.push(draft.recycleList[draft.recycleList.length - 1]);
+      const recyclables = draft.recycleList.pop();
+      if (recyclables?.type === SET_LINE_TEXT) {
+        draft.body[recyclables.payload.id].text = recyclables.payload.text;
+      }
+
+      draft.updatter += 1;
+    }),
   [SET_BANNER]: (state, action) =>
     produce(state, draft => {
       draft.banner = action.payload;
