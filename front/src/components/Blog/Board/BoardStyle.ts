@@ -18,11 +18,18 @@ export const BoardContent = styled.div`
   /* 레이아웃 */
   display: flex;
   flex-direction: column;
-  width: 800px;
+  max-width: 1006px;
   margin: 0 auto;
 
-  @media (max-width: 800px) {
-    width: 100%;
+  /* 미디어 쿼리 */
+  @media (max-width: 1395px) {
+    max-width: 1006px;
+  }
+  @media (max-width: 1052px) {
+    max-width: 663px;
+  }
+  @media (max-width: 709px) {
+    max-width: 320px;
   }
 
   .profil {
