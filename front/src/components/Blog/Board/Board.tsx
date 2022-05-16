@@ -1,11 +1,13 @@
 import BlogAPI from "assets/API/BlogAPI";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import BoardContext from "./BoardContext";
 import { BoardContainer, BoardContent } from "./BoardStyle";
 import heart from "assets/png/heart.png";
 import Loader from "components/common/Loader";
 import CommentForm from "./Comment/CommentForm";
 import CommentList from "./Comment/CommentList";
+import Divider from "components/common/Divider";
+import Main from "../Main";
 
 interface IBoard {
   idx: string | undefined;
@@ -41,6 +43,10 @@ const Board = ({ idx }: IBoard) => {
             </div>
             <CommentForm blogIdx={board.data.blog.idx} />
             <CommentList commentList={board.data.comments} />
+            <Divider>
+              <>다른 게시글</>
+            </Divider>
+            <Main />
           </BoardContent>
         </>
       ) : (

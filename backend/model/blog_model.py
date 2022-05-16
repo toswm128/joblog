@@ -5,14 +5,17 @@ class blogModel:
         self.db = database
 
     def get_blog(self):
-        cursor = self.db.cursor(pymysql.cursors.DictCursor)
+        db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+        cursor = db.cursor(pymysql.cursors.DictCursor)
         sql = '''SELECT * FROM blog;'''
         cursor.execute(sql)
         result = cursor.fetchall()
+        db.close()
         return result
 
     def get_board_idx(self,idx,userIdx):
-        cursor = self.db.cursor(pymysql.cursors.DictCursor)
+        db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+        cursor = db.cursor(pymysql.cursors.DictCursor)
         blogSql = '''select * from blog where idx = %d;''' % int(idx)
         commentSql = '''
             select c1.text, c1.regdate, u1.name, u1.profile  from comment c1
@@ -32,12 +35,13 @@ class blogModel:
         result['blog'] = blog_data
         result['comments'] = comment_data
         result['user'] = user_data
-        print(result)
+        db.close()
 
         return result
     
     def post_blog(self,userIdx,context,title,url):
-        cursor = self.db.cursor()
+        db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+        cursor = db.cursor()
         sql = '''
             INSERT INTO `joblog`.`blog`
             (`idx`,`userIdx`,`context`,`regdate`,`title`,`banner`)
@@ -46,11 +50,13 @@ class blogModel:
             ''' % (userIdx,context,title,url)
         cursor.execute(sql)
         result = cursor.fetchall()
-        self.db.commit()
+        db.commit()
+        db.close()
         return result
 
     def post_comment(self,blogId,userId,text):
-        cursor = self.db.cursor()
+        db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+        cursor = db.cursor()
         sql = '''
             INSERT INTO `joblog`.`comment`
             (`idx`,`blogId`,`userId`,`text`,regdate)
@@ -59,7 +65,8 @@ class blogModel:
             ''' % (blogId,userId,text)
         cursor.execute(sql)
         result = cursor.fetchall()
-        self.db.commit()
+        db.commit()
+        db.close()
         return result
 
     
