@@ -40,7 +40,6 @@ def create_blog_endpoints(app, services):
     def postMData():
         if request.method == 'POST':
             value = request.json
-            print(value)
             return jsonify({'result':'success'})
 
     @app.route('/image',methods=['GET'])

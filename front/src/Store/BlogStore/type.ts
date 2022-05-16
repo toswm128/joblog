@@ -4,8 +4,8 @@ export type blog = {
   title: string;
   context: string;
   userIdx: number;
-  writer: string;
-  regdata: string;
+  name: string;
+  regdate: string;
   likes: number;
   views: number;
 };

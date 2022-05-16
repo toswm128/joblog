@@ -23,7 +23,7 @@ export const BoardItemContent = styled.div`
   padding: 10px 10px 0px 10px;
   gap: 4px;
 
-  .title {
+  .BoardIitle {
     font-weight: bold;
   }
 

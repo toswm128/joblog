@@ -7,7 +7,7 @@ class blogModel:
     def get_blog(self):
         db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
         cursor = db.cursor(pymysql.cursors.DictCursor)
-        sql = '''SELECT * FROM blog;'''
+        sql = '''select b1.*,u1.name from blog b1 JOIN user u1 ON u1.idx = b1.userIdx;'''
         cursor.execute(sql)
         result = cursor.fetchall()
         db.close()

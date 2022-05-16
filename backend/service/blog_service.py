@@ -8,7 +8,6 @@ class blogService:
         
     def post_new_blog(self, value,url,token):
         userIdx = self.tools.get_data(token)['idx']
-        print(userIdx)
         if userIdx and value['context'] and value['title'] and url:
             context = value['context']
             title = value['title']
