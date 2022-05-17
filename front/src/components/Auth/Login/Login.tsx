@@ -15,7 +15,7 @@ const Login = () => {
 
   const submitLogin = async () => {
     const result = await Login(id, pwd);
-    if (result.status === 200) {
+    if (result?.status === 200) {
       const { idx, name, profile } = result.data.data;
       setUser({ userId: idx, name, profile });
       navigate("/");

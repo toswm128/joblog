@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import useBlog from "hooks/blog";
 import { board } from "pages/Blog/BoardPage/type";
 import { UserStateType } from "Store/UserStore/type";
@@ -12,7 +12,8 @@ class BlogAPI {
         return result;
       }
     } catch (e) {
-      console.log(e);
+      const err = e as AxiosError;
+      console.log(err.response?.status);
     }
   }
 
@@ -25,7 +26,8 @@ class BlogAPI {
         return result;
       }
     } catch (e) {
-      console.log(e);
+      const err = e as AxiosError;
+      console.log(err.response?.status);
     }
   }
   async postBoard(dom: any, title: string, banner: banner) {
@@ -39,7 +41,15 @@ class BlogAPI {
         return result;
       }
     } catch (e) {
-      console.log(e);
+      const err = e as AxiosError;
+      const status = err.response?.status;
+      switch (status) {
+        case 400:
+          console.log("값 부족");
+          break;
+        case 403:
+          console.log("토큰 없음");
+      }
     }
   }
 
@@ -56,7 +66,15 @@ class BlogAPI {
         return result;
       }
     } catch (e) {
-      console.log(e);
+      const err = e as AxiosError;
+      const status = err.response?.status;
+      switch (status) {
+        case 400:
+          console.log("값 부족");
+          break;
+        case 403:
+          console.log("토큰 없음");
+      }
     }
   }
 }

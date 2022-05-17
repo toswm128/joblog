@@ -20,7 +20,7 @@ def create_blog_endpoints(app, services):
             token = request.headers['Authorization']
             print("토큰:",token)
             if(token == ""):
-                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,400
+                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,403
             print("토큰:",token)
             if(token == ""):
                 return jsonify({'result':'success','msg': '유저 토큰 정보 가져오기 실패'}) ,400
@@ -64,7 +64,7 @@ def create_blog_endpoints(app, services):
             token = request.headers['Authorization']
             print("토큰:",token)
             if(token == ""):
-                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,400
+                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,403
             status = blog_service.post_comment(data,token)
             if status == 400:
                 return jsonify({"msg":"포함되지 않는 데이터가 있습니다"}),400

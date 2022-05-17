@@ -1,12 +1,17 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 class AuthAPI {
   async Login(id: string, pwd: string) {
-    const result = await axios.post("login", { id, password: pwd });
-    if (result.status === 200) {
-      localStorage.setItem("AccessToken", result.data.data.token);
+    try {
+      const result = await axios.post("login", { id, password: pwd });
+      if (result.status === 200) {
+        localStorage.setItem("AccessToken", result.data.data.token);
+      }
+      return result;
+    } catch (e) {
+      const err = e as AxiosError;
+      console.log(err.response?.status);
     }
-    return result;
   }
 
   async GetUser2Id() {
@@ -14,13 +19,19 @@ class AuthAPI {
       const result = await axios.get("user");
       return result;
     } catch (e) {
-      console.log(e);
+      const err = e as AxiosError;
+      console.log(err.response?.status);
     }
   }
 
   async Join(id: string, pwd: string, name: string) {
-    const result = await axios.post("join", { id, password: pwd, name });
-    return result.status;
+    try {
+      const result = await axios.post("join", { id, password: pwd, name });
+      return result.status;
+    } catch (e) {
+      const err = e as AxiosError;
+      console.log(err.response?.status);
+    }
   }
 }
 
