@@ -9,7 +9,7 @@ const Header = () => {
   const { GetUser2Id } = new AuthAPI();
 
   const { data: { data } = {} } = useQuery("myInfo", GetUser2Id);
-  // console.log(data?.data);
+  console.log(data?.data);
 
   return (
     <HeaderContaier>

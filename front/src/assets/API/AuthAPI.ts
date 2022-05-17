@@ -6,6 +6,7 @@ class AuthAPI {
       const result = await axios.post("login", { id, password: pwd });
       if (result.status === 200) {
         localStorage.setItem("AccessToken", result.data.data.token);
+        axios.defaults.headers.common["Authorization"] = result.data.data.token;
       }
       return result;
     } catch (e) {
