@@ -18,6 +18,12 @@ def create_blog_endpoints(app, services):
         if request.method == 'POST':
             value = request.form
             token = request.headers['Authorization']
+            print("토큰:",token)
+            if(token == ""):
+                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,400
+            print("토큰:",token)
+            if(token == ""):
+                return jsonify({'result':'success','msg': '유저 토큰 정보 가져오기 실패'}) ,400
             file = request.files["banner"]
             fileName = str(uuid.uuid4())+'.'+file.filename.split('.')[1]
             file.save(os.path.join(app.config["IMAGE_UPLOADS"],fileName))
@@ -32,8 +38,7 @@ def create_blog_endpoints(app, services):
     def getBoard():
         if request.method == 'GET':
             idx = request.args.get('idx')
-            token = request.headers['Authorization']
-            board = blog_service.get_select_board(idx,token)
+            board = blog_service.get_select_board(idx)
             return jsonify({'result':'success','data': board,'msg': 'blog 불러오기'})
             
     @app.route('/m',methods=['POST'])
@@ -57,6 +62,9 @@ def create_blog_endpoints(app, services):
         if request.method == 'POST':
             data = request.json
             token = request.headers['Authorization']
+            print("토큰:",token)
+            if(token == ""):
+                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,400
             status = blog_service.post_comment(data,token)
             if status == 400:
                 return jsonify({"msg":"포함되지 않는 데이터가 있습니다"}),400

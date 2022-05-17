@@ -13,7 +13,7 @@ class blogModel:
         db.close()
         return result
 
-    def get_board_idx(self,idx,userIdx):
+    def get_board_idx(self,idx):
         db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
         cursor = db.cursor(pymysql.cursors.DictCursor)
         blogSql = '''select * from blog where idx = %d;''' % int(idx)
@@ -23,17 +23,18 @@ class blogModel:
             ON c1.userId = u1.idx
             where c1.blogId = %d;
             ''' % int(idx)
-        userSql = '''select name, profile from user where idx = %d;''' % int(userIdx)
         cursor.execute(blogSql)
         blog_data = cursor.fetchone()
         cursor.execute(commentSql)
         comment_data = cursor.fetchall()
-        cursor.execute(userSql)
-        user_data = cursor.fetchone()
 
         result = dict()
         result['blog'] = blog_data
         result['comments'] = comment_data
+        
+        userSql = '''select name, profile from user where idx = %d;''' % int(result['blog']['userIdx'])
+        cursor.execute(userSql)
+        user_data = cursor.fetchone()
         result['user'] = user_data
         db.close()
 

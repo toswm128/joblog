@@ -16,7 +16,7 @@ const store = createStore(rootReducer, composeWithDevTools());
 const token = localStorage.getItem("AccessToken");
 
 axios.defaults.baseURL = SERVER.SERVER;
-if (token) axios.defaults.headers.common["Authorization"] = token;
+axios.defaults.headers.common["Authorization"] = token ? token : "";
 
 const queryClient = new QueryClient({
   defaultOptions: {

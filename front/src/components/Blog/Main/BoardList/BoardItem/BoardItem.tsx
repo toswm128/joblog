@@ -10,7 +10,7 @@ const BoardItem = ({ data }: { data: blog }) => {
       <img src={data.banner} alt="" />
       <BoardItemContent>
         <div className="BoardIitle">{data.title}</div>
-        <div className="info">
+        <div className="BoardInfo">
           <div>
             <p>
               <img src={heart} alt="" />
@@ -21,9 +21,9 @@ const BoardItem = ({ data }: { data: blog }) => {
               댓글
             </p>
           </div>
-          <div className="writer">{data.name}</div>
+          <div className="BoardWriter">{data.name}</div>
         </div>
-        <div className="date">{data.regdate}</div>
+        <div className="boardDate">{data.regdate}</div>
       </BoardItemContent>
     </BoardItemContainer>
   );

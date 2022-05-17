@@ -1,11 +1,13 @@
 from model.auth_model import authModel
+from tools.token import tokenTool
 import jwt 
 import bcrypt
 
 
 class authService: 
     def __init__(self, authModel):
-        self.auth_model = authModel 
+        self.auth_model = authModel
+        self.tools = tokenTool() 
         
     def try_login(self,userId,userPwd):
         resurt = self.auth_model.get_user_to_id(userId)
@@ -25,3 +27,8 @@ class authService:
             return resurt
         else:
             return 400
+
+    def get_userData(self,token):
+        userIdx = self.tools.get_data(token)['idx']
+        user = self.auth_model.get_user_to_idx(userIdx)
+        return {"idx":user["idx"],"id":user["id"],"name":user["name"],"profile":user["profile"]}

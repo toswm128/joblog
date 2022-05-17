@@ -2,8 +2,15 @@ import React from "react";
 import { HeaderContaier, HeaderLeft, HeaderRight } from "./headerStyle";
 import logo from "assets/png/jobl_logo.png";
 import { Link } from "react-router-dom";
+import AuthAPI from "assets/API/AuthAPI";
+import { useQuery } from "react-query";
 
 const Header = () => {
+  const { GetUser2Id } = new AuthAPI();
+
+  // const { data: { data } = {} } = useQuery("myInfo", GetUser2Id);
+  // console.log(data?.data);
+
   return (
     <HeaderContaier>
       <HeaderLeft>
@@ -24,6 +31,7 @@ const Header = () => {
           <input type="text" placeholder="검색어를 입력해 주세요" />
           <button>검색</button>
         </div>
+        {}
         <Link to={"/login"} className="header-authBtn">
           로그인
         </Link>

@@ -19,6 +19,7 @@ const Board = ({ idx }: IBoard) => {
     `board/${idx}`,
     () => getBoard(idx)
   );
+
   return (
     <BoardContainer>
       {!isLoading && board ? (

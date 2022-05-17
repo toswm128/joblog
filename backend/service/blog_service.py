@@ -19,9 +19,8 @@ class blogService:
     def get_Blog(self):
         blog = self.blog_model.get_blog()
         return blog
-    def get_select_board(self,idx,token):
-        userIdx = self.tools.get_data(token)['idx']
-        blog = self.blog_model.get_board_idx(idx,userIdx)
+    def get_select_board(self,idx):
+        blog = self.blog_model.get_board_idx(idx)
         return blog
 
     def post_comment(self,data,token):

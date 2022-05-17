@@ -3,11 +3,10 @@ import styled from "@emotion/styled";
 export const BoardItemContainer = styled.div`
   /* 레이아웃 */
   width: 320px;
-  height: 320px;
   min-width: 320px;
 
   /* 고급 */
-  box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);
   img {
     /* 레이아웃 */
     width: 100%;
@@ -27,7 +26,7 @@ export const BoardItemContent = styled.div`
     font-weight: bold;
   }
 
-  .info {
+  .BoardInfo {
     /* 레이아웃 */
     display: flex;
     justify-content: space-between;
@@ -50,12 +49,12 @@ export const BoardItemContent = styled.div`
         gap: 12px;
       }
     }
-    .writer {
+    .BoardWriter {
       /* 고급 */
       font-size: 0.75rem;
     }
   }
-  .date {
+  .boardDate {
     /* 레이아웃 */
     display: flex;
     justify-content: flex-end;
