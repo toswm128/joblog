@@ -8,8 +8,9 @@ import { useQuery } from "react-query";
 const Header = () => {
   const { GetUser2Id } = new AuthAPI();
 
-  const { data: { data } = {} } = useQuery("myInfo", GetUser2Id);
-  console.log(data?.data);
+  const { error, data: { data } = {} } = useQuery("myInfo", GetUser2Id, {
+    retry: false,
+  });
 
   return (
     <HeaderContaier>

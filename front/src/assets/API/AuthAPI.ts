@@ -16,13 +16,8 @@ class AuthAPI {
   }
 
   async GetUser2Id() {
-    try {
-      const result = await axios.get("user");
-      return result;
-    } catch (e) {
-      const err = e as AxiosError;
-      console.log(err.response?.status);
-    }
+    const result = await axios.get("user");
+    return result;
   }
 
   async Join(id: string, pwd: string, name: string) {
