@@ -7,10 +7,11 @@ export const BoardItemContainer = styled.div`
 
   /* 고급 */
   box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);
-  img {
+  & > img {
     /* 레이아웃 */
     width: 100%;
     height: 240px;
+    background-color: #c4c4c4;
     object-fit: cover;
   }
 `;

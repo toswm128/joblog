@@ -108,5 +108,6 @@ export const HeaderRight = styled.div`
     border-radius: 50px;
     font-size: 14px;
     color: #c4c4c4;
+    cursor: pointer;
   }
 `;

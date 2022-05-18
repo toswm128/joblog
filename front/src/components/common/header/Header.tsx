@@ -3,14 +3,16 @@ import { HeaderContaier, HeaderLeft, HeaderRight } from "./headerStyle";
 import logo from "assets/png/jobl_logo.png";
 import { Link } from "react-router-dom";
 import AuthAPI from "assets/API/AuthAPI";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
+import axios from "axios";
 
 const Header = () => {
   const { GetUser2Id } = new AuthAPI();
 
-  const { error, data: { data } = {} } = useQuery("myInfo", GetUser2Id, {
+  const { isSuccess, data: { data } = {} } = useQuery("myInfo", GetUser2Id, {
     retry: false,
   });
+  const queryClient = useQueryClient();
 
   return (
     <HeaderContaier>
@@ -32,13 +34,30 @@ const Header = () => {
           <input type="text" placeholder="검색어를 입력해 주세요" />
           <button>검색</button>
         </div>
-        {}
-        <Link to={"/login"} className="header-authBtn">
-          로그인
-        </Link>
-        <Link to={"/join"} className="header-authBtn">
-          회원가입
-        </Link>
+        {isSuccess ? (
+          <>
+            <div className="header-authBtn">{data?.data.name}</div>
+            <div
+              className="header-authBtn"
+              onClick={() => {
+                localStorage.removeItem("AccessToken");
+                axios.defaults.headers.common["Authorization"] = "";
+                queryClient.invalidateQueries("myInfo");
+              }}
+            >
+              로그아웃
+            </div>
+          </>
+        ) : (
+          <>
+            <Link to={"/login"} className="header-authBtn">
+              로그인
+            </Link>
+            <Link to={"/join"} className="header-authBtn">
+              회원가입
+            </Link>
+          </>
+        )}
       </HeaderRight>
     </HeaderContaier>
   );
