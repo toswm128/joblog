@@ -1,6 +1,4 @@
-import { css, jsx } from "@emotion/react";
 import useWrite from "hooks/write";
-import React from "react";
 import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
@@ -10,7 +8,6 @@ import { line } from "Store/WriteEditorStore/type";
 const EditorInputter = ({ data }: { data: line }) => {
   const [text, setText] = useState(data.text);
   const [flag, setFlag] = useState(false);
-  const [src, setSrc] = useState("");
   const [drogOver, setDrogOver] = useState(false);
   const inputHook = useWrite();
   const { WriteEditorState } = useWrite();

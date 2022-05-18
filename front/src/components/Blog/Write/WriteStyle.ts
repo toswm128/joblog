@@ -6,7 +6,7 @@ export const WriteContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  & > label {
+  label {
     /* 레이아웃 */
     display: flex;
     justify-content: center;

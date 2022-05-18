@@ -25,12 +25,14 @@ export const BoardItemContent = styled.div`
 
   .BoardIitle {
     font-weight: bold;
+    min-height: 19px;
   }
 
   .BoardInfo {
     /* 레이아웃 */
     display: flex;
     justify-content: space-between;
+    min-height: 20px;
     div {
       /* 레이아웃 */
       display: flex;
@@ -59,6 +61,7 @@ export const BoardItemContent = styled.div`
     /* 레이아웃 */
     display: flex;
     justify-content: flex-end;
+    min-height: 15px;
 
     /* 고급 */
     font-size: 0.75rem;
