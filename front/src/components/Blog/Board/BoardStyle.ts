@@ -59,6 +59,8 @@ export const BoardContent = styled.div`
       width: 40px;
       height: 40px;
       object-fit: cover;
+
+      cursor: pointer;
     }
   }
 

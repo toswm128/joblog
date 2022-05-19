@@ -16,8 +16,6 @@ const Header = ({ children }: IHeader) => {
   const { setUser } = useUser();
   const queryClient = useQueryClient();
 
-  console.log("a");
-
   const {
     isSuccess,
     isFetching,

@@ -32,6 +32,7 @@ const Board = ({ idx }: IBoard) => {
               profile={board.data.user.profile}
               name={board.data.user.name}
               regdate={board.data.blog.regdate}
+              likes={board.data.likes}
             />
             <div className="content">
               <BoardContext context={board.data.blog.context} />

@@ -1,6 +1,10 @@
 import BlogAPI from "assets/API/BlogAPI";
 import heart from "assets/png/heart.png";
-import { useMutation } from "react-query";
+import unHeart from "assets/png/unHeart.png";
+import useUser from "hooks/user";
+import { likes } from "pages/Blog/BoardPage/type";
+import { useCallback, useEffect, useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
 
 interface IBoardHeader {
   idx: string;
@@ -8,14 +12,45 @@ interface IBoardHeader {
   profile: string;
   name: string;
   regdate: string;
+  likes: likes;
 }
 
-const BoardHeader = ({ idx, title, profile, name, regdate }: IBoardHeader) => {
+const BoardHeader = ({
+  idx,
+  title,
+  profile,
+  name,
+  regdate,
+  likes,
+}: IBoardHeader) => {
   const { clickLike } = new BlogAPI();
+  const { user } = useUser();
+  const [isLike, setIsLike] = useState(false);
+  const queryClient = useQueryClient();
   const mutation = useMutation(
     ({ idx, isLike }: { idx: number; isLike: boolean }) =>
       clickLike(idx, isLike)
   );
+  const isUserLike = useCallback(() => {
+    return likes.some(({ userIdx }) => userIdx === user.userId);
+  }, [likes, user.userId]);
+  console.log(likes);
+  useEffect(() => {
+    setIsLike(isUserLike());
+  }, [likes, setIsLike, user.userId]);
+
+  const onClickLike = () => {
+    idx &&
+      mutation.mutate(
+        { idx: +idx, isLike },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries(`board/${idx}`);
+            setIsLike(!isLike);
+          },
+        }
+      );
+  };
 
   return (
     <>
@@ -26,13 +61,8 @@ const BoardHeader = ({ idx, title, profile, name, regdate }: IBoardHeader) => {
           <h4>{name}</h4>
           <p>{regdate}</p>
         </div>
-        <img
-          src={heart}
-          alt=""
-          onClick={() => {
-            idx && mutation.mutate({ idx: +idx, isLike: false });
-          }}
-        />
+        <img src={isLike ? heart : unHeart} alt="" onClick={onClickLike} />
+        <div>{likes.length}</div>
       </div>
     </>
   );

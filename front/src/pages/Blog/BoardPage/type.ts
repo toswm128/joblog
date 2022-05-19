@@ -8,6 +8,7 @@ export type data = {
   blog: blog;
   comments: comments;
   user: user;
+  likes: likes;
 };
 
 export type blog = {
@@ -29,3 +30,7 @@ export type comment = {
 };
 
 export type user = { name: string; profile: string };
+
+export type like = { userIdx: number };
+
+export type likes = [like];
