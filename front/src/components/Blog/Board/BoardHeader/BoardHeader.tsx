@@ -34,7 +34,6 @@ const BoardHeader = ({
   const isUserLike = useCallback(() => {
     return likes.some(({ userIdx }) => userIdx === user.userId);
   }, [likes, user.userId]);
-  console.log(likes);
   useEffect(() => {
     setIsLike(isUserLike());
   }, [likes, setIsLike, user.userId]);

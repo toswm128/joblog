@@ -6,7 +6,7 @@ export type blog = {
   userIdx: number;
   name: string;
   regdate: string;
-  likes: number;
+  likesCount: number;
   views: number;
 };
 

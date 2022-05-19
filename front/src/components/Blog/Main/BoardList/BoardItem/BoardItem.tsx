@@ -14,7 +14,7 @@ const BoardItem = memo(({ data }: { data: blog | undefined }) => {
           <div>
             <p>
               <img src={heart} alt="" />
-              {data?.likes}
+              {data?.likesCount}
             </p>
             <p>
               <img src={comment} alt="" />
