@@ -17,7 +17,7 @@ const BoardHeader = ({ title, profile, name, regdate }: IBoardHeader) => {
           <h4>{name}</h4>
           <p>{regdate}</p>
         </div>
-        <img src={heart} alt="" />
+        <img src={heart} alt="" onClick={() => console.log("a")} />
       </div>
     </>
   );

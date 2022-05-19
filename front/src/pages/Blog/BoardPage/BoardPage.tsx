@@ -7,7 +7,6 @@ const BoardPage = () => {
 
   return (
     <>
-      <Header />
       <Board idx={idx} />
     </>
   );

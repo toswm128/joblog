@@ -4,7 +4,6 @@ import Write from "components/Blog/Write";
 const WritePage = () => {
   return (
     <>
-      <Header />
       <Write />
     </>
   );

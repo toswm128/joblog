@@ -4,7 +4,6 @@ import Main from "components/Blog/Main";
 const MainPage = () => {
   return (
     <>
-      <Header />
       <Main />
     </>
   );
