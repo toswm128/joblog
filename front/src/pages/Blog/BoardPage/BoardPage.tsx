@@ -5,11 +5,7 @@ import Board from "components/Blog/Board";
 const BoardPage = () => {
   const { idx } = useParams();
 
-  return (
-    <>
-      <Board idx={idx} />
-    </>
-  );
+  return <>{idx && <Board idx={idx} />}</>;
 };
 
 export default BoardPage;

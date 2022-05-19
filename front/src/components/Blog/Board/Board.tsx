@@ -1,5 +1,5 @@
 import BlogAPI from "assets/API/BlogAPI";
-import { useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import BoardContext from "./BoardContext";
 import { BoardContainer, BoardContent } from "./BoardStyle";
 import Loader from "components/common/Loader";
@@ -10,7 +10,7 @@ import Main from "../Main";
 import BoardHeader from "./BoardHeader";
 
 interface IBoard {
-  idx: string | undefined;
+  idx: string;
 }
 
 const Board = ({ idx }: IBoard) => {
@@ -27,6 +27,7 @@ const Board = ({ idx }: IBoard) => {
           <img className="banner" src={board.data.blog.banner} alt="" />
           <BoardContent>
             <BoardHeader
+              idx={idx}
               title={board.data.blog.title}
               profile={board.data.user.profile}
               name={board.data.user.name}

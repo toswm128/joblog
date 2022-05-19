@@ -21,13 +21,13 @@ class blogModel:
             ON c1.userId = u1.idx
             where c1.blogId = %d;
             ''' % int(idx)
-        likesSql = '''select userIdx, count(idx) likeCount from likes where blogIdx = %d GROUP BY idx''' % int(idx)
+        likesSql = '''select userIdx from likes where blogIdx = %d''' % int(idx)
         cursor.execute(blogSql)
         blog_data = cursor.fetchone()
         cursor.execute(commentSql)
         comment_data = cursor.fetchall()
         cursor.execute(likesSql)
-        likes_data = cursor.fetchone()
+        likes_data = cursor.fetchall()
 
         result = dict()
         result['blog'] = blog_data
@@ -78,9 +78,9 @@ class blogModel:
         sql = '''
             INSERT INTO `joblog`.`likes`
             (`idx`,`userIdx`,`blogIdx`)
-            VALUES (null,%d,%d);''' & (userId, blogId)
+            VALUES (null,%d,%d);''' % (userId, blogId)
         cursor.execute(sql)
-        result = cursor.fetchall()
+        result = cursor.fetchone()
         db.commit()
         db.close()
         return result
@@ -91,9 +91,9 @@ class blogModel:
         sql = '''
             DELETE FROM `joblog`.`likes`
             WHERE userIdx = %d and blogIdx = %d ;
-            ''' & (userId, blogId)
+            ''' % (userId, blogId)
         cursor.execute(sql)
-        result = cursor.fetchall()
+        result = cursor.fetchone()
         db.commit()
         db.close()
         return result

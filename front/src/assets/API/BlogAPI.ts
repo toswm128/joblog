@@ -77,6 +77,25 @@ class BlogAPI {
       }
     }
   }
+
+  async clickLike(blogId: number, isLike: boolean) {
+    try {
+      const result = await axios.post(`/blog/likes`, { blogId, isLike });
+      if (result.status === 200) {
+        return result;
+      }
+    } catch (e) {
+      const err = e as AxiosError;
+      const status = err.response?.status;
+      switch (status) {
+        case 400:
+          console.log("값 부족");
+          break;
+        case 403:
+          console.log("토큰 없음");
+      }
+    }
+  }
 }
 
 export default BlogAPI;

@@ -70,6 +70,7 @@ def create_blog_endpoints(app, services):
                 return jsonify({"msg":"포함되지 않는 데이터가 있습니다"}),400
             else:
                 return jsonify({'result':'success','msg': '댓글 작성'})
+                
     @app.route('/blog/likes',methods=['POST'])
     def likes():
         if request.method == 'POST':
