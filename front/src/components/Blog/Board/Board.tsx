@@ -2,12 +2,12 @@ import BlogAPI from "assets/API/BlogAPI";
 import { useQuery, useQueryClient } from "react-query";
 import BoardContext from "./BoardContext";
 import { BoardContainer, BoardContent } from "./BoardStyle";
-import heart from "assets/png/heart.png";
 import Loader from "components/common/Loader";
 import CommentForm from "./Comment/CommentForm";
 import CommentList from "./Comment/CommentList";
 import Divider from "components/common/Divider";
 import Main from "../Main";
+import BoardHeader from "./BoardHeader";
 
 interface IBoard {
   idx: string | undefined;
@@ -26,19 +26,12 @@ const Board = ({ idx }: IBoard) => {
         <>
           <img className="banner" src={board.data.blog.banner} alt="" />
           <BoardContent>
-            <div className="title">{board.data.blog.title}</div>
-            <div className="info">
-              <div className="profil">
-                <img
-                  className="profilImg"
-                  src={board.data.user.profile}
-                  alt=""
-                />
-                <h4>{board.data.user.name}</h4>
-                <p>{board.data.blog.regdate}</p>
-              </div>
-              <img src={heart} alt="" />
-            </div>
+            <BoardHeader
+              title={board.data.blog.title}
+              profile={board.data.user.profile}
+              name={board.data.user.name}
+              regdate={board.data.blog.regdate}
+            />
             <div className="content">
               <BoardContext context={board.data.blog.context} />
             </div>
