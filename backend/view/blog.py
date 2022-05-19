@@ -70,4 +70,16 @@ def create_blog_endpoints(app, services):
                 return jsonify({"msg":"포함되지 않는 데이터가 있습니다"}),400
             else:
                 return jsonify({'result':'success','msg': '댓글 작성'})
-                
+    @app.route('/blog/likes',methods=['POST'])
+    def likes():
+        if request.method == 'POST':
+            data = request.json
+            token = request.headers['Authorization']
+            if(token == ""):
+                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,403
+            status = blog_service.post_likes(data,token)
+            if status == 400:
+                return jsonify({"msg":"포함되지 않는 데이터가 있습니다"}),400
+            else:
+                return jsonify({'result':'success','msg': '좋아요 설정'})
+            

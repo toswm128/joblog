@@ -71,5 +71,30 @@ class blogModel:
         db.commit()
         db.close()
         return result
-
+        
+    def insert_likes(self,userId,blogId):
+        db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+        cursor = db.cursor()
+        sql = '''
+            INSERT INTO `joblog`.`likes`
+            (`idx`,`userIdx`,`blogIdx`)
+            VALUES (null,%d,%d);''' & (userId, blogId)
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        db.commit()
+        db.close()
+        return result
     
+    def delete_likes(self,userId,blogId):
+        db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+        cursor = db.cursor()
+        sql = '''
+            DELETE FROM `joblog`.`likes`
+            WHERE userIdx = %d and blogIdx = %d ;
+            ''' & (userId, blogId)
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        db.commit()
+        db.close()
+        return result
+

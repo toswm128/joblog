@@ -32,3 +32,13 @@ class blogService:
             return blog
         else:
             return 400
+    def post_likes(self,data,token):
+        userId = self.tools.get_data(token)['idx']
+        if data['blogId'] and userId:
+            blogId = data['blogId']
+            if data['isLike']:
+                blog = self.blog_model.delete_likes(userId,blogId)
+            else:
+                blog = self.blog_model.insert_likes(userId,blogId)
+            return blog
+            
