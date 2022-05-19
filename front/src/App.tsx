@@ -6,6 +6,7 @@ import BoardPage from "pages/Blog/BoardPage";
 import JoinPage from "pages/Auth/JoinPage";
 import WritePage from "pages/Blog/WritePage";
 import Header from "components/common/header";
+import MyPage from "pages/Blog/MyPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/join" element={<JoinPage />} />
           <Route path="/write" element={<WritePage />} />
+          <Route path="/my" element={<MyPage />} />
         </Routes>
       </Header>
     </Router>

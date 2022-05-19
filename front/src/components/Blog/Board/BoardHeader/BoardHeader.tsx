@@ -45,6 +45,7 @@ const BoardHeader = ({
         {
           onSuccess: () => {
             queryClient.invalidateQueries(`board/${idx}`);
+            queryClient.invalidateQueries(`getBoard`);
             setIsLike(!isLike);
           },
         }
