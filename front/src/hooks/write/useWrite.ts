@@ -23,16 +23,15 @@ const useWrite = () => {
   const dispatch = useDispatch();
   const WriteEditorState = useTypedSelector(state => state.WriteEditor);
 
-  const setLineText = (
-    text: string | undefined,
-    id: number,
-    index?: number
-  ) => {
-    dispatch({
-      type: SET_LINE_TEXT,
-      payload: { text, id, index },
-    });
-  };
+  const setLineText = useCallback(
+    (text: string | undefined, id: number, index?: number) => {
+      dispatch({
+        type: SET_LINE_TEXT,
+        payload: { text, id, index },
+      });
+    },
+    [dispatch]
+  );
 
   const clickInputter = useCallback(
     (id: number) => {

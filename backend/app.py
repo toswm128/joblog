@@ -19,10 +19,9 @@ def create_app(test_config = None):
     CORS(app)
     app.config["IMAGE_UPLOADS"] = "/Users/macbook/Documents/GitHub/joblog/backend/static"
 
-    database = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
 
-    blog_Model = blogModel(database)
-    auth_Model = authModel(database)
+    blog_Model = blogModel()
+    auth_Model = authModel()
 
     blog_services=Services
     auth_services=Services

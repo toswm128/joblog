@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import useWrite from "hooks/write";
 import { useState } from "react";
 import EditorList from "./EditorList";

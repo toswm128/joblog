@@ -1,10 +1,10 @@
-import React from "react";
+import React, { memo } from "react";
 import { BoardItemContainer, BoardItemContent } from "./BoardItemStyle";
 import heart from "assets/png/heart.png";
 import comment from "assets/png/comment.png";
 import { blog } from "Store/BlogStore/type";
 
-const BoardItem = ({ data }: { data: blog | undefined }) => {
+const BoardItem = memo(({ data }: { data: blog | undefined }) => {
   return (
     <BoardItemContainer>
       <img src={data?.banner} alt="" />
@@ -27,6 +27,6 @@ const BoardItem = ({ data }: { data: blog | undefined }) => {
       </BoardItemContent>
     </BoardItemContainer>
   );
-};
+});
 
 export default BoardItem;

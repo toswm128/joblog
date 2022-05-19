@@ -1,8 +1,6 @@
 import pymysql 
 
 class blogModel:
-    def __init__(self,database):
-        self.db = database
 
     def get_blog(self):
         db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
@@ -23,14 +21,18 @@ class blogModel:
             ON c1.userId = u1.idx
             where c1.blogId = %d;
             ''' % int(idx)
+        likesSql = '''select userIdx, count(idx) likeCount from likes where blogIdx = %d GROUP BY idx''' % int(idx)
         cursor.execute(blogSql)
         blog_data = cursor.fetchone()
         cursor.execute(commentSql)
         comment_data = cursor.fetchall()
+        cursor.execute(likesSql)
+        likes_data = cursor.fetchone()
 
         result = dict()
         result['blog'] = blog_data
         result['comments'] = comment_data
+        result['likes'] = likes_data
         
         userSql = '''select name, profile from user where idx = %d;''' % int(result['blog']['userIdx'])
         cursor.execute(userSql)
