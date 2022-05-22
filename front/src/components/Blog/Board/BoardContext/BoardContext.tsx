@@ -1,4 +1,3 @@
-import { ReactChild, ReactFragment, ReactPortal } from "react";
 import { Link } from "react-router-dom";
 import { line } from "Store/WriteEditorStore/type";
 import {
@@ -12,25 +11,33 @@ const BoardContext = ({ context }: { context: string }) => {
   const contextDom = JSON.parse(context);
   return (
     <BoardContextContainer>
-      {contextDom.map((current: line, key: any) => {
+      {contextDom.map((current: line) => {
         switch (current.tag) {
           case "div":
             return (
-              <BoardContextDivTag key={key}>{current.text}</BoardContextDivTag>
+              <BoardContextDivTag key={current.id}>
+                {current.text}
+              </BoardContextDivTag>
             );
           case "ul":
             return (
-              <BoardContextUlTag key={key}>{current.text}</BoardContextUlTag>
+              <BoardContextUlTag key={current.id}>
+                {current.text}
+              </BoardContextUlTag>
             );
           case "img":
-            return <BoardContextImgTag key={key} src={current.src} alt="" />;
+            return (
+              <BoardContextImgTag key={current.id} src={current.src} alt="" />
+            );
 
           case "a":
             return (
-              <Link target="_blank" to={current.src} key={key}>
+              <Link target="_blank" to={current.src} key={current.id}>
                 {current.src}
               </Link>
             );
+          default:
+            return null;
         }
       })}
     </BoardContextContainer>

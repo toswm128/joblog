@@ -1,7 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import useBlog from "hooks/blog";
 import { board } from "pages/Blog/BoardPage/type";
-import { UserStateType } from "Store/UserStore/type";
 import { banner } from "Store/WriteEditorStore/type";
 
 class BlogAPI {

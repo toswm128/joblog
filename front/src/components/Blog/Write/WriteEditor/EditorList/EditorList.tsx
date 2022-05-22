@@ -13,40 +13,43 @@ const EditorList = () => {
   const { postBoard } = new BlogAPI();
   const queryClient = useQueryClient();
 
-  const tagTranslator = useCallback((data: line) => {
-    switch (data.tag) {
-      case "div":
-        return (
-          <div key={data.id}>
-            <EditorInputter data={data} key={data.id} />
-          </div>
-        );
-      case "ul":
-        return (
-          <ul className="tab" key={data.id}>
-            <EditorInputter data={data} key={data.id} />
-          </ul>
-        );
-      case "img":
-        return (
-          <img
-            src={data.src}
-            alt=""
-            onError={() => {
-              console.log("error");
-            }}
-            key={data.id}
-            onClick={() => unsetImg(data.id)}
-          />
-        );
-      case "a":
-        return (
-          <Link target="_blank" to={data.src} key={data.id}>
-            {data.src}
-          </Link>
-        );
-    }
-  }, []);
+  const tagTranslator = useCallback(
+    (data: line) => {
+      switch (data.tag) {
+        case "div":
+          return (
+            <div key={data.id}>
+              <EditorInputter data={data} key={data.id} />
+            </div>
+          );
+        case "ul":
+          return (
+            <ul className="tab" key={data.id}>
+              <EditorInputter data={data} key={data.id} />
+            </ul>
+          );
+        case "img":
+          return (
+            <img
+              src={data.src}
+              alt=""
+              onError={() => {
+                console.log("error");
+              }}
+              key={data.id}
+              onClick={() => unsetImg(data.id)}
+            />
+          );
+        case "a":
+          return (
+            <Link target="_blank" to={data.src} key={data.id}>
+              {data.src}
+            </Link>
+          );
+      }
+    },
+    [unsetImg]
+  );
 
   let next: number | null;
   let snext: number | null;
@@ -64,6 +67,8 @@ const EditorList = () => {
           snext = body[next].next;
           dom.push(body[next]);
           return tagTranslator(body[next]);
+        } else {
+          return null;
         }
       })}
       <button

@@ -9,9 +9,6 @@ import axios from "axios";
 import SERVER from "config/config.json";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { persistQueryClient } from "react-query/persistQueryClient-experimental";
-import { createWebStoragePersistor } from "react-query/createWebStoragePersistor-experimental";
-import Header from "components/common/header";
 
 const store = createStore(rootReducer, composeWithDevTools());
 const token = localStorage.getItem("AccessToken");

@@ -1,4 +1,3 @@
-import Header from "components/common/header";
 import { useParams } from "react-router-dom";
 import Board from "components/Blog/Board";
 

@@ -1,5 +1,5 @@
 import BlogAPI from "assets/API/BlogAPI";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import BoardContext from "./BoardContext";
 import { BoardContainer, BoardContent } from "./BoardStyle";
 import Loader from "components/common/Loader";

@@ -7,7 +7,7 @@ import { MyBoardsContainer } from "../MyStyle";
 
 const MyBoards = () => {
   const { getBlog } = new BlogAPI();
-  const { data, isLoading } = useQuery("getBoard", getBlog);
+  const { data } = useQuery("getBoard", getBlog);
   return (
     <MyBoardsContainer>
       {data && <BoardList blogList={data?.data.data} />}
