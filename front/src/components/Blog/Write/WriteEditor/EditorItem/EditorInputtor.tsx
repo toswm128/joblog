@@ -7,7 +7,6 @@ import { line } from "Store/WriteEditorStore/type";
 
 const EditorInputter = ({ data }: { data: line }) => {
   const [text, setText] = useState(data.text);
-  const [flag, setFlag] = useState(false);
   const [drogOver, setDrogOver] = useState(false);
   const {
     setLineText,
@@ -28,19 +27,11 @@ const EditorInputter = ({ data }: { data: line }) => {
   const spaceFlag = useRef<boolean>(false);
 
   useEffect(() => {
-    setText(data.text);
-    data.id === WriteEditorState.focusLine && setFlag(!flag);
-  }, [WriteEditorState.updatter]);
-  useEffect(() => {
-    data.id === WriteEditorState.focusLine && setFlag(!flag);
-  }, [WriteEditorState.setFocuser]);
-
-  useEffect(() => {
     if (data.id === WriteEditorState.focusLine && inputterRef.current) {
       inputterRef.current.setSelectionRange(9999, 9999);
       inputterRef.current.focus();
     }
-  }, [flag, data.id]);
+  }, [WriteEditorState.focusLine, data.id]);
 
   const onKeyPressEnter = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
