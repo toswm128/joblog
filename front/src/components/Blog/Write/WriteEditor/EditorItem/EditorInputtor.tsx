@@ -1,5 +1,5 @@
 import useWrite from "hooks/write";
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
@@ -9,7 +9,20 @@ const EditorInputter = ({ data }: { data: line }) => {
   const [text, setText] = useState(data.text);
   const [flag, setFlag] = useState(false);
   const [drogOver, setDrogOver] = useState(false);
-  const inputHook = useWrite();
+  const {
+    setLineText,
+    focusNextLine,
+    focusPrevLine,
+    setTag2Ul,
+    removeLine,
+    removeLineOnly,
+    redo,
+    undo,
+    dropImg,
+    setImg,
+    enterInputter,
+    clickInputter,
+  } = useWrite();
   const { WriteEditorState } = useWrite();
   const inputterRef = useRef<HTMLTextAreaElement>(null);
   const spaceFlag = useRef<boolean>(false);
@@ -29,6 +42,101 @@ const EditorInputter = ({ data }: { data: line }) => {
     }
   }, [flag]);
 
+  const onKeyPressEnter = useCallback(
+    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.key === "Enter" && e.shiftKey === false) {
+        setLineText(text, data.id);
+        enterInputter(data.id, data.next);
+        e.preventDefault();
+      }
+    },
+    [text, data]
+  );
+
+  const onKeyDownArrowUp = useCallback(
+    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      e.preventDefault();
+      if (inputterRef.current && !e.nativeEvent.isComposing)
+        focusPrevLine(data.id, inputterRef.current.selectionEnd);
+    },
+    [data]
+  );
+
+  const onKeyDownArrowDown = useCallback(
+    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      e.preventDefault();
+      if (inputterRef.current && !e.nativeEvent.isComposing)
+        focusNextLine(data.id, inputterRef.current.selectionEnd);
+    },
+    [data]
+  );
+
+  const onKeyDownSpace = useCallback(() => {
+    if (inputterRef.current) {
+      setLineText(text, data.id, inputterRef.current.selectionEnd);
+      spaceFlag.current = true;
+    }
+  }, [data]);
+
+  const onKeyDownTab = useCallback(
+    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      e.preventDefault();
+      if (data.tag !== "ul") {
+        inputterRef.current &&
+          setTag2Ul(data.id, inputterRef.current.selectionEnd);
+      }
+    },
+    [data]
+  );
+
+  const onKeyDownBackspace = useCallback(() => {
+    if (data.next !== null || WriteEditorState.head !== data.id) {
+      if (text.length === 0) removeLine(data.id, data.next, data.prev);
+      else if (
+        inputterRef.current &&
+        inputterRef.current.selectionEnd +
+          inputterRef.current.selectionStart ===
+          0
+      ) {
+        removeLineOnly(data.id, data.next, data.prev);
+      } else {
+        spaceFlag.current && setLineText(text, data.id);
+        spaceFlag.current = false;
+      }
+    }
+  }, [data]);
+
+  const onKeyDownZ = useCallback(
+    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.metaKey === true || e.ctrlKey === true) {
+        if (!e.nativeEvent.isComposing) {
+          e.preventDefault();
+          if (e.shiftKey === true) {
+            redo();
+          } else {
+            text !== data.text && setLineText(text, data.id);
+            undo();
+          }
+        }
+      }
+    },
+    [data]
+  );
+
+  const onDropUrl = useCallback(
+    (e: React.DragEvent<HTMLTextAreaElement>) => {
+      e.preventDefault();
+      setDrogOver(false);
+      if (e.dataTransfer.files[0] !== undefined) {
+        dropImg(data.id, URL.createObjectURL(e.dataTransfer.files[0]), true);
+      } else if (e.dataTransfer.getData("url") !== undefined) {
+        console.log(e.dataTransfer.types);
+        dropImg(data.id, e.dataTransfer.getData("url"), true);
+      }
+    },
+    [data]
+  );
+
   return (
     <>
       <ReactTextareaAutosize
@@ -41,93 +149,32 @@ const EditorInputter = ({ data }: { data: line }) => {
         onKeyDown={e => {
           switch (e.code) {
             case "Space":
-              console.log(inputterRef.current);
-
-              if (inputterRef.current) {
-                inputHook.setLineText(
-                  text,
-                  data.id,
-                  inputterRef.current.selectionEnd
-                );
-                spaceFlag.current = true;
-              }
+              onKeyDownSpace();
               break;
             case "ArrowUp":
-              e.preventDefault();
-              if (inputterRef.current && !e.nativeEvent.isComposing)
-                inputHook.focusPrevLine(
-                  data.id,
-                  inputterRef.current.selectionEnd
-                );
+              onKeyDownArrowUp(e);
               break;
             case "ArrowDown":
-              e.preventDefault();
-              if (inputterRef.current && !e.nativeEvent.isComposing)
-                inputHook.focusNextLine(
-                  data.id,
-                  inputterRef.current.selectionEnd
-                );
+              onKeyDownArrowDown(e);
               break;
             case "Tab":
-              e.preventDefault();
-              if (data.tag !== "ul") {
-                inputterRef.current &&
-                  inputHook.setTag2Ul(
-                    data.id,
-                    inputterRef.current.selectionEnd
-                  );
-              }
+              onKeyDownTab(e);
               break;
             case "Backspace":
-              if (data.next !== null || WriteEditorState.head !== data.id) {
-                if (text.length === 0)
-                  inputHook.removeLine(data.id, data.next, data.prev);
-                else if (
-                  inputterRef.current &&
-                  inputterRef.current.selectionEnd +
-                    inputterRef.current.selectionStart ===
-                    0
-                ) {
-                  inputHook.removeLineOnly(data.id, data.next, data.prev);
-                } else {
-                  spaceFlag.current && inputHook.setLineText(text, data.id);
-                  spaceFlag.current = false;
-                }
-              }
+              onKeyDownBackspace();
               break;
             case "KeyZ":
-              if (e.metaKey === true || e.ctrlKey === true) {
-                if (!e.nativeEvent.isComposing) {
-                  e.preventDefault();
-                  if (e.shiftKey === true) {
-                    inputHook.redo();
-                  } else {
-                    text !== data.text && inputHook.setLineText(text, data.id);
-                    inputHook.undo();
-                  }
-                }
-              }
+              onKeyDownZ(e);
               break;
           }
         }}
         onDrop={e => {
-          e.preventDefault();
-          setDrogOver(false);
-          if (e.dataTransfer.files[0] !== undefined) {
-            inputHook.dropImg(
-              data.id,
-              URL.createObjectURL(e.dataTransfer.files[0]),
-              true
-            );
-          } else if (e.dataTransfer.getData("url") !== undefined) {
-            console.log(e.dataTransfer.types);
-            inputHook.dropImg(data.id, e.dataTransfer.getData("url"), true);
-          }
+          onDropUrl(e);
         }}
-        onDragOver={e => {
+        onDragOver={() => {
           setDrogOver(true);
         }}
-        onDragLeave={e => {
+        onDragLeave={() => {
           setDrogOver(false);
         }}
         className="content"
@@ -135,28 +182,20 @@ const EditorInputter = ({ data }: { data: line }) => {
         ref={inputterRef}
         disabled={false}
         onPaste={e => {
-          if (e.clipboardData.files[0] !== undefined) {
-            inputHook.setImg(
-              data.id,
-              URL.createObjectURL(e.clipboardData.files[0])
-            );
-          }
+          e.clipboardData.files[0] &&
+            setImg(data.id, URL.createObjectURL(e.clipboardData.files[0]));
         }}
         onKeyPress={e => {
-          if (e.key === "Enter" && e.shiftKey === false) {
-            inputHook.setLineText(text, data.id);
-            inputHook.enterInputter(data.id, data.next);
-            e.preventDefault();
-          }
+          onKeyPressEnter(e);
         }}
         onClick={() => {
-          inputHook.clickInputter(data.id);
+          clickInputter(data.id);
         }}
         onChange={e => {
           setText(e.target.value);
         }}
         onBlur={() => {
-          if (text !== data.text) inputHook.setLineText(text, data.id);
+          if (text !== data.text) setLineText(text, data.id);
         }}
       />
     </>
