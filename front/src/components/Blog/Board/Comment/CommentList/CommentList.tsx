@@ -13,15 +13,18 @@ const CommentList = ({ commentList }: ICommentList) => {
       <Divider>
         <>{commentList.length}개의 댓글</>
       </Divider>
-      {commentList.map((comment, key) => (
-        <Comment
-          key={key}
-          text={comment.text}
-          profile={comment.profile}
-          name={comment.name}
-          regdate={comment.regdate}
-        />
-      ))}
+      {commentList
+        .slice(0)
+        .reverse()
+        .map((comment, key) => (
+          <Comment
+            key={key}
+            text={comment.text}
+            profile={comment.profile}
+            name={comment.name}
+            regdate={comment.regdate}
+          />
+        ))}
     </CommentListContainer>
   );
 };

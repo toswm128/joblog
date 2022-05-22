@@ -19,7 +19,6 @@ const Header = ({ children }: IHeader) => {
   const {
     isSuccess,
     isFetching,
-    isFetched,
     data: { data } = {},
   } = useQuery("myInfo", GetUser2Id, {
     retry: false,
@@ -57,7 +56,9 @@ const Header = ({ children }: IHeader) => {
           </div>
           {isSuccess ? (
             <>
-              <div className="header-authBtn">{data?.data.name}</div>
+              <Link to={"/my"} className="header-authBtn">
+                {data?.data.name}
+              </Link>
               <div
                 className="header-authBtn"
                 onClick={() => {
