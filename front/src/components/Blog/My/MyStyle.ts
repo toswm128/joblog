@@ -6,7 +6,7 @@ export const MyContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const MyBoards = styled.div`
+export const MyBoardsContainer = styled.div`
   display: flex;
   max-width: 1006px;
   margin: 0 auto 0 auto;
@@ -24,7 +24,7 @@ export const MyBoards = styled.div`
   }
 `;
 
-export const MyInfo = styled.div`
+export const MyInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
