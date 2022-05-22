@@ -22,8 +22,8 @@ const EditorInputter = ({ data }: { data: line }) => {
     setImg,
     enterInputter,
     clickInputter,
+    WriteEditorState,
   } = useWrite();
-  const { WriteEditorState } = useWrite();
   const inputterRef = useRef<HTMLTextAreaElement>(null);
   const spaceFlag = useRef<boolean>(false);
 
@@ -40,7 +40,7 @@ const EditorInputter = ({ data }: { data: line }) => {
       inputterRef.current.setSelectionRange(9999, 9999);
       inputterRef.current.focus();
     }
-  }, [flag]);
+  }, [flag, data.id]);
 
   const onKeyPressEnter = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -50,7 +50,7 @@ const EditorInputter = ({ data }: { data: line }) => {
         e.preventDefault();
       }
     },
-    [text, data]
+    [data.id, data.next, enterInputter, setLineText, text]
   );
 
   const onKeyDownArrowUp = useCallback(
@@ -59,7 +59,7 @@ const EditorInputter = ({ data }: { data: line }) => {
       if (inputterRef.current && !e.nativeEvent.isComposing)
         focusPrevLine(data.id, inputterRef.current.selectionEnd);
     },
-    [data]
+    [data.id, focusPrevLine]
   );
 
   const onKeyDownArrowDown = useCallback(
@@ -68,7 +68,7 @@ const EditorInputter = ({ data }: { data: line }) => {
       if (inputterRef.current && !e.nativeEvent.isComposing)
         focusNextLine(data.id, inputterRef.current.selectionEnd);
     },
-    [data]
+    [data.id, focusNextLine]
   );
 
   const onKeyDownSpace = useCallback(() => {
@@ -76,7 +76,7 @@ const EditorInputter = ({ data }: { data: line }) => {
       setLineText(text, data.id, inputterRef.current.selectionEnd);
       spaceFlag.current = true;
     }
-  }, [data]);
+  }, [data.id, setLineText, text]);
 
   const onKeyDownTab = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -86,7 +86,7 @@ const EditorInputter = ({ data }: { data: line }) => {
           setTag2Ul(data.id, inputterRef.current.selectionEnd);
       }
     },
-    [data]
+    [data.id, data.tag, setTag2Ul]
   );
 
   const onKeyDownBackspace = useCallback(() => {
@@ -104,7 +104,16 @@ const EditorInputter = ({ data }: { data: line }) => {
         spaceFlag.current = false;
       }
     }
-  }, [data]);
+  }, [
+    data.id,
+    data.next,
+    data.prev,
+    removeLine,
+    removeLineOnly,
+    setLineText,
+    WriteEditorState.head,
+    text,
+  ]);
 
   const onKeyDownZ = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -120,7 +129,7 @@ const EditorInputter = ({ data }: { data: line }) => {
         }
       }
     },
-    [data]
+    [data.text, data.id, redo, undo, text, setLineText]
   );
 
   const onDropUrl = useCallback(
@@ -134,7 +143,7 @@ const EditorInputter = ({ data }: { data: line }) => {
         dropImg(data.id, e.dataTransfer.getData("url"), true);
       }
     },
-    [data]
+    [data.id, dropImg]
   );
 
   return (
