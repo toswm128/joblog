@@ -12,10 +12,15 @@ const SearchForm = () => {
   const [title, setTitle] = useState("");
   const { getSearchBlog } = new BlogAPI();
 
-  const { data } = useQuery(`search/${title}`, () => getSearchBlog(title), {
-    retry: false,
-  });
-  console.log(data?.data.data);
+  const { data, isSuccess } = useQuery(
+    `search/${title}`,
+    () => getSearchBlog(title),
+    {
+      retry: false,
+    }
+  );
+
+  isSuccess && console.log(data?.data.data);
 
   return (
     <SearchFormContainer>
