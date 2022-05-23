@@ -1,6 +1,11 @@
 import styled from "@emotion/styled";
 
-export const SearchFormContainer = styled.form`
+export const SearchFormContainer = styled.div`
+  width: 515px;
+  height: 40px;
+`;
+
+export const SearchFormComponent = styled.form`
   /* 레이아웃 */
   display: flex;
   justify-content: flex-end;
@@ -50,4 +55,8 @@ export const SearchFormContainer = styled.form`
       color: black;
     }
   }
+`;
+
+export const SearchDataList = styled.div`
+  width: 515px;
 `;
