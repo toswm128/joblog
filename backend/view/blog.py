@@ -84,3 +84,12 @@ def create_blog_endpoints(app, services):
             else:
                 return jsonify({'result':'success','msg': '좋아요 %d'% (not data['isLike'])})
             
+    @app.route('/blog/search',methods=['GET'])
+    def search():
+        if request.method == 'GET':
+            title = request.args.get('title')
+            searchData = blog_service.post_search(title)
+            if searchData == 400:
+                return jsonify({"msg":"검색어 없음"}),400
+            else:
+                return jsonify({'result':'success','data':searchData,'msg': '댓글 작성'})

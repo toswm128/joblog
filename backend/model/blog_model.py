@@ -98,3 +98,13 @@ class blogModel:
         db.close()
         return result
 
+    def search_blog_to_title(self,title):
+        db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+        cursor = db.cursor(pymysql.cursors.DictCursor)
+        sql = '''
+            select * from blog where title like '%s'
+            ''' %  ("%"+title+"%")
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        db.close()
+        return result

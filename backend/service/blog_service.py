@@ -41,4 +41,11 @@ class blogService:
             else:
                 blog = self.blog_model.insert_likes(userId,blogId)
             return blog
+    
+    def post_search(self,title):
+        if title:
+            blog = self.blog_model.search_blog_to_title(title)
+            return blog
+        else:
+            return 400
             
