@@ -12,14 +12,17 @@ function App() {
   return (
     <Router>
       <Header>
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/board/:idx" element={<BoardPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/join" element={<JoinPage />} />
-          <Route path="/write" element={<WritePage />} />
-          <Route path="/my" element={<MyPage />} />
-        </Routes>
+        <>
+          <div style={{ marginTop: "79px" }} />
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/board/:idx" element={<BoardPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/join" element={<JoinPage />} />
+            <Route path="/write" element={<WritePage />} />
+            <Route path="/my" element={<MyPage />} />
+          </Routes>
+        </>
       </Header>
     </Router>
   );

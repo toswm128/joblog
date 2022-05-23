@@ -3,10 +3,16 @@ import styled from "@emotion/styled";
 export const HeaderContaier = styled.header`
   /* 레이아웃 */
   display: flex;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  padding: 0 23px 0 23px;
+  box-sizing: border-box;
   height: 79px;
-  margin-left: 23px;
-  margin-right: 23px;
   justify-content: space-between;
+
+  background-color: white;
 `;
 
 export const HeaderLeft = styled.div`
@@ -20,6 +26,9 @@ export const HeaderLeft = styled.div`
     /* 레이아웃 */
     width: 60px;
     text-align: center;
+    a:hover {
+      color: black;
+    }
     a {
       /* 고급 */
       color: #c4c4c4;
@@ -93,6 +102,10 @@ export const HeaderRight = styled.div`
       font-size: 14px;
       color: #c4c4c4;
       cursor: pointer;
+      &:hover {
+        border: 1px solid black;
+        color: black;
+      }
     }
   }
 
@@ -109,5 +122,9 @@ export const HeaderRight = styled.div`
     font-size: 14px;
     color: #c4c4c4;
     cursor: pointer;
+    &:hover {
+      border: 1px solid black;
+      color: black;
+    }
   }
 `;
