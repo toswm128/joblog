@@ -12,7 +12,7 @@ const SearchForm = () => {
   const [title, setTitle] = useState("");
   const { getSearchBlog } = new BlogAPI();
 
-  const { data, isSuccess } = useQuery(
+  const { data: { data } = {}, isSuccess } = useQuery(
     `search/${title}`,
     () => getSearchBlog(title),
     {
@@ -20,12 +20,15 @@ const SearchForm = () => {
     }
   );
 
-  isSuccess && console.log(data?.data.data);
-
   return (
     <SearchFormContainer>
       <SearchFormComponent
-        style={data && { borderBottom: "0px", borderRadius: "20px 20px 0 0" }}
+        style={
+          data?.data.length && {
+            borderBottom: "0px",
+            borderRadius: "20px 20px 0 0",
+          }
+        }
       >
         <input
           value={title}
@@ -35,8 +38,10 @@ const SearchForm = () => {
         />
         <button>검색</button>
       </SearchFormComponent>
-      <SearchDataList>
-        {data?.data.data.map((current: any) => (
+      <SearchDataList
+        style={data?.data.length && { borderBottom: "1px solid #c4c4c4" }}
+      >
+        {data?.data.map((current: any) => (
           <Link
             to={`/board/${current.idx}`}
             key={current.idx}
