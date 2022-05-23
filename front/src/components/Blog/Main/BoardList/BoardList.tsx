@@ -10,8 +10,8 @@ interface IBoardList {
 const BoardList = ({ blogList }: IBoardList) => {
   return (
     <>
-      {blogList.map((current: blog, key: React.Key) => (
-        <Link to={`/board/${current.idx}`} key={key}>
+      {blogList.map((current: blog) => (
+        <Link to={`/board/${current.idx}`} key={current.idx}>
           <BoardItem data={current} />
         </Link>
       ))}

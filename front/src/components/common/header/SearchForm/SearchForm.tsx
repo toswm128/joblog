@@ -1,6 +1,7 @@
 import BlogAPI from "assets/API/BlogAPI";
 import { useState } from "react";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import {
   SearchDataList,
   SearchFormComponent,
@@ -18,7 +19,9 @@ const SearchForm = () => {
 
   return (
     <SearchFormContainer>
-      <SearchFormComponent>
+      <SearchFormComponent
+        style={data && { borderBottom: "0px", borderRadius: "20px 20px 0 0" }}
+      >
         <input
           value={title}
           onChange={e => setTitle(e.target.value)}
@@ -29,7 +32,13 @@ const SearchForm = () => {
       </SearchFormComponent>
       <SearchDataList>
         {data?.data.data.map((current: any) => (
-          <div key={current.idx}>{current.title}</div>
+          <Link
+            to={`/board/${current.idx}`}
+            key={current.idx}
+            onClick={() => setTitle("")}
+          >
+            {current.title}
+          </Link>
         ))}
       </SearchDataList>
     </SearchFormContainer>

@@ -58,5 +58,20 @@ export const SearchFormComponent = styled.form`
 `;
 
 export const SearchDataList = styled.div`
+  padding-top: 5px;
   width: 515px;
+  border: 1px solid #c4c4c4;
+  border-top: 0px;
+  box-sizing: border-box;
+  left: -1;
+  display: flex;
+  flex-direction: column;
+  a {
+    background-color: white;
+    cursor: pointer;
+    border-top: 1px solid #c4c4c4;
+    &:hover {
+      background-color: #c4c4c4;
+    }
+  }
 `;
