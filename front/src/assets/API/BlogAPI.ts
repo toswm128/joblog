@@ -94,6 +94,11 @@ class BlogAPI {
       }
     }
   }
+
+  async getSearchBlog(title: string) {
+    const result = await axios.get(`/blog/search?title=${title}`);
+    return result;
+  }
 }
 
 export default BlogAPI;
