@@ -6,6 +6,7 @@ import AuthAPI from "assets/API/AuthAPI";
 import { useQuery, useQueryClient } from "react-query";
 import axios from "axios";
 import useUser from "hooks/user";
+import SearchForm from "./SearchForm";
 
 interface IHeader {
   children: JSX.Element;
@@ -50,10 +51,7 @@ const Header = ({ children }: IHeader) => {
           </div>
         </HeaderLeft>
         <HeaderRight>
-          <div className="header-search">
-            <input type="text" placeholder="검색어를 입력해 주세요" />
-            <button>검색</button>
-          </div>
+          <SearchForm />
           {isSuccess ? (
             <>
               <Link to={"/my"} className="header-authBtn">
