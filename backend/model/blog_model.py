@@ -5,7 +5,7 @@ class blogModel:
     def get_blog(self):
         db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
         cursor = db.cursor(pymysql.cursors.DictCursor)
-        sql = '''select b1.*,u1.name, count(l1.userIdx) likesCount from blog b1 JOIN user u1 ON u1.idx = b1.userIdx LEFT JOIN likes l1 ON b1.idx = l1.blogIdx GROUP BY b1.idx'''
+        sql = '''select b1.*,u1.name, count(l1.userIdx) likesCount from blog b1 JOIN user u1 ON u1.idx = b1.userIdx LEFT JOIN likes l1 ON b1.idx = l1.blogIdx GROUP BY b1.idx order by b1.idx desc'''
         cursor.execute(sql)
         result = cursor.fetchall()
         db.close()
@@ -19,7 +19,8 @@ class blogModel:
             select c1.text, c1.regdate, u1.name, u1.profile  from comment c1
             JOIN user u1
             ON c1.userId = u1.idx
-            where c1.blogId = %d;
+            where c1.blogId = %d
+            order by c1.idx desc;
             ''' % int(idx)
         likesSql = '''select userIdx from likes where blogIdx = %d''' % int(idx)
         cursor.execute(blogSql)
