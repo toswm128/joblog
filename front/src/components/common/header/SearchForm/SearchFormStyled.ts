@@ -58,7 +58,6 @@ export const SearchFormComponent = styled.form`
 `;
 
 export const SearchDataList = styled.div`
-  padding-top: 5px;
   width: 515px;
   border-top: 0px;
   box-sizing: border-box;

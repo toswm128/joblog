@@ -1,4 +1,6 @@
 import BlogAPI from "assets/API/BlogAPI";
+import { AxiosError } from "axios";
+import HearderSearchErr from "components/common/Error/HearderSearchErr";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
@@ -16,10 +18,11 @@ const SearchForm = () => {
   const {
     refetch,
     data: { data } = {},
-    isSuccess,
-  } = useQuery(`search/${title}`, () => getSearchBlog(title), {
+    isError,
+  } = useQuery<any, AxiosError>(`search/${title}`, () => getSearchBlog(title), {
     retry: false,
     enabled: false,
+    onError: err => err.response?.status === 404 && console.log("검색어 없음"),
   });
 
   return (
@@ -54,6 +57,7 @@ const SearchForm = () => {
       <SearchDataList
         style={title ? { borderBottom: "1px solid #c4c4c4" } : {}}
       >
+        {isError && <HearderSearchErr searchData={title} />}
         {data?.data.map((current: any) => (
           <Link
             to={`/board/${current.idx}`}

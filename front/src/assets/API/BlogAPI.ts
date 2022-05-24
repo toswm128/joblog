@@ -96,10 +96,8 @@ class BlogAPI {
   }
 
   async getSearchBlog(title: string) {
-    try {
-      const result = await axios.get(`/blog/search?title=${title}`);
-      return result;
-    } catch (e) {}
+    const result = await axios.get(`/blog/search?title=${title}`);
+    return result;
   }
 }
 
