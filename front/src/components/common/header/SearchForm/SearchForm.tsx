@@ -10,36 +10,49 @@ import {
 
 const SearchForm = () => {
   const [title, setTitle] = useState("");
+  const [timer, setTimer] = useState<NodeJS.Timeout>();
   const { getSearchBlog } = new BlogAPI();
 
-  const { data: { data } = {}, isSuccess } = useQuery(
-    `search/${title}`,
-    () => getSearchBlog(title),
-    {
-      retry: false,
-    }
-  );
+  const {
+    refetch,
+    data: { data } = {},
+    isSuccess,
+  } = useQuery(`search/${title}`, () => getSearchBlog(title), {
+    retry: false,
+    enabled: false,
+  });
 
   return (
     <SearchFormContainer>
       <SearchFormComponent
         style={
-          data?.data.length && {
-            borderBottom: "0px",
-            borderRadius: "20px 20px 0 0",
-          }
+          title
+            ? {
+                borderBottom: "0px",
+                borderRadius: "20px 20px 0 0",
+              }
+            : {}
         }
+        onSubmit={e => {
+          e.preventDefault();
+          refetch();
+        }}
       >
         <input
           value={title}
-          onChange={e => setTitle(e.target.value)}
+          onChange={e => {
+            setTitle(e.target.value);
+            if (timer) clearTimeout(timer);
+            const newTimer = setTimeout(async () => await refetch(), 800);
+            setTimer(newTimer);
+          }}
           type="text"
           placeholder="검색어를 입력해 주세요"
         />
         <button>검색</button>
       </SearchFormComponent>
       <SearchDataList
-        style={data?.data.length && { borderBottom: "1px solid #c4c4c4" }}
+        style={title ? { borderBottom: "1px solid #c4c4c4" } : {}}
       >
         {data?.data.map((current: any) => (
           <Link
