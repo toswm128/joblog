@@ -8,6 +8,7 @@ interface ISearchModal {
   autoSearch: blog[] | undefined;
   isModal: boolean;
   errText: string;
+  setIsModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SearchModal = ({
@@ -15,6 +16,7 @@ const SearchModal = ({
   autoSearch,
   isModal,
   errText,
+  setIsModal,
 }: ISearchModal) => {
   return (
     <>
@@ -22,7 +24,11 @@ const SearchModal = ({
         <SearchDataList>
           {isError && <HearderSearchErr searchData={errText} />}
           {autoSearch?.map((current: any) => (
-            <Link to={`/board/${current.idx}`} key={current.idx}>
+            <Link
+              to={`/board/${current.idx}`}
+              key={current.idx}
+              onClick={() => setIsModal(false)}
+            >
               {current.title}
             </Link>
           ))}

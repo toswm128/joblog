@@ -22,6 +22,7 @@ const SearchForm = () => {
     refetch,
     data: { data } = {},
     isError,
+    isSuccess,
   } = useQuery<any, AxiosError>(`search/${title}`, () => getSearchBlog(title), {
     retry: false,
     enabled: false,
@@ -29,10 +30,14 @@ const SearchForm = () => {
   });
 
   return (
-    <SearchFormContainer>
+    <SearchFormContainer
+      onBlur={e =>
+        !e.currentTarget.contains(e.relatedTarget) && setIsModal(false)
+      }
+    >
       <SearchFormComponent
         style={
-          isModal
+          isModal && title && (isSuccess || isError)
             ? {
                 borderBottom: "0px",
                 borderRadius: "20px 20px 0 0",
@@ -52,11 +57,12 @@ const SearchForm = () => {
             const newTimer = setTimeout(async () => {
               if (e.target.value) {
                 await refetch();
-                setIsModal(true);
               }
             }, 800);
             setTimer(newTimer);
           }}
+          onClick={() => !isModal && setIsModal(true)}
+          onKeyDown={e => e.key === "Escape" && setIsModal(false)}
           type="text"
           placeholder="검색어를 입력해 주세요"
         />
@@ -67,6 +73,7 @@ const SearchForm = () => {
         autoSearch={data?.data}
         isModal={isModal}
         errText={errText}
+        setIsModal={setIsModal}
       />
     </SearchFormContainer>
   );
