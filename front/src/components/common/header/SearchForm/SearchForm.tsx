@@ -46,7 +46,10 @@ const SearchForm = () => {
           onChange={e => {
             setTitle(e.target.value);
             if (timer) clearTimeout(timer);
-            const newTimer = setTimeout(async () => await refetch(), 800);
+            const newTimer = setTimeout(
+              async () => e.target.value && (await refetch()),
+              800
+            );
             setTimer(newTimer);
           }}
           type="text"
