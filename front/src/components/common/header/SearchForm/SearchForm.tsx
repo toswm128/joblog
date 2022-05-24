@@ -9,11 +9,14 @@ import {
   SearchFormComponent,
   SearchFormContainer,
 } from "./SearchFormStyled";
+import SearchModal from "./SearchModal";
 
 const SearchForm = () => {
   const [title, setTitle] = useState("");
   const [timer, setTimer] = useState<NodeJS.Timeout>();
   const { getSearchBlog } = new BlogAPI();
+  const [isModal, setIsModal] = useState(false);
+  const [errText, setErrText] = useState("");
 
   const {
     refetch,
@@ -22,14 +25,14 @@ const SearchForm = () => {
   } = useQuery<any, AxiosError>(`search/${title}`, () => getSearchBlog(title), {
     retry: false,
     enabled: false,
-    onError: err => err.response?.status === 404 && console.log("검색어 없음"),
+    onError: err => err.response?.status === 404 && setErrText(title),
   });
 
   return (
     <SearchFormContainer>
       <SearchFormComponent
         style={
-          title
+          isModal
             ? {
                 borderBottom: "0px",
                 borderRadius: "20px 20px 0 0",
@@ -46,10 +49,12 @@ const SearchForm = () => {
           onChange={e => {
             setTitle(e.target.value);
             if (timer) clearTimeout(timer);
-            const newTimer = setTimeout(
-              async () => e.target.value && (await refetch()),
-              800
-            );
+            const newTimer = setTimeout(async () => {
+              if (e.target.value) {
+                await refetch();
+                setIsModal(true);
+              }
+            }, 800);
             setTimer(newTimer);
           }}
           type="text"
@@ -57,20 +62,12 @@ const SearchForm = () => {
         />
         <button>검색</button>
       </SearchFormComponent>
-      <SearchDataList
-        style={title ? { borderBottom: "1px solid #c4c4c4" } : {}}
-      >
-        {isError && <HearderSearchErr searchData={title} />}
-        {data?.data.map((current: any) => (
-          <Link
-            to={`/board/${current.idx}`}
-            key={current.idx}
-            onClick={() => setTitle("")}
-          >
-            {current.title}
-          </Link>
-        ))}
-      </SearchDataList>
+      <SearchModal
+        isError={isError}
+        autoSearch={data?.data}
+        isModal={isModal}
+        errText={errText}
+      />
     </SearchFormContainer>
   );
 };

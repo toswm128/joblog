@@ -59,17 +59,17 @@ export const SearchFormComponent = styled.form`
 
 export const SearchDataList = styled.div`
   width: 515px;
-  border-top: 0px;
-  box-sizing: border-box;
   left: -1;
   display: flex;
   flex-direction: column;
   a {
+    border: 1px solid #c4c4c4;
+    border-top: 0px;
+    box-sizing: border-box;
     color: black;
     padding: 4px 0 4px 0;
     background-color: white;
     cursor: pointer;
-    border-top: 1px solid #c4c4c4;
     &:hover {
       background-color: #c4c4c4;
     }
