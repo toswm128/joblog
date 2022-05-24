@@ -91,5 +91,7 @@ def create_blog_endpoints(app, services):
             searchData = blog_service.post_search(title)
             if searchData == 400:
                 return jsonify({"msg":"검색어 없음"}),400
+            elif searchData == 404:
+                return jsonify({"msg":"검색 결과 없음"}),404
             else:
                 return jsonify({'result':'success','data':searchData,'msg': '댓글 작성'})

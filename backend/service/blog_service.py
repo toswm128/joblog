@@ -45,6 +45,8 @@ class blogService:
     def post_search(self,title):
         if title:
             blog = self.blog_model.search_blog_to_title(title)
+            if len(blog) == 0:
+                return 404
             return blog
         else:
             return 400
