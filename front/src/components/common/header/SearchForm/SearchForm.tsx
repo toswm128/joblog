@@ -1,14 +1,9 @@
 import BlogAPI from "assets/API/BlogAPI";
 import { AxiosError } from "axios";
-import HearderSearchErr from "components/common/Error/HearderSearchErr";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
-import {
-  SearchDataList,
-  SearchFormComponent,
-  SearchFormContainer,
-} from "./SearchFormStyled";
+import { useNavigate } from "react-router-dom";
+import { SearchFormComponent, SearchFormContainer } from "./SearchFormStyled";
 import SearchModal from "./SearchModal";
 
 const SearchForm = () => {
@@ -17,6 +12,8 @@ const SearchForm = () => {
   const { getSearchBlog } = new BlogAPI();
   const [isModal, setIsModal] = useState(false);
   const [errText, setErrText] = useState("");
+  const [selectIdx, setSelectIdx] = useState(-1);
+  const navigate = useNavigate();
 
   const {
     refetch,
@@ -28,6 +25,46 @@ const SearchForm = () => {
     enabled: false,
     onError: err => err.response?.status === 404 && setErrText(title),
   });
+
+  const debounceSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+    if (timer) clearTimeout(timer);
+    const newTimer = setTimeout(async () => {
+      if (e.target.value) {
+        await refetch();
+        setIsModal(true);
+      }
+    }, 800);
+    setTimer(newTimer);
+  };
+
+  const selectSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    navigate(`/board/${data?.data[selectIdx].idx}`);
+    setIsModal(false);
+    setSelectIdx(-1);
+  };
+
+  const KeyDownSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    switch (e.key) {
+      case "Escape":
+        setIsModal(false);
+        break;
+      case "ArrowDown":
+        selectIdx < data?.data.length - 1
+          ? setSelectIdx(prev => prev + 1)
+          : setSelectIdx(0);
+        break;
+      case "ArrowUp":
+        selectIdx > 0
+          ? setSelectIdx(prev => prev - 1)
+          : setSelectIdx(data?.data.length - 1);
+        break;
+      case "Enter":
+        selectIdx >= 0 && selectSearch(e);
+        console.log(selectIdx, e.key);
+    }
+  };
 
   return (
     <SearchFormContainer
@@ -46,23 +83,14 @@ const SearchForm = () => {
         }
         onSubmit={e => {
           e.preventDefault();
-          refetch();
+          console.log("submit");
         }}
       >
         <input
           value={title}
-          onChange={e => {
-            setTitle(e.target.value);
-            if (timer) clearTimeout(timer);
-            const newTimer = setTimeout(async () => {
-              if (e.target.value) {
-                await refetch();
-              }
-            }, 800);
-            setTimer(newTimer);
-          }}
+          onChange={e => debounceSearch(e)}
           onClick={() => !isModal && setIsModal(true)}
-          onKeyDown={e => e.key === "Escape" && setIsModal(false)}
+          onKeyDown={e => KeyDownSearch(e)}
           type="text"
           placeholder="검색어를 입력해 주세요"
         />
@@ -73,6 +101,7 @@ const SearchForm = () => {
         autoSearch={data?.data}
         isModal={isModal}
         errText={errText}
+        selectIdx={selectIdx}
         setIsModal={setIsModal}
       />
     </SearchFormContainer>
