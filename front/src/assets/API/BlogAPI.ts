@@ -4,14 +4,9 @@ import { banner } from "Store/WriteEditorStore/type";
 
 class BlogAPI {
   async getBlog() {
-    try {
-      const result = await axios.get("/");
-      if (result.status === 200) {
-        return result;
-      }
-    } catch (e) {
-      const err = e as AxiosError;
-      console.log(err.response?.status);
+    const result = await axios.get("/");
+    if (result.status === 200) {
+      return result;
     }
   }
 
