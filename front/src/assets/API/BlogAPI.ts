@@ -95,7 +95,7 @@ class BlogAPI {
     }
   }
 
-  async getSearchBlog(title: string) {
+  async getSearchBlog(title: string | undefined) {
     const result = await axios.get(`/blog/search?title=${title}`);
     return result;
   }

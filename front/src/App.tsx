@@ -22,7 +22,7 @@ function App() {
             <Route path="/join" element={<JoinPage />} />
             <Route path="/write" element={<WritePage />} />
             <Route path="/my" element={<MyPage />} />
-            <Route path="/search" element={<SearchBoardPage />} />
+            <Route path="/search/:q" element={<SearchBoardPage />} />
           </Routes>
         </>
       </Header>

@@ -83,6 +83,8 @@ const SearchForm = () => {
         }
         onSubmit={e => {
           e.preventDefault();
+          setIsModal(false);
+          navigate(`/search/${title}`);
         }}
       >
         <input
