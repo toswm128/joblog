@@ -83,7 +83,6 @@ const SearchForm = () => {
         }
         onSubmit={e => {
           e.preventDefault();
-          console.log("submit");
         }}
       >
         <input
