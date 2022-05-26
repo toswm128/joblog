@@ -1,5 +1,7 @@
+import { LoaderContainer } from "./LoaderStyle";
+
 const Loader = () => {
-  return <div>loading</div>;
+  return <LoaderContainer>loading...</LoaderContainer>;
 };
 
 export default Loader;

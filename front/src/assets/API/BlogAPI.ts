@@ -11,17 +11,10 @@ class BlogAPI {
   }
 
   async getBoard(idx: string | undefined) {
-    try {
-      const result: AxiosResponse<board, any> = await axios.get(
-        `/blog/board?idx=${idx}`
-      );
-      if (result.status === 200) {
-        return result;
-      }
-    } catch (e) {
-      const err = e as AxiosError;
-      console.log(err.response?.status);
-    }
+    const result: AxiosResponse<board, any> = await axios.get(
+      `/blog/board?idx=${idx}`
+    );
+    return result;
   }
   async postBoard(dom: any, title: string, banner: banner) {
     const formData = new FormData();

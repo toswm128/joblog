@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const CommentFormContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 16px 0;
+  margin: 32px 0;
   gap: 6px;
 
   & > div {

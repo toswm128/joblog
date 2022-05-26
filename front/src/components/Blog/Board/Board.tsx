@@ -8,16 +8,25 @@ import CommentList from "./Comment/CommentList";
 import Divider from "components/common/Divider";
 import Main from "../Main";
 import BoardHeader from "./BoardHeader";
+import useModal from "hooks/modal";
+import Modal from "components/common/Modal";
+import { useNavigate } from "react-router-dom";
 
 interface IBoard {
   idx: string;
 }
 
 const Board = ({ idx }: IBoard) => {
+  const { isModal, showModal } = useModal(false);
+  const navigate = useNavigate();
   const { getBoard } = new BlogAPI();
   const { isLoading, data: { data: board } = {} } = useQuery(
     `board/${idx}`,
-    () => getBoard(idx)
+    () => getBoard(idx),
+    {
+      retry: false,
+      onError: () => showModal(),
+    }
   );
 
   return (
@@ -47,6 +56,14 @@ const Board = ({ idx }: IBoard) => {
         </>
       ) : (
         <Loader />
+      )}
+      {isModal && (
+        <Modal
+          title={"⚠️ Warning! ⚠️"}
+          context={"좆됐습니다!"}
+          buttonText={"새로고침"}
+          btnClick={() => navigate(0)}
+        />
       )}
     </BoardContainer>
   );
