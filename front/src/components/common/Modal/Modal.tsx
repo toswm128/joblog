@@ -1,13 +1,31 @@
 import { ModalCard, ModalContainer } from "./ModalStyle";
 
-const Modal = () => {
+interface Modal {
+  title: string;
+  context: string;
+  buttonText: string;
+  btnClick: () => void;
+  backgroundClick?: () => void;
+}
+
+const Modal = ({
+  title,
+  context,
+  buttonText,
+  btnClick,
+  backgroundClick,
+}: Modal) => {
   return (
-    <ModalContainer>
+    <ModalContainer
+      onClick={e =>
+        e.currentTarget === e.target && backgroundClick && backgroundClick()
+      }
+    >
       <ModalCard>
-        <h2>⚠️ Warning! ⚠️</h2>
-        <span>좆됐습니다!!</span>
+        <h2>{title}</h2>
+        <span>{context}</span>
         <button>
-          <div>새로고침</div>
+          <div onClick={btnClick}>{buttonText}</div>
         </button>
       </ModalCard>
     </ModalContainer>
