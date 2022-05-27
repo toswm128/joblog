@@ -39,7 +39,7 @@ const Login = () => {
 
   return (
     <>
-      <AuthForm submit={mutate}>
+      <AuthForm submit={() => (id && pwd ? mutate() : showModal(1))}>
         <>
           <AuthInput
             updateValue={value => (value || id) && setId(value)}
@@ -70,7 +70,12 @@ const Login = () => {
         btnClick={closeModal}
         backgroundClick={closeModal}
       >
-        <>{status === 400 ? "로그인 실패" : "인터넷 오류"}</>
+        <>
+          {status === 400 && "비밀번호가 틀렸습니다"}
+          {status === 404 && "존재하지 않는 아이디 입니다"}
+          {status === 1 && "조건에 맞지 않는 항목이 있습니다"}
+          {status >= 500 && "서버 에러"}
+        </>
       </Modal>
     </>
   );

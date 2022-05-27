@@ -27,6 +27,7 @@ const AuthInput = ({
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
+    !e.target.value && updateValue("");
   };
 
   const tags = { value, onChange, placeholder, type };
