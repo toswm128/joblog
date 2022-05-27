@@ -14,7 +14,7 @@ const Join = () => {
   const [pwd, setPwd] = useState("");
   const [name, setName] = useState("");
 
-  const { isModal, showModal, closeModal } = useModal(false);
+  const { isModal, showModal, closeModal, status } = useModal(false);
 
   const { Join } = new AuthAPI();
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const Join = () => {
 
   return (
     <>
-      <AuthForm submit={mutate}>
+      <AuthForm submit={() => (id && pwd && name ? mutate() : showModal(1))}>
         <>
           <AuthInput
             updateValue={value => (value || id) && setId(value)}
@@ -62,11 +62,14 @@ const Join = () => {
       </AuthForm>
       <Modal
         isModal={isModal}
-        title={"Error"}
+        title={"⚠️ Error ⚠️"}
         buttonText={"닫기"}
         btnClick={closeModal}
       >
-        <>인터넷 오류</>
+        <>
+          {status === 1 && "조건에 맞지 않는 항목이 있습니다"}
+          {status === 500 && "서버 에러"}
+        </>
       </Modal>
     </>
   );
