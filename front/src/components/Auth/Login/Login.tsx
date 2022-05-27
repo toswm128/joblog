@@ -1,14 +1,15 @@
 import AuthAPI from "assets/API/AuthAPI";
+import { idReg, pwdReg } from "assets/regExp/authRegExp";
 import axios, { AxiosError } from "axios";
 import Modal from "components/common/Modal";
 import { AuthButton } from "components/common/styleObject/ButtonStyle";
-import { AuthInput } from "components/common/styleObject/InputStyle";
 import useModal from "hooks/modal";
 import useUser from "hooks/user";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import AuthForm from "../AuthForm";
+import AuthInput from "../AuthInput";
 
 const Login = () => {
   const [id, setId] = useState("");
@@ -42,12 +43,17 @@ const Login = () => {
             value={id}
             onChange={e => setId(e.target.value)}
             placeholder="아이디"
+            type="text"
+            reg={idReg}
+            errMsg="6~20자리의 대소문자 및 숫자를 입력해 주세요"
           />
           <AuthInput
             value={pwd}
             onChange={e => setPwd(e.target.value)}
             placeholder="비밀번호"
             type="password"
+            reg={pwdReg}
+            errMsg="8~16자리의 대소문자 및 숫자를 입력해 주세요"
           />
           <div>
             <AuthButton>로그인</AuthButton>

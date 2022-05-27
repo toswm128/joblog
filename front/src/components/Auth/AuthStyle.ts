@@ -22,9 +22,9 @@ export const AuthComponents = styled.form`
     margin-bottom: 27px;
   }
 
-  & > div {
+  /* & > div {
     display: flex;
     justify-content: center;
     gap: 13px;
-  }
+  } */
 `;
