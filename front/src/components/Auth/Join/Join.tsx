@@ -23,9 +23,8 @@ const Join = () => {
     <AuthForm submit={mutate}>
       <>
         <AuthInput
+          updateValue={value => (value || id) && setId(value)}
           type="text"
-          value={id}
-          onChange={e => setId(e.target.value)}
           placeholder="아이디"
           reg={idReg}
           errMsg="6~20자리의 대소문자 및 숫자를 입력해 주세요."
@@ -33,8 +32,7 @@ const Join = () => {
         />
         <AuthInput
           type="password"
-          value={pwd}
-          onChange={e => setPwd(e.target.value)}
+          updateValue={value => (value || pwd) && setPwd(value)}
           placeholder="비밀번호"
           reg={pwdReg}
           errMsg="8~16자리의 대소문자 및 숫자를 입력해 주세요"
@@ -42,8 +40,7 @@ const Join = () => {
         />
         <AuthInput
           type="text"
-          value={name}
-          onChange={e => setName(e.target.value)}
+          updateValue={value => (value || name) && setName(value)}
           placeholder="이름"
           reg={nameReg}
           errMsg="8~16자리의 대소문자 및 숫자를 입력해 주세요"

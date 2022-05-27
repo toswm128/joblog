@@ -1,5 +1,5 @@
 import { InputContainer } from "components/common/styleObject/InputStyle";
-import React, { useCallback } from "react";
+import React, { useState } from "react";
 import {
   AuthInputContainer,
   ErrMsgContainer,
@@ -7,8 +7,7 @@ import {
 } from "./AuthInputStyle";
 
 interface IAuthInput {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  updateValue: (value: string) => void;
   placeholder: string;
   type: string;
   reg: RegExp;
@@ -17,21 +16,29 @@ interface IAuthInput {
 }
 
 const AuthInput = ({
-  value,
-  onChange,
+  updateValue,
   placeholder,
   type,
   reg,
   errMsg,
   successMsg,
 }: IAuthInput) => {
+  const [value, setValue] = useState("");
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
   const tags = { value, onChange, placeholder, type };
+
   const cheackValue = () => {
-    return reg.test(value) ? (
-      <SuccessMsgContainer>{successMsg}</SuccessMsgContainer>
-    ) : (
-      <ErrMsgContainer>{errMsg}</ErrMsgContainer>
-    );
+    if (reg.test(value)) {
+      updateValue(value);
+      return <SuccessMsgContainer>{successMsg}</SuccessMsgContainer>;
+    } else {
+      updateValue("");
+      return <ErrMsgContainer>{errMsg}</ErrMsgContainer>;
+    }
   };
 
   return (

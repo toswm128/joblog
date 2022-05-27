@@ -14,6 +14,7 @@ import AuthInput from "../AuthInput";
 const Login = () => {
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
+
   const navigate = useNavigate();
   const { Login } = new AuthAPI();
   const { setUser } = useUser();
@@ -40,16 +41,14 @@ const Login = () => {
       <AuthForm submit={mutate}>
         <>
           <AuthInput
-            value={id}
-            onChange={e => setId(e.target.value)}
+            updateValue={value => (value || id) && setId(value)}
             placeholder="아이디"
             type="text"
             reg={idReg}
             errMsg="6~20자리의 대소문자 및 숫자를 입력해 주세요"
           />
           <AuthInput
-            value={pwd}
-            onChange={e => setPwd(e.target.value)}
+            updateValue={value => (value || pwd) && setPwd(value)}
             placeholder="비밀번호"
             type="password"
             reg={pwdReg}
