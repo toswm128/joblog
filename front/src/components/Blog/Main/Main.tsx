@@ -23,14 +23,13 @@ const Main = () => {
       ) : (
         <BoardList blogList={data?.data.data} />
       )}
-      {isModal && (
-        <Modal
-          title={"⚠️ Warning! ⚠️"}
-          context={"좆됐습니다!!"}
-          buttonText={"새로고침"}
-          btnClick={() => navigate(0)}
-        />
-      )}
+      <Modal
+        isModal={isModal}
+        title={"⚠️ Warning! ⚠️"}
+        context={"좆됐습니다!!"}
+        buttonText={"새로고침"}
+        btnClick={() => navigate(0)}
+      />
     </MainContainer>
   );
 };

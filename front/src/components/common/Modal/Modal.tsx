@@ -1,6 +1,7 @@
 import { ModalCard, ModalContainer } from "./ModalStyle";
 
 interface Modal {
+  isModal: boolean;
   title: string;
   context: string;
   buttonText: string;
@@ -9,6 +10,7 @@ interface Modal {
 }
 
 const Modal = ({
+  isModal,
   title,
   context,
   buttonText,
@@ -16,19 +18,25 @@ const Modal = ({
   backgroundClick,
 }: Modal) => {
   return (
-    <ModalContainer
-      onClick={e =>
-        e.currentTarget === e.target && backgroundClick && backgroundClick()
-      }
-    >
-      <ModalCard>
-        <h2>{title}</h2>
-        <span>{context}</span>
-        <button>
-          <div onClick={btnClick}>{buttonText}</div>
-        </button>
-      </ModalCard>
-    </ModalContainer>
+    <>
+      {isModal ? (
+        <ModalContainer
+          onClick={e =>
+            e.currentTarget === e.target && backgroundClick && backgroundClick()
+          }
+        >
+          <ModalCard>
+            <h2>{title}</h2>
+            <span>{context}</span>
+            <button>
+              <div onClick={btnClick}>{buttonText}</div>
+            </button>
+          </ModalCard>
+        </ModalContainer>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 export default Modal;

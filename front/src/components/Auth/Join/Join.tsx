@@ -2,6 +2,7 @@ import AuthAPI from "assets/API/AuthAPI";
 import { AuthButton } from "components/common/styleObject/ButtonStyle";
 import { AuthInput } from "components/common/styleObject/InputStyle";
 import { useState } from "react";
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import AuthForm from "../AuthForm";
 
@@ -12,15 +13,12 @@ const Join = () => {
   const { Join } = new AuthAPI();
   const navigate = useNavigate();
 
-  const submitJoin = async () => {
-    const result = await Join(id, pwd, name);
-    if (result === 200) {
-      navigate("/login");
-    }
-  };
+  const { mutate } = useMutation(() => Join(id, pwd, name), {
+    onSuccess: data => console.log(data),
+  });
 
   return (
-    <AuthForm submit={submitJoin}>
+    <AuthForm submit={mutate}>
       <>
         <AuthInput
           value={id}

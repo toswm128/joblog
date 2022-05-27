@@ -57,15 +57,14 @@ const Login = () => {
           </div>
         </>
       </AuthForm>
-      {isModal && (
-        <Modal
-          title={"error"}
-          context={status === 400 ? "로그인 실패" : "인터넷 오류"}
-          buttonText={"닫기"}
-          btnClick={closeModal}
-          backgroundClick={closeModal}
-        />
-      )}
+      <Modal
+        isModal={isModal}
+        title={"⚠️ Error ⚠️"}
+        context={status === 400 ? "로그인 실패" : "인터넷 오류"}
+        buttonText={"닫기"}
+        btnClick={closeModal}
+        backgroundClick={closeModal}
+      />
     </>
   );
 };

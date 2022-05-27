@@ -6,7 +6,7 @@ import { AxiosResponse } from "axios";
 
 interface IAuthForm {
   children: JSX.Element;
-  submit: UseMutateFunction<AxiosResponse<any, any>, unknown, void, unknown>;
+  submit: any;
 }
 
 const AuthForm: React.FC<IAuthForm> = ({ children, submit }) => {
