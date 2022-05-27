@@ -1,10 +1,12 @@
 import React from "react";
 import { AuthContainer, AuthComponents } from "./AuthStyle";
 import logo from "assets/png/jobl_logo.png";
+import { UseMutateFunction } from "react-query";
+import { AxiosResponse } from "axios";
 
 interface IAuthForm {
   children: JSX.Element;
-  submit: () => Promise<void>;
+  submit: UseMutateFunction<AxiosResponse<any, any>, unknown, void, unknown>;
 }
 
 const AuthForm: React.FC<IAuthForm> = ({ children, submit }) => {
