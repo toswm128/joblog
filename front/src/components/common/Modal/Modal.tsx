@@ -3,19 +3,19 @@ import { ModalCard, ModalContainer } from "./ModalStyle";
 interface Modal {
   isModal: boolean;
   title: string;
-  context: string;
   buttonText: string;
   btnClick: () => void;
   backgroundClick?: () => void;
+  children: JSX.Element;
 }
 
 const Modal = ({
   isModal,
   title,
-  context,
   buttonText,
   btnClick,
   backgroundClick,
+  children,
 }: Modal) => {
   return (
     <>
@@ -27,7 +27,7 @@ const Modal = ({
         >
           <ModalCard>
             <h2>{title}</h2>
-            <span>{context}</span>
+            <span>{children}</span>
             <button>
               <div onClick={btnClick}>{buttonText}</div>
             </button>

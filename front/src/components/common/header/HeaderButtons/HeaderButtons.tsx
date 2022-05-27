@@ -15,6 +15,7 @@ const HeaderButtons = () => {
     isFetching,
     data: { data } = {},
   } = useQuery("myInfo", GetUser2Id, {
+    enabled: localStorage.getItem("AccessToken") ? true : false,
     retry: false,
   });
 

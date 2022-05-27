@@ -26,10 +26,12 @@ const Main = () => {
       <Modal
         isModal={isModal}
         title={"⚠️ Warning! ⚠️"}
-        context={"좆됐습니다!!"}
         buttonText={"새로고침"}
         btnClick={() => navigate(0)}
-      />
+        backgroundClick={closeModal}
+      >
+        <>좆됐습니다!!</>
+      </Modal>
     </MainContainer>
   );
 };

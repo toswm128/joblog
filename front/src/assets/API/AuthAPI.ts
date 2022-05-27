@@ -12,13 +12,8 @@ class AuthAPI {
   }
 
   async Join(id: string, pwd: string, name: string) {
-    try {
-      const result = await axios.post("join", { id, password: pwd, name });
-      return result.status;
-    } catch (e) {
-      const err = e as AxiosError;
-      console.log(err.response?.status);
-    }
+    const result = await axios.post("join", { id, password: pwd, name });
+    return result.status;
   }
 }
 

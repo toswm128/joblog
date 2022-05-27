@@ -6,7 +6,7 @@ import { AuthButton } from "components/common/styleObject/ButtonStyle";
 import useModal from "hooks/modal";
 import useUser from "hooks/user";
 import { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { QueryClient, useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import AuthForm from "../AuthForm";
 import AuthInput from "../AuthInput";
@@ -28,10 +28,11 @@ const Login = () => {
       setUser({ userId: idx, name, profile });
       localStorage.setItem("AccessToken", token);
       axios.defaults.headers.common["Authorization"] = token;
-      quetClient.invalidateQueries("myInfo");
+      quetClient.refetchQueries("myInfo");
       navigate("/");
     },
     onError: (error: AxiosError) => {
+      console.log(id);
       showModal(error.response?.status);
     },
   });
@@ -65,11 +66,12 @@ const Login = () => {
       <Modal
         isModal={isModal}
         title={"⚠️ Error ⚠️"}
-        context={status === 400 ? "로그인 실패" : "인터넷 오류"}
         buttonText={"닫기"}
         btnClick={closeModal}
         backgroundClick={closeModal}
-      />
+      >
+        <>{status === 400 ? "로그인 실패" : "인터넷 오류"}</>
+      </Modal>
     </>
   );
 };

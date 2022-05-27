@@ -13,11 +13,13 @@ from view import create_blog_endpoints,create_auth_endpoints
 class Services:
     pass
 
-def create_app(test_config = None):
+def create_app():
     app = Flask(__name__)
     app.config['JSON_AS_ASCII'] = False
     CORS(app, resources={r"*": {"origins": "*"}})
     app.config["IMAGE_UPLOADS"] = "/Users/macbook/Documents/GitHub/joblog/backend/static"
+
+
 
 
     blog_Model = blogModel()
@@ -33,3 +35,5 @@ def create_app(test_config = None):
     create_auth_endpoints(app,auth_services)
 
     return app
+
+
