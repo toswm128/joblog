@@ -168,9 +168,7 @@ const EditorInputter = ({ data }: { data: line }) => {
               break;
           }
         }}
-        onDrop={e => {
-          onDropUrl(e);
-        }}
+        onDrop={onDropUrl}
         onDragOver={() => {
           setDrogOver(true);
         }}
@@ -185,9 +183,7 @@ const EditorInputter = ({ data }: { data: line }) => {
           e.clipboardData.files[0] &&
             setImg(data.id, URL.createObjectURL(e.clipboardData.files[0]));
         }}
-        onKeyPress={e => {
-          onKeyPressEnter(e);
-        }}
+        onKeyPress={onKeyPressEnter}
         onClick={() => {
           clickInputter(data.id);
         }}

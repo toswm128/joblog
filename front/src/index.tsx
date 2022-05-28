@@ -11,10 +11,26 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
 const store = createStore(rootReducer, composeWithDevTools());
-const token = localStorage.getItem("AccessToken");
 
 axios.defaults.baseURL = SERVER.SERVER;
-axios.defaults.headers.common["Authorization"] = token ? token : "";
+axios.defaults.headers.common["Authorization"] = "";
+
+axios.interceptors.request.use(
+  config => {
+    const token = localStorage.getItem("AccessToken");
+    if (!config.headers) {
+      config.headers = {};
+    }
+    config.headers["Authorization"] = token ? token : "";
+
+    console.log(config.headers["Authorization"]);
+    return config;
+  },
+  err => {
+    console.log(err);
+    return Promise.reject(err);
+  }
+);
 
 const queryClient = new QueryClient({
   defaultOptions: {

@@ -35,5 +35,3 @@ def create_app():
     create_auth_endpoints(app,auth_services)
 
     return app
-
-

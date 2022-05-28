@@ -12,20 +12,17 @@ import SearchBoardPage from "pages/Blog/SearchBoardPage";
 function App() {
   return (
     <Router>
-      <Header>
-        <>
-          <div style={{ marginTop: "79px" }} />
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/board/:idx" element={<BoardPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/join" element={<JoinPage />} />
-            <Route path="/write" element={<WritePage />} />
-            <Route path="/my" element={<MyPage />} />
-            <Route path="/search/:q" element={<SearchBoardPage />} />
-          </Routes>
-        </>
-      </Header>
+      <Header />
+      <div style={{ marginTop: "79px" }} />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/board/:idx" element={<BoardPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/join" element={<JoinPage />} />
+        <Route path="/write" element={<WritePage />} />
+        <Route path="/my" element={<MyPage />} />
+        <Route path="/search/:q" element={<SearchBoardPage />} />
+      </Routes>
     </Router>
   );
 }
