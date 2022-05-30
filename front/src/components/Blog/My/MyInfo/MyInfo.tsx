@@ -1,20 +1,17 @@
-import useUser from "hooks/user";
+import AuthAPI from "assets/API/AuthAPI";
+import { useQuery } from "react-query";
 import { MyInfoContainer } from "../MyStyle";
 
 const MyInfo = () => {
-  const { user } = useUser();
+  const { GetUser2Id } = new AuthAPI();
+
+  const { data: { data } = {} } = useQuery("myInfo", GetUser2Id);
+
   return (
     <MyInfoContainer>
-      <img
-        src={
-          user.profile
-            ? user.profile
-            : "http://localhost:5000/image?file=user.png"
-        }
-        alt=""
-      />
+      <img src={data?.data.profile} alt="" />
       <div>
-        <h2>{user.name}</h2>
+        <h2>{data?.data.name}</h2>
       </div>
     </MyInfoContainer>
   );

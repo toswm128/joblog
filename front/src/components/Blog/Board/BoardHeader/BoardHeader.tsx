@@ -1,10 +1,10 @@
+import AuthAPI from "assets/API/AuthAPI";
 import BlogAPI from "assets/API/BlogAPI";
 import heart from "assets/png/heart.png";
 import unHeart from "assets/png/unHeart.png";
-import useUser from "hooks/user";
 import { likes } from "pages/Blog/BoardPage/type";
 import { useCallback, useEffect, useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
 interface IBoardHeader {
   idx: string;
@@ -24,34 +24,28 @@ const BoardHeader = ({
   likes,
 }: IBoardHeader) => {
   const { clickLike } = new BlogAPI();
-  const { user } = useUser();
+  const { GetUser2Id } = new AuthAPI();
+  const { data: { data } = {} } = useQuery("myInfo", GetUser2Id);
   const [isLike, setIsLike] = useState(false);
   const queryClient = useQueryClient();
-  const mutation = useMutation(
-    ({ idx, isLike }: { idx: number; isLike: boolean }) =>
-      clickLike(idx, isLike)
-  );
+  const { mutate } = useMutation(() => clickLike(+idx, isLike), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(`board/${idx}`);
+      queryClient.invalidateQueries(`getBoard`);
+      setIsLike(!isLike);
+    },
+  });
 
   const isUserLike = useCallback(() => {
-    return likes.some(({ userIdx }) => userIdx === user.userId);
-  }, [likes, user.userId]);
+    return likes.some(({ userIdx }) => userIdx === data?.data.idx);
+  }, [likes, data?.data.idx]);
 
   useEffect(() => {
     setIsLike(isUserLike());
-  }, [likes, setIsLike, user.userId]);
+  }, [likes, setIsLike, data?.data.idx]);
 
   const onClickLike = () => {
-    idx &&
-      mutation.mutate(
-        { idx: +idx, isLike },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries(`board/${idx}`);
-            queryClient.invalidateQueries(`getBoard`);
-            setIsLike(!isLike);
-          },
-        }
-      );
+    idx && mutate();
   };
 
   return (

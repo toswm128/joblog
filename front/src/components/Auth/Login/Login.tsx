@@ -4,7 +4,6 @@ import axios, { AxiosError } from "axios";
 import Modal from "components/common/Modal";
 import { AuthButton } from "components/common/styleObject/ButtonStyle";
 import useModal from "hooks/modal";
-import useUser from "hooks/user";
 import { useState } from "react";
 import { QueryClient, useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
@@ -17,15 +16,13 @@ const Login = () => {
 
   const navigate = useNavigate();
   const { Login } = new AuthAPI();
-  const { setUser } = useUser();
   const { isModal, showModal, closeModal, status } = useModal(false);
 
   const quetClient = useQueryClient();
 
   const { mutate } = useMutation(() => Login(id, pwd), {
     onSuccess: data => {
-      const { idx, name, profile, token } = data?.data.data;
-      setUser({ userId: idx, name, profile });
+      const { token } = data?.data.data;
       localStorage.setItem("AccessToken", token);
       axios.defaults.headers.common["Authorization"] = token;
       quetClient.refetchQueries("myInfo");

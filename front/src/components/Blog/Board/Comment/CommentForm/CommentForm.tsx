@@ -1,8 +1,8 @@
+import AuthAPI from "assets/API/AuthAPI";
 import BlogAPI from "assets/API/BlogAPI";
 import { WriteButton } from "components/common/styleObject/ButtonStyle";
-import useUser from "hooks/user";
 import { useState } from "react";
-import { useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { CommentFormContainer } from "./CommentFormStyle";
 
@@ -11,22 +11,17 @@ interface ICommentForm {
 }
 
 const CommentForm = ({ blogIdx }: ICommentForm) => {
-  const { user } = useUser();
+  const { GetUser2Id } = new AuthAPI();
+
+  const { data: { data } = {} } = useQuery("myInfo", GetUser2Id);
+
   const { postComment } = new BlogAPI();
   const queryClient = useQueryClient();
   const [commentText, setCommentText] = useState("");
   return (
     <CommentFormContainer>
       <div>
-        <img
-          className="profilImg"
-          src={
-            user.profile
-              ? user.profile
-              : "http://localhost:5000/image?file=user.png"
-          }
-          alt=""
-        />
+        <img className="profilImg" src={data?.data.profile} alt="" />
         <ReactTextareaAutosize
           className="commentTextarea"
           spellCheck={false}

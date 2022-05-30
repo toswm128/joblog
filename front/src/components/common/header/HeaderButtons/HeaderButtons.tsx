@@ -1,13 +1,10 @@
 import AuthAPI from "assets/API/AuthAPI";
 import axios from "axios";
-import useUser from "hooks/user";
-import { useEffect } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { Link } from "react-router-dom";
 
 const HeaderButtons = () => {
   const { GetUser2Id } = new AuthAPI();
-  const { setUser } = useUser();
   const queryClient = useQueryClient();
 
   const {
@@ -18,15 +15,6 @@ const HeaderButtons = () => {
     enabled: localStorage.getItem("AccessToken") ? true : false,
     retry: false,
   });
-
-  useEffect(() => {
-    isSuccess &&
-      setUser({
-        userId: data.data.idx,
-        name: data.data.name,
-        profile: data.data.porfile,
-      });
-  }, [isFetching]);
 
   return (
     <>

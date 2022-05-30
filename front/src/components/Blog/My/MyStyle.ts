@@ -32,6 +32,7 @@ export const MyInfoContainer = styled.div`
   height: 100%;
   & > img {
     width: 310px;
+    height: 310px;
     object-fit: cover;
     background-color: #c4c4c4;
     border-radius: 50%;
