@@ -5,13 +5,15 @@ import { MyInfoContainer } from "../MyStyle";
 const MyInfo = () => {
   const { GetUser } = new AuthAPI();
 
-  const { data: { data } = {} } = useQuery("myInfo", GetUser);
+  const { data: { data } = {} } = useQuery("myInfo", GetUser, {
+    select: data => data.data,
+  });
 
   return (
     <MyInfoContainer>
-      <img src={data?.data.profile} alt="" />
+      <img src={data?.profile} alt="" />
       <div>
-        <h2>{data?.data.name}</h2>
+        <h2>{data?.name}</h2>
       </div>
     </MyInfoContainer>
   );

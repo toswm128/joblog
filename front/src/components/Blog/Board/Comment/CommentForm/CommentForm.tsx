@@ -21,7 +21,7 @@ const CommentForm = ({ blogIdx }: ICommentForm) => {
   return (
     <CommentFormContainer>
       <div>
-        <img className="profilImg" src={data?.data.profile} alt="" />
+        <img className="profilImg" src={data?.profile} alt="" />
         <ReactTextareaAutosize
           className="commentTextarea"
           spellCheck={false}

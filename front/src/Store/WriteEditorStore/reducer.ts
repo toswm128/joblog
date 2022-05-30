@@ -112,7 +112,6 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
         draft.focusLine = draft.body[action.payload.id].next;
       else draft.focusLine = draft.body[action.payload.id].prev;
 
-      console.log(action.payload.isA);
       draft.body.push({
         id: draft.body.length,
         text: "",

@@ -12,17 +12,17 @@ const Main = () => {
   const { isModal, showModal, closeModal } = useModal(false);
   const navigate = useNavigate();
 
-  const { data, isLoading, isError } = useQuery("getBoard", getBlog, {
+  const {
+    data: { data } = {},
+    isLoading,
+    isError,
+  } = useQuery("getBoard", getBlog, {
     onError: showModal,
-    retry: false,
   });
+
   return (
     <MainContainer>
-      {isLoading || isError ? (
-        <MainLoader />
-      ) : (
-        <BoardList blogList={data?.data.data} />
-      )}
+      {isLoading || isError ? <MainLoader /> : <BoardList blogList={data} />}
       <Modal
         isModal={isModal}
         title={"⚠️ Warning! ⚠️"}

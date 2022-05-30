@@ -24,30 +24,30 @@ const Board = ({ idx }: IBoard) => {
     `board/${idx}`,
     () => getBoard(idx),
     {
-      retry: false,
       onError: () => showModal(),
     }
   );
+
 
   return (
     <BoardContainer>
       {!isLoading && board ? (
         <>
-          <img className="banner" src={board.data.blog.banner} alt="" />
+          <img className="banner" src={board.blog.banner} alt="" />
           <BoardContent>
             <BoardHeader
               idx={idx}
-              title={board.data.blog.title}
-              profile={board.data.user.profile}
-              name={board.data.user.name}
-              regdate={board.data.blog.regdate}
-              likes={board.data.likes}
+              title={board.blog.title}
+              profile={board.user.profile}
+              name={board.user.name}
+              regdate={board.blog.regdate}
+              likes={board.likes}
             />
             <div className="content">
-              <BoardContext context={board.data.blog.context} />
+              <BoardContext context={board.blog.context} />
             </div>
-            <CommentForm blogIdx={board.data.blog.idx} />
-            <CommentList commentList={board.data.comments} />
+            <CommentForm blogIdx={board.blog.idx} />
+            <CommentList commentList={board.comments} />
             <Divider>
               <>다른 게시글</>
             </Divider>

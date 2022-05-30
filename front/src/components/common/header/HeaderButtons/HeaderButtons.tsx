@@ -13,7 +13,6 @@ const HeaderButtons = () => {
     data: { data } = {},
   } = useQuery("myInfo", GetUser, {
     enabled: localStorage.getItem("AccessToken") ? true : false,
-    retry: false,
   });
 
   return (
@@ -21,7 +20,7 @@ const HeaderButtons = () => {
       {isSuccess ? (
         <>
           <Link to={"/my"} className="header-authBtn">
-            {data?.data.name}
+            {data.name}
           </Link>
           <div
             className="header-authBtn"

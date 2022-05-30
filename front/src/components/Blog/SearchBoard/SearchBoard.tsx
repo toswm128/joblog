@@ -11,11 +11,9 @@ const SearchBoard = () => {
     getSearchBlog(q)
   );
 
-  console.log(data);
-
   return (
     <SearchBoardContainer>
-      {data?.data && <BoardList blogList={data?.data} />}
+      {data && <BoardList blogList={data} />}
     </SearchBoardContainer>
   );
 };

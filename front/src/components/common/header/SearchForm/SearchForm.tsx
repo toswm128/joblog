@@ -21,7 +21,6 @@ const SearchForm = () => {
     isError,
     isSuccess,
   } = useQuery<any, AxiosError>(`search/${title}`, () => getSearchBlog(title), {
-    retry: false,
     enabled: false,
     onError: err => err.response?.status === 404 && setErrText(title),
   });
@@ -40,7 +39,7 @@ const SearchForm = () => {
 
   const selectSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault();
-    navigate(`/board/${data?.data[selectIdx].idx}`);
+    navigate(`/board/${data[selectIdx].idx}`);
     setIsModal(false);
     setSelectIdx(-1);
   };
@@ -51,14 +50,14 @@ const SearchForm = () => {
         setIsModal(false);
         break;
       case "ArrowDown":
-        selectIdx < data?.data.length - 1
+        selectIdx < data?.length - 1
           ? setSelectIdx(prev => prev + 1)
           : setSelectIdx(0);
         break;
       case "ArrowUp":
         selectIdx > 0
           ? setSelectIdx(prev => prev - 1)
-          : setSelectIdx(data?.data.length - 1);
+          : setSelectIdx(data?.length - 1);
         break;
       case "Enter":
         selectIdx >= 0 && selectSearch(e);
@@ -99,7 +98,7 @@ const SearchForm = () => {
       </SearchFormComponent>
       <SearchModal
         isError={isError}
-        autoSearch={data?.data}
+        autoSearch={data}
         isModal={isModal}
         errText={errText}
         selectIdx={selectIdx}

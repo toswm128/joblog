@@ -11,7 +11,7 @@ class BlogAPI {
   }
 
   async getBoard(idx: string | undefined) {
-    const result: AxiosResponse<board, any> = await axios.get(
+    const result: AxiosResponse<any, any> = await axios.get(
       `/blog/board?idx=${idx}`
     );
     return result;
