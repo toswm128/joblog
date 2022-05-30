@@ -1,4 +1,4 @@
-import { user } from "types/UserTypes/type";
+import { UserType } from "types/UserTypes/type";
 
 export type board = {
   data: data;
@@ -9,7 +9,7 @@ export type board = {
 export type data = {
   blog: blog;
   comments: comments;
-  user: user;
+  user: UserType;
   likes: likes;
 };
 
