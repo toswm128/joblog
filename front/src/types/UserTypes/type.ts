@@ -1,9 +1,13 @@
-export type userId = number | undefined;
+export type idx = number | undefined;
 export type name = string | undefined;
 export type profile = string | undefined;
 
 export type UserType = {
-  userId: userId;
+  idx: idx;
   name: name;
   profile: profile;
+};
+
+export type user = {
+  data: UserType;
 };

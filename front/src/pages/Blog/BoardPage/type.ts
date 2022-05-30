@@ -1,3 +1,5 @@
+import { user } from "types/UserTypes/type";
+
 export type board = {
   data: data;
   msg: string;
@@ -28,8 +30,6 @@ export type comment = {
   profile: string;
   regdate: string;
 };
-
-export type user = { name: string; profile: string };
 
 export type like = { userIdx: number };
 

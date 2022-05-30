@@ -1,4 +1,5 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { user } from "types/UserTypes/type";
 
 class AuthAPI {
   async Login(id: string, pwd: string) {
@@ -6,8 +7,8 @@ class AuthAPI {
     return result;
   }
 
-  async GetUser2Id() {
-    const result = await axios.get("user");
+  async GetUser() {
+    const result: AxiosResponse<user, any> = await axios.get("user");
     return result;
   }
 

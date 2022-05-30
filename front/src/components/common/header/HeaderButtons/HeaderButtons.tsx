@@ -4,14 +4,14 @@ import { useQuery, useQueryClient } from "react-query";
 import { Link } from "react-router-dom";
 
 const HeaderButtons = () => {
-  const { GetUser2Id } = new AuthAPI();
+  const { GetUser } = new AuthAPI();
   const queryClient = useQueryClient();
 
   const {
     isSuccess,
     isFetching,
     data: { data } = {},
-  } = useQuery("myInfo", GetUser2Id, {
+  } = useQuery("myInfo", GetUser, {
     enabled: localStorage.getItem("AccessToken") ? true : false,
     retry: false,
   });

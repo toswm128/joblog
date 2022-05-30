@@ -11,9 +11,9 @@ interface ICommentForm {
 }
 
 const CommentForm = ({ blogIdx }: ICommentForm) => {
-  const { GetUser2Id } = new AuthAPI();
+  const { GetUser } = new AuthAPI();
 
-  const { data: { data } = {} } = useQuery("myInfo", GetUser2Id);
+  const { data: { data } = {} } = useQuery("myInfo", GetUser);
 
   const { postComment } = new BlogAPI();
   const queryClient = useQueryClient();

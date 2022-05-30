@@ -24,8 +24,8 @@ const BoardHeader = ({
   likes,
 }: IBoardHeader) => {
   const { clickLike } = new BlogAPI();
-  const { GetUser2Id } = new AuthAPI();
-  const { data: { data } = {} } = useQuery("myInfo", GetUser2Id);
+  const { GetUser } = new AuthAPI();
+  const { data: { data } = {} } = useQuery("myInfo", GetUser);
   const [isLike, setIsLike] = useState(false);
   const queryClient = useQueryClient();
   const { mutate } = useMutation(() => clickLike(+idx, isLike), {

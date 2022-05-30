@@ -3,9 +3,9 @@ import { useQuery } from "react-query";
 import { MyInfoContainer } from "../MyStyle";
 
 const MyInfo = () => {
-  const { GetUser2Id } = new AuthAPI();
+  const { GetUser } = new AuthAPI();
 
-  const { data: { data } = {} } = useQuery("myInfo", GetUser2Id);
+  const { data: { data } = {} } = useQuery("myInfo", GetUser);
 
   return (
     <MyInfoContainer>
