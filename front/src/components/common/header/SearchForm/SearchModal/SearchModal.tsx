@@ -1,6 +1,6 @@
 import HearderSearchErr from "components/common/Error/HearderSearchErr";
 import { Link } from "react-router-dom";
-import { blog } from "Store/BlogStore/type";
+import { blog } from "types/BlogTypes/type";
 import { SearchDataList } from "../SearchFormStyled";
 
 interface ISearchModal {

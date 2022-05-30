@@ -10,6 +10,6 @@ export type blog = {
   views: number;
 };
 
-export type BlogStateType = {
+export type BlogType = {
   blogList: blog[];
 };

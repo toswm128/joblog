@@ -23,7 +23,6 @@ axios.interceptors.request.use(
     }
     config.headers["Authorization"] = token ? token : "";
 
-    console.log(config.headers["Authorization"]);
     return config;
   },
   err => {

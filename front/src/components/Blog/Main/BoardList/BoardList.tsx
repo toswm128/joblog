@@ -1,7 +1,7 @@
 import BoardItem from "components/Blog/Main/BoardList/BoardItem";
 import React from "react";
 import { Link } from "react-router-dom";
-import { blog } from "Store/BlogStore/type";
+import { blog } from "types/BlogTypes/type";
 
 interface IBoardList {
   blogList: blog[];

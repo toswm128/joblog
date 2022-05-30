@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import { BoardItemContainer, BoardItemContent } from "./BoardItemStyle";
 import heart from "assets/png/heart.png";
 import comment from "assets/png/comment.png";
-import { blog } from "Store/BlogStore/type";
+import { blog } from "types/BlogTypes/type";
 
 const BoardItem = memo(({ data }: { data: blog | undefined }) => {
   return (
