@@ -40,12 +40,6 @@ def create_blog_endpoints(app, services):
             idx = request.args.get('idx')
             board = blog_service.get_select_board(idx)
             return jsonify({'result':'success','data': board,'msg': 'blog 불러오기'})
-            
-    @app.route('/m',methods=['POST'])
-    def postMData():
-        if request.method == 'POST':
-            value = request.json
-            return jsonify({'result':'success'})
 
     @app.route('/image',methods=['GET'])
     def showImg():

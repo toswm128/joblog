@@ -32,3 +32,11 @@ class authService:
         userIdx = self.tools.get_data(token)['idx']
         user = self.auth_model.get_user_to_idx(userIdx)
         return {"idx":user["idx"],"id":user["id"],"name":user["name"],"profile":user["profile"]}
+
+
+    def patch_user_profile(self,url,token):
+        if url:
+            userIdx = self.tools.get_data(token)['idx']
+            self.auth_model.patch_user_profile(url,userIdx)
+            print(userIdx)
+            return 

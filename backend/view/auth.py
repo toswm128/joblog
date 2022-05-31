@@ -1,12 +1,15 @@
 from flask import request, jsonify
 import jwt
+import os
+from werkzeug.utils import secure_filename
+import uuid
 
 
 def create_auth_endpoints(app, services):
     user_service  = services.authServices
 
     @app.route('/login',methods=['POST'])
-    def loginPost():
+    def login():
         if request.method == 'POST':
             value = request.json
             loginUser = user_service.try_login(value['id'],value['password'])
@@ -33,8 +36,22 @@ def create_auth_endpoints(app, services):
     def getUserToId():
         if request.method == 'GET':
             token = request.headers['Authorization']
-            print("토큰:",token)
-            if(token == ""):
+            if not token:
                 return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,400
             userData = user_service.get_userData(token)
             return jsonify({'result':'success','data': userData,'msg': '유저 정보 가져오기'})
+
+    @app.route('/user/profile',methods=['PATCH'])
+    def patchUserProfile():
+        if request.method == 'PATCH':
+            token = request.headers['Authorization']
+            if not token:
+                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,400
+
+            file = request.files["profile"]
+            fileName = str(uuid.uuid4())+'.'+file.filename.split('.')[1]
+            file.save(os.path.join(app.config["IMAGE_UPLOADS"],fileName))
+            url = "http://localhost:5000/image?file="+fileName
+
+            user_service.patch_user_profile(url,token)
+            return jsonify({'result':'success','msg': '유저 프로필 사진 변경'})
