@@ -1,4 +1,4 @@
-import AuthAPI from "assets/API/AuthAPI";
+import useAuthAPI from "hooks/API/useAuthAPI";
 import { idReg, pwdReg } from "assets/regExp/authRegExp";
 import axios, { AxiosError } from "axios";
 import Modal from "components/common/Modal";
@@ -15,7 +15,7 @@ const Login = () => {
   const [pwd, setPwd] = useState("");
 
   const navigate = useNavigate();
-  const { Login } = new AuthAPI();
+  const { Login } = useAuthAPI();
   const { isModal, showModal, closeModal, status } = useModal(false);
 
   const quetClient = useQueryClient();

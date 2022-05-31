@@ -1,9 +1,9 @@
-import AuthAPI from "assets/API/AuthAPI";
+import useAuthAPI from "hooks/API/useAuthAPI";
 import { useQuery } from "react-query";
 import { MyInfoContainer } from "../MyStyle";
 
 const MyInfo = () => {
-  const { GetUser } = new AuthAPI();
+  const { GetUser } = useAuthAPI();
 
   const { data: { data } = {} } = useQuery("myInfo", GetUser, {
     select: data => data.data,

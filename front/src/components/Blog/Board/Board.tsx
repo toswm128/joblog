@@ -1,4 +1,4 @@
-import BlogAPI from "assets/API/BlogAPI";
+import useBlogAPI from "assets/API/useBlogAPI";
 import { useQuery } from "react-query";
 import BoardContext from "./BoardContext";
 import { BoardContainer, BoardContent } from "./BoardStyle";
@@ -19,7 +19,7 @@ interface IBoard {
 const Board = ({ idx }: IBoard) => {
   const { isModal, showModal } = useModal(false);
   const navigate = useNavigate();
-  const { getBoard } = new BlogAPI();
+  const { getBoard } = useBlogAPI();
   const { isLoading, data: { data: board } = {} } = useQuery(
     `board/${idx}`,
     () => getBoard(idx),
@@ -27,7 +27,6 @@ const Board = ({ idx }: IBoard) => {
       onError: () => showModal(),
     }
   );
-
 
   return (
     <BoardContainer>

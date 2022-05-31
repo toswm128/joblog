@@ -1,4 +1,4 @@
-import AuthAPI from "assets/API/AuthAPI";
+import useAuthAPI from "hooks/API/useAuthAPI";
 import { idReg, nameReg, pwdReg } from "assets/regExp/authRegExp";
 import Modal from "components/common/Modal";
 import { AuthButton } from "components/common/styleObject/ButtonStyle";
@@ -16,7 +16,7 @@ const Join = () => {
 
   const { isModal, showModal, closeModal, status } = useModal(false);
 
-  const { Join } = new AuthAPI();
+  const { Join } = useAuthAPI();
   const navigate = useNavigate();
 
   const { mutate } = useMutation(() => Join(id, pwd, name), {

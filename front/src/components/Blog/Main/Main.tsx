@@ -1,4 +1,4 @@
-import BlogAPI from "assets/API/BlogAPI";
+import useBlogAPI from "assets/API/useBlogAPI";
 import MainLoader from "components/common/Loader/MainLoader";
 import Modal from "components/common/Modal";
 import useModal from "hooks/modal";
@@ -8,7 +8,7 @@ import BoardList from "./BoardList";
 import { MainContainer } from "./MainPageStyle";
 
 const Main = () => {
-  const { getBlog } = new BlogAPI();
+  const { getBlog } = useBlogAPI();
   const { isModal, showModal, closeModal } = useModal(false);
   const navigate = useNavigate();
 

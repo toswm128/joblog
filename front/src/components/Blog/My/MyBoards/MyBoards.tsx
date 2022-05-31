@@ -1,12 +1,12 @@
 import { useQuery } from "react-query";
 
-import BlogAPI from "assets/API/BlogAPI";
+import useBlogAPI from "assets/API/useBlogAPI";
 
 import BoardList from "components/Blog/Main/BoardList";
 import { MyBoardsContainer } from "../MyStyle";
 
 const MyBoards = () => {
-  const { getBlog } = new BlogAPI();
+  const { getBlog } = useBlogAPI();
   const { data: { data } = {} } = useQuery("getBoard", getBlog);
   return (
     <MyBoardsContainer>

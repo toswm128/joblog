@@ -1,10 +1,10 @@
-import AuthAPI from "assets/API/AuthAPI";
+import useAuthAPI from "hooks/API/useAuthAPI";
 import axios from "axios";
 import { useQuery, useQueryClient } from "react-query";
 import { Link } from "react-router-dom";
 
 const HeaderButtons = () => {
-  const { GetUser } = new AuthAPI();
+  const { GetUser } = useAuthAPI();
   const queryClient = useQueryClient();
 
   const {

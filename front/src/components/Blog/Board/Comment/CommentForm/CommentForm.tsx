@@ -1,5 +1,5 @@
-import AuthAPI from "assets/API/AuthAPI";
-import BlogAPI from "assets/API/BlogAPI";
+import useAuthAPI from "hooks/API/useAuthAPI";
+import useBlogAPI from "assets/API/useBlogAPI";
 import { WriteButton } from "components/common/styleObject/ButtonStyle";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
@@ -11,11 +11,11 @@ interface ICommentForm {
 }
 
 const CommentForm = ({ blogIdx }: ICommentForm) => {
-  const { GetUser } = new AuthAPI();
+  const { GetUser } = useAuthAPI();
 
   const { data: { data } = {} } = useQuery("myInfo", GetUser);
 
-  const { postComment } = new BlogAPI();
+  const { postComment } = useBlogAPI();
   const queryClient = useQueryClient();
   const [commentText, setCommentText] = useState("");
   return (

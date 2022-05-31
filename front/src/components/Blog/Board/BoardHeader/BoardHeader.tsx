@@ -1,5 +1,5 @@
-import AuthAPI from "assets/API/AuthAPI";
-import BlogAPI from "assets/API/BlogAPI";
+import useAuthAPI from "hooks/API/useAuthAPI";
+import useBlogAPI from "assets/API/useBlogAPI";
 import heart from "assets/png/heart.png";
 import unHeart from "assets/png/unHeart.png";
 import { likes } from "pages/Blog/BoardPage/type";
@@ -23,8 +23,8 @@ const BoardHeader = ({
   regdate,
   likes,
 }: IBoardHeader) => {
-  const { clickLike } = new BlogAPI();
-  const { GetUser } = new AuthAPI();
+  const { clickLike } = useBlogAPI();
+  const { GetUser } = useAuthAPI();
   const { data: { data } = {} } = useQuery("myInfo", GetUser);
   const [isLike, setIsLike] = useState(false);
   const queryClient = useQueryClient();

@@ -1,4 +1,4 @@
-import BlogAPI from "assets/API/BlogAPI";
+import useBlogAPI from "assets/API/useBlogAPI";
 import { AxiosError } from "axios";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
@@ -9,7 +9,7 @@ import SearchModal from "./SearchModal";
 const SearchForm = () => {
   const [title, setTitle] = useState("");
   const [timer, setTimer] = useState<NodeJS.Timeout>();
-  const { getSearchBlog } = new BlogAPI();
+  const { getSearchBlog } = useBlogAPI();
   const [isModal, setIsModal] = useState(false);
   const [errText, setErrText] = useState("");
   const [selectIdx, setSelectIdx] = useState(-1);

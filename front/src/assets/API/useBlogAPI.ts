@@ -2,21 +2,21 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { board } from "pages/Blog/BoardPage/type";
 import { banner } from "Store/WriteEditorStore/type";
 
-class BlogAPI {
-  async getBlog() {
+const useBlogAPI = () => {
+  const getBlog = async () => {
     const result = await axios.get("/");
     if (result.status === 200) {
       return result;
     }
-  }
+  };
 
-  async getBoard(idx: string | undefined) {
+  const getBoard = async (idx: string | undefined) => {
     const result: AxiosResponse<any, any> = await axios.get(
       `/blog/board?idx=${idx}`
     );
     return result;
-  }
-  async postBoard(dom: any, title: string, banner: banner) {
+  };
+  const postBoard = async (dom: any, title: string, banner: banner) => {
     const formData = new FormData();
     formData.append("context", JSON.stringify(dom).replaceAll("\\n", "\\\\n"));
     formData.append("title", title);
@@ -37,9 +37,9 @@ class BlogAPI {
           console.log("토큰 없음");
       }
     }
-  }
+  };
 
-  async postComment(blogId: number, text: string) {
+  const postComment = async (blogId: number, text: string) => {
     try {
       const result: AxiosResponse<board, any> = await axios.post(
         `/blog/comment`,
@@ -62,9 +62,9 @@ class BlogAPI {
           console.log("토큰 없음");
       }
     }
-  }
+  };
 
-  async clickLike(blogId: number, isLike: boolean) {
+  const clickLike = async (blogId: number, isLike: boolean) => {
     try {
       const result = await axios.post(`/blog/likes`, { blogId, isLike });
       if (result.status === 200) {
@@ -81,12 +81,21 @@ class BlogAPI {
           console.log("토큰 없음");
       }
     }
-  }
+  };
 
-  async getSearchBlog(title: string | undefined) {
+  const getSearchBlog = async (title: string | undefined) => {
     const result = await axios.get(`/blog/search?title=${title}`);
     return result;
-  }
-}
+  };
 
-export default BlogAPI;
+  return {
+    getBlog,
+    getBoard,
+    postBoard,
+    postComment,
+    clickLike,
+    getSearchBlog,
+  };
+};
+
+export default useBlogAPI;

@@ -1,4 +1,4 @@
-import BlogAPI from "assets/API/BlogAPI";
+import useBlogAPI from "assets/API/useBlogAPI";
 import useWrite from "hooks/write";
 import { useCallback } from "react";
 import { useQueryClient } from "react-query";
@@ -10,7 +10,7 @@ const EditorList = () => {
   const { WriteEditorState, unsetImg } = useWrite();
   const { body, head, title, banner } = WriteEditorState;
   const dom: any = [];
-  const { postBoard } = new BlogAPI();
+  const { postBoard } = useBlogAPI();
   const queryClient = useQueryClient();
 
   const tagTranslator = useCallback(
