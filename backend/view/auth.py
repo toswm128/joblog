@@ -48,10 +48,17 @@ def create_auth_endpoints(app, services):
             if not token:
                 return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,400
 
-            file = request.files["profile"]
-            fileName = str(uuid.uuid4())+'.'+file.filename.split('.')[1]
-            file.save(os.path.join(app.config["IMAGE_UPLOADS"],fileName))
-            url = "http://localhost:5000/image?file="+fileName
 
-            user_service.patch_user_profile(url,token)
-            return jsonify({'result':'success','msg': '유저 프로필 사진 변경'})
+            src = request.form
+            if src:
+                user_service.patch_user_profile(src['profile'],token)
+
+                return jsonify({'result':'success','msg': '유저 프로필 사진 변경'})
+            else:
+                file = request.files['profile']
+                fileName = str(uuid.uuid4())+'.'+file.filename.split('.')[1]
+                file.save(os.path.join(app.config["IMAGE_UPLOADS"],fileName))
+                url = "http://localhost:5000/image?file="+fileName
+
+                user_service.patch_user_profile(url,token)
+                return jsonify({'result':'success','msg': '유저 프로필 사진 변경'})

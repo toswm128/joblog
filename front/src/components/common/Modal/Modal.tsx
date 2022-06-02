@@ -28,8 +28,8 @@ const Modal = ({
           <ModalCard>
             <h2>{title}</h2>
             <span>{children}</span>
-            <button>
-              <div onClick={btnClick}>{buttonText}</div>
+            <button onClick={btnClick}>
+              <div>{buttonText}</div>
             </button>
           </ModalCard>
         </ModalContainer>

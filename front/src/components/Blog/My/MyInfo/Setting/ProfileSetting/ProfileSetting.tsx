@@ -28,11 +28,16 @@ const ProfileSetting = () => {
       <Modal
         isModal={isModal}
         title={"프로필 사진 변경 "}
-        buttonText={src ? "변경" : "기본 프로필 사진 사용"}
+        buttonText={src ? "변경" : "기본 프로필로 변경"}
         backgroundClick={closeModal}
         btnClick={() => {
           const form = new FormData();
-          file && form.append("profile", file);
+          file
+            ? form.append("profile", file)
+            : form.append(
+                "profile",
+                "http://localhost:5000/image?file=user.png"
+              );
           mutate(form);
           closeModal();
         }}
