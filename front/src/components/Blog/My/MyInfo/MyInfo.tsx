@@ -1,7 +1,7 @@
 import useAuthAPI from "hooks/API/useAuthAPI";
 import { useQuery } from "react-query";
 import { MyInfoContainer } from "../MyStyle";
-import ProfileSetting from "./Setting";
+import ProfileSetting from "./Setting/ProfileSetting";
 
 const MyInfo = () => {
   const { GetUser } = useAuthAPI();

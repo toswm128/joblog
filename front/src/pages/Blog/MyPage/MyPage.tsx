@@ -4,7 +4,7 @@ import { useIsFetching } from "react-query";
 
 const MyPage = () => {
   const isFetching = useIsFetching();
-  console.log(isFetching);
+
   return <>{isFetching ? <Loader /> : <My />}</>;
 };
 

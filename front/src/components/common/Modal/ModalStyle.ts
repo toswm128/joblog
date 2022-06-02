@@ -17,9 +17,11 @@ export const ModalContainer = styled.div`
 
 export const ModalCard = styled.div`
   width: 615px;
-  height: 335px;
+  min-height: 335px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  row-gap: 50px;
+  padding: 15px 0;
   align-items: center;
   flex-direction: column;
   background-color: white;
