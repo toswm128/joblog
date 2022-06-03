@@ -37,7 +37,7 @@ def create_auth_endpoints(app, services):
         if request.method == 'GET':
             token = request.headers['Authorization']
             if not token:
-                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,400
+                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,403
             userData = user_service.get_userData(token)
             return jsonify({'result':'success','data': userData,'msg': '유저 정보 가져오기'})
 
@@ -46,7 +46,7 @@ def create_auth_endpoints(app, services):
         if request.method == 'PATCH':
             token = request.headers['Authorization']
             if not token:
-                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,400
+                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,403
 
 
             src = request.form
@@ -62,3 +62,17 @@ def create_auth_endpoints(app, services):
 
                 user_service.patch_user_profile(url,token)
                 return jsonify({'result':'success','msg': '유저 프로필 사진 변경'})
+    
+    @app.route('/user/name',methods=['PATCH'])
+    def patchUserName():
+        if request.method == 'PATCH':
+            token = request.headers['Authorization']
+            if not token:
+                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,403
+        
+            body = request.json
+            print(body)
+
+            user_service.patch_user_name(body,token)
+
+            return jsonify({'result':'success','msg': '유저 이름 변경'})

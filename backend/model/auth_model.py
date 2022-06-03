@@ -40,6 +40,14 @@ class authModel:
         cursor = db.cursor()
         sql = '''UPDATE user SET `profile` = '%s' WHERE (`idx` = %s);''' % (url,userIdx)
         cursor.execute(sql)
-        print(sql)
+        db.commit()
+        db.close()
+
+    
+    def patch_user_name(self,name,userIdx):
+        db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+        cursor = db.cursor()
+        sql = '''UPDATE user SET `name` = '%s' WHERE (`idx` = %s);''' % (name,userIdx)
+        cursor.execute(sql)
         db.commit()
         db.close()
