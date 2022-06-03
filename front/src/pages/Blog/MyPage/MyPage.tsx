@@ -3,9 +3,7 @@ import Loader from "components/common/Loader";
 import { useIsFetching } from "react-query";
 
 const MyPage = () => {
-  const isFetching = useIsFetching();
-
-  return <>{isFetching ? <Loader /> : <My />}</>;
+  return <My />;
 };
 
 export default MyPage;

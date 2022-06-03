@@ -1,23 +1,30 @@
+import Loader from "components/common/Loader";
 import useAuthAPI from "hooks/API/useAuthAPI";
-import { useQuery } from "react-query";
+import { useIsFetching, useQuery } from "react-query";
 import { MyInfoContainer } from "../MyStyle";
 import ProfileSetting from "./Setting/ProfileSetting";
 
 const MyInfo = () => {
   const { GetUser } = useAuthAPI();
 
+  const isFetchingGetBoard = useIsFetching("getBoard");
+
   const { data: { data } = {} } = useQuery("myInfo", GetUser, {
-    select: data => data.data,
+    onError: err => console.log("err"),
   });
 
   return (
-    <MyInfoContainer>
-      <img src={data?.profile} alt="" />
-      <div>
-        <h2>{data?.name}</h2>
-      </div>
-      <ProfileSetting />
-    </MyInfoContainer>
+    <>
+      {!isFetchingGetBoard && (
+        <MyInfoContainer>
+          <img src={data?.profile} alt="" />
+          <div>
+            <h2>{data?.name}</h2>
+          </div>
+          <ProfileSetting />
+        </MyInfoContainer>
+      )}
+    </>
   );
 };
 
