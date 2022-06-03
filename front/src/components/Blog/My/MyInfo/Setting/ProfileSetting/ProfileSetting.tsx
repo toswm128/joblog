@@ -4,6 +4,7 @@ import useAuthAPI from "hooks/API/useAuthAPI";
 import useModal from "hooks/modal";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
+import { ModalShowButton } from "../SettingStyle";
 
 const ProfileSetting = () => {
   const { PatchMyProfile } = useAuthAPI();
@@ -68,16 +69,6 @@ const ProfileSetting = () => {
     </div>
   );
 };
-
-const ModalShowButton = styled.div`
-  font-size: 1.1rem;
-  border-bottom: 1px solid #c4c4c4;
-  padding: 5px 0;
-  cursor: pointer;
-  &:hover {
-    background-color: #c4c4c4;
-  }
-`;
 
 const ModalContent = styled.div`
   & > label {

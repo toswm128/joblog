@@ -21,7 +21,12 @@ const useAuthAPI = () => {
     return result;
   };
 
-  return { Login, GetUser, Join, PatchMyProfile };
+  const PatchMyName = async (name: string) => {
+    const result = await axios.patch("user/name", { name });
+    return result;
+  };
+
+  return { Login, GetUser, Join, PatchMyProfile, PatchMyName };
 };
 
 export default useAuthAPI;

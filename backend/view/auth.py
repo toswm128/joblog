@@ -71,7 +71,7 @@ def create_auth_endpoints(app, services):
                 return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,403
         
             body = request.json
-            print(body)
+
 
             user_service.patch_user_name(body,token)
 
