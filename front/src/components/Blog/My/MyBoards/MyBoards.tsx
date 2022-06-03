@@ -8,10 +8,11 @@ import Modal from "components/common/Modal";
 import useModal from "hooks/modal";
 import { useNavigate } from "react-router-dom";
 import Loader from "components/common/Loader";
+import MainLoader from "components/common/Loader/MainLoader";
 
 const MyBoards = () => {
   const { getBlog } = useBlogAPI();
-  const { data: { data } = {} } = useQuery("getBoard", getBlog, {
+  const { data: { data } = {}, isFetching } = useQuery("getBoard", getBlog, {
     onError: () => showModal(),
   });
 
@@ -22,9 +23,11 @@ const MyBoards = () => {
   const navigate = useNavigate();
 
   return (
-    <>
-      {!isFetchingMyInfo && (
-        <MyBoardsContainer>
+    <MyBoardsContainer>
+      {isFetching || isFetchingMyInfo ? (
+        <MainLoader />
+      ) : (
+        <>
           {data && <BoardList blogList={data} />}
           <Modal
             isModal={isModal}
@@ -37,9 +40,9 @@ const MyBoards = () => {
               <div>error</div>
             </>
           </Modal>
-        </MyBoardsContainer>
+        </>
       )}
-    </>
+    </MyBoardsContainer>
   );
 };
 

@@ -1,4 +1,5 @@
 import BoardItem from "components/Blog/Main/BoardList/BoardItem";
+import MainLoader from "components/common/Loader/MainLoader";
 import React from "react";
 import { Link } from "react-router-dom";
 import { blog } from "types/BlogTypes/type";
@@ -15,6 +16,7 @@ const BoardList = ({ blogList }: IBoardList) => {
           <BoardItem data={current} />
         </Link>
       ))}
+      <MainLoader />
     </>
   );
 };
