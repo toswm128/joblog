@@ -2,8 +2,7 @@ import Loader from "components/common/Loader";
 import useAuthAPI from "hooks/API/useAuthAPI";
 import { useIsFetching, useQuery } from "react-query";
 import { MyInfoContainer } from "../MyStyle";
-import NameSetting from "./Setting/NameSetting";
-import ProfileSetting from "./Setting/ProfileSetting";
+import Settings from "./Settings";
 
 const MyInfoLoader = () => {
   return (
@@ -12,7 +11,7 @@ const MyInfoLoader = () => {
       <div>
         <h2></h2>
       </div>
-      <ProfileSetting />
+      <Settings />
     </>
   );
 };
@@ -37,8 +36,7 @@ const MyInfo = () => {
             <div>
               <h2>{data?.name}</h2>
             </div>
-            <NameSetting />
-            <ProfileSetting />
+            <Settings />
           </>
         )}
       </MyInfoContainer>
