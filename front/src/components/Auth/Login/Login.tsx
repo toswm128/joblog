@@ -29,7 +29,6 @@ const Login = () => {
       navigate("/");
     },
     onError: (error: AxiosError) => {
-      console.log(id);
       showModal(error.response?.status);
     },
   });
@@ -72,6 +71,7 @@ const Login = () => {
           {status === 404 && "존재하지 않는 아이디 입니다"}
           {status === 1 && "조건에 맞지 않는 항목이 있습니다"}
           {status >= 500 && "서버 에러"}
+          {status === 0 && "인터넷 상태가 불안정 합니다."}
         </>
       </Modal>
     </>
