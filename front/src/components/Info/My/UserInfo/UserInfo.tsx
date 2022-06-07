@@ -4,30 +4,34 @@ import Settings from "./Settings";
 
 export const UserInfoLoader = () => {
   return (
-    <InfoComponent>
+    <>
       <img style={{ backgroundColor: "#c4c4c4" }} />
       <div>
         <h2></h2>
       </div>
-      <Settings />
-    </InfoComponent>
+    </>
   );
 };
 
 interface IUserInfo {
+  isFetching: boolean;
   info: UserType;
 }
 
-const UserInfo = ({ info }: IUserInfo) => {
+const UserInfo = ({ isFetching, info }: IUserInfo) => {
   return (
     <InfoComponent>
-      <>
-        <img src={info?.profile} alt="" />
-        <div>
-          <h2>{info?.name}</h2>
-        </div>
-        <Settings />
-      </>
+      {isFetching ? (
+        <UserInfoLoader />
+      ) : (
+        <>
+          <img src={info?.profile} alt="" />
+          <div>
+            <h2>{info?.name}</h2>
+          </div>
+          <Settings />
+        </>
+      )}
     </InfoComponent>
   );
 };

@@ -3,22 +3,19 @@ import MainLoader from "components/common/Loader/MainLoader";
 import { blog } from "types/BlogTypes/type";
 import { UserBoardsContainer } from "../../InfoStyle";
 
-export const UserBoardsLoader = () => {
-  return (
-    <UserBoardsContainer>
-      <MainLoader />
-    </UserBoardsContainer>
-  );
-};
-
 interface IUserBoards {
+  isFetching: boolean;
   borders: blog[];
 }
 
-const UserBoards = ({ borders }: IUserBoards) => {
+const UserBoards = ({ isFetching, borders }: IUserBoards) => {
   return (
     <UserBoardsContainer>
-      {borders && <BoardList blogList={borders} />}
+      {isFetching ? (
+        <MainLoader />
+      ) : (
+        <>{borders && <BoardList blogList={borders} />}</>
+      )}
     </UserBoardsContainer>
   );
 };

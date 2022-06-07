@@ -1,5 +1,5 @@
-import UserBoards, { UserBoardsLoader } from "./UserBoards";
-import UserInfo, { UserInfoLoader } from "./UserInfo";
+import UserBoards from "./UserBoards";
+import UserInfo from "./UserInfo";
 import { InfoContainer } from "../InfoStyle";
 import useAuthAPI from "hooks/API/useAuthAPI";
 import useBlogAPI from "assets/API/useBlogAPI";
@@ -31,17 +31,15 @@ const My = () => {
     useQuery("getMyBoard", getMyBoard);
   return (
     <InfoContainer>
-      {isMyInfoFetching || isBoardFetching || isMyInfoError ? (
-        <>
-          <UserInfoLoader />
-          <UserBoardsLoader />
-        </>
-      ) : (
-        <>
-          <UserInfo info={myInfo} />
-          <UserBoards borders={myBoard} />
-        </>
-      )}
+      <UserInfo
+        isFetching={isMyInfoFetching || isBoardFetching || isMyInfoError}
+        info={myInfo}
+      />
+      <UserBoards
+        isFetching={isMyInfoFetching || isBoardFetching || isMyInfoError}
+        borders={myBoard}
+      />
+
       <Modal
         isModal={isModal}
         title={"Error"}
