@@ -1,13 +1,13 @@
 import MyBoards from "./MyBoards";
 import MyInfo from "./MyInfo";
-import { MyContainer } from "./MyStyle";
+import { InfoContainer } from "../InfoStyle";
 
 const My = () => {
   return (
-    <MyContainer>
+    <InfoContainer>
       <MyInfo />
       <MyBoards />
-    </MyContainer>
+    </InfoContainer>
   );
 };
 

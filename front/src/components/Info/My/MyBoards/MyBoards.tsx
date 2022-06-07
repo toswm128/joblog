@@ -3,7 +3,7 @@ import { useIsFetching, useQuery } from "react-query";
 import useBlogAPI from "assets/API/useBlogAPI";
 
 import BoardList from "components/Blog/Main/BoardList";
-import { MyBoardsContainer } from "../MyStyle";
+import { UserBoardsContainer } from "../../InfoStyle";
 import Modal from "components/common/Modal";
 import useModal from "hooks/modal";
 import { useNavigate } from "react-router-dom";
@@ -21,13 +21,13 @@ const MyBoards = () => {
   const isFetchingMyInfo = useIsFetching("myInfo");
 
   return (
-    <MyBoardsContainer>
+    <UserBoardsContainer>
       {isFetching || isFetchingMyInfo || isError ? (
         <MainLoader />
       ) : (
         <>{data && <BoardList blogList={data} />}</>
       )}
-    </MyBoardsContainer>
+    </UserBoardsContainer>
   );
 };
 

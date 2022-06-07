@@ -6,8 +6,9 @@ import BoardPage from "pages/Blog/BoardPage";
 import JoinPage from "pages/Auth/JoinPage";
 import WritePage from "pages/Blog/WritePage";
 import Header from "components/common/header";
-import MyPage from "pages/Blog/MyPage";
+import MyPage from "pages/Info/MyPage";
 import SearchBoardPage from "pages/Blog/SearchBoardPage";
+import UserPage from "pages/Info/UserPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/join" element={<JoinPage />} />
         <Route path="/write" element={<WritePage />} />
         <Route path="/my" element={<MyPage />} />
+        <Route path="/user/:userIdx" element={<UserPage />} />
         <Route path="/search/:q" element={<SearchBoardPage />} />
       </Routes>
     </Router>

@@ -4,10 +4,10 @@ import useAuthAPI from "hooks/API/useAuthAPI";
 import useModal from "hooks/modal";
 import { useIsFetching, useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { MyInfoContainer } from "../MyStyle";
+import { InfoComponent } from "../../InfoStyle";
 import Settings from "./Settings";
 
-const MyInfoLoader = () => {
+const InfoLoader = () => {
   return (
     <>
       <img style={{ backgroundColor: "#c4c4c4" }} />
@@ -41,9 +41,9 @@ const MyInfo = () => {
 
   return (
     <>
-      <MyInfoContainer>
+      <InfoComponent>
         {isFetchingGetBoard || isFetching || isError ? (
-          <MyInfoLoader />
+          <InfoLoader />
         ) : (
           <>
             <img src={data?.profile} alt="" />
@@ -53,7 +53,7 @@ const MyInfo = () => {
             <Settings />
           </>
         )}
-      </MyInfoContainer>
+      </InfoComponent>
       <Modal
         isModal={isModal}
         title={"Error"}

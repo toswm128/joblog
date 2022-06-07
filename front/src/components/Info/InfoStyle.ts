@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 
-export const MyContainer = styled.div`
+export const InfoContainer = styled.div`
   /* 레이아웃 */
   display: flex;
   justify-content: space-between;
 `;
 
-export const MyBoardsContainer = styled.div`
+export const UserBoardsContainer = styled.div`
   display: flex;
   max-width: 1006px;
   margin: 0 auto 0 auto;
@@ -24,7 +24,7 @@ export const MyBoardsContainer = styled.div`
   }
 `;
 
-export const MyInfoContainer = styled.div`
+export const InfoComponent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
