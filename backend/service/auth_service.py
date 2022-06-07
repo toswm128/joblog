@@ -28,8 +28,12 @@ class authService:
         else:
             return 400
 
-    def get_userData(self,token):
+    def get_my_info(self,token):
         userIdx = self.tools.get_data(token)['idx']
+        user = self.auth_model.get_user_to_idx(userIdx)
+        return {"idx":user["idx"],"id":user["id"],"name":user["name"],"profile":user["profile"]}
+
+    def get_user_info(self,userIdx):
         user = self.auth_model.get_user_to_idx(userIdx)
         return {"idx":user["idx"],"id":user["id"],"name":user["name"],"profile":user["profile"]}
 

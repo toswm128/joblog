@@ -36,9 +36,13 @@ def create_auth_endpoints(app, services):
     def getUserToId():
         if request.method == 'GET':
             token = request.headers['Authorization']
+            userIdx = request.args.get('userIdx')
             if not token:
                 return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,403
-            userData = user_service.get_userData(token)
+            elif userIdx:
+                userData = user_service.get_user_info(userIdx)
+            else:
+                userData = user_service.get_my_info(token)
             return jsonify({'result':'success','data': userData,'msg': '유저 정보 가져오기'})
 
     @app.route('/user/profile',methods=['PATCH'])

@@ -1,5 +1,4 @@
 import { AxiosError } from "axios";
-import Loader from "components/common/Loader";
 import Modal from "components/common/Modal";
 import useAuthAPI from "hooks/API/useAuthAPI";
 import useModal from "hooks/modal";
