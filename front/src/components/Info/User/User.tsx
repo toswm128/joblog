@@ -1,8 +1,11 @@
+import { InfoContainer } from "../InfoStyle";
+import UserInfo from "./UserInfo";
+
 const User = () => {
   return (
-    <>
-      <div>a</div>
-    </>
+    <InfoContainer>
+      <UserInfo />
+    </InfoContainer>
   );
 };
 
