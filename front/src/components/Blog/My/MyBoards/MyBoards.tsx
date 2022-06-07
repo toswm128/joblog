@@ -11,12 +11,12 @@ import Loader from "components/common/Loader";
 import MainLoader from "components/common/Loader/MainLoader";
 
 const MyBoards = () => {
-  const { getBlog } = useBlogAPI();
+  const { getMyBoard } = useBlogAPI();
   const {
     data: { data } = {},
     isFetching,
     isError,
-  } = useQuery("getBoard", getBlog);
+  } = useQuery("getBoard", getMyBoard);
 
   const isFetchingMyInfo = useIsFetching("myInfo");
 
