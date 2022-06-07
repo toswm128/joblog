@@ -89,3 +89,13 @@ def create_blog_endpoints(app, services):
                 return jsonify({"msg":"검색 결과 없음"}),404
             else:
                 return jsonify({'result':'success','data':searchData,'msg': '댓글 작성'})
+    
+
+    @app.route('/blog/user',methods=['GET'])
+    def userBoard():
+        if request.method == 'GET':
+            token = request.headers['Authorization']
+            if(token == ""):
+                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,403
+            userBoard = blog_service.get_board_to_userIdx(token)
+            return jsonify({'result':'success','msg': 'userBoard 가져오기 성공', 'data':userBoard})
