@@ -51,9 +51,12 @@ class blogService:
         else:
             return 400
     
-    def get_board_to_userIdx(self,token):
+    def get_my_board(self,token):
         userIdx = self.tools.get_data(token)['idx']
         userBoard = self.blog_model.get_board_to_userIdx(userIdx)
         return userBoard
 
+    def get_ussr_board(self,userIdx):
+        userBoard = self.blog_model.get_board_to_userIdx(userIdx)
+        return userBoard
             

@@ -95,7 +95,11 @@ def create_blog_endpoints(app, services):
     def userBoard():
         if request.method == 'GET':
             token = request.headers['Authorization']
+            userIdx = request.args.get('userIdx')
             if(token == ""):
                 return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,403
-            userBoard = blog_service.get_board_to_userIdx(token)
+            elif userIdx:
+                userBoard = blog_service.get_ussr_board(userIdx)
+            else:
+                userBoard = blog_service.get_my_board(token)
             return jsonify({'result':'success','msg': 'userBoard 가져오기 성공', 'data':userBoard})

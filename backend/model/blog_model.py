@@ -114,7 +114,7 @@ class blogModel:
     def get_board_to_userIdx(self,userIdx):
         db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
         cursor = db.cursor(pymysql.cursors.DictCursor)
-        sql = '''select * from blog where userIdx = %d;''' % userIdx
+        sql = '''select * from blog where userIdx = %s;''' % userIdx
         cursor.execute(sql)
         result = cursor.fetchall()
         db.close()
