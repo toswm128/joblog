@@ -16,7 +16,7 @@ const MyBoards = () => {
     data: { data } = {},
     isFetching,
     isError,
-  } = useQuery("getBoard", getMyBoard);
+  } = useQuery("getMyBoard", getMyBoard);
 
   const isFetchingMyInfo = useIsFetching("myInfo");
 
