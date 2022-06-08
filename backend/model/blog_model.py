@@ -35,7 +35,7 @@ class blogModel:
         result['comments'] = comment_data
         result['likes'] = likes_data
         
-        userSql = '''select name, profile from user where idx = %d;''' % int(result['blog']['userIdx'])
+        userSql = '''select idx, name, profile from user where idx = %d;''' % int(result['blog']['userIdx'])
         cursor.execute(userSql)
         user_data = cursor.fetchone()
         result['user'] = user_data

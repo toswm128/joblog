@@ -28,6 +28,8 @@ const Board = ({ idx }: IBoard) => {
     }
   );
 
+  console.log(board);
+
   return (
     <BoardContainer>
       {!isLoading && board ? (
@@ -36,6 +38,7 @@ const Board = ({ idx }: IBoard) => {
           <BoardContent>
             <BoardHeader
               idx={idx}
+              userIdx={board.user.idx}
               title={board.blog.title}
               profile={board.user.profile}
               name={board.user.name}

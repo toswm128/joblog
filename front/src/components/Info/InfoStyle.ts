@@ -12,6 +12,9 @@ export const UserBoardsContainer = styled.div`
   margin: 0 auto 0 auto;
   flex-wrap: wrap;
   gap: 23px;
+  & > a {
+    color: black;
+  }
 
   /* @media (max-width: 1658px) {
     max-width: 1006px;

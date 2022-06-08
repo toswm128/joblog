@@ -5,10 +5,12 @@ import unHeart from "assets/png/unHeart.png";
 import { likes } from "pages/Blog/BoardPage/type";
 import { useCallback, useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import Profile from "components/common/Profile";
 
 interface IBoardHeader {
   idx: string;
   title: string;
+  userIdx: number;
   profile: string;
   name: string;
   regdate: string;
@@ -17,6 +19,7 @@ interface IBoardHeader {
 
 const BoardHeader = ({
   idx,
+  userIdx,
   title,
   profile,
   name,
@@ -52,11 +55,12 @@ const BoardHeader = ({
     <>
       <div className="title">{title}</div>
       <div className="info">
-        <div className="profil">
-          <img className="profilImg" src={profile} alt="" />
-          <h4>{name}</h4>
-          <p>{regdate}</p>
-        </div>
+        <Profile
+          userIdx={userIdx}
+          name={name}
+          profile={profile}
+          regdate={regdate}
+        />
         <img src={isLike ? heart : unHeart} alt="" onClick={onClickLike} />
         <div>{likes.length}</div>
       </div>
