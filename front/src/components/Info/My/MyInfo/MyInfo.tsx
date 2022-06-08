@@ -1,14 +1,15 @@
-import { user, UserType } from "types/UserTypes/type";
+import { UserType } from "types/UserTypes/type";
 import { InfoComponent } from "../../InfoStyle";
 import Settings from "./Settings";
 
-export const UserInfoLoader = () => {
+export const MyInfoLoader = () => {
   return (
     <>
       <img style={{ backgroundColor: "#c4c4c4" }} />
       <div>
         <h2></h2>
       </div>
+      <Settings />
     </>
   );
 };
@@ -18,11 +19,11 @@ interface IUserInfo {
   info: UserType;
 }
 
-const UserInfo = ({ isFetching, info }: IUserInfo) => {
+const MyInfo = ({ isFetching, info }: IUserInfo) => {
   return (
     <InfoComponent>
       {isFetching ? (
-        <UserInfoLoader />
+        <MyInfoLoader />
       ) : (
         <>
           <img src={info?.profile} alt="" />
@@ -36,4 +37,4 @@ const UserInfo = ({ isFetching, info }: IUserInfo) => {
   );
 };
 
-export default UserInfo;
+export default MyInfo;

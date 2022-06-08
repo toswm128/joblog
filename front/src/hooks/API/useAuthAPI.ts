@@ -16,6 +16,11 @@ const useAuthAPI = () => {
     return result.status;
   };
 
+  const GetUser2UserIdx = async (userIdx: string | undefined) => {
+    const result = await axios.get(`user?userIdx=${userIdx}`);
+    return result;
+  };
+
   const PatchMyProfile = async (file: FormData) => {
     const result = await axios.patch("user/profile", file);
     return result;
@@ -26,7 +31,7 @@ const useAuthAPI = () => {
     return result;
   };
 
-  return { Login, GetUser, Join, PatchMyProfile, PatchMyName };
+  return { Login, GetUser, Join, GetUser2UserIdx, PatchMyProfile, PatchMyName };
 };
 
 export default useAuthAPI;

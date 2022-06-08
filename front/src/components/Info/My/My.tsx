@@ -1,5 +1,4 @@
-import UserBoards from "./UserBoards";
-import UserInfo from "./UserInfo";
+import UserBoards from "../UserBoards";
 import { InfoContainer } from "../InfoStyle";
 import useAuthAPI from "hooks/API/useAuthAPI";
 import useBlogAPI from "assets/API/useBlogAPI";
@@ -8,6 +7,7 @@ import { AxiosError } from "axios";
 import useModal from "hooks/modal";
 import { useNavigate } from "react-router-dom";
 import Modal from "components/common/Modal";
+import MyInfo from "./MyInfo";
 
 const My = () => {
   const { GetUser } = useAuthAPI();
@@ -24,14 +24,14 @@ const My = () => {
       console.log(error.response?.status);
     },
   });
+  const { data: { data: myBoard } = {}, isFetching: isBoardFetching } =
+    useQuery("getMyBoard", getMyBoard);
 
   const navigate = useNavigate();
 
-  const { data: { data: myBoard } = {}, isFetching: isBoardFetching } =
-    useQuery("getMyBoard", getMyBoard);
   return (
     <InfoContainer>
-      <UserInfo
+      <MyInfo
         isFetching={isMyInfoFetching || isBoardFetching || isMyInfoError}
         info={myInfo}
       />

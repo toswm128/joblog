@@ -17,6 +17,11 @@ const useBlogAPI = () => {
     return result;
   };
 
+  const GetBlog2UserIdx = async (userIdx: string | undefined) => {
+    const result = await axios.get(`blog/user?userIdx=${userIdx}`);
+    return result;
+  };
+
   const postBoard = async (dom: any, title: string, banner: banner) => {
     const formData = new FormData();
     formData.append("context", JSON.stringify(dom).replaceAll("\\n", "\\\\n"));
@@ -99,9 +104,10 @@ const useBlogAPI = () => {
     getBoard,
     postBoard,
     postComment,
+    GetBlog2UserIdx,
     clickLike,
     getSearchBlog,
-    getMyBoard
+    getMyBoard,
   };
 };
 
