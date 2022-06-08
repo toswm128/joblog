@@ -3,11 +3,9 @@ import { board } from "pages/Blog/BoardPage/type";
 import { banner } from "Store/WriteEditorStore/type";
 
 const useBlogAPI = () => {
-  const getBlog = async () => {
-    const result = await axios.get("/");
-    if (result.status === 200) {
-      return result;
-    }
+  const getBlog = async (page: number) => {
+    const result = await axios.get(`/?page=${page}&limit=24`);
+    return result.data;
   };
 
   const getBoard = async (idx: string | undefined) => {

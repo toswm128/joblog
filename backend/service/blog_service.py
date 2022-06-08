@@ -17,7 +17,7 @@ class blogService:
             return 400
 
     def get_Blog(self,page,limit):
-        new_page = int(page)-1
+        new_page = int(page)
         blog = self.blog_model.get_blog(new_page,int(limit))
         return blog
 

@@ -11,12 +11,12 @@ def create_blog_endpoints(app, services):
     @app.route('/',methods=['GET'])
     def index():
         if request.method == 'GET':
-            page = request.args.get('page')
+            page = int(request.args.get('page'))
             limit = request.args.get('limit')
-            if page and limit:
-                return jsonify({'result':'success','data': blog_service.get_Blog(page,limit),'msg': 'blog정보 가져오기'})
+            if page>=0 and limit:
+                return jsonify({'result':'success','nextPage':page+1,'data': blog_service.get_Blog(page,limit),'msg': 'blog정보 가져오기'})
             else:
-                return jsonify({'result':'success','msg': 'blog정보 가져오기 실패'})
+                return jsonify({'result':'success','msg': 'blog정보 가져오기 실패'}),400
 
     @app.route('/blog/post',methods=['POST'])
     def blogPost():
