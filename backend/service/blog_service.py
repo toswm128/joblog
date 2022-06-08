@@ -16,9 +16,11 @@ class blogService:
         else:
             return 400
 
-    def get_Blog(self):
-        blog = self.blog_model.get_blog()
+    def get_Blog(self,page,limit):
+        new_page = int(page)-1
+        blog = self.blog_model.get_blog(new_page,int(limit))
         return blog
+
     def get_select_board(self,idx):
         blog = self.blog_model.get_board_idx(idx)
         return blog

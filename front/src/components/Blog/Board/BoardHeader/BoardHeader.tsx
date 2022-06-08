@@ -61,8 +61,10 @@ const BoardHeader = ({
           profile={profile}
           regdate={regdate}
         />
-        <img src={isLike ? heart : unHeart} alt="" onClick={onClickLike} />
-        <div>{likes.length}</div>
+        <div className="heart">
+          <img src={isLike ? heart : unHeart} alt="" onClick={onClickLike} />
+          <div>{likes.length}</div>
+        </div>
       </div>
     </>
   );

@@ -64,6 +64,13 @@ export const BoardContent = styled.div`
     }
   }
 
+  .heart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 13px;
+  }
+
   .content {
     /* 레이아웃 */
     display: flex;

@@ -16,7 +16,6 @@ const BoardList = ({ blogList }: IBoardList) => {
           <BoardItem data={current} />
         </Link>
       ))}
-      <MainLoader />
     </>
   );
 };

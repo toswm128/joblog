@@ -2,7 +2,7 @@ import useBlogAPI from "assets/API/useBlogAPI";
 import useWrite from "hooks/write";
 import { useCallback } from "react";
 import { useQueryClient } from "react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { line } from "Store/WriteEditorStore/type";
 import EditorInputter from "../EditorItem";
 
@@ -12,6 +12,8 @@ const EditorList = () => {
   const dom: any = [];
   const { postBoard } = useBlogAPI();
   const queryClient = useQueryClient();
+
+  const navigate = useNavigate();
 
   const tagTranslator = useCallback(
     (data: line) => {
@@ -74,9 +76,10 @@ const EditorList = () => {
       <button
         onClick={() => {
           dom && title && banner
-            ? postBoard(dom, title, banner).then(() =>
-                queryClient.invalidateQueries("getBoard")
-              )
+            ? postBoard(dom, title, banner).then(() => {
+                queryClient.invalidateQueries("getBoard");
+                navigate("/");
+              })
             : alert("작성 다 하셈");
         }}
       >
