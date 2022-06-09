@@ -6,11 +6,14 @@ import { useInfiniteQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import BoardList from "./BoardList";
 import { MainContainer } from "./MainPageStyle";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 
 const Main = () => {
   const { getBlog } = useBlogAPI();
   const { isModal, showModal, closeModal } = useModal(false);
   const navigate = useNavigate();
+  const [ref, inView] = useInView();
 
   const { data, isLoading, isError, fetchNextPage } = useInfiniteQuery(
     "getBoard",
@@ -22,7 +25,11 @@ const Main = () => {
     }
   );
 
-  console.log(data?.pages);
+  console.log(inView);
+
+  useEffect(() => {
+    inView && fetchNextPage();
+  }, [inView]);
 
   return (
     <MainContainer>
@@ -32,6 +39,7 @@ const Main = () => {
         data?.pages.map(({ data }) => <BoardList blogList={data} />)
       )}
       <button
+        ref={ref}
         onClick={() => {
           fetchNextPage();
         }}
