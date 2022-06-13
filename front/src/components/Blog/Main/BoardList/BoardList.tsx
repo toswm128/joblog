@@ -3,30 +3,21 @@ import MainLoader from "components/common/Loader/MainLoader";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { blog } from "types/BlogTypes/type";
-import BoardFlex from "./BoardFlex/BoardFlex";
+import BoardFlex from "./BoardFlex";
+import useBoardList from "./useBoardList";
 
 interface IBoardList {
   blogList: blog[];
 }
 
 const breakpoints = [709, 1052, 1395, 1738];
-function getWindowDimensions() {
-  const { innerWidth: width } = window;
-  let flex = 1;
-  breakpoints.map((point, index) => {
-    if (point <= width) flex = index + 2;
-  });
-
-  return flex;
-}
 
 const BoardList = ({ blogList }: IBoardList) => {
-  const [flex, setFlex] = useState(0);
-  const [flexData, setFlexData] = useState<blog[][]>([[]]);
+  const { getFlex, flexBlog, flex, flexData } = useBoardList();
 
   useEffect(() => {
     const handleResize = () => {
-      setFlex(getWindowDimensions());
+      getFlex(breakpoints);
     };
     handleResize();
 
@@ -35,19 +26,8 @@ const BoardList = ({ blogList }: IBoardList) => {
   }, []);
 
   useEffect(() => {
-    setFlexData(flexBlog());
+    flexBlog(blogList);
   }, [flex]);
-
-  const flexBlog = () => {
-    if (flex) {
-      const flexBlogs = [];
-      for (let i = 0; i < Math.floor(blogList.length / flex); i++) {
-        flexBlogs.push(blogList.slice(i * flex, flex * (i + 1)));
-      }
-      return flexBlogs;
-    }
-    return [[]];
-  };
 
   return (
     <>
