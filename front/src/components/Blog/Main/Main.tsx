@@ -31,21 +31,18 @@ const Main = () => {
     inView && fetchNextPage();
   }, [inView]);
 
+  data && console.log([...data.pages]);
+
   return (
-    <MainContainer>
-      {isLoading || isError ? (
+    <div>
+      <MainContainer>
+        {isLoading || isError ? (
+          <MainLoader />
+        ) : (
+          data?.pages.map(({ data }) => <BoardList blogList={data} />)
+        )}
         <MainLoader />
-      ) : (
-        data?.pages.map(({ data }) => <BoardList blogList={data} />)
-      )}
-      <button
-        ref={ref}
-        onClick={() => {
-          fetchNextPage();
-        }}
-      >
-        다시
-      </button>
+      </MainContainer>
       <Modal
         isModal={isModal}
         title={"⚠️ Warning! ⚠️"}
@@ -55,7 +52,7 @@ const Main = () => {
       >
         <>좆됐습니다!!</>
       </Modal>
-    </MainContainer>
+    </div>
   );
 };
 

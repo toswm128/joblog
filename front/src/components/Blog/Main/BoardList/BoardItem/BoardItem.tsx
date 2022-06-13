@@ -4,7 +4,11 @@ import heart from "assets/png/heart.png";
 import comment from "assets/png/comment.png";
 import { blog } from "types/BlogTypes/type";
 
-const BoardItem = memo(({ data }: { data: blog | undefined }) => {
+interface IBoardItem {
+  data?: blog;
+}
+
+const BoardItem = memo(({ data }: IBoardItem) => {
   return (
     <BoardItemContainer>
       <img src={data?.banner} alt="" />

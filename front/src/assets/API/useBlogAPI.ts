@@ -4,7 +4,7 @@ import { banner } from "Store/WriteEditorStore/type";
 
 const useBlogAPI = () => {
   const getBlog = async (page: number) => {
-    const result = await axios.get(`/?page=${page}&limit=24`);
+    const result = await axios.get(`/?page=${page}&limit=23`);
     return result.data;
   };
 

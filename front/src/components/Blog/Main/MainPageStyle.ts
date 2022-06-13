@@ -6,7 +6,7 @@ export const MainContainer = styled.div`
   flex-wrap: wrap;
   gap: 23px;
   max-width: 1692px;
-  margin: 0 auto 0 auto;
+  margin: 23px auto 0 auto;
 
   a {
     color: black;
