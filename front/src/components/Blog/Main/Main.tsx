@@ -14,7 +14,6 @@ const Main = () => {
   const { isModal, showModal, closeModal } = useModal(false);
   const navigate = useNavigate();
   const [ref, inView] = useInView();
-
   const { data, isLoading, isError, fetchNextPage } = useInfiniteQuery(
     "getBoard",
     ({ pageParam = 0 }) => getBlog(pageParam),
@@ -25,13 +24,9 @@ const Main = () => {
     }
   );
 
-  console.log(inView);
-
   useEffect(() => {
     inView && fetchNextPage();
   }, [inView]);
-
-  data && console.log([...data.pages]);
 
   return (
     <div>
@@ -39,9 +34,15 @@ const Main = () => {
         {isLoading || isError ? (
           <MainLoader />
         ) : (
-          data?.pages.map(({ data }) => <BoardList blogList={data} />)
+          <BoardList
+            blogList={data?.pages.reduce((acc, { data: cur }) => {
+              if (acc.data !== cur) return [...acc, ...cur];
+              else return acc.data;
+            }, data?.pages[0])}
+          />
         )}
         <MainLoader />
+        <div ref={ref}></div>
       </MainContainer>
       <Modal
         isModal={isModal}

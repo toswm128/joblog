@@ -8,11 +8,6 @@ const MainLoader = () => {
       <BoardItem />
       <BoardItem />
       <BoardItem />
-      <BoardItem />
-      <BoardItem />
-      <BoardItem />
-      <BoardItem />
-      <BoardItem />
     </>
   );
 };

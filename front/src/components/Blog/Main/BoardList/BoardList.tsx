@@ -1,7 +1,4 @@
-import BoardItem from "components/Blog/Main/BoardList/BoardItem";
-import MainLoader from "components/common/Loader/MainLoader";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import { blog } from "types/BlogTypes/type";
 import BoardFlex from "./BoardFlex";
 import useBoardList from "./useBoardList";
@@ -20,14 +17,13 @@ const BoardList = ({ blogList }: IBoardList) => {
       getFlex(breakpoints);
     };
     handleResize();
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
     flexBlog(blogList);
-  }, [flex]);
+  }, [flex, blogList]);
 
   return (
     <>
@@ -37,8 +33,4 @@ const BoardList = ({ blogList }: IBoardList) => {
     </>
   );
 };
-
-// <Link to={`/board/${current.idx}`} key={current.idx}>
-//   <BoardItem data={current} />
-// </Link>
 export default BoardList;

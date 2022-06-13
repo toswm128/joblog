@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { blog } from "types/BlogTypes/type";
 
 const useBoardList = () => {
@@ -24,6 +24,11 @@ const useBoardList = () => {
       }
       setFlexData(flexBlogs);
     }
+  };
+
+  const handleResize = () => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   };
 
   return { getFlex, flexBlog, flexData, flex };
