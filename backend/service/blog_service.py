@@ -19,7 +19,10 @@ class blogService:
     def get_Blog(self,page,limit):
         new_page = int(page)
         blog = self.blog_model.get_blog(new_page,int(limit))
-        return blog
+        isEnd = False
+        if len(blog) != int(limit):
+            isEnd = True
+        return {"data":blog,"isEnd":isEnd}
 
     def get_select_board(self,idx):
         blog = self.blog_model.get_board_idx(idx)

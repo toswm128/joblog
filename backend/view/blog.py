@@ -14,7 +14,8 @@ def create_blog_endpoints(app, services):
             page = int(request.args.get('page'))
             limit = request.args.get('limit')
             if page>=0 and limit:
-                return jsonify({'result':'success','nextPage':page+1,'data': blog_service.get_Blog(page,limit),'msg': 'blog정보 가져오기'})
+                blogData = blog_service.get_Blog(page,limit)
+                return jsonify({'result':'success','nextPage':page+1,'data': blogData["data"],'msg': 'blog정보 가져오기',"isEnd":blogData["isEnd"]})
             else:
                 return jsonify({'result':'success','msg': 'blog정보 가져오기 실패'}),400
 
