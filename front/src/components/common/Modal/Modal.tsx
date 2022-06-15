@@ -1,7 +1,7 @@
 import { ModalCard, ModalContainer } from "./ModalStyle";
 
 interface Modal {
-  isModal: boolean;
+  isModal?: boolean;
   title: string;
   buttonText: string;
   btnClick: () => void;

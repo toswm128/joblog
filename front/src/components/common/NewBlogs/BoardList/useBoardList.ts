@@ -11,6 +11,7 @@ const useBoardList = () => {
     breakpoints.map((point, index) => {
       if (point <= width) flex = index + 2;
     });
+    console.log(flex);
 
     setFlex(flex);
     return flex;

@@ -1,7 +1,8 @@
 import useBlogAPI from "assets/API/useBlogAPI";
+import { defaultBreakPoints } from "assets/breakpoints/breakpoints";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import BoardList from "../Main/BoardList";
+import BoardList from "../../common/NewBlogs/BoardList";
 import { SearchBoardContainer } from "./SearchBoardStyle";
 
 const SearchBoard = () => {
@@ -13,7 +14,7 @@ const SearchBoard = () => {
 
   return (
     <SearchBoardContainer>
-      {data && <BoardList blogList={data} />}
+      {data && <BoardList blogList={data} breakpoints={defaultBreakPoints} />}
     </SearchBoardContainer>
   );
 };

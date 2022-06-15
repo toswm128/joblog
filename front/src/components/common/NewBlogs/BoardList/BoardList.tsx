@@ -1,16 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { blog } from "types/BlogTypes/type";
 import BoardFlex from "./BoardFlex";
 import useBoardList from "./useBoardList";
 
 interface IBoardList {
   blogList: blog[];
+  breakpoints: number[];
 }
 
-const breakpoints = [709, 1052, 1395, 1738];
-
-const BoardList = ({ blogList }: IBoardList) => {
+const BoardList = ({ blogList, breakpoints }: IBoardList) => {
   const { getFlex, flexBlog, flex, flexData } = useBoardList();
+
+  const thhis = () => {
+    console.log(this);
+  };
+
+  thhis();
 
   useEffect(() => {
     const handleResize = () => {

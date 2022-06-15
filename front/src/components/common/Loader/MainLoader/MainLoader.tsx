@@ -1,4 +1,4 @@
-import BoardItem from "components/Blog/Main/BoardList/BoardItem";
+import BoardItem from "components/common/NewBlogs/BoardList/BoardItem";
 
 const MainLoader = () => {
   return (

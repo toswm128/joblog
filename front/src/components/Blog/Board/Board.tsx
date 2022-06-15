@@ -11,6 +11,8 @@ import BoardHeader from "./BoardHeader";
 import useModal from "hooks/modal";
 import Modal from "components/common/Modal";
 import { useNavigate } from "react-router-dom";
+import NewBlogs from "components/common/NewBlogs";
+import { anotherBreakPoints } from "assets/breakpoints/breakpoints";
 
 interface IBoard {
   idx: string;
@@ -27,8 +29,6 @@ const Board = ({ idx }: IBoard) => {
       onError: () => showModal(),
     }
   );
-
-  console.log(board);
 
   return (
     <BoardContainer>
@@ -53,7 +53,11 @@ const Board = ({ idx }: IBoard) => {
             <Divider>
               <>다른 게시글</>
             </Divider>
-            <Main />
+            <NewBlogs
+              isModal={isModal}
+              showModal={showModal}
+              breakpoints={anotherBreakPoints}
+            />
           </BoardContent>
         </>
       ) : (

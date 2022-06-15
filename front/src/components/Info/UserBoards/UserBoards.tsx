@@ -1,4 +1,5 @@
-import BoardList from "components/Blog/Main/BoardList";
+import { defaultBreakPoints } from "assets/breakpoints/breakpoints";
+import BoardList from "components/common/NewBlogs/BoardList";
 import MainLoader from "components/common/Loader/MainLoader";
 import { blog } from "types/BlogTypes/type";
 import { UserBoardsContainer } from "../InfoStyle";
@@ -14,7 +15,11 @@ const UserBoards = ({ isFetching, borders }: IUserBoards) => {
       {isFetching ? (
         <MainLoader />
       ) : (
-        <>{borders && <BoardList blogList={borders} />}</>
+        <>
+          {borders && (
+            <BoardList blogList={borders} breakpoints={defaultBreakPoints} />
+          )}
+        </>
       )}
     </UserBoardsContainer>
   );
