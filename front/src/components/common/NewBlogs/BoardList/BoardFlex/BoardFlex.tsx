@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import { blog } from "types/BlogTypes/type";
+import { BoardFlexContainer } from "../../MainPageStyle";
 import BoardItem from "../BoardItem";
 
 interface IBoardFlex {
@@ -18,17 +19,5 @@ const BoardFlex = ({ blogFlex }: IBoardFlex) => {
     </BoardFlexContainer>
   );
 };
-
-const BoardFlexContainer = styled.div`
-  /* 레이아웃 */
-  display: flex;
-  gap: 23px;
-  width: 100%;
-
-  a {
-    color: black;
-    text-decoration: none;
-  }
-`;
 
 export default BoardFlex;

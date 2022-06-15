@@ -50,10 +50,11 @@ const NewBlogs = ({
               if (acc.data !== cur) return [...acc, ...cur];
               else return acc.data;
             }, data?.pages[0])}
-          />
+          >
+            <div ref={ref}></div>
+          </BoardList>
         )}
         <MainLoader />
-        <div ref={ref}></div>
       </NewBlogsContainer>
       <Modal
         isModal={isModal}
@@ -62,7 +63,7 @@ const NewBlogs = ({
         btnClick={() => navigate(0)}
         backgroundClick={closeModal}
       >
-        <>좆됐습니다!!</>
+        <>인터넷 연결이 불안정 합니다.</>
       </Modal>
     </div>
   );

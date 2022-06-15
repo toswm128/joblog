@@ -4,7 +4,6 @@ export const NewBlogsContainer = styled.div`
   /* 레이아웃 */
   display: flex;
   flex-wrap: wrap;
-  gap: 23px;
   max-width: 1692px;
   margin: 23px auto 0 auto;
 
@@ -25,5 +24,18 @@ export const NewBlogsContainer = styled.div`
   }
   @media (max-width: 709px) {
     max-width: 320px;
+  }
+`;
+
+export const BoardFlexContainer = styled.div`
+  /* 레이아웃 */
+  display: flex;
+  margin-top: 23px;
+  gap: 23px;
+  width: 100%;
+
+  a {
+    color: black;
+    text-decoration: none;
   }
 `;

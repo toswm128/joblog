@@ -1,14 +1,17 @@
+import MainLoader from "components/common/Loader/MainLoader";
 import { useEffect, useRef } from "react";
 import { blog } from "types/BlogTypes/type";
+import { BoardFlexContainer } from "../MainPageStyle";
 import BoardFlex from "./BoardFlex";
 import useBoardList from "./useBoardList";
 
 interface IBoardList {
   blogList: blog[];
   breakpoints: number[];
+  children?: JSX.Element;
 }
 
-const BoardList = ({ blogList, breakpoints }: IBoardList) => {
+const BoardList = ({ blogList, breakpoints, children }: IBoardList) => {
   const { getFlex, flexBlog, flex, flexData } = useBoardList();
 
   const thhis = () => {
@@ -35,6 +38,10 @@ const BoardList = ({ blogList, breakpoints }: IBoardList) => {
       {flexData.map((current: blog[], key: number) => (
         <BoardFlex blogFlex={current} key={key} />
       ))}
+      {children}
+      <BoardFlexContainer>
+        <MainLoader flex={flex} />
+      </BoardFlexContainer>
     </>
   );
 };
