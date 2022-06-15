@@ -14,12 +14,6 @@ interface IBoardList {
 const BoardList = ({ blogList, breakpoints, children }: IBoardList) => {
   const { getFlex, flexBlog, flex, flexData } = useBoardList();
 
-  const thhis = () => {
-    console.log(this);
-  };
-
-  thhis();
-
   useEffect(() => {
     const handleResize = () => {
       getFlex(breakpoints);
@@ -38,7 +32,8 @@ const BoardList = ({ blogList, breakpoints, children }: IBoardList) => {
       {flexData.map((current: blog[], key: number) => (
         <BoardFlex blogFlex={current} key={key} />
       ))}
-      {children}
+
+      {flex && children}
       <BoardFlexContainer>
         <MainLoader flex={flex} />
       </BoardFlexContainer>

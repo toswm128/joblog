@@ -11,11 +11,6 @@ const MainLoader = ({ flex }: IMainLoader) => {
         Array.from({ length: flex }, (_, index) => index + 1).map(key => (
           <BoardItem key={key} />
         ))}
-      {/* <BoardItem />
-      <BoardItem />
-      <BoardItem />
-      <BoardItem />
-      <BoardItem /> */}
     </>
   );
 };

@@ -1,12 +1,11 @@
 import useBlogAPI from "assets/API/useBlogAPI";
 import BoardList from "components/common/NewBlogs/BoardList";
 import { NewBlogsContainer } from "components/common/NewBlogs/MainPageStyle";
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import MainLoader from "../Loader/MainLoader";
 import Modal from "../Modal";
+import ViewObserver from "../ViewObserver";
 
 interface INewBlogs {
   isModal?: boolean;
@@ -23,7 +22,6 @@ const NewBlogs = ({
 }: INewBlogs) => {
   const { getBlog } = useBlogAPI();
   const navigate = useNavigate();
-  const [ref, inView] = useInView();
   const { data, isLoading, isError, fetchNextPage } = useInfiniteQuery(
     "getBoard",
     ({ pageParam = 0 }) => getBlog(pageParam),
@@ -33,10 +31,6 @@ const NewBlogs = ({
       getNextPageParam: (lastPage, pages) => lastPage.nextPage,
     }
   );
-
-  useEffect(() => {
-    inView && fetchNextPage();
-  }, [inView]);
 
   return (
     <div>
@@ -51,10 +45,9 @@ const NewBlogs = ({
               else return acc.data;
             }, data?.pages[0])}
           >
-            <div ref={ref}></div>
+            <ViewObserver observerFuc={fetchNextPage} />
           </BoardList>
         )}
-        <MainLoader />
       </NewBlogsContainer>
       <Modal
         isModal={isModal}
