@@ -9,9 +9,10 @@ interface IBoardList {
   blogList: blog[];
   breakpoints: number[];
   children?: JSX.Element;
+  isEnd?: boolean;
 }
 
-const BoardList = ({ blogList, breakpoints, children }: IBoardList) => {
+const BoardList = ({ blogList, breakpoints, children, isEnd }: IBoardList) => {
   const { getFlex, flexBlog, flex, flexData } = useBoardList();
 
   useEffect(() => {
@@ -33,10 +34,12 @@ const BoardList = ({ blogList, breakpoints, children }: IBoardList) => {
         <BoardFlex blogFlex={current} key={key} />
       ))}
 
-      {flex && children}
-      <BoardFlexContainer>
-        <MainLoader flex={flex} />
-      </BoardFlexContainer>
+      {!isEnd && flex && children}
+      {!isEnd && (
+        <BoardFlexContainer>
+          <MainLoader flex={flex} />
+        </BoardFlexContainer>
+      )}
     </>
   );
 };
