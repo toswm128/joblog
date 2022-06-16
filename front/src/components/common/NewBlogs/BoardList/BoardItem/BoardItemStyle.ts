@@ -4,6 +4,7 @@ export const BoardItemContainer = styled.div`
   /* 레이아웃 */
   width: 320px;
   min-width: 320px;
+  margin-top: 23px;
 
   /* 고급 */
   box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);

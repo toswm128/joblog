@@ -4,9 +4,19 @@ export const SearchBoardContainer = styled.div`
   /* 레이아웃 */
   display: flex;
   flex-wrap: wrap;
-  gap: 23px;
   max-width: 1692px;
   margin: 0 auto 0 auto;
+
+  h2 {
+    width: 100%;
+    border-bottom: 1px solid #c4c4c4;
+    margin-top: 16px;
+    font-weight: normal;
+    span {
+      font-weight: bold;
+      font-size: 1.6rem;
+    }
+  }
 
   a {
     color: black;

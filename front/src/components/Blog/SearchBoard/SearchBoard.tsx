@@ -14,7 +14,16 @@ const SearchBoard = () => {
 
   return (
     <SearchBoardContainer>
-      {data && <BoardList blogList={data} breakpoints={defaultBreakPoints} />}
+      <h2>
+        <span>"{q}"</span>에 대한 검색 결과
+      </h2>
+      {data && (
+        <BoardList
+          blogList={data}
+          isEnd={true}
+          breakpoints={defaultBreakPoints}
+        />
+      )}
     </SearchBoardContainer>
   );
 };

@@ -5,6 +5,7 @@ export const NewBlogsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   max-width: 1692px;
+  column-gap: 23px;
   margin: 23px auto 0 auto;
 
   a {
@@ -30,7 +31,6 @@ export const NewBlogsContainer = styled.div`
 export const BoardFlexContainer = styled.div`
   /* 레이아웃 */
   display: flex;
-  margin-top: 23px;
   gap: 23px;
   width: 100%;
 

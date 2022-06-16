@@ -1,5 +1,5 @@
-import MainLoader from "components/common/Loader/MainLoader";
-import { useEffect, useRef } from "react";
+import ScrollLoader from "components/common/Loader/ScrollLoader/ScrollLoader";
+import { useEffect } from "react";
 import { blog } from "types/BlogTypes/type";
 import { BoardFlexContainer } from "../MainPageStyle";
 import BoardFlex from "./BoardFlex";
@@ -38,7 +38,7 @@ const BoardList = ({ blogList, breakpoints, children, isEnd }: IBoardList) => {
       {!isEnd && flex && children}
       {!isEnd && (
         <BoardFlexContainer>
-          <MainLoader flex={flex} />
+          <ScrollLoader flex={flex} />
         </BoardFlexContainer>
       )}
     </>
