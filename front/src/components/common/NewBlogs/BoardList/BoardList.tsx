@@ -13,6 +13,7 @@ interface IBoardList {
 }
 
 const BoardList = ({ blogList, breakpoints, children, isEnd }: IBoardList) => {
+  console.log(breakpoints);
   const { getFlex, flexBlog, flex, flexData } = useBoardList();
 
   useEffect(() => {

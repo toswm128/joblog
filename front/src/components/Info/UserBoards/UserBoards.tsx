@@ -1,4 +1,4 @@
-import { defaultBreakPoints } from "assets/breakpoints/breakpoints";
+import { myBreakPoints } from "assets/breakpoints/breakpoints";
 import BoardList from "components/common/NewBlogs/BoardList";
 import MainLoader from "components/common/Loader/MainLoader";
 import { blog } from "types/BlogTypes/type";
@@ -17,7 +17,7 @@ const UserBoards = ({ isFetching, borders }: IUserBoards) => {
       ) : (
         <>
           {borders && (
-            <BoardList blogList={borders} breakpoints={defaultBreakPoints} />
+            <BoardList blogList={borders} breakpoints={myBreakPoints} />
           )}
         </>
       )}

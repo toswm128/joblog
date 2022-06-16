@@ -4,6 +4,11 @@ export const InfoContainer = styled.div`
   /* 레이아웃 */
   display: flex;
   justify-content: space-between;
+  @media (max-width: 845px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const UserBoardsContainer = styled.div`

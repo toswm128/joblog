@@ -27,11 +27,6 @@ const useBoardList = () => {
     }
   };
 
-  const handleResize = () => {
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  };
-
   return { getFlex, flexBlog, flexData, flex };
 };
 
