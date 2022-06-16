@@ -25,7 +25,7 @@ const BoardList = ({ blogList, breakpoints, children, isEnd }: IBoardList) => {
   }, []);
 
   useEffect(() => {
-    flexBlog(blogList);
+    flexBlog(blogList, isEnd);
   }, [flex, blogList]);
 
   return (

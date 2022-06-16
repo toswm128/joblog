@@ -16,10 +16,11 @@ const useBoardList = () => {
     return flex;
   };
 
-  const flexBlog = (blogList: blog[]) => {
+  const flexBlog = (blogList: blog[], isEnd?: boolean) => {
     if (flex) {
       const flexBlogs = [];
-      for (let i = 0; i < Math.floor(blogList.length / flex); i++) {
+      const over = isEnd ? 1 : 0;
+      for (let i = 0; i < Math.floor(blogList.length / flex) + over; i++) {
         flexBlogs.push(blogList.slice(i * flex, flex * (i + 1)));
       }
       setFlexData(flexBlogs);
