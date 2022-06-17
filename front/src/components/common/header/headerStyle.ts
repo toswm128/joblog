@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { basicColor } from "style/color";
 
 export const HeaderContaier = styled.header`
   /* 레이아웃 */
@@ -31,7 +32,7 @@ export const HeaderLeft = styled.div`
     }
     a {
       /* 고급 */
-      color: #c4c4c4;
+      color: ${basicColor};
       font-size: 1rem;
     }
   }
@@ -65,10 +66,10 @@ export const HeaderRight = styled.div`
     width: 76px;
     height: 40px;
     /* 고급 */
-    border: 1px solid #c4c4c4;
+    border: 1px solid ${basicColor};
     border-radius: 50px;
     font-size: 14px;
-    color: #c4c4c4;
+    color: ${basicColor};
     cursor: pointer;
     &:hover {
       border: 1px solid black;

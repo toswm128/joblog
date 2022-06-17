@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { basicColor } from "style/color";
 
 export const WriteButton = styled.button`
   /* 레이아웃 */
@@ -8,7 +9,7 @@ export const WriteButton = styled.button`
   color: white;
   border-radius: 9px;
   border: 0;
-  background-color: #c4c4c4;
+  background-color: ${basicColor};
   outline: none;
   cursor: pointer;
 `;

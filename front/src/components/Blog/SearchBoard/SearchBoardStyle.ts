@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { basicColor } from "style/color";
 
 export const SearchBoardContainer = styled.div`
   /* 레이아웃 */
@@ -9,7 +10,7 @@ export const SearchBoardContainer = styled.div`
 
   h2 {
     width: 100%;
-    border-bottom: 1px solid #c4c4c4;
+    border-bottom: 1px solid ${basicColor};
     margin-top: 16px;
     font-weight: normal;
     span {

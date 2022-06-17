@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { basicColor } from "style/color";
 
 export const BoardItemContainer = styled.div`
   /* 레이아웃 */
@@ -12,7 +13,7 @@ export const BoardItemContainer = styled.div`
     /* 레이아웃 */
     width: 100%;
     height: 240px;
-    background-color: #c4c4c4;
+    background-color: ${basicColor};
     object-fit: cover;
   }
 `;

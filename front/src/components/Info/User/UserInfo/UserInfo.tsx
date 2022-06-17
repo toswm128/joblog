@@ -1,10 +1,11 @@
+import { basicColor } from "style/color";
 import { UserType } from "types/UserTypes/type";
 import { InfoComponent } from "../../InfoStyle";
 
 export const UserInfoLoader = () => {
   return (
     <>
-      <img style={{ backgroundColor: "#c4c4c4" }} />
+      <img style={{ backgroundColor: basicColor }} />
       <div>
         <h2></h2>
       </div>

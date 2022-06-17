@@ -30,7 +30,7 @@ const SearchModal = ({
               to={`/board/${current.idx}`}
               key={current.idx}
               onClick={() => setIsModal(false)}
-              style={selectIdx === key ? { backgroundColor: "#c4c4c4" } : {}}
+              style={selectIdx === key ? { backgroundColor: "#e8e8e8" } : {}}
             >
               {current.title}
             </Link>

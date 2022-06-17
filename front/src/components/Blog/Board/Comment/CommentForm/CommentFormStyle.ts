@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { basicColor } from "style/color";
 
 export const CommentFormContainer = styled.div`
   display: flex;
@@ -27,10 +28,10 @@ export const CommentFormContainer = styled.div`
       padding: 0 3px;
       /* 고급 */
       font-size: 1rem;
-      border: 1px solid #c4c4c4;
+      border: 1px solid ${basicColor};
       &::placeholder {
         /* 고급 */
-        color: #c4c4c4;
+        color: ${basicColor};
       }
     }
   }

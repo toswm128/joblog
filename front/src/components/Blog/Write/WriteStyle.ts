@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { basicColor } from "style/color";
 
 export const WriteContainer = styled.div`
   /* 레이아웃 */
@@ -16,7 +17,7 @@ export const WriteContainer = styled.div`
     /* 고급 */
     font-size: 48px;
     font-weight: bold;
-    color: #c4c4c4;
+    color: ${basicColor};
     background-color: #e5e5e5;
   }
 `;
@@ -69,6 +70,6 @@ export const WriteComponent = styled.div`
   .title::placeholder {
     /* 고급 */
     font-size: 48px;
-    color: #c4c4c4;
+    color: ${basicColor};
   }
 `;

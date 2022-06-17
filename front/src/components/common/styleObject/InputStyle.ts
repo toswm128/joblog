@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { basicColor } from "style/color";
 
 export const CommentInput = styled.input`
   /* 레이아웃 */
@@ -8,10 +9,10 @@ export const CommentInput = styled.input`
   padding: 0 3px;
   /* 고급 */
   font-size: 18px;
-  border: 1px solid #c4c4c4;
+  border: 1px solid ${basicColor};
   &::placeholder {
     /* 고급 */
-    color: #c4c4c4;
+    color: ${basicColor};
   }
 `;
 

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { basicColor } from "style/color";
 
 export const CommentItemContainer = styled.div`
   /* 레이아웃 */
@@ -6,7 +7,7 @@ export const CommentItemContainer = styled.div`
   flex-direction: column;
   gap: 16px;
   /* 고급 */
-  border-bottom: 1px solid #c4c4c4;
+  border-bottom: 1px solid ${basicColor};
 
   .comment-info {
     /* 레이아웃 */
@@ -34,7 +35,7 @@ export const CommentItemContainer = styled.div`
       .comment-date {
         /* 고급 */
         font-size: 13px;
-        color: #c4c4c4;
+        color: ${basicColor};
       }
     }
   }

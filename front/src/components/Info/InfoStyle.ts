@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { basicColor } from "style/color";
 
 export const InfoContainer = styled.div`
   /* 레이아웃 */
@@ -42,7 +43,7 @@ export const InfoComponent = styled.div`
     width: 310px;
     height: 310px;
     object-fit: cover;
-    background-color: #c4c4c4;
+    background-color: ${basicColor};
     border-radius: 50%;
   }
   & > div {

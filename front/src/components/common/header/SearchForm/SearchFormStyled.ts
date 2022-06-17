@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { basicColor } from "style/color";
 
 export const SearchFormContainer = styled.div`
   width: 515px;
@@ -13,7 +14,7 @@ export const SearchFormComponent = styled.form`
   width: 515px;
   height: 40px;
   /* 고급 */
-  border: 1px solid #c4c4c4;
+  border: 1px solid ${basicColor};
   border-radius: 40px;
   box-sizing: border-box;
 
@@ -30,7 +31,7 @@ export const SearchFormComponent = styled.form`
   input::placeholder {
     /* 고급 */
     font-size: 14px;
-    color: #c4c4c4;
+    color: ${basicColor};
   }
 
   /* 검색 */
@@ -44,11 +45,11 @@ export const SearchFormComponent = styled.form`
     width: 62px;
     height: 40px;
     /* 고급 */
-    border: 1px solid #c4c4c4;
+    border: 1px solid ${basicColor};
     border-radius: 40px;
     background-color: rgba(0, 0, 0, 0);
     font-size: 14px;
-    color: #c4c4c4;
+    color: ${basicColor};
     cursor: pointer;
     &:hover {
       border: 1px solid black;
@@ -62,16 +63,19 @@ export const SearchDataList = styled.div`
   left: -1;
   display: flex;
   flex-direction: column;
+  height: 500px;
+  overflow-y: auto;
+
   a {
-    border: 1px solid #c4c4c4;
+    border: 1px solid ${basicColor};
     border-top: 0px;
     box-sizing: border-box;
     color: black;
-    padding: 4px 0 4px 0;
+    padding: 8px 0 8px 0;
     background-color: white;
     cursor: pointer;
     &:hover {
-      background-color: #c4c4c4;
+      background-color: #e8e8e8;
     }
   }
 `;
