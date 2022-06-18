@@ -1,10 +1,10 @@
 import useAuthAPI from "hooks/API/useAuthAPI";
 import useBlogAPI from "assets/API/useBlogAPI";
-import { WriteButton } from "components/common/styleObject/ButtonStyle";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { CommentFormContainer } from "./CommentFormStyle";
+import DefaultButton from "components/common/Buttons/DefaultButton";
 
 interface ICommentForm {
   blogIdx: number;
@@ -27,20 +27,22 @@ const CommentForm = ({ blogIdx }: ICommentForm) => {
           spellCheck={false}
           minRows={2}
           value={commentText}
-          onChange={e => setCommentText(e.target.value)}
+          onChange={(e) => setCommentText(e.target.value)}
           placeholder="댓글을 입력해 주세요"
         />
       </div>
       <div>
-        <WriteButton
+        <DefaultButton
           onClick={async () => {
             await postComment(blogIdx, commentText);
             setCommentText("");
             queryClient.invalidateQueries(`board/${blogIdx}`);
           }}
+          isAbled={true}
+          size={"M"}
         >
-          작성하기
-        </WriteButton>
+          <>작성하기</>
+        </DefaultButton>
       </div>
     </CommentFormContainer>
   );

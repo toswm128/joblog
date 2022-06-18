@@ -35,21 +35,4 @@ export const ModalCard = styled.div`
   & > span {
     font-size: 1.3rem;
   }
-
-  & > button {
-    outline: none;
-    border: 0;
-    background-color: black;
-    border-radius: 8px;
-    cursor: pointer;
-    & > div {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 48px;
-      color: white;
-      font-size: 1.1rem;
-      margin: 0 24px 0 24px;
-    }
-  }
 `;

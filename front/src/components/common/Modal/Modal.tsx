@@ -1,3 +1,4 @@
+import DefaultButton from "../Buttons/DefaultButton";
 import { ModalCard, ModalContainer } from "./ModalStyle";
 
 interface Modal {
@@ -21,16 +22,16 @@ const Modal = ({
     <>
       {isModal ? (
         <ModalContainer
-          onClick={e =>
+          onClick={(e) =>
             e.currentTarget === e.target && backgroundClick && backgroundClick()
           }
         >
           <ModalCard>
             <h2>{title}</h2>
             <span>{children}</span>
-            <button onClick={btnClick}>
-              <div>{buttonText}</div>
-            </button>
+            <DefaultButton onClick={btnClick} isAbled={true} size={"L"}>
+              <>{buttonText}</>
+            </DefaultButton>
           </ModalCard>
         </ModalContainer>
       ) : (
