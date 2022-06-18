@@ -38,7 +38,7 @@ const CommentForm = ({ blogIdx }: ICommentForm) => {
             setCommentText("");
             queryClient.invalidateQueries(`board/${blogIdx}`);
           }}
-          isAbled={true}
+          isAbled={commentText ? true : false}
           size={"M"}
         >
           <>작성하기</>

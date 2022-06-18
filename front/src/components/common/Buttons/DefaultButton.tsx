@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { buttonBackgroundColor, buttonTextColor } from "style/color";
 
 interface IDefaultButton {
   onClick?: () => any;
@@ -26,14 +27,20 @@ const DefaultButton = ({
     (size === "M" && "42px") ||
     (size === "S" && "36px")};
     padding: 0 16px;
-    background-color: ${isAbled ? "#3D3D3D" : "#E4E4E4"};
-    color: ${isAbled ? "white" : "#6C6C6C"};
+    background-color: ${isAbled
+      ? buttonBackgroundColor.abled.basic
+      : buttonBackgroundColor.disabled.basic};
+    color: ${isAbled ? buttonTextColor.abled : buttonTextColor.disabled};
     font-size: 18px;
     &:hover {
-      background-color: ${isAbled ? "#5C5C5C" : "#DCDCDC"};
+      background-color: ${isAbled
+        ? buttonBackgroundColor.abled.hover
+        : buttonBackgroundColor.disabled.hover};
     }
     &:active {
-      background-color: ${isAbled ? "#929292" : "#BCBCBC"};
+      background-color: ${isAbled
+        ? buttonBackgroundColor.abled.active
+        : buttonBackgroundColor.disabled.active};
     }
   `;
   return <DefaultButtonStyle onClick={onClick}>{children}</DefaultButtonStyle>;
