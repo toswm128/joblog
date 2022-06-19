@@ -1,4 +1,6 @@
-import styled from "@emotion/styled";
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
 import { buttonBackgroundColor, buttonTextColor } from "style/color";
 
 interface IDefaultButton {
@@ -14,7 +16,7 @@ const DefaultButton = ({
   isAbled,
   size,
 }: IDefaultButton) => {
-  const DefaultButtonStyle = styled.button`
+  const DefaultButtonCss = css`
     transition: 0.1s all;
     outline: none;
     border: 0;
@@ -43,7 +45,12 @@ const DefaultButton = ({
         : buttonBackgroundColor.disabled.active};
     }
   `;
-  return <DefaultButtonStyle onClick={onClick}>{children}</DefaultButtonStyle>;
+
+  return (
+    <button css={DefaultButtonCss} onClick={onClick}>
+      {children}
+    </button>
+  );
 };
 
 export default DefaultButton;
