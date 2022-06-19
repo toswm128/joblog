@@ -6,6 +6,7 @@ import { likes } from "pages/Blog/BoardPage/type";
 import { useCallback, useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import Profile from "components/common/Profile";
+import LikeButton from "components/common/Buttons/LikeButton";
 
 interface IBoardHeader {
   idx: string;
@@ -61,10 +62,15 @@ const BoardHeader = ({
           profile={profile}
           regdate={regdate}
         />
-        <div className="heart">
+        {/* <div className="heart">
           <img src={isLike ? heart : unHeart} alt="" onClick={onClickLike} />
           <div>{likes.length}</div>
-        </div>
+        </div> */}
+        <LikeButton
+          isLike={isLike}
+          onClick={onClickLike}
+          likes={likes.length}
+        />
       </div>
     </>
   );

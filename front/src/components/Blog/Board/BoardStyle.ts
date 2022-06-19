@@ -51,15 +51,12 @@ export const BoardContent = styled.div`
     align-items: center;
     margin-bottom: 32px;
     .profilImg {
-      /* 고급 */
-      border-radius: 50%;
-    }
-    img {
       /* 레이아웃 */
       width: 40px;
       height: 40px;
       object-fit: cover;
-
+      /* 고급 */
+      border-radius: 50%;
       cursor: pointer;
     }
   }
