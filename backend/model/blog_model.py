@@ -51,8 +51,9 @@ class blogModel:
             INSERT INTO `joblog`.`blog`
             (`idx`,`userIdx`,`context`,`regdate`,`title`,`banner`)
             VALUES
-            (Null,%d,'%s',now(),'%s','%s');
+            (Null,%d,'%s',now(),"%s",'%s');
             ''' % (userIdx,context,title,url)
+        print(sql)
         cursor.execute(sql)
         result = cursor.fetchall()
         db.commit()

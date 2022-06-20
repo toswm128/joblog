@@ -12,9 +12,11 @@ const Profile = ({ userIdx, name, profile, regdate }: IProfile) => {
     <div className="profil">
       <Link to={`/user/${userIdx}`} className="profil">
         <img className="profilImg" src={profile} alt="" />
-        <h4>{name}</h4>
+        <div>
+          <h4>{name}</h4>
+          <p>{regdate}</p>
+        </div>
       </Link>
-      <p>{regdate}</p>
     </div>
   );
 };

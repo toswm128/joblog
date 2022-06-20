@@ -1,7 +1,5 @@
 import useAuthAPI from "hooks/API/useAuthAPI";
 import useBlogAPI from "assets/API/useBlogAPI";
-import heart from "assets/png/heart.png";
-import unHeart from "assets/png/unHeart.png";
 import { likes } from "pages/Blog/BoardPage/type";
 import { useCallback, useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
@@ -62,10 +60,6 @@ const BoardHeader = ({
           profile={profile}
           regdate={regdate}
         />
-        {/* <div className="heart">
-          <img src={isLike ? heart : unHeart} alt="" onClick={onClickLike} />
-          <div>{likes.length}</div>
-        </div> */}
         <LikeButton
           isLike={isLike}
           onClick={onClickLike}

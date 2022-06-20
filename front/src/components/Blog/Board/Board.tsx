@@ -69,7 +69,7 @@ const Board = ({ idx }: IBoard) => {
         buttonText={"새로고침"}
         btnClick={() => navigate(0)}
       >
-        <>좆됐습니다!</>
+        <>인터넷 연결이 불안정 합니다.</>
       </Modal>
     </BoardContainer>
   );

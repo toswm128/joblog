@@ -37,6 +37,19 @@ export const BoardContent = styled.div`
     align-items: center;
     display: flex;
     gap: 14px;
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      color: black;
+      & > h4 {
+        margin: 0;
+      }
+      & > p {
+        margin: 0;
+      }
+    }
   }
   .title {
     /* 고급 */

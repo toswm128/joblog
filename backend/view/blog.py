@@ -38,7 +38,7 @@ def create_blog_endpoints(app, services):
             if status == 400:
                 return jsonify({'msg': '포함되지 않는 데이터가 있습니다'}),400
             else:
-                return jsonify({'result':'success','data': blog_service.get_Blog(),'msg': 'blog 생성!'})
+                return jsonify({'result':'success','msg': 'blog 생성!'})
 
     @app.route('/blog/board',methods=['GET'])
     def getBoard():

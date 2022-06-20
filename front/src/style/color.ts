@@ -1,5 +1,6 @@
 export const basicColor = "#c4c4c4";
 export const backgroundColor = "#eee";
+export const DisabledColor = "#6D6D6D";
 
 export const buttonBackgroundColor = {
   abled: {
