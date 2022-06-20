@@ -1,7 +1,6 @@
 import React, { memo } from "react";
 import { BoardItemContainer, BoardItemContent } from "./BoardItemStyle";
-import heart from "assets/png/heart.png";
-import comment from "assets/png/comment.png";
+
 import { blog } from "types/BlogTypes/type";
 
 interface IBoardItem {

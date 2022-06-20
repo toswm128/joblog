@@ -11,6 +11,14 @@ export const BoardContainer = styled.div`
     width: 100%;
     height: 320px;
     object-fit: cover;
+    transition: 1s all;
+    margin: 0 auto;
+    -webkit-user-drag: none;
+    &:active {
+      background-color: rgba(0, 0, 0, 1);
+      height: 80vh;
+      object-fit: contain;
+    }
   }
 `;
 

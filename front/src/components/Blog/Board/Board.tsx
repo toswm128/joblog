@@ -6,7 +6,6 @@ import Loader from "components/common/Loader";
 import CommentForm from "./Comment/CommentForm";
 import CommentList from "./Comment/CommentList";
 import Divider from "components/common/Divider";
-import Main from "../Main";
 import BoardHeader from "./BoardHeader";
 import useModal from "hooks/modal";
 import Modal from "components/common/Modal";

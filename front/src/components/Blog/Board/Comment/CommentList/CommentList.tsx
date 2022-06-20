@@ -10,18 +10,24 @@ interface ICommentList {
 const CommentList = ({ commentList }: ICommentList) => {
   return (
     <CommentListContainer>
-      <Divider>
-        <>{commentList.length}개의 댓글</>
-      </Divider>
-      {commentList.map((comment, key) => (
-        <Comment
-          key={key}
-          text={comment.text}
-          profile={comment.profile}
-          name={comment.name}
-          regdate={comment.regdate}
-        />
-      ))}
+      {commentList.length ? (
+        <>
+          <Divider>
+            <>{commentList.length}개의 댓글</>
+          </Divider>
+          {commentList.map((comment, key) => (
+            <Comment
+              key={key}
+              text={comment.text}
+              profile={comment.profile}
+              name={comment.name}
+              regdate={comment.regdate}
+            />
+          ))}
+        </>
+      ) : (
+        <></>
+      )}
     </CommentListContainer>
   );
 };

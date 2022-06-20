@@ -25,9 +25,9 @@ export const CommentFormContainer = styled.div`
       resize: none;
       height: auto;
       overflow-y: hidden;
-      padding: 0 3px;
+      padding: 3px 4px;
       /* 고급 */
-      font-size: 1rem;
+      font-size: 0.9rem;
       border: 1px solid ${basicColor};
       &::placeholder {
         /* 고급 */
