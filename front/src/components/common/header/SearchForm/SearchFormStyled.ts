@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
-import { basicColor } from "style/color";
+import { backgroundColor, basicColor, newBlack } from "style/color";
 
 export const SearchFormContainer = styled.div`
-  width: 515px;
+  width: 720px;
   height: 40px;
 `;
 
@@ -11,27 +11,34 @@ export const SearchFormComponent = styled.form`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 515px;
+  width: 720px;
   height: 40px;
   /* 고급 */
-  border: 1px solid ${basicColor};
-  border-radius: 40px;
   box-sizing: border-box;
+  justify-content: space-between;
 
   input {
     /* 레이아웃 */
-    width: 443px;
+    padding: 0 8px;
+    width: 660px;
     height: 40px;
+    box-sizing: border-box;
     /* 고급 */
     border: 0;
+    border-radius: 10px;
     outline: none;
     font-size: 14px;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: white;
+    border: 1px solid ${newBlack};
+    &:focus {
+      border-radius: 10px 10px 0 0;
+      border-bottom: 0;
+    }
   }
   input::placeholder {
     /* 고급 */
     font-size: 14px;
-    color: ${basicColor};
+    color: ${newBlack};
   }
 
   /* 검색 */
@@ -42,36 +49,35 @@ export const SearchFormComponent = styled.form`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 62px;
+    width: 40px;
     height: 40px;
     /* 고급 */
-    border: 1px solid ${basicColor};
-    border-radius: 40px;
+    border: 1px solid ${newBlack};
+
+    border-radius: 10px;
     background-color: rgba(0, 0, 0, 0);
     font-size: 14px;
-    color: ${basicColor};
+    color: ${newBlack};
     cursor: pointer;
-    &:hover {
-      border: 1px solid black;
-      color: black;
-    }
   }
 `;
 
 export const SearchDataList = styled.div`
-  width: 515px;
+  width: 660px;
   left: -1;
   display: flex;
   flex-direction: column;
-  height: 500px;
+  max-height: 500px;
   overflow-y: auto;
+  box-sizing: border-box;
+  border: 1px solid ${newBlack};
+  border-radius: 0 0 10px 10px;
+  border-top: 0px;
 
   a {
-    border: 1px solid ${basicColor};
-    border-top: 0px;
     box-sizing: border-box;
     color: black;
-    padding: 8px 0 8px 0;
+    padding: 8px;
     background-color: white;
     cursor: pointer;
     &:hover {

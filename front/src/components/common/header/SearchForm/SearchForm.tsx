@@ -22,7 +22,7 @@ const SearchForm = () => {
     isSuccess,
   } = useQuery<any, AxiosError>(`search/${title}`, () => getSearchBlog(title), {
     enabled: false,
-    onError: err => err.response?.status === 404 && setErrText(title),
+    onError: (err) => err.response?.status === 404 && setErrText(title),
   });
 
   const debounceSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,12 +51,12 @@ const SearchForm = () => {
         break;
       case "ArrowDown":
         selectIdx < data?.length - 1
-          ? setSelectIdx(prev => prev + 1)
+          ? setSelectIdx((prev) => prev + 1)
           : setSelectIdx(0);
         break;
       case "ArrowUp":
         selectIdx > 0
-          ? setSelectIdx(prev => prev - 1)
+          ? setSelectIdx((prev) => prev - 1)
           : setSelectIdx(data?.length - 1);
         break;
       case "Enter":
@@ -67,7 +67,7 @@ const SearchForm = () => {
 
   return (
     <SearchFormContainer
-      onBlur={e =>
+      onBlur={(e) =>
         !e.currentTarget.contains(e.relatedTarget) && setIsModal(false)
       }
     >
@@ -80,7 +80,7 @@ const SearchForm = () => {
               }
             : {}
         }
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           setIsModal(false);
           navigate(`/search/${title}`);
@@ -88,13 +88,14 @@ const SearchForm = () => {
       >
         <input
           value={title}
-          onChange={e => debounceSearch(e)}
+          onChange={(e) => debounceSearch(e)}
           onClick={() => !isModal && setIsModal(true)}
-          onKeyDown={e => KeyDownSearch(e)}
+          onKeyDown={(e) => KeyDownSearch(e)}
           type="text"
           placeholder="검색어를 입력해 주세요"
         />
-        <button>검색</button>
+
+        <button>🔍</button>
       </SearchFormComponent>
       <SearchModal
         isError={isError}

@@ -12,6 +12,7 @@ export const HeaderContaier = styled.header`
   box-sizing: border-box;
   height: 79px;
   justify-content: space-between;
+  align-items: center;
 
   background-color: white;
 `;

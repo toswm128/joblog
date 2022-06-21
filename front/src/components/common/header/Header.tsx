@@ -20,8 +20,8 @@ const Header = () => {
           <Link to={"/write"}>글쓰기</Link>
         </div>
       </HeaderLeft>
+      <SearchForm />
       <HeaderRight>
-        <SearchForm />
         <HeaderButtons />
       </HeaderRight>
     </HeaderContaier>

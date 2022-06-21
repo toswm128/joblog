@@ -45,7 +45,7 @@ export const BoardItemContent = styled.div`
   .BoardWriter {
     /* 고급 */
     color: ${DisabledColor};
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
   .boardDate {
     /* 레이아웃 */
@@ -54,7 +54,7 @@ export const BoardItemContent = styled.div`
     min-height: 15px;
 
     /* 고급 */
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: ${DisabledColor};
   }
 `;
