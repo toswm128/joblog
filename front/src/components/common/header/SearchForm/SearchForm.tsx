@@ -6,16 +6,12 @@ import { useNavigate } from "react-router-dom";
 import SearchButton from "./SearchButton";
 import { SearchFormComponent, SearchFormContainer } from "./SearchFormStyled";
 import SearchModal from "./SearchModal";
+import useSearchForm from "./useSearchForm";
 
 const SearchForm = () => {
   const [title, setTitle] = useState("");
-  const [timer, setTimer] = useState<NodeJS.Timeout>();
   const { getSearchBlog } = useBlogAPI();
-  const [isModal, setIsModal] = useState(false);
-  const [errText, setErrText] = useState("");
-  const [selectIdx, setSelectIdx] = useState(-1);
   const navigate = useNavigate();
-
   const {
     refetch,
     data: { data } = {},
@@ -26,45 +22,15 @@ const SearchForm = () => {
     onError: (err) => err.response?.status === 404 && setErrText(title),
   });
 
-  const debounceSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
-    if (timer) clearTimeout(timer);
-    const newTimer = setTimeout(async () => {
-      if (e.target.value) {
-        await refetch();
-        setIsModal(true);
-      }
-    }, 800);
-    setTimer(newTimer);
-  };
-
-  const selectSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    navigate(`/board/${data[selectIdx].idx}`);
-    setIsModal(false);
-    setSelectIdx(-1);
-  };
-
-  const KeyDownSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    switch (e.key) {
-      case "Escape":
-        setIsModal(false);
-        break;
-      case "ArrowDown":
-        selectIdx < data?.length - 1
-          ? setSelectIdx((prev) => prev + 1)
-          : setSelectIdx(0);
-        break;
-      case "ArrowUp":
-        selectIdx > 0
-          ? setSelectIdx((prev) => prev - 1)
-          : setSelectIdx(data?.length - 1);
-        break;
-      case "Enter":
-        selectIdx >= 0 && selectSearch(e);
-        console.log(selectIdx, e.key);
-    }
-  };
+  const {
+    debounceSearch,
+    KeyDownSearch,
+    setErrText,
+    selectIdx,
+    errText,
+    isModal,
+    setIsModal,
+  } = useSearchForm(refetch, data);
 
   return (
     <SearchFormContainer
@@ -89,7 +55,10 @@ const SearchForm = () => {
       >
         <input
           value={title}
-          onChange={(e) => debounceSearch(e)}
+          onChange={(e) => {
+            setTitle(e.target.value);
+            debounceSearch(e);
+          }}
           onClick={() => !isModal && setIsModal(true)}
           onKeyDown={(e) => KeyDownSearch(e)}
           type="text"
