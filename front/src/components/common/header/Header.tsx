@@ -13,12 +13,6 @@ const Header = () => {
             <img src={logo} alt="" />
           </Link>
         </div>
-        <div className="header-nav">
-          <Link to={"/my"}>내 블로그</Link>
-        </div>
-        <div className="header-nav">
-          <Link to={"/write"}>글쓰기</Link>
-        </div>
       </HeaderLeft>
       <SearchForm />
       <HeaderRight>

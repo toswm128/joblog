@@ -56,9 +56,10 @@ const BoardHeader = ({
       <div className="title">{title}</div>
       <div className="info">
         <Profile
-          userIdx={userIdx}
+          isMe={false}
+          idx={userIdx}
           name={name}
-          profile={profile}
+          src={profile}
           regdate={regdate}
         />
         <LikeButton

@@ -2,6 +2,9 @@ import useAuthAPI from "hooks/API/useAuthAPI";
 import axios from "axios";
 import { useQuery, useQueryClient } from "react-query";
 import { Link } from "react-router-dom";
+import DefaultButton from "components/common/Buttons/DefaultButton";
+import Profile from "components/common/Profile";
+import log_out from "assets/png/log_out.png";
 
 const HeaderButtons = () => {
   const { GetUser } = useAuthAPI();
@@ -15,15 +18,18 @@ const HeaderButtons = () => {
     enabled: localStorage.getItem("AccessToken") ? true : false,
   });
 
+  console.log(data);
   return (
     <>
       {isSuccess ? (
         <>
-          <Link to={"/my"} className="header-authBtn">
-            {data.name}
+          <Link to={"/write"}>
+            <DefaultButton isAbled={false} size={"M"}>
+              <>글작성</>
+            </DefaultButton>
           </Link>
-          <div
-            className="header-authBtn"
+          <Profile isMe={true} idx={data.id} src={data.profile} />
+          {/* <div
             onClick={() => {
               localStorage.removeItem("AccessToken");
               axios.defaults.headers.common["Authorization"] = "";
@@ -31,7 +37,7 @@ const HeaderButtons = () => {
             }}
           >
             로그아웃
-          </div>
+          </div> */}
         </>
       ) : (
         <>

@@ -40,26 +40,6 @@ export const SearchFormComponent = styled.form`
     font-size: 14px;
     color: ${newBlack};
   }
-
-  /* 검색 */
-  button {
-    /* 레이아웃 */
-    position: relative;
-    left: 1px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    /* 고급 */
-    border: 1px solid ${newBlack};
-
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0);
-    font-size: 14px;
-    color: ${newBlack};
-    cursor: pointer;
-  }
 `;
 
 export const SearchDataList = styled.div`

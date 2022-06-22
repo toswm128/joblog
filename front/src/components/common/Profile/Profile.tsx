@@ -1,22 +1,28 @@
 import { Link } from "react-router-dom";
+import MyProfileImg from "./MyProfileImg";
 
 interface IProfile {
-  userIdx: number;
-  name: string;
-  profile: string;
-  regdate: string;
+  isMe: boolean;
+  idx: number;
+  name?: string;
+  src: string;
+  regdate?: string;
 }
 
-const Profile = ({ userIdx, name, profile, regdate }: IProfile) => {
+const Profile = ({ isMe, idx, name, src, regdate }: IProfile) => {
   return (
     <div className="profil">
-      <Link to={`/user/${userIdx}`} className="profil">
-        <img className="profilImg" src={profile} alt="" />
-        <div>
-          <h4>{name}</h4>
-          <p>{regdate}</p>
-        </div>
-      </Link>
+      {isMe ? (
+        <MyProfileImg src={src} />
+      ) : (
+        <Link to={`/user/${idx}`} className="profil">
+          <img className="profilImg" src={src} alt="" />
+          <div>
+            <h4>{name}</h4>
+            <p>{regdate}</p>
+          </div>
+        </Link>
+      )}
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { AxiosError } from "axios";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+import SearchButton from "./SearchButton";
 import { SearchFormComponent, SearchFormContainer } from "./SearchFormStyled";
 import SearchModal from "./SearchModal";
 
@@ -95,7 +96,7 @@ const SearchForm = () => {
           placeholder="검색어를 입력해 주세요"
         />
 
-        <button>🔍</button>
+        <SearchButton />
       </SearchFormComponent>
       <SearchModal
         isError={isError}
