@@ -1,3 +1,4 @@
+import LogoutSetting from "./LogoutSetting/LogoutSetting";
 import NameSetting from "./NameSetting";
 import ProfileSetting from "./ProfileSetting";
 
@@ -6,6 +7,7 @@ const Setting = () => {
     <>
       <NameSetting />
       <ProfileSetting />
+      <LogoutSetting />
     </>
   );
 };
