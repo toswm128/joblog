@@ -11,7 +11,7 @@ interface IBoardFlex {
 const BoardFlex = ({ blogFlex }: IBoardFlex) => {
   return (
     <BoardFlexContainer>
-      {blogFlex.map(current => (
+      {blogFlex.map((current) => (
         <Link to={`/board/${current.idx}`} key={current.idx}>
           <BoardItem data={current} />
         </Link>

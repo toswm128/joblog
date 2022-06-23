@@ -8,7 +8,7 @@ import { ModalShowButton } from "../SettingStyle";
 const LogoutSetting = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const { isModal, showModal, closeModal, status } = useModal(false);
+  const { isModal, showModal, closeModal } = useModal(false);
 
   return (
     <div>

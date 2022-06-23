@@ -5,7 +5,7 @@ import { InfoComponent } from "../../InfoStyle";
 export const UserInfoLoader = () => {
   return (
     <>
-      <img style={{ backgroundColor: basicColor }} />
+      <img style={{ backgroundColor: basicColor }} alt="" />
       <div>
         <h2></h2>
       </div>
