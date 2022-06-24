@@ -29,7 +29,7 @@ const Join = () => {
       <AuthForm submit={() => (id && pwd && name ? mutate() : showModal(1))}>
         <>
           <AuthInput
-            updateValue={value => (value || id) && setId(value)}
+            setValue={setId}
             type="text"
             placeholder="아이디"
             reg={idReg}
@@ -37,16 +37,16 @@ const Join = () => {
             successMsg="사용 가능한 아이디 입니다."
           />
           <AuthInput
+            setValue={setId}
             type="password"
-            updateValue={value => (value || pwd) && setPwd(value)}
             placeholder="비밀번호"
             reg={pwdReg}
             errMsg="8~16자리의 대소문자 및 숫자를 입력해 주세요"
             successMsg="사용 가능한 비밀번호 입니다."
           />
           <AuthInput
+            setValue={setId}
             type="text"
-            updateValue={value => (value || name) && setName(value)}
             placeholder="이름"
             reg={nameReg}
             errMsg="8~16자리의 대소문자 및 숫자를 입력해 주세요"

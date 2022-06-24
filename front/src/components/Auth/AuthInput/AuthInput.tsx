@@ -1,5 +1,5 @@
 import { InputContainer } from "components/common/styleObject/InputStyle";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AuthInputContainer,
   ErrMsgContainer,
@@ -7,7 +7,7 @@ import {
 } from "./AuthInputStyle";
 
 interface IAuthInput {
-  updateValue: (value: string) => void;
+  setValue: (value: any) => any;
   placeholder: string;
   type: string;
   reg: RegExp;
@@ -16,36 +16,41 @@ interface IAuthInput {
 }
 
 const AuthInput = ({
-  updateValue,
+  setValue,
   placeholder,
   type,
   reg,
   errMsg,
   successMsg,
 }: IAuthInput) => {
-  const [value, setValue] = useState("");
+  const [value, setThisValue] = useState("");
+  const [isSuccess, setIsSuccess] = useState(true);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setThisValue(e.target.value);
     setValue(e.target.value);
-    !e.target.value && updateValue("");
   };
 
   const tags = { value, onChange, placeholder, type };
 
-  const cheackValue = () => {
+  useEffect(() => {
     if (reg.test(value)) {
-      updateValue(value);
-      return <SuccessMsgContainer>{successMsg}</SuccessMsgContainer>;
+      setValue(value);
+      setIsSuccess(true);
     } else {
-      updateValue("");
-      return <ErrMsgContainer>{errMsg}</ErrMsgContainer>;
+      setValue("");
+      setIsSuccess(false);
     }
-  };
+  }, [reg, setValue, value]);
 
   return (
     <AuthInputContainer>
       <InputContainer {...tags} />
-      {value && cheackValue()}
+      {isSuccess ? (
+        <SuccessMsgContainer>{successMsg}</SuccessMsgContainer>
+      ) : (
+        <ErrMsgContainer>{errMsg}</ErrMsgContainer>
+      )}
     </AuthInputContainer>
   );
 };

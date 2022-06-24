@@ -21,7 +21,7 @@ const Login = () => {
   const quetClient = useQueryClient();
 
   const { mutate } = useMutation(() => Login(id, pwd), {
-    onSuccess: data => {
+    onSuccess: (data) => {
       const { token } = data?.data.data;
       localStorage.setItem("AccessToken", token);
       axios.defaults.headers.common["Authorization"] = token;
@@ -38,14 +38,14 @@ const Login = () => {
       <AuthForm submit={() => (id && pwd ? mutate() : showModal(1))}>
         <>
           <AuthInput
-            updateValue={value => (value || id) && setId(value)}
+            setValue={setId}
             placeholder="아이디"
             type="text"
             reg={idReg}
             errMsg="6~20자리의 대소문자 및 숫자를 입력해 주세요"
           />
           <AuthInput
-            updateValue={value => (value || pwd) && setPwd(value)}
+            setValue={setPwd}
             placeholder="비밀번호"
             type="password"
             reg={pwdReg}
