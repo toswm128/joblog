@@ -12,7 +12,11 @@ const BoardItem = memo(({ data }: IBoardItem) => {
     <BoardItemContainer>
       <img src={data?.banner} alt="" />
       <BoardItemContent>
-        <div className="BoardIitle">{data?.title}</div>
+        <div className="BoardIitle">
+          {data?.title && data.title.length >= 45
+            ? data.title.substring(45, 0) + "..."
+            : data?.title}
+        </div>
 
         <div className="BoardWriter">{data?.name}</div>
         <div className="boardDate">{data?.regdate}</div>
