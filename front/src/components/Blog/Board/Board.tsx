@@ -20,7 +20,8 @@ interface IBoard {
 const Board = ({ idx }: IBoard) => {
   const { isModal, showModal } = useModal(false);
   const navigate = useNavigate();
-  const { getBoard } = useBlogAPI();
+  const { getBoard, getBlog } = useBlogAPI();
+
   const { isLoading, data: { data: board } = {} } = useQuery(
     `board/${idx}`,
     () => getBoard(idx),
@@ -56,6 +57,7 @@ const Board = ({ idx }: IBoard) => {
               isModal={isModal}
               showModal={showModal}
               breakpoints={anotherBreakPoints}
+              infiniteFuc={getBlog}
             />
           </BoardContent>
         </>

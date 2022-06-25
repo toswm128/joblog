@@ -1,4 +1,3 @@
-import useBlogAPI from "assets/API/useBlogAPI";
 import BoardList from "components/common/NewBlogs/BoardList";
 import { NewBlogsContainer } from "components/common/NewBlogs/MainPageStyle";
 import { useState } from "react";
@@ -13,6 +12,7 @@ interface INewBlogs {
   showModal?: (status?: number | undefined) => void;
   closeModal?: () => void;
   breakpoints: number[];
+  infiniteFuc: (page: number) => any;
 }
 
 const NewBlogs = ({
@@ -20,17 +20,17 @@ const NewBlogs = ({
   showModal,
   closeModal,
   breakpoints,
+  infiniteFuc,
 }: INewBlogs) => {
-  const { getBlog } = useBlogAPI();
   const navigate = useNavigate();
   const [isEnd, setIsEnd] = useState(false);
   const { data, isLoading, isError, fetchNextPage } = useInfiniteQuery(
     "getBoard",
-    ({ pageParam = 0 }) => getBlog(pageParam),
+    ({ pageParam = 0 }) => infiniteFuc(pageParam),
     {
       onError: showModal,
-      select: data => data,
-      getNextPageParam: (lastPage, pages) => lastPage.nextPage,
+      select: (data) => data,
+      getNextPageParam: (lastPage) => lastPage.nextPage,
       onSuccess: ({ pages }) => {
         const last = pages[pages.length - 1];
         last.isEnd && setIsEnd(true);

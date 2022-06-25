@@ -11,7 +11,6 @@ const HeaderButtons = () => {
     enabled: localStorage.getItem("AccessToken") ? true : false,
   });
 
-  console.log(data);
   return (
     <>
       <Link to={"/write"}>
