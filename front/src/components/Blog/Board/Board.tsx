@@ -58,6 +58,7 @@ const Board = ({ idx }: IBoard) => {
               showModal={showModal}
               breakpoints={anotherBreakPoints}
               infiniteFuc={getBlog}
+              querykey={"blogs"}
             />
           </BoardContent>
         </>

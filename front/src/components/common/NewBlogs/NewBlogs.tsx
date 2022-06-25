@@ -8,6 +8,7 @@ import Modal from "../Modal";
 import ViewObserver from "../ViewObserver";
 
 interface INewBlogs {
+  querykey: string;
   isModal?: boolean;
   showModal?: (status?: number | undefined) => void;
   closeModal?: () => void;
@@ -16,6 +17,7 @@ interface INewBlogs {
 }
 
 const NewBlogs = ({
+  querykey,
   isModal,
   showModal,
   closeModal,
@@ -25,7 +27,7 @@ const NewBlogs = ({
   const navigate = useNavigate();
   const [isEnd, setIsEnd] = useState(false);
   const { data, isLoading, isError, fetchNextPage } = useInfiniteQuery(
-    "getBoard",
+    querykey,
     ({ pageParam = 0 }) => infiniteFuc(pageParam),
     {
       onError: showModal,

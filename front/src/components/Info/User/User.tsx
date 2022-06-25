@@ -36,6 +36,7 @@ const User = () => {
       <NewBlogs
         breakpoints={myBreakPoints}
         infiniteFuc={(page) => GetBlog2UserIdx(userIdx, page)}
+        querykey={`userBlogs/${userIdx}`}
       />
       <Modal
         isModal={isModal}

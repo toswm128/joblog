@@ -13,6 +13,7 @@ const Main = () => {
       closeModal={closeModal}
       breakpoints={defaultBreakPoints}
       infiniteFuc={getBlog}
+      querykey={"blogs"}
     />
   );
 };

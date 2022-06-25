@@ -30,7 +30,11 @@ const My = () => {
   return (
     <InfoContainer>
       <MyInfo isFetching={isMyInfoFetching || isMyInfoError} info={myInfo} />
-      <NewBlogs breakpoints={myBreakPoints} infiniteFuc={getMyBoard} />
+      <NewBlogs
+        breakpoints={myBreakPoints}
+        infiniteFuc={getMyBoard}
+        querykey={"myBlogs"}
+      />
       <Modal
         isModal={isModal}
         title={"Error"}
