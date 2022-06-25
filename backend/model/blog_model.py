@@ -117,7 +117,8 @@ class blogModel:
         db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
         cursor = db.cursor(pymysql.cursors.DictCursor)
         sql = '''select b1.*,u1.name, count(l1.userIdx) likesCount from blog b1 JOIN user u1 ON u1.idx = b1.userIdx LEFT JOIN likes l1 ON b1.idx = l1.blogIdx 
-        where b1.userIdx = %s GROUP BY b1.idx order by b1.idx desc Limit %s, %s;''' % (userIdx,page*limit,limit)
+        where b1.userIdx = %s GROUP BY b1.idx order by b1.idx desc Limit %s, %s;''' % (userIdx,page*int(limit),limit)
+        print(sql)
         cursor.execute(sql)
         result = cursor.fetchall()
         db.close()

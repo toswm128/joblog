@@ -109,4 +109,4 @@ def create_blog_endpoints(app, services):
                     userBoard = blog_service.get_my_board(token,page,limit)
             else:
                 return jsonify({'result':'failure','msg': 'blog정보 가져오기 실패'}),400
-            return jsonify({'result':'success','msg': 'userBoard 가져오기 성공', 'data':userBoard})
+            return jsonify({'result':'success', 'nextPage':page+1, 'msg': 'userBoard 가져오기 성공', 'data':userBoard['data'],'isEnd':userBoard['isEnd']})
