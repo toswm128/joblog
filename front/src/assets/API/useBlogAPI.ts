@@ -5,6 +5,7 @@ import { banner } from "Store/WriteEditorStore/type";
 const useBlogAPI = () => {
   const getBlog = async (page: number) => {
     const result = await axios.get(`/?page=${page}&limit=23`);
+    console.log(result.data);
     return result.data;
   };
 
@@ -15,9 +16,11 @@ const useBlogAPI = () => {
     return result;
   };
 
-  const GetBlog2UserIdx = async (userIdx: string | undefined) => {
-    const result = await axios.get(`blog/user?userIdx=${userIdx}`);
-    return result;
+  const GetBlog2UserIdx = async (userIdx: string | undefined, page: number) => {
+    const result = await axios.get(
+      `blog/user?userIdx=${userIdx}&page=${page}&limit=23`
+    );
+    return result.data;
   };
 
   const postBoard = async (dom: any, title: string, banner: banner) => {
@@ -92,9 +95,10 @@ const useBlogAPI = () => {
     return result;
   };
 
-  const getMyBoard = async () => {
-    const result = await axios.get("/blog/user");
-    return result;
+  const getMyBoard = async (page: number) => {
+    const result = await axios.get(`/blog/user?page=${page}&limit=23`);
+    console.log(result.data);
+    return result.data;
   };
 
   return {

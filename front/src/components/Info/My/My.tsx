@@ -1,4 +1,3 @@
-import UserBoards from "../UserBoards";
 import { InfoContainer } from "../InfoStyle";
 import useAuthAPI from "hooks/API/useAuthAPI";
 import useBlogAPI from "assets/API/useBlogAPI";
@@ -8,11 +7,14 @@ import useModal from "hooks/modal";
 import { useNavigate } from "react-router-dom";
 import Modal from "components/common/Modal";
 import MyInfo from "./MyInfo";
+import NewBlogs from "components/common/NewBlogs";
+import { myBreakPoints } from "assets/breakpoints/breakpoints";
 
 const My = () => {
   const { GetUser } = useAuthAPI();
   const { getMyBoard } = useBlogAPI();
   const { isModal, showModal, closeModal, status } = useModal(false);
+  const navigate = useNavigate();
 
   const {
     data: { data: myInfo } = {},
@@ -24,22 +26,11 @@ const My = () => {
       console.log(error.response?.status);
     },
   });
-  const { data: { data: myBoard } = {}, isFetching: isBoardFetching } =
-    useQuery("getMyBoard", getMyBoard);
-
-  const navigate = useNavigate();
 
   return (
     <InfoContainer>
-      <MyInfo
-        isFetching={isMyInfoFetching || isBoardFetching || isMyInfoError}
-        info={myInfo}
-      />
-      <UserBoards
-        isFetching={isMyInfoFetching || isBoardFetching || isMyInfoError}
-        borders={myBoard}
-      />
-
+      <MyInfo isFetching={isMyInfoFetching || isMyInfoError} info={myInfo} />
+      <NewBlogs breakpoints={myBreakPoints} infiniteFuc={getMyBoard} />
       <Modal
         isModal={isModal}
         title={"Error"}
