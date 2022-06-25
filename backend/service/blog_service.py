@@ -20,7 +20,7 @@ class blogService:
         new_page = int(page)
         blog = self.blog_model.get_blog(new_page,int(limit))
         isEnd = False
-        if len(blog) != int(limit):
+        if len(blog) < int(limit):
             isEnd = True
         return {"data":blog,"isEnd":isEnd}
 
@@ -56,12 +56,18 @@ class blogService:
         else:
             return 400
     
-    def get_my_board(self,token):
+    def get_my_board(self,token,page,limit):
         userIdx = self.tools.get_data(token)['idx']
-        userBoard = self.blog_model.get_board_to_userIdx(userIdx)
-        return userBoard
+        userBoard = self.blog_model.get_board_to_userIdx(userIdx,page,limit)
+        isEnd = False
+        if len(userBoard) < int(limit):
+            isEnd = True
+        return {"data":userBoard,"isEnd":isEnd}
 
-    def get_ussr_board(self,userIdx):
-        userBoard = self.blog_model.get_board_to_userIdx(userIdx)
-        return userBoard
+    def get_ussr_board(self,userIdx,page,limit):
+        userBoard = self.blog_model.get_board_to_userIdx(userIdx,page,limit)
+        isEnd = False
+        if len(userBoard) < int(limit):
+            isEnd = True
+        return {"data":userBoard,"isEnd":isEnd}
             

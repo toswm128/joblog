@@ -24,12 +24,8 @@ def create_blog_endpoints(app, services):
         if request.method == 'POST':
             value = request.form
             token = request.headers['Authorization']
-            print("토큰:",token)
             if(token == ""):
-                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,403
-            print("토큰:",token)
-            if(token == ""):
-                return jsonify({'result':'success','msg': '유저 토큰 정보 가져오기 실패'}) ,400
+                return jsonify({'result':'failure','msg': '유저 정보 가져오기 실패'}) ,400
             file = request.files["banner"]
             fileName = str(uuid.uuid4())+'.'+file.filename.split('.')[1]
             file.save(os.path.join(app.config["IMAGE_UPLOADS"],fileName))
@@ -64,7 +60,7 @@ def create_blog_endpoints(app, services):
             token = request.headers['Authorization']
             print("토큰:",token)
             if(token == ""):
-                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,403
+                return jsonify({'result':'failure','msg': '유저 정보 가져오기 실패'}) ,400
             status = blog_service.post_comment(data,token)
             if status == 400:
                 return jsonify({"msg":"포함되지 않는 데이터가 있습니다"}),400
@@ -77,7 +73,7 @@ def create_blog_endpoints(app, services):
             data = request.json
             token = request.headers['Authorization']
             if(token == ""):
-                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,403
+                return jsonify({'result':'failure','msg': '유저 정보 가져오기 실패'}) ,400
             status = blog_service.post_likes(data,token)
             if status == 400:
                 return jsonify({"msg":"포함되지 않는 데이터가 있습니다"}),400
@@ -102,10 +98,15 @@ def create_blog_endpoints(app, services):
         if request.method == 'GET':
             token = request.headers['Authorization']
             userIdx = request.args.get('userIdx')
-            if(token == ""):
-                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,403
-            elif userIdx:
-                userBoard = blog_service.get_ussr_board(userIdx)
+            page = int(request.args.get('page'))
+            limit = request.args.get('limit')
+            if page>=0 and limit:
+                if(token == ""):
+                    return jsonify({'result':'failure','msg': '유저 정보 가져오기 실패'}) ,400
+                elif userIdx:
+                    userBoard = blog_service.get_ussr_board(userIdx,page,limit)
+                else:
+                    userBoard = blog_service.get_my_board(token,page,limit)
             else:
-                userBoard = blog_service.get_my_board(token)
+                return jsonify({'result':'failure','msg': 'blog정보 가져오기 실패'}),400
             return jsonify({'result':'success','msg': 'userBoard 가져오기 성공', 'data':userBoard})
