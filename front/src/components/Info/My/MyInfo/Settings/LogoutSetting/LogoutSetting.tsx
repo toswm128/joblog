@@ -1,5 +1,5 @@
 import axios from "axios";
-import Modal from "components/common/Modal";
+import Modal from "components/Modal";
 import useModal from "hooks/modal";
 import { useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
@@ -8,12 +8,11 @@ import { ModalShowButton } from "../SettingStyle";
 const LogoutSetting = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const { isModal, showModal, closeModal } = useModal(false);
 
   return (
     <div>
-      <ModalShowButton onClick={() => showModal()}>로그아웃</ModalShowButton>
-      <Modal
+      {/* <ModalShowButton onClick={() => showModal()}>로그아웃</ModalShowButton> */}
+      {/* <Modal
         isModal={isModal}
         title={""}
         buttonText={"로그아웃"}
@@ -26,7 +25,7 @@ const LogoutSetting = () => {
         }}
       >
         <>정말 로그아웃 하시겠습니까?</>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

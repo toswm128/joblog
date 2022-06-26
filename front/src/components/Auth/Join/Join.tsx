@@ -1,6 +1,6 @@
 import useAuthAPI from "hooks/API/useAuthAPI";
 import { idReg, nameReg, pwdReg } from "assets/regExp/authRegExp";
-import Modal from "components/common/Modal";
+import Modal from "components/Modal";
 import { AuthButton } from "components/common/styleObject/ButtonStyle";
 import useModal from "hooks/modal";
 import { useRef, useState } from "react";
@@ -14,19 +14,17 @@ const Join = () => {
   const [pwd, setPwd] = useState("");
   const [name, setName] = useState("");
 
-  const { isModal, showModal, closeModal, status } = useModal(false);
-
   const { Join } = useAuthAPI();
   const navigate = useNavigate();
 
   const { mutate } = useMutation(() => Join(id, pwd, name), {
     onSuccess: () => navigate("/login"),
-    onError: showModal,
+    // onError: showModal,
   });
 
   return (
     <>
-      <AuthForm submit={() => (id && pwd && name ? mutate() : showModal(1))}>
+      <AuthForm submit={() => (id && pwd && name ? mutate() : mutate())}>
         <>
           <AuthInput
             setValue={setId}
@@ -60,7 +58,7 @@ const Join = () => {
           </div>
         </>
       </AuthForm>
-      <Modal
+      {/* <Modal
         isModal={isModal}
         title={"⚠️ Error ⚠️"}
         buttonText={"닫기"}
@@ -70,7 +68,7 @@ const Join = () => {
           {status === 1 && "조건에 맞지 않는 항목이 있습니다"}
           {status === 500 && "서버 에러"}
         </>
-      </Modal>
+      </Modal> */}
     </>
   );
 };

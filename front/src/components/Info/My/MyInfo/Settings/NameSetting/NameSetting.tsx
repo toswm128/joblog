@@ -1,4 +1,4 @@
-import Modal from "components/common/Modal";
+import Modal from "components/Modal";
 import useAuthAPI from "hooks/API/useAuthAPI";
 import useModal from "hooks/modal";
 import { useState } from "react";
@@ -6,8 +6,6 @@ import { useMutation, useQueryClient } from "react-query";
 import { ModalShowButton } from "../SettingStyle";
 
 const NameSetting = () => {
-  const { isModal, showModal, closeModal } = useModal(false);
-
   const [name, setName] = useState("");
 
   const { PatchMyName } = useAuthAPI();
@@ -20,13 +18,12 @@ const NameSetting = () => {
         old.data.data.name = name;
         return old;
       });
-      closeModal();
     },
   });
 
   return (
     <div>
-      <ModalShowButton onClick={() => showModal()}>이름 변경</ModalShowButton>
+      {/* <ModalShowButton onClick={() => showModal()}>이름 변경</ModalShowButton>
       <Modal
         isModal={isModal}
         title={"이름 변경"}
@@ -42,7 +39,7 @@ const NameSetting = () => {
             onChange={e => setName(e.target.value)}
           />
         </>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

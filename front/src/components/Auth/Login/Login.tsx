@@ -1,7 +1,7 @@
 import useAuthAPI from "hooks/API/useAuthAPI";
 import { idReg, pwdReg } from "assets/regExp/authRegExp";
 import axios, { AxiosError } from "axios";
-import Modal from "components/common/Modal";
+import Modal from "components/Modal";
 import { AuthButton } from "components/common/styleObject/ButtonStyle";
 import useModal from "hooks/modal";
 import { useState } from "react";
@@ -16,7 +16,6 @@ const Login = () => {
 
   const navigate = useNavigate();
   const { Login } = useAuthAPI();
-  const { isModal, showModal, closeModal, status } = useModal(false);
 
   const quetClient = useQueryClient();
 
@@ -29,13 +28,13 @@ const Login = () => {
       navigate("/");
     },
     onError: (error: AxiosError) => {
-      showModal(error.response?.status);
+      // showModal(error.response?.status);
     },
   });
 
   return (
     <>
-      <AuthForm submit={() => (id && pwd ? mutate() : showModal(1))}>
+      <AuthForm submit={() => (id && pwd ? mutate() : mutate())}>
         <>
           <AuthInput
             setValue={setId}
@@ -59,7 +58,7 @@ const Login = () => {
           </div>
         </>
       </AuthForm>
-      <Modal
+      {/* <Modal
         isModal={isModal}
         title={"⚠️ Error ⚠️"}
         buttonText={"닫기"}
@@ -73,7 +72,7 @@ const Login = () => {
           {status >= 500 && "서버 에러"}
           {status === 0 && "인터넷 상태가 불안정 합니다."}
         </>
-      </Modal>
+      </Modal> */}
     </>
   );
 };

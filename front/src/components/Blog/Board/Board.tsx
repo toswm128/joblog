@@ -8,7 +8,7 @@ import CommentList from "./Comment/CommentList";
 import Divider from "components/common/Divider";
 import BoardHeader from "./BoardHeader";
 import useModal from "hooks/modal";
-import Modal from "components/common/Modal";
+import Modal from "components/Modal";
 import { useNavigate } from "react-router-dom";
 import NewBlogs from "components/common/NewBlogs";
 import { anotherBreakPoints } from "assets/breakpoints/breakpoints";
@@ -18,16 +18,13 @@ interface IBoard {
 }
 
 const Board = ({ idx }: IBoard) => {
-  const { isModal, showModal } = useModal(false);
   const navigate = useNavigate();
   const { getBoard, getBlog } = useBlogAPI();
 
   const { isLoading, data: { data: board } = {} } = useQuery(
     `board/${idx}`,
     () => getBoard(idx),
-    {
-      onError: () => showModal(),
-    }
+    {}
   );
 
   return (
@@ -54,8 +51,6 @@ const Board = ({ idx }: IBoard) => {
               <>다른 게시글</>
             </Divider>
             <NewBlogs
-              isModal={isModal}
-              showModal={showModal}
               breakpoints={anotherBreakPoints}
               infiniteFuc={getBlog}
               querykey={"blogs"}
@@ -65,14 +60,14 @@ const Board = ({ idx }: IBoard) => {
       ) : (
         <Loader />
       )}
-      <Modal
+      {/* <Modal
         isModal={isModal}
         title={"⚠️ Warning! ⚠️"}
         buttonText={"새로고침"}
         btnClick={() => navigate(0)}
       >
         <>인터넷 연결이 불안정 합니다.</>
-      </Modal>
+      </Modal> */}
     </BoardContainer>
   );
 };

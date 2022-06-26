@@ -1,7 +1,20 @@
 export type ModalStateType = {
   isOpen: boolean;
+  type: string;
+  Modals: TModals;
+};
+
+export type TModals = Map<string, TModal>;
+
+export type TModal = {
+  type: string;
   titleText: string;
-  context: string;
+  content: string;
   status: number;
-  buttonFuc: (any?: any) => any;
+  button?: TButton[];
+};
+
+export type TButton = {
+  title: string;
+  fuc: () => any;
 };

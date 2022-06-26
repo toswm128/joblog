@@ -9,6 +9,7 @@ import Header from "components/common/header";
 import MyPage from "pages/Info/MyPage";
 import SearchBoardPage from "pages/Blog/SearchBoardPage";
 import UserPage from "pages/Info/UserPage";
+import Modal from "components/Modal";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/user/:userIdx" element={<UserPage />} />
         <Route path="/search/:q" element={<SearchBoardPage />} />
       </Routes>
+      <Modal />
     </Router>
   );
 }

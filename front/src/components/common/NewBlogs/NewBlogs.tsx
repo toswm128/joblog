@@ -4,33 +4,24 @@ import { useState } from "react";
 import { useInfiniteQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import MainLoader from "../Loader/MainLoader";
-import Modal from "../Modal";
 import ViewObserver from "../ViewObserver";
+import useModal from "hooks/modal";
 
 interface INewBlogs {
   querykey: string;
-  isModal?: boolean;
-  showModal?: (status?: number | undefined) => void;
-  closeModal?: () => void;
   breakpoints: number[];
   infiniteFuc: (page: number) => any;
 }
 
-const NewBlogs = ({
-  querykey,
-  isModal,
-  showModal,
-  closeModal,
-  breakpoints,
-  infiniteFuc,
-}: INewBlogs) => {
+const NewBlogs = ({ querykey, breakpoints, infiniteFuc }: INewBlogs) => {
+  const { openModal } = useModal();
   const navigate = useNavigate();
   const [isEnd, setIsEnd] = useState(false);
   const { data, isLoading, isError, fetchNextPage } = useInfiniteQuery(
     querykey,
     ({ pageParam = 0 }) => infiniteFuc(pageParam),
     {
-      onError: showModal,
+      onError: () => openModal("err500"),
       select: (data) => data,
       getNextPageParam: (lastPage) => lastPage.nextPage,
       onSuccess: ({ pages }) => {
@@ -58,7 +49,7 @@ const NewBlogs = ({
           </BoardList>
         )}
       </NewBlogsContainer>
-      <Modal
+      {/* <Modal
         isModal={isModal}
         title={"⚠️ Warning! ⚠️"}
         buttonText={"새로고침"}
@@ -66,7 +57,7 @@ const NewBlogs = ({
         backgroundClick={closeModal}
       >
         <>인터넷 연결이 불안정 합니다.</>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

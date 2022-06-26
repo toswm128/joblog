@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Modal from "components/common/Modal";
+import Modal from "components/Modal";
 import useAuthAPI from "hooks/API/useAuthAPI";
 import useModal from "hooks/modal";
 import { useState } from "react";
@@ -10,7 +10,6 @@ const ProfileSetting = () => {
   const { PatchMyProfile } = useAuthAPI();
 
   const [file, setFile] = useState<File>();
-  const { isModal, showModal, closeModal } = useModal(false);
   const [src, setSrc] = useState("");
 
   const queryClient = useQueryClient();
@@ -23,7 +22,7 @@ const ProfileSetting = () => {
 
   return (
     <div>
-      <ModalShowButton onClick={() => showModal()}>
+      {/* <ModalShowButton onClick={() => showModal()}>
         프로필 사진 변경
       </ModalShowButton>
       <Modal
@@ -65,7 +64,7 @@ const ProfileSetting = () => {
             }}
           />
         </ModalContent>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

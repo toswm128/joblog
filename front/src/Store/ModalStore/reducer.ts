@@ -8,15 +8,10 @@ export default createReducer<ModalStateType>(ModalState, {
   [OPEN_MODAL]: (state, action) =>
     produce(state, (draft) => {
       draft.isOpen = true;
-      draft.titleText = action.payload.titleText;
-      draft.context = action.payload.context;
-      draft.buttonFuc = action.payload.buttonFuc;
+      draft.type = action.payload.type;
     }),
   [CLOSE_MODAL]: (state, action) =>
     produce(state, (draft) => {
       draft.isOpen = false;
-      draft.titleText = "";
-      draft.context = "";
-      draft.buttonFuc = () => {};
     }),
 });
