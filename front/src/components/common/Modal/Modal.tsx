@@ -1,7 +1,13 @@
 import DefaultButton from "../Buttons/DefaultButton";
 import { ModalCard, ModalContainer } from "./ModalStyle";
+import reactDom from "react-dom";
 
-interface Modal {
+const ModalPortal = ({ children }: { children: JSX.Element }) => {
+  const el = document.getElementById("modal");
+  return el && reactDom.createPortal(children, el);
+};
+
+interface IModal {
   isModal?: boolean;
   title: string;
   buttonText: string;
@@ -17,27 +23,31 @@ const Modal = ({
   btnClick,
   backgroundClick,
   children,
-}: Modal) => {
+}: IModal) => {
   return (
-    <>
-      {isModal ? (
-        <ModalContainer
-          onClick={(e) =>
-            e.currentTarget === e.target && backgroundClick && backgroundClick()
-          }
-        >
-          <ModalCard>
-            <h2>{title}</h2>
-            <span>{children}</span>
-            <DefaultButton onClick={btnClick} isAbled={true} size={"L"}>
-              <>{buttonText}</>
-            </DefaultButton>
-          </ModalCard>
-        </ModalContainer>
-      ) : (
-        <></>
-      )}
-    </>
+    <ModalPortal>
+      <>
+        {isModal ? (
+          <ModalContainer
+            onClick={(e) =>
+              e.currentTarget === e.target &&
+              backgroundClick &&
+              backgroundClick()
+            }
+          >
+            <ModalCard>
+              <h2>{title}</h2>
+              <span>{children}</span>
+              <DefaultButton onClick={btnClick} isAbled={true} size={"L"}>
+                <>{buttonText}</>
+              </DefaultButton>
+            </ModalCard>
+          </ModalContainer>
+        ) : (
+          <></>
+        )}
+      </>
+    </ModalPortal>
   );
 };
 export default Modal;
