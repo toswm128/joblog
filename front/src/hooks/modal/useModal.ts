@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { CLOSE_MODAL, OPEN_MODAL } from "Store/ModalStore/action";
+import { TModal } from "Store/ModalStore/type";
 import { useTypedSelector } from "Store/rootReducer";
 
 const useModal = () => {
@@ -8,7 +9,7 @@ const useModal = () => {
   const ModalState = useTypedSelector((state) => state.Modal);
 
   const openModal = useCallback(
-    (type: string, option?) =>
+    (type: string, option?: TModal) =>
       dispatch({
         type: OPEN_MODAL,
         payload: { type, option },

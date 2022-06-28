@@ -2,6 +2,7 @@ import DefaultButton from "../common/Buttons/DefaultButton";
 import { ModalCard, ModalContainer } from "./ModalStyle";
 import reactDom from "react-dom";
 import useModal from "hooks/modal";
+import { useState } from "react";
 
 const ModalPortal = ({ children }: { children: JSX.Element }) => {
   const el = document.getElementById("modal");
@@ -21,7 +22,20 @@ const Modal = () => {
   const { ModalState, closeModal } = useModal();
   const { isOpen, type, Modals } = ModalState;
   const modal = Modals.get(type);
-  console.log(isOpen, type, modal);
+
+  // const modalContent = () => {
+  //   switch (modal?.type) {
+  //     case "default":
+  //       return <span>{modal?.contentText}</span>;
+  //     case "text":
+  //       const content = modal?.content;
+  //       console.log(content);
+  //       return <input {...content} type="text" />;
+  //     case "file":
+  //       return <input type="file" />;
+  //   }
+  // };
+  console.log(isOpen);
 
   return (
     <ModalPortal>

@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import Modal from "components/Modal";
 import useAuthAPI from "hooks/API/useAuthAPI";
 import useModal from "hooks/modal";
 import { useState } from "react";
@@ -11,6 +10,7 @@ const ProfileSetting = () => {
 
   const [file, setFile] = useState<File>();
   const [src, setSrc] = useState("");
+  const { openModal } = useModal();
 
   const queryClient = useQueryClient();
   const { mutate } = useMutation(
@@ -22,49 +22,59 @@ const ProfileSetting = () => {
 
   return (
     <div>
-      {/* <ModalShowButton onClick={() => showModal()}>
+      <ModalShowButton
+        onClick={() =>
+          openModal("setting/profile", {
+            type: "jsx",
+            titleText: "프로필 사진 변경",
+            content: (
+              <ModalContent>
+                <label htmlFor="profilePatch">
+                  {src ? (
+                    <img src={src} alt="" />
+                  ) : (
+                    <img
+                      src="http://localhost:5000/image?file=user.png"
+                      alt=""
+                    />
+                  )}
+                  클릭하여 변경
+                </label>
+
+                <input
+                  id="profilePatch"
+                  type="file"
+                  onChange={(e) => {
+                    if (e.target.files && e.target.files.length) {
+                      let fileData = e.target.files[0];
+                      setFile(fileData);
+                      setSrc(URL.createObjectURL(fileData));
+                    }
+                  }}
+                />
+              </ModalContent>
+            ),
+            status: 0,
+            button: [
+              {
+                title: src ? "변경" : "기본 프로필로 변경",
+                fuc: () => {
+                  const form = new FormData();
+                  file
+                    ? form.append("profile", file)
+                    : form.append(
+                        "profile",
+                        "http://localhost:5000/image?file=user.png"
+                      );
+                  mutate(form);
+                },
+              },
+            ],
+          })
+        }
+      >
         프로필 사진 변경
       </ModalShowButton>
-      <Modal
-        isModal={isModal}
-        title={"프로필 사진 변경 "}
-        buttonText={src ? "변경" : "기본 프로필로 변경"}
-        backgroundClick={closeModal}
-        btnClick={() => {
-          const form = new FormData();
-          file
-            ? form.append("profile", file)
-            : form.append(
-                "profile",
-                "http://localhost:5000/image?file=user.png"
-              );
-          mutate(form);
-          closeModal();
-        }}
-      >
-        <ModalContent>
-          <label htmlFor="profilePatch">
-            {src ? (
-              <img src={src} alt="" />
-            ) : (
-              <img src="http://localhost:5000/image?file=user.png" alt="" />
-            )}
-            클릭하여 변경
-          </label>
-
-          <input
-            id="profilePatch"
-            type="file"
-            onChange={e => {
-              if (e.target.files && e.target.files.length) {
-                let fileData = e.target.files[0];
-                setFile(fileData);
-                setSrc(URL.createObjectURL(fileData));
-              }
-            }}
-          />
-        </ModalContent>
-      </Modal> */}
     </div>
   );
 };

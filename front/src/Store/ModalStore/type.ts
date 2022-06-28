@@ -9,7 +9,7 @@ export type TModals = Map<string, TModal>;
 export type TModal = {
   type: string;
   titleText: string;
-  content: string;
+  content: string | JSX.Element;
   status: number;
   button?: TButton[];
 };
