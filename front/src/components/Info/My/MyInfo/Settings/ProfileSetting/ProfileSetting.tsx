@@ -23,54 +23,55 @@ const ProfileSetting = () => {
   return (
     <div>
       <ModalShowButton
-        onClick={() =>
-          openModal("setting/profile", {
-            type: "jsx",
-            titleText: "프로필 사진 변경",
-            content: (
-              <ModalContent>
-                <label htmlFor="profilePatch">
-                  {src ? (
-                    <img src={src} alt="" />
-                  ) : (
-                    <img
-                      src="http://localhost:5000/image?file=user.png"
-                      alt=""
-                    />
-                  )}
-                  클릭하여 변경
-                </label>
+        onClick={
+          () => console.log("")
+          // openModal("setting/profile", {
+          //   type: "jsx",
+          //   titleText: "프로필 사진 변경",
+          //   content: (
+          //     <ModalContent>
+          //       <label htmlFor="profilePatch">
+          //         {src ? (
+          //           <img src={src} alt="" />
+          //         ) : (
+          //           <img
+          //             src="http://localhost:5000/image?file=user.png"
+          //             alt=""
+          //           />
+          //         )}
+          //         클릭하여 변경
+          //       </label>
 
-                <input
-                  id="profilePatch"
-                  type="file"
-                  onChange={(e) => {
-                    if (e.target.files && e.target.files.length) {
-                      let fileData = e.target.files[0];
-                      setFile(fileData);
-                      setSrc(URL.createObjectURL(fileData));
-                    }
-                  }}
-                />
-              </ModalContent>
-            ),
-            status: 0,
-            button: [
-              {
-                title: src ? "변경" : "기본 프로필로 변경",
-                fuc: () => {
-                  const form = new FormData();
-                  file
-                    ? form.append("profile", file)
-                    : form.append(
-                        "profile",
-                        "http://localhost:5000/image?file=user.png"
-                      );
-                  mutate(form);
-                },
-              },
-            ],
-          })
+          //       <input
+          //         id="profilePatch"
+          //         type="file"
+          //         onChange={(e) => {
+          //           if (e.target.files && e.target.files.length) {
+          //             let fileData = e.target.files[0];
+          //             setFile(fileData);
+          //             setSrc(URL.createObjectURL(fileData));
+          //           }
+          //         }}
+          //       />
+          //     </ModalContent>
+          //   ),
+          //   status: 0,
+          //   button: [
+          //     {
+          //       title: src ? "변경" : "기본 프로필로 변경",
+          //       fuc: () => {
+          //         const form = new FormData();
+          //         file
+          //           ? form.append("profile", file)
+          //           : form.append(
+          //               "profile",
+          //               "http://localhost:5000/image?file=user.png"
+          //             );
+          //         mutate(form);
+          //       },
+          //     },
+          //   ],
+          // })
         }
       >
         프로필 사진 변경

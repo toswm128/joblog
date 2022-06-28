@@ -16,7 +16,7 @@ axios.defaults.baseURL = SERVER.SERVER;
 axios.defaults.headers.common["Authorization"] = "";
 
 axios.interceptors.request.use(
-  config => {
+  (config) => {
     const token = localStorage.getItem("AccessToken");
     if (!config.headers) {
       config.headers = {};
@@ -25,7 +25,7 @@ axios.interceptors.request.use(
 
     return config;
   },
-  err => {
+  (err) => {
     console.log(err);
     return Promise.reject(err);
   }

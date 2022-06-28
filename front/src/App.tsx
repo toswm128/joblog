@@ -9,6 +9,7 @@ import Header from "components/common/header";
 import MyPage from "pages/Info/MyPage";
 import SearchBoardPage from "pages/Blog/SearchBoardPage";
 import UserPage from "pages/Info/UserPage";
+import ModalPortal from "components/Modal/ModalPortal";
 import Modal from "components/Modal";
 
 function App() {

@@ -21,7 +21,10 @@ const NewBlogs = ({ querykey, breakpoints, infiniteFuc }: INewBlogs) => {
     querykey,
     ({ pageParam = 0 }) => infiniteFuc(pageParam),
     {
-      onError: () => openModal("err500"),
+      onError: () =>
+        openModal("error", {
+          content: "나중에 다시 시도해 주세요",
+        }),
       select: (data) => data,
       getNextPageParam: (lastPage) => lastPage.nextPage,
       onSuccess: ({ pages }) => {

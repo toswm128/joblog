@@ -23,25 +23,26 @@ const NameSetting = () => {
   return (
     <div>
       <ModalShowButton
-        onClick={() =>
-          openModal("custom", {
-            type: "jsx",
-            titleText: "이름 변경",
-            content: (
-              <input
-                type="text"
-                placeholder="이름을 입력해 주세요"
-                onChange={(e) => setName(e.target.value)}
-              />
-            ),
-            status: 0,
-            button: [
-              {
-                title: "변경",
-                fuc: () => mutate(),
-              },
-            ],
-          })
+        onClick={
+          () => console.log("")
+          // openModal("custom", {
+          //   type: "jsx",
+          //   titleText: "이름 변경",
+          //   content: (
+          //     <input
+          //       type="text"
+          //       placeholder="이름을 입력해 주세요"
+          //       onChange={(e) => setName(e.target.value)}
+          //     />
+          //   ),
+          //   status: 0,
+          //   button: [
+          //     {
+          //       title: "변경",
+          //       fuc: () => mutate(),
+          //     },
+          //   ],
+          // })
         }
       >
         이름 변경

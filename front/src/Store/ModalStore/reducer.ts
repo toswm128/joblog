@@ -11,9 +11,7 @@ export default createReducer<ModalStateType>(ModalState, {
     produce(state, (draft) => {
       draft.isOpen = true;
       draft.type = action.payload.type;
-      if (action.payload.option) {
-        draft.Modals.set(draft.type, action.payload.option);
-      }
+      draft.props = action.payload.props;
     }),
   [CLOSE_MODAL]: (state) =>
     produce(state, (draft) => {
