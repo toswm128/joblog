@@ -14,12 +14,11 @@ def create_auth_endpoints(app, services):
             value = request.json
             loginUser = user_service.try_login(value['id'],value['password'])
             if loginUser == 404:
-                return jsonify({"msg":"아이디를 찾을 수 없습니다."}),404
+                return jsonify({"msg":"아이디를 찾을 수 없습니다."}),400
             elif loginUser == 400:
                 return jsonify({"msg":"비밀번호가 일치하지 않습니다."}),400
             else:
                 return jsonify({'message':'OK!','data':loginUser}), 200
-            return jsonify({"msg":"예기치 못한 오류"}),500
 
 
     @app.route('/join',methods=['POST'])
@@ -38,7 +37,7 @@ def create_auth_endpoints(app, services):
             token = request.headers['Authorization']
             userIdx = request.args.get('userIdx')
             if not token:
-                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,403
+                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,400
             elif userIdx:
                 userData = user_service.get_user_info(userIdx)
             else:
@@ -50,7 +49,7 @@ def create_auth_endpoints(app, services):
         if request.method == 'PATCH':
             token = request.headers['Authorization']
             if not token:
-                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,403
+                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,400
 
 
             src = request.form
@@ -72,7 +71,7 @@ def create_auth_endpoints(app, services):
         if request.method == 'PATCH':
             token = request.headers['Authorization']
             if not token:
-                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,403
+                return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,400
         
             body = request.json
 

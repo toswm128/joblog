@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import MainLoader from "../Loader/MainLoader";
 import ViewObserver from "../ViewObserver";
 import useModal from "hooks/modal";
+import { AxiosError } from "axios";
 
 interface INewBlogs {
   querykey: string;
@@ -15,16 +16,13 @@ interface INewBlogs {
 
 const NewBlogs = ({ querykey, breakpoints, infiniteFuc }: INewBlogs) => {
   const { openModal } = useModal();
-  const navigate = useNavigate();
   const [isEnd, setIsEnd] = useState(false);
   const { data, isLoading, isError, fetchNextPage } = useInfiniteQuery(
     querykey,
     ({ pageParam = 0 }) => infiniteFuc(pageParam),
     {
-      onError: () =>
-        openModal("error", {
-          content: "나중에 다시 시도해 주세요",
-        }),
+      onError: (error: AxiosError) =>
+        openModal("error", { status: error.response?.status }),
       select: (data) => data,
       getNextPageParam: (lastPage) => lastPage.nextPage,
       onSuccess: ({ pages }) => {

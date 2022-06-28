@@ -18,6 +18,7 @@ const Login = () => {
   const { Login } = useAuthAPI();
 
   const quetClient = useQueryClient();
+  const { openModal } = useModal();
 
   const { mutate } = useMutation(() => Login(id, pwd), {
     onSuccess: (data) => {
@@ -28,7 +29,7 @@ const Login = () => {
       navigate("/");
     },
     onError: (error: AxiosError) => {
-      // showModal(error.response?.status);
+      openModal("error", { status: error.response?.status });
     },
   });
 
