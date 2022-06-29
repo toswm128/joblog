@@ -3,6 +3,7 @@ import useModal from "hooks/modal";
 import ModalPortal from "./ModalPortal";
 import Error from "./Modals/Error/Error";
 import Name from "./Modals/Setting/Name";
+import Profile from "./Modals/Setting/Profile";
 
 // export const Modals = {
 // };
@@ -20,6 +21,8 @@ const Modal = () => {
         return <Error {...props} />;
       case "setting/name":
         return <Name {...props} />;
+      case "setting/profile":
+        return <Profile {...props} />;
     }
   };
 
