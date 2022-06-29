@@ -1,31 +1,11 @@
 import styled from "@emotion/styled";
 import DefaultButton from "components/common/Buttons/DefaultButton";
 import ModalForm from "components/Modal/ModalForm";
-import useModal from "hooks/modal";
 import { useState } from "react";
 
 const Profile = ({ mutate }: { mutate: (file: any) => any }) => {
   const [file, setFile] = useState<File>();
   const [src, setSrc] = useState("");
-  const { closeModal } = useModal();
-
-  const onClick = () => {
-    const form = new FormData();
-    file
-      ? form.append("profile", file)
-      : form.append("profile", "http://localhost:5000/image?file=user.png");
-    mutate(form);
-    closeModal();
-  };
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length) {
-      let fileData = e.target.files[0];
-      setFile(fileData);
-      setSrc(URL.createObjectURL(fileData));
-    }
-  };
-
   return (
     <ModalForm>
       <>
@@ -40,9 +20,32 @@ const Profile = ({ mutate }: { mutate: (file: any) => any }) => {
             클릭하여 변경
           </label>
 
-          <input id="profilePatch" type="file" onChange={onChange} />
+          <input
+            id="profilePatch"
+            type="file"
+            onChange={(e) => {
+              if (e.target.files && e.target.files.length) {
+                let fileData = e.target.files[0];
+                setFile(fileData);
+                setSrc(URL.createObjectURL(fileData));
+              }
+            }}
+          />
         </ModalContent>
-        <DefaultButton onClick={onClick} isAbled={true} size={"L"}>
+        <DefaultButton
+          onClick={() => {
+            const form = new FormData();
+            file
+              ? form.append("profile", file)
+              : form.append(
+                  "profile",
+                  "http://localhost:5000/image?file=user.png"
+                );
+            mutate(form);
+          }}
+          isAbled={true}
+          size={"L"}
+        >
           <>{src ? "변경" : "기본 프로필로 변경"}</>
         </DefaultButton>
       </>
