@@ -6,15 +6,14 @@ import { useMutation, useQueryClient } from "react-query";
 import { ModalShowButton } from "../SettingStyle";
 
 const NameSetting = () => {
-  const [name, setName] = useState("");
   const { PatchMyName } = useAuthAPI();
   const queryClient = useQueryClient();
   const { openModal } = useModal();
 
-  const { mutate } = useMutation(() => PatchMyName(name), {
-    onSuccess: () => {
+  const { mutate } = useMutation((name: string) => PatchMyName(name), {
+    onSuccess: (data, variables) => {
       queryClient.setQueryData("myInfo", (old: any) => {
-        old.data.data.name = name;
+        old.data.data.name = variables;
         return old;
       });
     },
@@ -24,7 +23,7 @@ const NameSetting = () => {
     <div>
       <ModalShowButton
         onClick={
-          () => console.log("")
+          () => openModal("setting/name", { mutate })
           // openModal("custom", {
           //   type: "jsx",
           //   titleText: "이름 변경",

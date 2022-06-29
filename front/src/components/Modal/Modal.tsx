@@ -1,9 +1,8 @@
-import DefaultButton from "../common/Buttons/DefaultButton";
-import { ModalCard, ModalContainer } from "./ModalStyle";
 import useModal from "hooks/modal";
 // import loadable from "@loadable/component";
 import ModalPortal from "./ModalPortal";
-import ErrorModal from "./Modals/Error/Error";
+import Error from "./Modals/Error/Error";
+import Name from "./Modals/Setting/Name";
 
 // export const Modals = {
 // };
@@ -18,7 +17,9 @@ const Modal = () => {
   const ModalSelecter = () => {
     switch (type) {
       case "error":
-        return <ErrorModal {...props} />;
+        return <Error {...props} />;
+      case "setting/name":
+        return <Name {...props} />;
     }
   };
 
