@@ -1,19 +1,6 @@
-import { basicColor } from "style/color";
 import { UserType } from "types/UserTypes/type";
 import { InfoComponent } from "../../InfoStyle";
 import Settings from "./Settings";
-
-export const MyInfoLoader = () => {
-  return (
-    <>
-      <img style={{ backgroundColor: basicColor }} />
-      <div>
-        <h2></h2>
-      </div>
-      <Settings />
-    </>
-  );
-};
 
 interface IUserInfo {
   isFetching: boolean;
@@ -23,9 +10,7 @@ interface IUserInfo {
 const MyInfo = ({ isFetching, info }: IUserInfo) => {
   return (
     <InfoComponent>
-      {isFetching ? (
-        <MyInfoLoader />
-      ) : (
+      {!isFetching && (
         <>
           <img src={info?.profile} alt="" />
           <div>

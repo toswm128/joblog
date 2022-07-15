@@ -3,9 +3,6 @@ import useAuthAPI from "hooks/API/useAuthAPI";
 import useBlogAPI from "assets/API/useBlogAPI";
 import { useQuery } from "react-query";
 import { AxiosError } from "axios";
-import useModal from "hooks/modal";
-import { useNavigate } from "react-router-dom";
-import Modal from "components/Modal";
 import MyInfo from "./MyInfo";
 import NewBlogs from "components/common/NewBlogs";
 import { myBreakPoints } from "assets/breakpoints/breakpoints";
@@ -13,7 +10,6 @@ import { myBreakPoints } from "assets/breakpoints/breakpoints";
 const My = () => {
   const { GetUser } = useAuthAPI();
   const { getMyBoard } = useBlogAPI();
-  const navigate = useNavigate();
 
   const {
     data: { data: myInfo } = {},

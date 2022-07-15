@@ -22,7 +22,7 @@ import { createReducer } from "typesafe-actions";
 
 export default createReducer<WriteEditorStateType>(WriteEditorState, {
   [SET_LINE_TEXT]: (state, action) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.body[action.payload.id].text = action.payload.text;
       draft.trashList.push({
         type: SET_LINE_TEXT,
@@ -33,11 +33,11 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
       });
     }),
   [FOCUS_LINE]: (state, action) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.focusLine = action.payload;
     }),
   [ADD_LINE]: (state, action) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.focusLine = draft.body.length;
       draft.body.push({
         id: draft.body.length,
@@ -60,8 +60,9 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
       });
     }),
   [REMOVE_LINE]: (state, action) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.focusIndex = 9999;
+      // delete draft.body[action.payload.id];
 
       if (draft.head !== action.payload.id) {
         draft.body[action.payload.prev].next = action.payload.next;
@@ -75,7 +76,8 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
       draft.setTexter = !draft.setTexter;
     }),
   [REMOVE_LINE_ONLY]: (state, action) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
+      // delete draft.body[action.payload.id];
       if (draft.head !== action.payload.id) {
         if (draft.updatter !== 1) {
           draft.trashList.splice(
@@ -95,19 +97,19 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     }),
 
   [SET_IMG]: (state, action) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.body[action.payload.id].src = action.payload.src;
       if (draft.body[action.payload.id].next !== null)
         draft.focusLine = draft.body[action.payload.id].next;
       else draft.focusLine = draft.body[action.payload.id].prev;
     }),
   [UNSET_IMG]: (state, action) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.body[action.payload].tag = "div";
       draft.focusLine = action.payload;
     }),
   [DROP_IMG]: (state, action) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       if (draft.body[action.payload.id].next !== null)
         draft.focusLine = draft.body[action.payload.id].next;
       else draft.focusLine = draft.body[action.payload.id].prev;
@@ -126,25 +128,25 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
           draft.body.length - 1;
     }),
   [SET_TAG_TO_UL]: (state, action) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.body[action.payload.id].tag = "ul";
       draft.focusIndex = action.payload.focusIndex;
     }),
   [FOCUS_NEXT_LINE]: (state, action) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.setFocuser = !draft.setFocuser;
       draft.focusLine = draft.body[action.payload.id].next;
       draft.focusIndex = action.payload.focusIndex;
     }),
   [FOCUS_PREV_LINE]: (state, action) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.setFocuser = !draft.setFocuser;
       draft.focusLine = draft.body[action.payload.id].prev;
       draft.focusIndex = action.payload.focusIndex;
     }),
 
-  [UNDO]: state =>
-    produce(state, draft => {
+  [UNDO]: (state) =>
+    produce(state, (draft) => {
       draft.trashList.length &&
         draft.recycleList.push(draft.trashList[draft.trashList.length - 1]);
       const trash = draft.trashList.pop();
@@ -160,8 +162,8 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
 
       draft.updatter += 1;
     }),
-  [REDO]: state =>
-    produce(state, draft => {
+  [REDO]: (state) =>
+    produce(state, (draft) => {
       draft.recycleList.length &&
         draft.trashList.push(draft.recycleList[draft.recycleList.length - 1]);
       const recyclables = draft.recycleList.pop();
@@ -178,11 +180,11 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
       draft.updatter += 1;
     }),
   [SET_BANNER]: (state, action) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.banner = action.payload;
     }),
   [SET_TITLE]: (state, action) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.title = action.payload;
     }),
 });

@@ -27,6 +27,7 @@ const BoardList = ({ blogList, breakpoints, children, isEnd }: IBoardList) => {
   useEffect(() => {
     flexBlog(blogList, isEnd);
   }, [flex, blogList]);
+
   return (
     <>
       {flexData.map((current: blog[], key: number) => (
@@ -34,11 +35,11 @@ const BoardList = ({ blogList, breakpoints, children, isEnd }: IBoardList) => {
       ))}
 
       {!isEnd && flex && children}
-      {!isEnd && (
+      {/* {!isEnd && flexData && (
         <BoardFlexContainer>
           <ScrollLoader flex={flex} />
         </BoardFlexContainer>
-      )}
+      )} */}
     </>
   );
 };

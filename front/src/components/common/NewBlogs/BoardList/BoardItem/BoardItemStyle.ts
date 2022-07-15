@@ -18,10 +18,10 @@ export const BoardItemContainer = styled.div`
 
   & > img {
     /* 레이아웃 */
-    width: 100%;
+    object-fit: cover;
+    width: 320px;
     height: 240px;
     background-color: ${basicColor};
-    object-fit: cover;
     border-radius: 16px 16px 0 0;
   }
 `;

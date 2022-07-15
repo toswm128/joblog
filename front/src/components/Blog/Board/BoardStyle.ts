@@ -8,9 +8,9 @@ export const BoardContainer = styled.div`
 
   & > img {
     /* 레이아웃 */
+    object-fit: cover;
     width: 100%;
     height: 320px;
-    object-fit: cover;
     transition: 1s all;
     margin: 0 auto;
     -webkit-user-drag: none;

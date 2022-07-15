@@ -50,15 +50,6 @@ const NewBlogs = ({ querykey, breakpoints, infiniteFuc }: INewBlogs) => {
           </BoardList>
         )}
       </NewBlogsContainer>
-      {/* <Modal
-        isModal={isModal}
-        title={"⚠️ Warning! ⚠️"}
-        buttonText={"새로고침"}
-        btnClick={() => navigate(0)}
-        backgroundClick={closeModal}
-      >
-        <>인터넷 연결이 불안정 합니다.</>
-      </Modal> */}
     </div>
   );
 };
