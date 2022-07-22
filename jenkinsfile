@@ -17,12 +17,19 @@ pipeline {
                 }
             }
         } 
-         stage('push docker hub') {
+        stage('push docker hub') {
             steps {
                 sh "docker push minsu10/joblog-client"
                 sh "docker push minsu10/joblog-server"
             }
         }   
+        stage('run') {
+            steps {
+                sh "docker run -d -p 80:80 --name joblog-client minsu10/joblog-client"
+                sh "docker run -d -p 5000:5000 --name joblog-server minsu10/joblog-server"
+            }
+        }   
+        
             
     }
 }
