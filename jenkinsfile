@@ -3,6 +3,12 @@ pipeline {
     
     stages() {
         
+        stage('change directory') {
+            steps {
+
+                sh "cd front"
+            }
+        }        
         stage('build') {
             steps {
 
