@@ -8,7 +8,6 @@ pipeline {
 
                 sh "pwd"
                 sh "cd front"
-                sh "rm -r build"
                 sh "npm build"
                 sh "docker build -t minsu10/joblog-client ."
                 sh "docker push minsu10/joblog-client"
