@@ -5,7 +5,9 @@ pipeline {
         
         stage('build') {
             steps {
-                sh "ls"
+                sh "docker images"
+                sh "cd front"
+                sh "docker build -t minsu10/joblog-client --push ."
             }
         }        
     }
