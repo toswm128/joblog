@@ -1,3 +1,4 @@
 from .token import tokenTool
+from .databases import dbTool
 
-__all__=["tokenTool"]
+__all__=["tokenTool","dbTool"]

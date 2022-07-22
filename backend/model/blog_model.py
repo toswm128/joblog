@@ -1,9 +1,12 @@
-import pymysql 
-
+import pymysql
+from tools.databases import dbTool
 class blogModel:
 
+    def __init__(self):
+        self.db = dbTool()
+
     def get_blog(self,page,limit):
-        db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+        db = self.db.getDB()
         cursor = db.cursor(pymysql.cursors.DictCursor)
         sql = '''select b1.*,u1.name, count(l1.userIdx) likesCount from blog b1 JOIN user u1 ON u1.idx = b1.userIdx LEFT JOIN likes l1 ON b1.idx = l1.blogIdx GROUP BY b1.idx order by b1.idx desc 
         Limit %d, %d''' % (page*limit,limit)
@@ -13,7 +16,7 @@ class blogModel:
         return result
 
     def get_board_idx(self,idx):
-        db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+        db = self.db.getDB()
         cursor = db.cursor(pymysql.cursors.DictCursor)
         blogSql = '''select * from blog where idx = %d;''' % int(idx)
         commentSql = '''
@@ -45,7 +48,7 @@ class blogModel:
         return result
     
     def post_blog(self,userIdx,context,title,url):
-        db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+        db = self.db.getDB()
         cursor = db.cursor()
         sql = '''
             INSERT INTO `joblog`.`blog`
@@ -61,7 +64,7 @@ class blogModel:
         return result
 
     def post_comment(self,blogId,userId,text):
-        db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+        db = self.db.getDB()
         cursor = db.cursor()
         sql = '''
             INSERT INTO `joblog`.`comment`
@@ -76,7 +79,7 @@ class blogModel:
         return result
         
     def insert_likes(self,userId,blogId):
-        db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+        db = self.db.getDB()
         cursor = db.cursor()
         sql = '''
             INSERT INTO `joblog`.`likes`
@@ -89,7 +92,7 @@ class blogModel:
         return result
     
     def delete_likes(self,userId,blogId):
-        db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+        db = self.db.getDB()
         cursor = db.cursor()
         sql = '''
             DELETE FROM `joblog`.`likes`
@@ -102,7 +105,7 @@ class blogModel:
         return result
 
     def search_blog_to_title(self,title):
-        db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+        db = self.db.getDB()
         cursor = db.cursor(pymysql.cursors.DictCursor)
         sql = '''
             select b1.*,u1.name, count(l1.userIdx) likesCount from blog b1 JOIN user u1 ON u1.idx = b1.userIdx LEFT JOIN likes l1 ON b1.idx = l1.blogIdx 
@@ -115,7 +118,7 @@ class blogModel:
 
 
     def get_board_to_userIdx(self,userIdx,page,limit):
-        db = pymysql.connect(host='127.0.0.1', user='root', password='12345678', charset='utf8',db='joblog')
+        db = self.db.getDB()
         cursor = db.cursor(pymysql.cursors.DictCursor)
         sql = '''select b1.*,u1.name, count(l1.userIdx) likesCount from blog b1 JOIN user u1 ON u1.idx = b1.userIdx LEFT JOIN likes l1 ON b1.idx = l1.blogIdx 
         where b1.userIdx = %s GROUP BY b1.idx order by b1.idx desc Limit %s, %s;''' % (userIdx,page*int(limit),limit)

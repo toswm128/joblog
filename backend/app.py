@@ -17,7 +17,7 @@ def create_app():
     app = Flask(__name__)
     app.config['JSON_AS_ASCII'] = False
     CORS(app, resources={r"*": {"origins": "*"}})
-    app.config["IMAGE_UPLOADS"] = "/Users/jominsu/Documents/GitHub/joblog/backend/static"
+    app.config["IMAGE_UPLOADS"] = "./static"
 
 
 
