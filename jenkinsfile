@@ -5,9 +5,11 @@ pipeline {
         
         stage('build') {
             steps {
-                sh "docker images"
+
+                sh "pwd"
                 sh "cd front"
-                sh "docker build -t minsu10/joblog-client --push ."
+                sh "docker build -t minsu10/joblog-client ."
+                sh "docker push minsu10/joblog-client"
             }
         }        
     }
