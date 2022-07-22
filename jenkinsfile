@@ -3,14 +3,26 @@ pipeline {
     
     stages() {
         
-        stage('build') {
+        stage('client build') {
             steps {
-
                 dir('front'){
                     sh "docker build -t minsu10/joblog-client ."
                 }
-                    sh "docker push minsu10/joblog-client"
             }
-        }        
+        }
+        stage('server build') {
+            steps {
+                dir('backend'){
+                    sh "docker build -t minsu10/joblog-server ."
+                }
+            }
+        } 
+         stage('push docker hub') {
+            steps {
+                sh "docker push minsu10/joblog-client"
+                sh "docker push minsu10/joblog-server"
+            }
+        }   
+            
     }
 }
