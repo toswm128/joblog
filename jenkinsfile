@@ -2,11 +2,6 @@ pipeline {
     agent any
     
     stages() {
-        stage('git clone') {
-            steps() {
-                git 'https://github.com/toswm128/joblog.git'
-            }
-        }
         
         stage('build') {
             steps {
