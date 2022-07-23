@@ -4,20 +4,22 @@ pipeline {
     stages() {
         stage('remove existing container') {
             steps{
-                try {
-                    sh "docker stop joblog-client"
-                    sh "docker rm joblog-client"
+                script{
+                    try {
+                        sh "docker stop joblog-client"
+                        sh "docker rm joblog-client"
 
-                    sh "docker stop joblog-server"
-                    sh "docker rm joblog-server"
-                    
-                    sh "docker rmi minsu10/joblog-server:latest"
-                    sh "docker rmi minsu10/joblog-client:latest"
+                        sh "docker stop joblog-server"
+                        sh "docker rm joblog-server"
+                        
+                        sh "docker rmi minsu10/joblog-server:latest"
+                        sh "docker rmi minsu10/joblog-client:latest"
+                    }
+                    catch (e) {
+                        echo 'Exception occurred: ' + e.toString()
+                        sh 'Handle the exception!'
+                    }
                 }
-                catch (e) {
-                        sh 'echo stage2 Fail!!'
-                }
-
             }
         }
 
