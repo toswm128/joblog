@@ -2,16 +2,42 @@ pipeline {
     agent any
     
     stages() {
-        stage('remove existing container') {
+
+        stage('stop container') {
             steps{
                 script{
                     try {
                         sh "docker stop joblog-client"
-                        sh "docker rm joblog-client"
-
                         sh "docker stop joblog-server"
+                    }
+                    catch (e) {
+                        echo 'Exception occurred: ' + e.toString()
+                        sh 'Handle the exception!'
+                    }
+                }
+            }
+        }
+
+
+
+        stage('remove existing container') {
+            steps{
+                script{
+                    try {
+                        sh "docker rm joblog-client"
                         sh "docker rm joblog-server"
-                        
+                    }
+                    catch (e) {
+                        echo 'Exception occurred: ' + e.toString()
+                        sh 'Handle the exception!'
+                    }
+                }
+            }
+        }
+        stage('remove images') {
+            steps{
+                script{
+                    try {
                         sh "docker rmi minsu10/joblog-server:latest"
                         sh "docker rmi minsu10/joblog-client:latest"
                     }
