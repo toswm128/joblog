@@ -15,13 +15,13 @@ pipeline {
                         sh "docker rmi minsu10/joblog-server:latest"
                         sh "docker rmi minsu10/joblog-client:latest"
                     }
-                    catch (Exception e) {
-                        echo 'Exception occurred: ' + e.toString()
-                        sh 'Handle the exception!'
+                    catch (e) {
+                         sh 'echo stage2 Fail!!'
                     }
                 }
             }
         }
+
         
         stage('client build') {
             steps {
