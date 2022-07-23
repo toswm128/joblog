@@ -1,11 +1,10 @@
 import useModal from "hooks/modal";
-import { lazy } from "react";
 import ModalPortal from "./ModalPortal";
 
-const Error = lazy(() => import("./Modals/Error/Error"));
-const Name = lazy(() => import("./Modals/Setting/Logout"));
-const Profile = lazy(() => import("./Modals/Setting/Name"));
-const Logout = lazy(() => import("./Modals/Setting/Profile"));
+import Error from "./Modals/Error/Error";
+import Profile from "./Modals/Setting/Profile";
+import Logout from "./Modals/Setting/Logout";
+import Name from "./Modals/Setting/Name";
 
 // export const Modals = {
 // };
