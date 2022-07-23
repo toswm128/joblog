@@ -34,7 +34,7 @@ axios.interceptors.request.use(
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 5,
+      staleTime: 1000 * 60,
       retry: false,
       select: (data: any) => data?.data,
     },

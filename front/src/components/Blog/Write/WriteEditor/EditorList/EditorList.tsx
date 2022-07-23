@@ -77,7 +77,7 @@ const EditorList = () => {
         onClick={() => {
           dom && title && banner
             ? postBoard(dom, title, banner).then(() => {
-                queryClient.invalidateQueries("getBoard");
+                queryClient.invalidateQueries("blogs");
                 navigate("/");
               })
             : alert("작성 다 하셈");
