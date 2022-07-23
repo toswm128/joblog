@@ -2,6 +2,21 @@ pipeline {
     agent any
     
     stages() {
+        stage('remove existing container') {
+            steps{
+
+                sh "docker stop minsu10/joblog-client:latest"
+                sh "docker rm minsu10/joblog-client:latest"
+
+                sh "docker stop minsu10/joblog-server:latest"
+                sh "docker rm minsu10/joblog-server:latest"
+                
+                sh "docker rmi minsu10/joblog-server:latest"
+                sh "docker rmi minsu10/joblog-server:latest"
+
+
+            }
+        }
         
         stage('client build') {
             steps {
@@ -25,6 +40,8 @@ pipeline {
         }   
         stage('run') {
             steps {
+                
+
                 sh "docker run -d -p 80:80 --name joblog-client minsu10/joblog-client"
                 sh "docker run -d -p 5000:5000 --name joblog-server minsu10/joblog-server"
             }
