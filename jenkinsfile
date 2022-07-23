@@ -5,11 +5,11 @@ pipeline {
         stage('remove existing container') {
             steps{
 
-                sh "docker stop minsu10/joblog-client:latest"
-                sh "docker rm minsu10/joblog-client:latest"
+                sh "docker stop joblog-client"
+                sh "docker rm joblog-client"
 
-                sh "docker stop minsu10/joblog-server:latest"
-                sh "docker rm minsu10/joblog-server:latest"
+                sh "docker stop joblog-server"
+                sh "docker rm joblog-server"
                 
                 sh "docker rmi minsu10/joblog-server:latest"
                 sh "docker rmi minsu10/joblog-server:latest"
