@@ -11,8 +11,7 @@ pipeline {
                         sh "docker stop joblog-server"
                     }
                     catch (e) {
-                        echo 'Exception occurred: ' + e.toString()
-                        sh 'Handle the exception!'
+                        sh 'echo stopped container'
                     }
                 }
             }
@@ -28,8 +27,7 @@ pipeline {
                         sh "docker rm joblog-server"
                     }
                     catch (e) {
-                        echo 'Exception occurred: ' + e.toString()
-                        sh 'Handle the exception!'
+                        sh 'echo no container'
                     }
                 }
             }
@@ -42,8 +40,7 @@ pipeline {
                         sh "docker rmi minsu10/joblog-client:latest"
                     }
                     catch (e) {
-                        echo 'Exception occurred: ' + e.toString()
-                        sh 'Handle the exception!'
+                        sh 'echo no images'
                     }
                 }
             }
