@@ -6,6 +6,8 @@ import { AxiosError } from "axios";
 import MyInfo from "./MyInfo";
 import NewBlogs from "components/common/NewBlogs";
 import { myBreakPoints } from "assets/breakpoints/breakpoints";
+import { Suspense } from "react";
+import Loader from "components/common/Loader";
 
 const My = () => {
   const { GetUser } = useAuthAPI();
@@ -22,14 +24,16 @@ const My = () => {
   });
 
   return (
-    <InfoContainer>
-      <MyInfo isFetching={isMyInfoFetching || isMyInfoError} info={myInfo} />
-      <NewBlogs
-        breakpoints={myBreakPoints}
-        infiniteFuc={getMyBoard}
-        querykey={"myBlogs"}
-      />
-    </InfoContainer>
+    <Suspense fallback={<Loader />}>
+      <InfoContainer>
+        <MyInfo isFetching={isMyInfoFetching || isMyInfoError} info={myInfo} />
+        <NewBlogs
+          breakpoints={myBreakPoints}
+          infiniteFuc={getMyBoard}
+          querykey={"myBlogs"}
+        />
+      </InfoContainer>
+    </Suspense>
   );
 };
 
