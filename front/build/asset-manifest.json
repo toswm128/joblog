@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/static/js/main.0af94f15.js",
+    "main.js": "/static/js/main.921286f0.js",
     "static/js/413.ec6d07e3.chunk.js": "/static/js/413.ec6d07e3.chunk.js",
     "static/js/337.add9b4bb.chunk.js": "/static/js/337.add9b4bb.chunk.js",
     "static/js/309.418bbd69.chunk.js": "/static/js/309.418bbd69.chunk.js",
     "static/js/608.57cf6486.chunk.js": "/static/js/608.57cf6486.chunk.js",
     "static/media/jobl_logo.png": "/static/media/jobl_logo.36352a11113b3da6a017.png",
     "index.html": "/index.html",
-    "main.0af94f15.js.map": "/static/js/main.0af94f15.js.map",
+    "main.921286f0.js.map": "/static/js/main.921286f0.js.map",
     "413.ec6d07e3.chunk.js.map": "/static/js/413.ec6d07e3.chunk.js.map",
     "337.add9b4bb.chunk.js.map": "/static/js/337.add9b4bb.chunk.js.map",
     "309.418bbd69.chunk.js.map": "/static/js/309.418bbd69.chunk.js.map",
     "608.57cf6486.chunk.js.map": "/static/js/608.57cf6486.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.0af94f15.js"
+    "static/js/main.921286f0.js"
   ]
 }
