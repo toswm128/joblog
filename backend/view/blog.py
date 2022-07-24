@@ -49,7 +49,7 @@ def create_blog_endpoints(app, services):
         if request.method == 'GET':
             fileName = request.args.get('file')
             if fileName:
-                return send_file('https://joblog-images-buckit.s3.ap-northeast-2.amazonaws.com/images/'+fileName,mimetype='image/gif',attachment_filename="download")
+                return 'https://joblog-images-buckit.s3.ap-northeast-2.amazonaws.com/images/'+fileName
 
     @app.route('/blog/comment',methods=['POST'])
     def comment():
