@@ -35,7 +35,7 @@ const Join = () => {
             successMsg="사용 가능한 아이디 입니다."
           />
           <AuthInput
-            setValue={setId}
+            setValue={setPwd}
             type="password"
             placeholder="비밀번호"
             reg={pwdReg}
@@ -43,7 +43,7 @@ const Join = () => {
             successMsg="사용 가능한 비밀번호 입니다."
           />
           <AuthInput
-            setValue={setId}
+            setValue={setName}
             type="text"
             placeholder="이름"
             reg={nameReg}
