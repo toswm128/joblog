@@ -60,7 +60,7 @@ pipeline {
                     sh "docker build -t minsu10/joblog-server ."
                 }
             }
-        }  
+        } 
         stage('run') {
             steps {
                 
