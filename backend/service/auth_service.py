@@ -22,7 +22,7 @@ class authService:
     def try_join(self,userData):
         if userData['id'] and userData['password'] and userData['name']:
             userData['password'] = bcrypt.hashpw(userData['password'].encode("utf-8"), bcrypt.gensalt()).decode('utf-8')
-            url = "http://localhost:5000/image?file=user.png"
+            url = "http://joblog.kro.kr:5000/image?file=user.png"
             resurt = self.auth_model.insert_user(userData,url)
             return resurt
         else:

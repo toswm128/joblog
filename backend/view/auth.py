@@ -61,7 +61,7 @@ def create_auth_endpoints(app, services):
                 file = request.files['profile']
                 fileName = str(uuid.uuid4())+'.'+file.filename.split('.')[1]
                 file.save(os.path.join(app.config["IMAGE_UPLOADS"],fileName))
-                url = "http://localhost:5000/image?file="+fileName
+                url = "http://joblog.kro.kr:5000/image?file="+fileName
 
                 user_service.patch_user_profile(url,token)
                 return jsonify({'result':'success','msg': '유저 프로필 사진 변경'})
