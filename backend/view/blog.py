@@ -49,10 +49,7 @@ def create_blog_endpoints(app, services):
         if request.method == 'GET':
             fileName = request.args.get('file')
             if fileName:
-                if os.path.isfile(os.path.join(app.config["IMAGE_UPLOADS"],fileName)):
-                    return send_file('https://joblog-images-buckit.s3.ap-northeast-2.amazonaws.com/images/'+fileName,mimetype='image/gif',attachment_filename="download")
-                else:
-                    return jsonify({"msg":"이미지를 찾을 수 없습니다."}),404
+                return send_file('https://joblog-images-buckit.s3.ap-northeast-2.amazonaws.com/images/'+fileName,mimetype='image/gif',attachment_filename="download")
 
     @app.route('/blog/comment',methods=['POST'])
     def comment():
