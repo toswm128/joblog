@@ -26,10 +26,10 @@ def create_blog_endpoints(app, services):
             token = request.headers['Authorization']
             if(token == ""):
                 return jsonify({'result':'failure','msg': '유저 정보 가져오기 실패'}) ,400
+            print(os.getcwd())
             file = request.files["banner"]
             fileName = str(uuid.uuid4())+'.'+file.filename.split('.')[1]
             file.save(os.path.join(app.config["IMAGE_UPLOADS"],fileName))
-            print(os.getcwd())
             url = "http://joblog.kro.kr:5000/image?file="+fileName
             status = blog_service.post_new_blog(value,url,token)
             if status == 400:
