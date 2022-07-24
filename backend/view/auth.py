@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 import uuid
 
 
-def create_auth_endpoints(app, services):
+def create_auth_endpoints(app, services,s3):
     user_service  = services.authServices
 
     @app.route('/login',methods=['POST'])
@@ -50,8 +50,6 @@ def create_auth_endpoints(app, services):
             token = request.headers['Authorization']
             if not token:
                 return jsonify({'result':'success','msg': '유저 정보 가져오기 실패'}) ,400
-
-
             src = request.form
             if src:
                 user_service.patch_user_profile(src['profile'],token)
@@ -61,7 +59,9 @@ def create_auth_endpoints(app, services):
                 file = request.files['profile']
                 fileName = str(uuid.uuid4())+'.'+file.filename.split('.')[1]
                 file.save(os.path.join(app.config["IMAGE_UPLOADS"],fileName))
-                url = "http://joblog.kro.kr:5000/image?file="+fileName
+                url = "https://joblog-images-buckit.s3.ap-northeast-2.amazonaws.com/images/"+fileName
+
+                s3.upload_file('static/'+fileName,'joblog-images-buckit','images/'+fileName)
 
                 user_service.patch_user_profile(url,token)
                 return jsonify({'result':'success','msg': '유저 프로필 사진 변경'})

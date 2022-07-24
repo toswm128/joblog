@@ -5,7 +5,7 @@ import uuid
 
 
 
-def create_blog_endpoints(app, services):
+def create_blog_endpoints(app, services,s3):
     blog_service  = services.blogServices
 
     @app.route('/',methods=['GET'])
@@ -26,11 +26,12 @@ def create_blog_endpoints(app, services):
             token = request.headers['Authorization']
             if(token == ""):
                 return jsonify({'result':'failure','msg': '유저 정보 가져오기 실패'}) ,400
-            print(os.getcwd())
             file = request.files["banner"]
             fileName = str(uuid.uuid4())+'.'+file.filename.split('.')[1]
             file.save(os.path.join(app.config["IMAGE_UPLOADS"],fileName))
-            url = "http://joblog.kro.kr:5000/image?file="+fileName
+            url = "https://joblog-images-buckit.s3.ap-northeast-2.amazonaws.com/images/"+fileName
+            
+            s3.upload_file('static/'+fileName,'joblog-images-buckit','images/'+fileName)
             status = blog_service.post_new_blog(value,url,token)
             if status == 400:
                 return jsonify({'msg': '포함되지 않는 데이터가 있습니다'}),400
@@ -49,7 +50,10 @@ def create_blog_endpoints(app, services):
         if request.method == 'GET':
             fileName = request.args.get('file')
             if fileName:
-                return 'https://joblog-images-buckit.s3.ap-northeast-2.amazonaws.com/images/'+fileName
+                if os.path.isfile(os.path.join(app.config["IMAGE_UPLOADS"],fileName)):
+                    return send_file(os.path.join(app.config["IMAGE_UPLOADS"],fileName),mimetype='image/gif',attachment_filename="download")
+                else:
+                    return jsonify({"msg":"이미지를 찾을 수 없습니다."}),404
 
     @app.route('/blog/comment',methods=['POST'])
     def comment():
