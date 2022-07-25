@@ -34,22 +34,20 @@ const NewBlogs = ({ querykey, breakpoints, infiniteFuc }: INewBlogs) => {
 
   return (
     <div>
-      <NewBlogsContainer>
-        {isLoading || isError ? (
-          <MainLoader />
-        ) : (
-          <BoardList
-            breakpoints={breakpoints}
-            blogList={data?.pages.reduce((acc, { data: cur }) => {
-              if (acc.data !== cur) return [...acc, ...cur];
-              else return acc.data;
-            }, data?.pages[0])}
-            isEnd={isEnd}
-          >
-            <ViewObserver observerFuc={fetchNextPage} />
-          </BoardList>
-        )}
-      </NewBlogsContainer>
+      {isLoading || isError ? (
+        <MainLoader />
+      ) : (
+        <BoardList
+          breakpoints={breakpoints}
+          blogList={data?.pages.reduce((acc, { data: cur }) => {
+            if (acc.data !== cur) return [...acc, ...cur];
+            else return acc.data;
+          }, data?.pages[0])}
+          isEnd={isEnd}
+        >
+          <ViewObserver observerFuc={fetchNextPage} />
+        </BoardList>
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { InfoContainer } from "../InfoStyle";
+import { InfoContainer, UserBoardsContainer } from "../InfoStyle";
 import useAuthAPI from "hooks/API/useAuthAPI";
 import useBlogAPI from "assets/API/useBlogAPI";
 import { useQuery } from "react-query";
@@ -27,11 +27,13 @@ const My = () => {
     <Suspense fallback={<Loader />}>
       <InfoContainer>
         <MyInfo isFetching={isMyInfoFetching || isMyInfoError} info={myInfo} />
-        <NewBlogs
-          breakpoints={myBreakPoints}
-          infiniteFuc={getMyBoard}
-          querykey={"myBlogs"}
-        />
+        <UserBoardsContainer>
+          <NewBlogs
+            breakpoints={myBreakPoints}
+            infiniteFuc={getMyBoard}
+            querykey={"myBlogs"}
+          />
+        </UserBoardsContainer>
       </InfoContainer>
     </Suspense>
   );

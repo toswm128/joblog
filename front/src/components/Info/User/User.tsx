@@ -7,7 +7,7 @@ import useAuthAPI from "hooks/API/useAuthAPI";
 import useModal from "hooks/modal";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import { InfoContainer } from "../InfoStyle";
+import { InfoContainer, UserBoardsContainer } from "../InfoStyle";
 import UserInfo from "./UserInfo";
 
 const User = () => {
@@ -32,11 +32,13 @@ const User = () => {
         isFetching={isUserInfoFetching || isUserInfoError}
         info={userInfo}
       />
-      <NewBlogs
-        breakpoints={myBreakPoints}
-        infiniteFuc={(page) => GetBlog2UserIdx(userIdx, page)}
-        querykey={`userBlogs/${userIdx}`}
-      />
+      <UserBoardsContainer>
+        <NewBlogs
+          breakpoints={myBreakPoints}
+          infiniteFuc={(page) => GetBlog2UserIdx(userIdx, page)}
+          querykey={`userBlogs/${userIdx}`}
+        />
+      </UserBoardsContainer>
     </InfoContainer>
   );
 };
