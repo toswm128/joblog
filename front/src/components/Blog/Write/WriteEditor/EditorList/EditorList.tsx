@@ -7,7 +7,7 @@ import { line } from "Store/WriteEditorStore/type";
 import EditorInputter from "../EditorItem";
 
 const EditorList = () => {
-  const { WriteEditorState, unsetImg } = useWrite();
+  const { WriteEditorState, unsetImg, reset } = useWrite();
   const { body, head, title, banner } = WriteEditorState;
   const dom: any = [];
   const { postBoard } = useBlogAPI();
@@ -78,6 +78,7 @@ const EditorList = () => {
           dom && title && banner
             ? postBoard(dom, title, banner).then(() => {
                 queryClient.invalidateQueries("blogs");
+                reset();
                 navigate("/");
               })
             : alert("작성 다 하셈");

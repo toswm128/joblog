@@ -17,11 +17,12 @@ import {
   DROP_IMG,
   SET_BANNER,
   SET_TITLE,
+  RESET,
 } from "Store/WriteEditorStore/actions";
 
 const useWrite = () => {
   const dispatch = useDispatch();
-  const WriteEditorState = useTypedSelector(state => state.WriteEditor);
+  const WriteEditorState = useTypedSelector((state) => state.WriteEditor);
 
   const setLineText = useCallback(
     (text: string | undefined, id: number, index?: number) => {
@@ -163,6 +164,12 @@ const useWrite = () => {
     [dispatch]
   );
 
+  const reset = useCallback(() => {
+    dispatch({
+      type: RESET,
+    });
+  }, [dispatch]);
+
   return {
     clickInputter,
     enterInputter,
@@ -179,6 +186,7 @@ const useWrite = () => {
     redo,
     setBanner,
     setTitle,
+    reset,
     WriteEditorState,
   };
 };
