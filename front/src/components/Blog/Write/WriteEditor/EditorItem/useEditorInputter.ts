@@ -140,9 +140,14 @@ const useEditorInputter = (data: line) => {
     [data.id, dropImg]
   );
 
-  const onBlur = useCallback(() => {
-    if (text !== data.text) setLineText(text, data.id);
-  }, [data.text, data.id, text]);
+  const onBlur = useCallback(
+    (e: React.FocusEvent<HTMLTextAreaElement, Element>) => {
+      if (text !== data.text) setLineText(text, data.id);
+      if (WriteEditorState.isTagBox)
+        !e.currentTarget.contains(e.relatedTarget) && closeTagBox();
+    },
+    [data.text, data.id, text]
+  );
 
   const dragOver = useCallback(() => {
     setDrogOver(true);

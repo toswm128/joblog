@@ -84,9 +84,7 @@ const EditorInputter = ({ data }: { data: line }) => {
           click();
         }}
         onChange={(e) => onChangeText(e, data.id)}
-        onBlur={() => {
-          onBlur();
-        }}
+        onBlur={onBlur}
       />
       {data.id === WriteEditorState.isTagBox &&
         data.id === WriteEditorState.focusLine && <TagBox />}
