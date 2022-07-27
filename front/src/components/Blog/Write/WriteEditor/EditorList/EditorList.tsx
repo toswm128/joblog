@@ -5,6 +5,7 @@ import { useQueryClient } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { line } from "Store/WriteEditorStore/type";
 import EditorInputter from "../EditorItem";
+import { H1, H2, H3 } from "./TagsStyle";
 
 const EditorList = () => {
   const { WriteEditorState, unsetImg, reset } = useWrite();
@@ -23,6 +24,24 @@ const EditorList = () => {
             <div key={data.id}>
               <EditorInputter data={data} key={data.id} />
             </div>
+          );
+        case "h1":
+          return (
+            <H1 key={data.id}>
+              <EditorInputter data={data} key={data.id} />
+            </H1>
+          );
+        case "h2":
+          return (
+            <H2 key={data.id}>
+              <EditorInputter data={data} key={data.id} />
+            </H2>
+          );
+        case "h3":
+          return (
+            <H3 key={data.id}>
+              <EditorInputter data={data} key={data.id} />
+            </H3>
           );
         case "ul":
           return (

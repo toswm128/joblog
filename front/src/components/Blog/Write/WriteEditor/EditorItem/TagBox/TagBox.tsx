@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
 import { browserColor } from "style/color";
+import TagList from "./TagList";
 
 const TagBox = () => {
   return (
-    <TagBoxContainer>
+    <TagBoxContainer tabIndex={0}>
       <TagBoxTitle>기본 태그</TagBoxTitle>
+      <TagList />
     </TagBoxContainer>
   );
 };

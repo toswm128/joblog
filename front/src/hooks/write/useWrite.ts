@@ -20,6 +20,9 @@ import {
   RESET,
   OPEN_TAG_BOX,
   CLOSE_TAG_BOX,
+  SET_TAG_TO_H1,
+  SET_TAG_TO_H3,
+  SET_TAG_TO_H2,
 } from "Store/WriteEditorStore/actions";
 
 const useWrite = () => {
@@ -114,6 +117,33 @@ const useWrite = () => {
     },
     [dispatch]
   );
+  const setTag2H1 = useCallback(
+    (id: number) => {
+      dispatch({
+        type: SET_TAG_TO_H1,
+        payload: id,
+      });
+    },
+    [dispatch]
+  );
+  const setTag2H2 = useCallback(
+    (id: number) => {
+      dispatch({
+        type: SET_TAG_TO_H2,
+        payload: id,
+      });
+    },
+    [dispatch]
+  );
+  const setTag2H3 = useCallback(
+    (id: number) => {
+      dispatch({
+        type: SET_TAG_TO_H3,
+        payload: id,
+      });
+    },
+    [dispatch]
+  );
 
   const focusNextLine = useCallback(
     (id: number, focusIndex: number) => {
@@ -197,6 +227,9 @@ const useWrite = () => {
     dropImg,
     unsetImg,
     setTag2Ul,
+    setTag2H1,
+    setTag2H2,
+    setTag2H3,
     focusNextLine,
     focusPrevLine,
     undo,

@@ -143,10 +143,15 @@ const useEditorInputter = (data: line) => {
   const onBlur = useCallback(
     (e: React.FocusEvent<HTMLTextAreaElement, Element>) => {
       if (text !== data.text) setLineText(text, data.id);
-      if (WriteEditorState.isTagBox)
-        !e.currentTarget.contains(e.relatedTarget) && closeTagBox();
+      console.log(WriteEditorState.isTagBox);
+      if (
+        !(WriteEditorState.isTagBox === false) &&
+        e.currentTarget.nextSibling
+      ) {
+        !e.currentTarget.nextSibling.contains(e.relatedTarget) && closeTagBox();
+      }
     },
-    [data.text, data.id, text]
+    [data.text, data.id, text, WriteEditorState.isTagBox]
   );
 
   const dragOver = useCallback(() => {

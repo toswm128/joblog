@@ -15,6 +15,9 @@ import {
   SET_BANNER,
   SET_IMG,
   SET_LINE_TEXT,
+  SET_TAG_TO_H1,
+  SET_TAG_TO_H2,
+  SET_TAG_TO_H3,
   SET_TAG_TO_UL,
   SET_TITLE,
   UNDO,
@@ -134,6 +137,18 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     produce(state, (draft) => {
       draft.body[action.payload.id].tag = "ul";
       draft.focusIndex = action.payload.focusIndex;
+    }),
+  [SET_TAG_TO_H1]: (state, action) =>
+    produce(state, (draft) => {
+      draft.body[action.payload].tag = "h1";
+    }),
+  [SET_TAG_TO_H2]: (state, action) =>
+    produce(state, (draft) => {
+      draft.body[action.payload].tag = "h2";
+    }),
+  [SET_TAG_TO_H3]: (state, action) =>
+    produce(state, (draft) => {
+      draft.body[action.payload].tag = "h3";
     }),
   [FOCUS_NEXT_LINE]: (state, action) =>
     produce(state, (draft) => {
