@@ -22,10 +22,17 @@ const useEditorInputter = (data: line) => {
     setImg,
     enterInputter,
     clickInputter,
+    openTagBox,
+    closeTagBox,
     WriteEditorState,
   } = useWrite();
 
-  const onChangeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const onChangeText = (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+    id: number
+  ) => {
+    if (e.target.value.startsWith("/")) openTagBox(id);
+    else closeTagBox();
     setText(e.target.value);
   };
 

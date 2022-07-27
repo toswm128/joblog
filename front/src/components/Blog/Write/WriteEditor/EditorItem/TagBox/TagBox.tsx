@@ -4,7 +4,7 @@ import { browserColor } from "style/color";
 const TagBox = () => {
   return (
     <TagBoxContainer>
-      <div>a</div>
+      <div>기본 태그</div>
     </TagBoxContainer>
   );
 };
@@ -19,6 +19,7 @@ const TagBoxContainer = styled.div`
   flex-direction: column;
   overflow-y: auto;
   z-index: 999;
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.1);
 `;
 
 export default TagBox;

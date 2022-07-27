@@ -28,5 +28,5 @@ export type WriteEditorStateType = {
   updatter: updater;
   setTexter: boolean;
   setFocuser: Boolean;
-  isTagBox: boolean;
+  isTagBox: number | boolean;
 };

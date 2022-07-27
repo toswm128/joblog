@@ -19,6 +19,7 @@ import {
   SET_TITLE,
   RESET,
   OPEN_TAG_BOX,
+  CLOSE_TAG_BOX,
 } from "Store/WriteEditorStore/actions";
 
 const useWrite = () => {
@@ -171,9 +172,18 @@ const useWrite = () => {
     });
   }, [dispatch]);
 
-  const openTagBox = useCallback(() => {
+  const openTagBox = useCallback(
+    (id: number) => {
+      dispatch({
+        type: OPEN_TAG_BOX,
+        payload: id,
+      });
+    },
+    [dispatch]
+  );
+  const closeTagBox = useCallback(() => {
     dispatch({
-      type: OPEN_TAG_BOX,
+      type: CLOSE_TAG_BOX,
     });
   }, [dispatch]);
 
@@ -195,6 +205,7 @@ const useWrite = () => {
     setTitle,
     reset,
     openTagBox,
+    closeTagBox,
     WriteEditorState,
   };
 };

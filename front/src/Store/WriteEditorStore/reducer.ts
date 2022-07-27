@@ -214,12 +214,12 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
       draft.setFocuser = false;
     }),
 
-  [OPEN_TAG_BOX]: (state) =>
+  [OPEN_TAG_BOX]: (state, action) =>
     produce(state, (draft) => {
-      draft.isTagBox = true;
+      draft.isTagBox = action.payload;
     }),
   [CLOSE_TAG_BOX]: (state) =>
     produce(state, (draft) => {
-      draft.isTagBox = true;
+      draft.isTagBox = false;
     }),
 });
