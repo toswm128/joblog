@@ -18,6 +18,7 @@ import {
   SET_BANNER,
   SET_TITLE,
   RESET,
+  OPEN_TAG_BOX,
 } from "Store/WriteEditorStore/actions";
 
 const useWrite = () => {
@@ -170,6 +171,12 @@ const useWrite = () => {
     });
   }, [dispatch]);
 
+  const openTagBox = useCallback(() => {
+    dispatch({
+      type: OPEN_TAG_BOX,
+    });
+  }, [dispatch]);
+
   return {
     clickInputter,
     enterInputter,
@@ -187,6 +194,7 @@ const useWrite = () => {
     setBanner,
     setTitle,
     reset,
+    openTagBox,
     WriteEditorState,
   };
 };

@@ -24,3 +24,6 @@ export const SET_BANNER = "WriteEditor/SET_BANNER";
 export const SET_TITLE = "WriteEditor/SET_TITLE";
 
 export const RESET = "WriteEditor/RESET";
+
+export const OPEN_TAG_BOX = "WriteEditor/OPEN_TAG_BOX";
+export const CLOSE_TAG_BOX = "WriteEditor/CLOSE_TAG_BOX";

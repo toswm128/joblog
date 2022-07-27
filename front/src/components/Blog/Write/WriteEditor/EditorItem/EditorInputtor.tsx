@@ -1,9 +1,9 @@
+import styled from "@emotion/styled";
 import useWrite from "hooks/write";
-import React, { useCallback, useState } from "react";
-import { useRef } from "react";
 import { useEffect } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { line } from "Store/WriteEditorStore/type";
+import TagBox from "./TagBox";
 import useEditorInputter from "./useEditorInputter";
 
 const EditorInputter = ({ data }: { data: line }) => {
@@ -37,7 +37,7 @@ const EditorInputter = ({ data }: { data: line }) => {
   } = useEditorInputter(data);
 
   return (
-    <>
+    <EditorInputterLine>
       <ReactTextareaAutosize
         placeholder={
           data.id === WriteEditorState.focusLine ? "내용을 입력해 주세요" : ""
@@ -45,7 +45,7 @@ const EditorInputter = ({ data }: { data: line }) => {
         spellCheck={false}
         // cacheMeasurements
         style={drogOver ? { borderBottom: "5px solid #c4e3f0" } : {}}
-        onKeyDown={e => {
+        onKeyDown={(e) => {
           switch (e.code) {
             case "Space":
               onKeyDownSpace();
@@ -78,7 +78,7 @@ const EditorInputter = ({ data }: { data: line }) => {
         value={text}
         ref={inputterRef}
         disabled={false}
-        onPaste={e => onPasteImg}
+        onPaste={(e) => onPasteImg}
         onKeyPress={onKeyPressEnter}
         onClick={() => {
           click();
@@ -88,8 +88,15 @@ const EditorInputter = ({ data }: { data: line }) => {
           onBlur();
         }}
       />
-    </>
+      {data.id === WriteEditorState.focusLine && <TagBox />}
+    </EditorInputterLine>
   );
 };
+
+const EditorInputterLine = styled.div`
+  display: flex;
+  position: relative;
+  width: 100%;
+`;
 
 export default EditorInputter;

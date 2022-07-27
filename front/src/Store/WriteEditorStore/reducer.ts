@@ -2,10 +2,12 @@ import WriteEditorState from "./state";
 import produce from "immer";
 import {
   ADD_LINE,
+  CLOSE_TAG_BOX,
   DROP_IMG,
   FOCUS_LINE,
   FOCUS_NEXT_LINE,
   FOCUS_PREV_LINE,
+  OPEN_TAG_BOX,
   REDO,
   REMOVE_LINE,
   REMOVE_LINE_ONLY,
@@ -210,5 +212,14 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
       draft.focusIndex = 999999;
       draft.setTexter = false;
       draft.setFocuser = false;
+    }),
+
+  [OPEN_TAG_BOX]: (state) =>
+    produce(state, (draft) => {
+      draft.isTagBox = true;
+    }),
+  [CLOSE_TAG_BOX]: (state) =>
+    produce(state, (draft) => {
+      draft.isTagBox = true;
     }),
 });
