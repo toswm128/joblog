@@ -1,17 +1,15 @@
 import { TagContainer } from "../TagsStyle";
 import useWrite from "hooks/write/useWrite";
+import useTags from "../useTags";
 
 const Title1 = () => {
-  const {
-    setTag2H1,
-    WriteEditorState: { isTagBox },
-    closeTagBox,
-  } = useWrite();
+  const { setTag2H1 } = useWrite();
+  const { selectTag } = useTags();
+
   return (
     <TagContainer
       onClick={() => {
-        typeof isTagBox === "number" && setTag2H1(isTagBox);
-        closeTagBox();
+        selectTag(setTag2H1);
       }}
     >
       <h1>제목1</h1>
