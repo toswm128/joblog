@@ -15,6 +15,7 @@ import {
   SET_BANNER,
   SET_IMG,
   SET_LINE_TEXT,
+  SET_TAG_TO_A,
   SET_TAG_TO_H1,
   SET_TAG_TO_H2,
   SET_TAG_TO_H3,
@@ -149,6 +150,10 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
   [SET_TAG_TO_H3]: (state, action) =>
     produce(state, (draft) => {
       draft.body[action.payload].tag = "h3";
+    }),
+  [SET_TAG_TO_A]: (state, action) =>
+    produce(state, (draft) => {
+      draft.body[action.payload].tag = "a";
     }),
   [FOCUS_NEXT_LINE]: (state, action) =>
     produce(state, (draft) => {

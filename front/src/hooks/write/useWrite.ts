@@ -23,6 +23,7 @@ import {
   SET_TAG_TO_H1,
   SET_TAG_TO_H3,
   SET_TAG_TO_H2,
+  SET_TAG_TO_A,
 } from "Store/WriteEditorStore/actions";
 
 const useWrite = () => {
@@ -144,6 +145,15 @@ const useWrite = () => {
     },
     [dispatch]
   );
+  const setTag2A = useCallback(
+    (id: number) => {
+      dispatch({
+        type: SET_TAG_TO_A,
+        payload: id,
+      });
+    },
+    [dispatch]
+  );
 
   const focusNextLine = useCallback(
     (id: number, focusIndex: number) => {
@@ -230,6 +240,7 @@ const useWrite = () => {
     setTag2H1,
     setTag2H2,
     setTag2H3,
+    setTag2A,
     focusNextLine,
     focusPrevLine,
     undo,

@@ -16,6 +16,7 @@ export const SET_TAG_TO_UL = "WriteEditor/SET_TAG_TO_UL";
 export const SET_TAG_TO_H1 = "WriteEditor/SET_TAG_TO_H1";
 export const SET_TAG_TO_H2 = "WriteEditor/SET_TAG_TO_H2";
 export const SET_TAG_TO_H3 = "WriteEditor/SET_TAG_TO_H3";
+export const SET_TAG_TO_A = "WriteEditor/SET_TAG_TO_a";
 
 export const FOCUS_NEXT_LINE = "WriteEditor/FOCUS_NEXT_LINE";
 export const FOCUS_PREV_LINE = "WriteEditor/FOCUS_PREV_LINE";
