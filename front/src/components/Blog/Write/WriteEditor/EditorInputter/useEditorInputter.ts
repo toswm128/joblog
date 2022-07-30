@@ -1,5 +1,5 @@
 import useWrite from "hooks/write";
-import React, { ReactEventHandler, useCallback, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { line } from "Store/WriteEditorStore/type";
 
 const useEditorInputter = (data: line) => {
@@ -32,7 +32,7 @@ const useEditorInputter = (data: line) => {
     id: number
   ) => {
     if (e.target.value.startsWith("/")) openTagBox(id);
-    else closeTagBox();
+    else if (WriteEditorState.isTagBox) closeTagBox();
     setText(e.target.value);
   };
 
@@ -143,7 +143,6 @@ const useEditorInputter = (data: line) => {
   const onBlur = useCallback(
     (e: React.FocusEvent<HTMLTextAreaElement, Element>) => {
       if (text !== data.text) setLineText(text, data.id);
-      console.log(WriteEditorState.isTagBox);
       if (
         !(WriteEditorState.isTagBox === false) &&
         e.currentTarget.nextSibling

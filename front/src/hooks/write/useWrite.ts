@@ -24,6 +24,7 @@ import {
   SET_TAG_TO_H3,
   SET_TAG_TO_H2,
   SET_TAG_TO_A,
+  DROP_LINE,
 } from "Store/WriteEditorStore/actions";
 
 const useWrite = () => {
@@ -75,6 +76,21 @@ const useWrite = () => {
       dispatch({
         type: REMOVE_LINE_ONLY,
         payload: { id, next, prev },
+      });
+    },
+    [dispatch]
+  );
+
+  const dropLine = useCallback(
+    (
+      source: number,
+      destination: number,
+      id: number,
+      destinationID: number
+    ) => {
+      dispatch({
+        type: DROP_LINE,
+        payload: { source, destination, id, destinationID },
       });
     },
     [dispatch]
@@ -233,6 +249,7 @@ const useWrite = () => {
     setLineText,
     removeLine,
     removeLineOnly,
+    dropLine,
     setImg,
     dropImg,
     unsetImg,

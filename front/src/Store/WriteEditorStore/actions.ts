@@ -5,6 +5,8 @@ export const ADD_LINE = "WriteEditor/ADD_LINE";
 export const REMOVE_LINE = "WriteEditor/REMOVE_LINE";
 export const REMOVE_LINE_ONLY = "WriteEditor/REMOVE_LINE_ONLY";
 
+export const DROP_LINE = "WriteEditor/DROP_LINE";
+
 export const FOCUS_LINE = "WriteEditor/FOCUS_LINE";
 
 export const SET_IMG = "WriteEditor/SET_IMG";

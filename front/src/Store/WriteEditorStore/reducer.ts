@@ -4,6 +4,7 @@ import {
   ADD_LINE,
   CLOSE_TAG_BOX,
   DROP_IMG,
+  DROP_LINE,
   FOCUS_LINE,
   FOCUS_NEXT_LINE,
   FOCUS_PREV_LINE,
@@ -101,6 +102,65 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
           draft.body[action.payload.next].prev = action.payload.prev;
         draft.focusLine = action.payload.prev;
       }
+    }),
+
+  [DROP_LINE]: (state, action) =>
+    produce(state, (draft) => {
+      // source 는 index순서이다...
+      const source = draft.body[action.payload.id];
+      const nextS = source.next;
+      const prevS = source.prev;
+      const idS = source.id;
+      const destination = draft.body[action.payload.destinationID];
+      const nextD = destination.next;
+      const prevD = destination.prev;
+      const idD = destination.id;
+
+      if (Math.abs(action.payload.source - action.payload.destination) === 1) {
+        if (action.payload.source > action.payload.destination) {
+          if (prevD !== null) {
+            draft.body[prevD].next = idS;
+          } else draft.head = idS;
+          draft.body[idS].prev = prevD;
+          draft.body[idS].next = idD;
+          draft.body[idD].prev = idS;
+          draft.body[idD].next = nextS;
+          if (nextS !== null) {
+            draft.body[nextS].prev = idD;
+          }
+        } else if (action.payload.source < action.payload.destination) {
+        }
+      }
+
+      // if (source.prev !== null && source.prev !== action.payload.destination) {
+      //   draft.body[source.prev].next = action.payload.destination;
+      // } else if (source.prev === null) {
+      //   draft.head = action.payload.destination;
+      // }
+      // if (source.next !== null && source.next !== action.payload.destination) {
+      //   draft.body[source.next].prev = action.payload.destination;
+      // }
+      // draft.body[action.payload.source].next = destination.next;
+      // draft.body[action.payload.source].prev = destination.prev;
+      // //중요한건 옆에 있는것과 바꿀때 주의
+      // //
+      // if (
+      //   destination.prev !== null &&
+      //   destination.prev !== action.payload.source
+      // ) {
+      //   draft.body[destination.prev].next = action.payload.source;
+      // } else if (destination.prev === null) {
+      //   draft.head = action.payload.source;
+      // }
+      // if (
+      //   destination.next !== null &&
+      //   destination.next !== action.payload.source
+      // ) {
+      //   draft.body[destination.next].prev = action.payload.source;
+      // }
+
+      // draft.body[action.payload.destination].next = next;
+      // draft.body[action.payload.destination].prev = prev;
     }),
 
   [SET_IMG]: (state, action) =>
