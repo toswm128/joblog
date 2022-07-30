@@ -2,10 +2,11 @@ import useBlogAPI from "assets/API/useBlogAPI";
 import useWrite from "hooks/write";
 import { useCallback } from "react";
 import { useQueryClient } from "react-query";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { line } from "Store/WriteEditorStore/type";
 import EditorInputter from "../EditorItem";
 import { A, H1, H2, H3 } from "./TagsStyle";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 const EditorList = () => {
   const { WriteEditorState, unsetImg, reset } = useWrite();
@@ -68,12 +69,6 @@ const EditorList = () => {
               onClick={() => unsetImg(data.id)}
             />
           );
-        case "a":
-          return (
-            <Link target="_blank" to={data.src} key={data.id}>
-              {data.src}
-            </Link>
-          );
       }
     },
     [unsetImg]
@@ -81,24 +76,74 @@ const EditorList = () => {
 
   let next: number | null;
   let snext: number | null;
+
   return (
     <>
-      {body.map((_, key: number) => {
-        next = snext;
-        if (key === 0) {
-          next = body[head].next;
-          snext = next;
-          dom.push(body[head]);
-          return tagTranslator(body[head]);
-        }
-        if (next !== null) {
-          snext = body[next].next;
-          dom.push(body[next]);
-          return tagTranslator(body[next]);
-        } else {
-          return null;
-        }
-      })}
+      <DragDropContext
+        onDragEnd={(result) => {
+          console.log(result.draggableId);
+          console.log(result.destination?.index);
+        }}
+        onDragUpdate={() => {}}
+      >
+        <Droppable droppableId="droppable">
+          {(provided) => (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              {body.map((_, key: number) => {
+                next = snext;
+                if (key === 0) {
+                  next = body[head].next;
+                  snext = next;
+                  dom.push(body[head]);
+                  return (
+                    <Draggable
+                      key={head}
+                      draggableId={head.toString()}
+                      index={head}
+                    >
+                      {(provided) => (
+                        <ul
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          {tagTranslator(body[head])}
+                        </ul>
+                      )}
+                    </Draggable>
+                  );
+                }
+                if (next !== null) {
+                  snext = body[next].next;
+                  dom.push(body[next]);
+                  return (
+                    <Draggable
+                      key={next}
+                      draggableId={next.toString()}
+                      index={next}
+                    >
+                      {(provided) => (
+                        <ul
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          {next !== null && tagTranslator(body[next])}
+                        </ul>
+                      )}
+                    </Draggable>
+                  );
+                } else {
+                  return null;
+                }
+              })}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+      {/* return tagTranslator(body[next]); */}
+      {/* tagTranslator(body[head],provided) */}
       <button
         onClick={() => {
           dom && title && banner
