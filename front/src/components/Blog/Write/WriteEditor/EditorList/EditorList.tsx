@@ -81,8 +81,7 @@ const EditorList = () => {
       {/* tagTranslator(body[head],provided) */}
       <button
         onClick={() => {
-          console.log(dom);
-          dom.splice(WriteEditorState.body.length);
+          console.log("dom");
           console.log(dom);
           dom && title && banner
             ? postBoard(dom, title, banner).then(() => {
