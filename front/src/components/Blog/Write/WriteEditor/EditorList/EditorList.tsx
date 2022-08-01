@@ -39,7 +39,6 @@ const EditorList = () => {
       <DragDropContext
         onDragEnd={(result) => {
           if (!result.destination) return;
-          dom.splice(WriteEditorState.body.length);
           console.log(result, dom);
           dropLine(
             result.source.index,
