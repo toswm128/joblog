@@ -4,6 +4,7 @@ import { useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import EditorItem from "./EditorItem/EditorItem";
+import { line } from "Store/WriteEditorStore/type";
 
 const EditorList = () => {
   const { WriteEditorState, reset, dropLine } = useWrite();
@@ -15,6 +16,22 @@ const EditorList = () => {
 
   let next: number | null;
   let snext: number | null;
+
+  body.map((_, key: number) => {
+    next = snext;
+    if (key === 0) {
+      next = body[head].next;
+      snext = next;
+      dom.push(body[head]);
+    }
+    if (next !== null) {
+      snext = body[next].next;
+      dom.push(body[next]);
+    } else {
+      return null;
+    }
+  });
+  console.log(dom);
 
   return (
     <>
@@ -51,26 +68,9 @@ const EditorList = () => {
         <Droppable droppableId="droppable">
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
-              {body.map((_, key: number) => {
-                next = snext;
-                if (key === 0) {
-                  next = body[head].next;
-                  snext = next;
-                  dom.push(body[head]);
-                  return (
-                    <EditorItem key={head} line={body[head]} index={key} />
-                  );
-                }
-                if (next !== null) {
-                  snext = body[next].next;
-                  dom.push(body[next]);
-                  return (
-                    <EditorItem key={next} line={body[next]} index={key} />
-                  );
-                } else {
-                  return null;
-                }
-              })}
+              {dom.map((line: line, key: number) => (
+                <EditorItem key={line.id} line={line} index={key} />
+              ))}
               {provided.placeholder}
             </div>
           )}
