@@ -70,7 +70,6 @@ const EditorItem = ({ line, index }: TEditorItem) => {
     [unsetImg]
   );
 
-  console.log(line.id, index);
   return (
     <Draggable draggableId={`${line.id}`} index={index}>
       {(provided) => (
