@@ -140,6 +140,22 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
             draft.body[nextD].prev = idS;
           }
         }
+      } else {
+        if (action.payload.source > action.payload.destination) {
+          if (prevD !== null) {
+            draft.body[prevD].next = idS;
+          } else draft.head = idS;
+
+          draft.body[idS].prev = prevD;
+          draft.body[idS].next = idD;
+          draft.body[idD].prev = idS;
+          if (prevS !== null) {
+            draft.body[prevS].next = nextS;
+          }
+          if (nextS !== null) {
+            draft.body[nextS].prev = prevS;
+          }
+        }
       }
 
       // if (source.prev !== null && source.prev !== action.payload.destination) {
