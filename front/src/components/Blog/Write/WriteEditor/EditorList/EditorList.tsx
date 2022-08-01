@@ -57,12 +57,12 @@ const EditorList = () => {
         onDragEnd={(result) => {
           if (!result.destination) return;
           console.log(result.destination.index, dom);
-          // dropLine(
-          //   result.source.index,
-          //   result.destination?.index,
-          //   +result.draggableId,
-          //   dom[result.destination?.index].id
-          // );
+          dropLine(
+            result.source.index,
+            result.destination?.index,
+            +result.draggableId,
+            dom[result.destination?.index].id
+          );
         }}
       >
         <Droppable droppableId="droppable">
@@ -82,13 +82,13 @@ const EditorList = () => {
         onClick={() => {
           console.log("dom");
           console.log(dom);
-          // dom && title && banner
-          //   ? postBoard(dom, title, banner).then(() => {
-          //       queryClient.invalidateQueries("blogs");
-          //       reset();
-          //       navigate("/");
-          //     })
-          //   : alert("작성 다 하셈");
+          dom && title && banner
+            ? postBoard(dom, title, banner).then(() => {
+                queryClient.invalidateQueries("blogs");
+                reset();
+                navigate("/");
+              })
+            : alert("작성 다 하셈");
         }}
       >
         작성하기
