@@ -10,7 +10,7 @@ const EditorList = () => {
   const { body, head, title, banner } = WriteEditorState;
   const { postBoard } = useBlogAPI();
   const queryClient = useQueryClient();
-  const dom: any = [];
+  const dom: any[] = [];
   const navigate = useNavigate();
 
   let next: number | null;
@@ -39,7 +39,7 @@ const EditorList = () => {
       <DragDropContext
         onDragEnd={(result) => {
           if (!result.destination) return;
-          dom.length = dom.length / 4;
+          dom.splice(WriteEditorState.body.length);
           console.log(result, dom);
           dropLine(
             result.source.index,
@@ -81,8 +81,7 @@ const EditorList = () => {
       {/* tagTranslator(body[head],provided) */}
       <button
         onClick={() => {
-          dom.length = dom.length / 2;
-          console.log(dom);
+          dom.splice(WriteEditorState.body.length);
           dom && title && banner
             ? postBoard(dom, title, banner).then(() => {
                 queryClient.invalidateQueries("blogs");
