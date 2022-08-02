@@ -74,13 +74,13 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
 
       if (draft.head !== action.payload.id) {
         draft.body[action.payload.prev].next = action.payload.next;
-        if (action.payload.next !== null)
-          draft.body[action.payload.next].prev = action.payload.prev;
         draft.focusLine = action.payload.prev;
       } else {
         draft.head = action.payload.next;
         draft.focusLine = action.payload.next;
       }
+      if (action.payload.next !== null)
+        draft.body[action.payload.next].prev = action.payload.prev;
       draft.setTexter = !draft.setTexter;
     }),
   [REMOVE_LINE_ONLY]: (state, action) =>
