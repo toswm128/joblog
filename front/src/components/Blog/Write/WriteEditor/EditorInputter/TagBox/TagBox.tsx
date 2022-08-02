@@ -12,6 +12,7 @@ const TagBox = () => {
 };
 
 const TagBoxContainer = styled.div`
+  left: 12px;
   position: absolute;
   width: 300px;
   min-height: 300px;

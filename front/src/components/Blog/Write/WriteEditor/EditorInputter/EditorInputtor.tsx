@@ -5,6 +5,7 @@ import ReactTextareaAutosize from "react-textarea-autosize";
 import { line } from "Store/WriteEditorStore/type";
 import TagBox from "./TagBox";
 import useEditorInputter from "./useEditorInputter";
+import tag from "assets/png/tag.png";
 
 const EditorInputter = ({ data }: { data: line }) => {
   const { WriteEditorState } = useWrite();
@@ -18,6 +19,7 @@ const EditorInputter = ({ data }: { data: line }) => {
 
   const {
     onChangeText,
+    clickTagButton,
     onKeyPressEnter,
     onKeyDownArrowUp,
     onKeyDownArrowDown,
@@ -38,6 +40,13 @@ const EditorInputter = ({ data }: { data: line }) => {
 
   return (
     <EditorInputterLine>
+      <img
+        src={tag}
+        alt=""
+        width={12}
+        height={18}
+        onClick={() => clickTagButton()}
+      />
       <ReactTextareaAutosize
         placeholder={
           data.id === WriteEditorState.focusLine ? "내용을 입력해 주세요" : ""
@@ -96,6 +105,17 @@ const EditorInputterLine = styled.div`
   display: flex;
   position: relative;
   width: 100%;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    & > img {
+      opacity: 1;
+    }
+  }
+  & > img {
+    opacity: 0;
+    transition: 0.2s;
+  }
 `;
 
 export default EditorInputter;

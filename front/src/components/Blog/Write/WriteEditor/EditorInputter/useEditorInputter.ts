@@ -36,6 +36,11 @@ const useEditorInputter = (data: line) => {
     setText(e.target.value);
   };
 
+  const clickTagButton = () => {
+    click();
+    WriteEditorState.isTagBox !== false ? closeTagBox() : openTagBox(data.id);
+  };
+
   const onKeyPressEnter = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       if (e.key === "Enter" && e.shiftKey === false) {
@@ -175,6 +180,7 @@ const useEditorInputter = (data: line) => {
 
   return {
     onChangeText,
+    clickTagButton,
     onKeyPressEnter,
     onKeyDownArrowUp,
     onKeyDownArrowDown,

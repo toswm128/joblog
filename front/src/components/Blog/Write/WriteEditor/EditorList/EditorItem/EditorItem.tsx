@@ -73,13 +73,13 @@ const EditorItem = ({ line, index }: TEditorItem) => {
   return (
     <Draggable draggableId={`${line.id}`} index={index}>
       {(provided) => (
-        <ul
+        <div
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
           {tagTranslator(line)}
-        </ul>
+        </div>
       )}
     </Draggable>
   );
