@@ -106,7 +106,6 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
 
   [DROP_LINE]: (state, action) =>
     produce(state, (draft) => {
-      // source 는 index순서이다...
       const source = draft.body[action.payload.id];
       const nextS = source.next;
       const prevS = source.prev;
@@ -170,36 +169,6 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
           }
         }
       }
-
-      // if (source.prev !== null && source.prev !== action.payload.destination) {
-      //   draft.body[source.prev].next = action.payload.destination;
-      // } else if (source.prev === null) {
-      //   draft.head = action.payload.destination;
-      // }
-      // if (source.next !== null && source.next !== action.payload.destination) {
-      //   draft.body[source.next].prev = action.payload.destination;
-      // }
-      // draft.body[action.payload.source].next = destination.next;
-      // draft.body[action.payload.source].prev = destination.prev;
-      // //중요한건 옆에 있는것과 바꿀때 주의
-      // //
-      // if (
-      //   destination.prev !== null &&
-      //   destination.prev !== action.payload.source
-      // ) {
-      //   draft.body[destination.prev].next = action.payload.source;
-      // } else if (destination.prev === null) {
-      //   draft.head = action.payload.source;
-      // }
-      // if (
-      //   destination.next !== null &&
-      //   destination.next !== action.payload.source
-      // ) {
-      //   draft.body[destination.next].prev = action.payload.source;
-      // }
-
-      // draft.body[action.payload.destination].next = next;
-      // draft.body[action.payload.destination].prev = prev;
     }),
 
   [SET_IMG]: (state, action) =>
@@ -212,26 +181,26 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
   [UNSET_IMG]: (state, action) =>
     produce(state, (draft) => {
       draft.body[action.payload].tag = "div";
+      draft.body[action.payload].src = "";
       draft.focusLine = action.payload;
     }),
   [DROP_IMG]: (state, action) =>
     produce(state, (draft) => {
-      if (draft.body[action.payload.id].next !== null)
-        draft.focusLine = draft.body[action.payload.id].next;
-      else draft.focusLine = draft.body[action.payload.id].prev;
+      const id = action.payload.id;
+      if (draft.body[id].next !== null) draft.focusLine = draft.body[id].next;
+      else draft.focusLine = draft.body[id].prev;
+      if (draft.body[id].next !== null)
+        draft.body[draft.body[id].next!].prev = draft.body.length - 1;
 
       draft.body.push({
         id: draft.body.length,
         text: "",
         tag: action.payload.isA ? "img" : "a",
-        next: draft.body[action.payload.id].next,
-        prev: action.payload.id,
+        next: draft.body[id].next,
+        prev: id,
         src: action.payload.src,
       });
-      draft.body[action.payload.id].next = draft.body.length - 1;
-      if (draft.body[action.payload.id].next !== null)
-        draft.body[draft.body[action.payload.id].next!].prev =
-          draft.body.length - 1;
+      draft.body[id].next = draft.body.length - 1;
     }),
   [SET_TAG_TO_UL]: (state, action) =>
     produce(state, (draft) => {

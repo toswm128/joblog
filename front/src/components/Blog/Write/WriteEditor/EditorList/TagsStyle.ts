@@ -28,3 +28,8 @@ export const A = styled.a`
     text-decoration: underline;
   }
 `;
+export const Img = styled.img`
+  margin: 0;
+  max-width: 100%;
+  object-fit: cover;
+`;

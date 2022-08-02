@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { line } from "Store/WriteEditorStore/type";
 import EditorInputter from "../../EditorInputter";
-import { A, H1, H2, H3 } from "../TagsStyle";
+import { A, H1, H2, H3, Img } from "../TagsStyle";
 import useWrite from "hooks/write/useWrite";
 import { Draggable } from "react-beautiful-dnd";
 
@@ -55,7 +55,7 @@ const EditorItem = ({ line, index }: TEditorItem) => {
           );
         case "img":
           return (
-            <img
+            <Img
               src={data.src}
               alt=""
               onError={() => {
