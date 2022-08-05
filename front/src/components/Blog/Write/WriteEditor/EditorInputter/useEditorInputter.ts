@@ -133,12 +133,13 @@ const useEditorInputter = (data: line) => {
 
   const onDropUrl = useCallback(
     (e: React.DragEvent<HTMLTextAreaElement>) => {
+      console.log(e.dataTransfer);
       e.preventDefault();
       setDrogOver(false);
       if (e.dataTransfer.files[0] !== undefined) {
         dropImg(data.id, URL.createObjectURL(e.dataTransfer.files[0]), true);
       } else if (e.dataTransfer.getData("url") !== undefined) {
-        console.log(e.dataTransfer.types);
+        console.log(e.dataTransfer.types, e.dataTransfer.getData("url"));
         dropImg(data.id, e.dataTransfer.getData("url"), true);
       }
     },
@@ -168,6 +169,7 @@ const useEditorInputter = (data: line) => {
 
   const onPasteImg = useCallback(
     (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+      console.log(URL.createObjectURL(e.clipboardData.files[0]));
       e.clipboardData.files[0] &&
         setImg(data.id, URL.createObjectURL(e.clipboardData.files[0]));
     },

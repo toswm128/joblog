@@ -87,7 +87,7 @@ const EditorInputter = ({ data }: { data: line }) => {
         value={text}
         ref={inputterRef}
         disabled={false}
-        onPaste={(e) => onPasteImg}
+        onPaste={onPasteImg}
         onKeyPress={onKeyPressEnter}
         onClick={() => {
           click();
