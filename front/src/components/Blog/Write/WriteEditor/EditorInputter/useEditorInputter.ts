@@ -16,6 +16,7 @@ const useEditorInputter = (data: line) => {
     setTag2Ul,
     removeLine,
     removeLineOnly,
+    setTag2A,
     redo,
     undo,
     dropImg,
@@ -169,11 +170,17 @@ const useEditorInputter = (data: line) => {
 
   const onPasteImg = useCallback(
     (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
-      console.log(URL.createObjectURL(e.clipboardData.files[0]));
-      e.clipboardData.files[0] &&
-        setImg(data.id, URL.createObjectURL(e.clipboardData.files[0]));
+      e.clipboardData.items[0] &&
+        e.clipboardData.items[0].getAsString((string) => {
+          if (string.startsWith("http")) {
+            setLineText(string, data.id);
+            setTag2A(data.id);
+          }
+        });
+      // e.clipboardData.files[0] &&
+      //   setImg(data.id, URL.createObjectURL(e.clipboardData.files[0]));
     },
-    [data.id]
+    [data.id, setLineText, setTag2A]
   );
 
   const click = useCallback(() => {
