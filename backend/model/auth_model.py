@@ -9,8 +9,8 @@ class authModel:
     def get_user_to_id(self,userId):
         db = self.db.getDB()
         cursor = db.cursor(pymysql.cursors.DictCursor)
-        sql = '''SELECT * FROM user where id="%s";''' % userId
-        cursor.execute(sql)
+        sql = '''SELECT * FROM user where id="%s";''' 
+        cursor.execute(sql,int(userId))
         result = cursor.fetchone()
         db.close()
         return result
@@ -23,8 +23,8 @@ class authModel:
         (`idx`,`id`,`password`,`name`,`profile`)
         VALUES
         (Null,'%s','%s','%s','%s');
-        ''' % (userData['id'],userData['password'],userData['name'],url)
-        cursor.execute(sql)
+        ''' 
+        cursor.execute(sql,(userData['id'],userData['password'],userData['name'],url))
         result = cursor.fetchall()
         db.commit()
         db.close()
@@ -33,8 +33,8 @@ class authModel:
     def get_user_to_idx(self,userIdx):
         db = self.db.getDB()
         cursor = db.cursor(pymysql.cursors.DictCursor)
-        sql = '''SELECT * FROM user where idx="%s";''' % userIdx
-        cursor.execute(sql)
+        sql = '''SELECT * FROM user where idx="%s";''' 
+        cursor.execute(sql,int(userIdx))
         result = cursor.fetchone()
         db.close()
         return result
@@ -42,8 +42,8 @@ class authModel:
     def patch_user_profile(self,url,userIdx):
         db = self.db.getDB()
         cursor = db.cursor()
-        sql = '''UPDATE user SET `profile` = '%s' WHERE (`idx` = %s);''' % (url,userIdx)
-        cursor.execute(sql)
+        sql = '''UPDATE user SET `profile` = '%s' WHERE (`idx` = %s);'''
+        cursor.execute(sql,(url,int(userIdx)))
         db.commit()
         db.close()
 
@@ -51,7 +51,7 @@ class authModel:
     def patch_user_name(self,name,userIdx):
         db = self.db.getDB()
         cursor = db.cursor()
-        sql = '''UPDATE user SET `name` = '%s' WHERE (`idx` = %s);''' % (name,userIdx)
-        cursor.execute(sql)
+        sql = '''UPDATE user SET `name` = '%s' WHERE (`idx` = %s);''' 
+        cursor.execute(sql,(name,int(userIdx)))
         db.commit()
         db.close()
