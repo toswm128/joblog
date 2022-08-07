@@ -22,6 +22,12 @@ const useBlogAPI = () => {
     );
     return result.data;
   };
+  const postImg = async (img: Blob) => {
+    const formData = new FormData();
+    formData.append("img", img);
+    const result = await axios.post("image", formData);
+    return result.data;
+  };
 
   const postBoard = async (dom: any, title: string, banner: banner) => {
     const formData = new FormData();
@@ -107,6 +113,7 @@ const useBlogAPI = () => {
     postBoard,
     postComment,
     GetBlog2UserIdx,
+    postImg,
     clickLike,
     getSearchBlog,
     getMyBoard,

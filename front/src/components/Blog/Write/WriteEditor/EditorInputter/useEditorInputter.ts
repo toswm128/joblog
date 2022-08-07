@@ -1,5 +1,7 @@
+import useBlogAPI from "assets/API/useBlogAPI";
 import useWrite from "hooks/write";
 import React, { useCallback, useRef, useState } from "react";
+import { useMutation } from "react-query";
 import { line } from "Store/WriteEditorStore/type";
 
 const useEditorInputter = (data: line) => {
@@ -8,6 +10,10 @@ const useEditorInputter = (data: line) => {
 
   const inputterRef = useRef<HTMLTextAreaElement>(null);
   const spaceFlag = useRef<boolean>(false);
+  const { postImg } = useBlogAPI();
+  const { mutate } = useMutation(postImg, {
+    onSuccess: (img) => dropImg(data.id, img.data, true),
+  });
 
   const {
     setLineText,
@@ -134,17 +140,18 @@ const useEditorInputter = (data: line) => {
 
   const onDropUrl = useCallback(
     (e: React.DragEvent<HTMLTextAreaElement>) => {
-      console.log(e.dataTransfer);
+      console.log(e.dataTransfer.files[0]);
       e.preventDefault();
       setDrogOver(false);
       if (e.dataTransfer.files[0] !== undefined) {
-        dropImg(data.id, URL.createObjectURL(e.dataTransfer.files[0]), true);
+        // dropImg(data.id, URL.createObjectURL(e.dataTransfer.files[0]), true);
+        mutate(e.dataTransfer.files[0]);
       } else if (e.dataTransfer.getData("url") !== undefined) {
         console.log(e.dataTransfer.types, e.dataTransfer.getData("url"));
-        dropImg(data.id, e.dataTransfer.getData("url"), true);
+        // dropImg(data.id, e.dataTransfer.getData("url"), true);
       }
     },
-    [data.id, dropImg]
+    [data.id, mutate]
   );
 
   const onBlur = useCallback(

@@ -44,8 +44,8 @@ def create_blog_endpoints(app, services,s3):
             idx = request.args.get('idx')
             board = blog_service.get_select_board(idx)
             return jsonify({'result':'success','data': board,'msg': 'blog 불러오기'})
-
-    @app.route('/image',methods=['GET'])
+    
+    @app.route('/image',methods=['GET','POST'])
     def showImg():
         if request.method == 'GET':
             fileName = request.args.get('file')
@@ -54,6 +54,16 @@ def create_blog_endpoints(app, services,s3):
                     return send_file(os.path.join(app.config["IMAGE_UPLOADS"],fileName),mimetype='image/gif',attachment_filename="download")
                 else:
                     return jsonify({"msg":"이미지를 찾을 수 없습니다."}),404
+        if request.method == 'POST':
+            file = request.files["img"]
+            fileName = str(uuid.uuid4())+'.'+file.filename.split('.')[1]
+            file.save(os.path.join(app.config["IMAGE_UPLOADS"],fileName))
+            url = "https://joblog-images-buckit.s3.ap-northeast-2.amazonaws.com/images/"+fileName
+            s3.upload_file('static/'+fileName,'joblog-images-buckit','images/'+fileName)
+            if url:
+                return jsonify({'result':'success','data':url})
+            else:
+                return jsonify({'result':'failure','msg': '이미지 없음'}) ,400
 
     @app.route('/blog/comment',methods=['POST'])
     def comment():
