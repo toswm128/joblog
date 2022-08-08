@@ -28,6 +28,15 @@ export const A = styled.a`
     text-decoration: underline;
   }
 `;
+export const Code = styled.div`
+  margin: 0;
+  & > div > textarea {
+    position: absolute;
+    left: 10px;
+    z-index: -10;
+    opacity: 0;
+  }
+`;
 export const Img = styled.img`
   margin: 0;
   max-width: 100%;

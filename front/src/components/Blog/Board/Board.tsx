@@ -7,8 +7,6 @@ import CommentForm from "./Comment/CommentForm";
 import CommentList from "./Comment/CommentList";
 import Divider from "components/common/Divider";
 import BoardHeader from "./BoardHeader";
-import useModal from "hooks/modal";
-import Modal from "components/Modal";
 import { useNavigate } from "react-router-dom";
 import NewBlogs from "components/common/NewBlogs";
 import { anotherBreakPoints } from "assets/breakpoints/breakpoints";

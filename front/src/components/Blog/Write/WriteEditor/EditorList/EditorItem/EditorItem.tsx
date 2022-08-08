@@ -1,9 +1,11 @@
 import { useCallback } from "react";
 import { line } from "Store/WriteEditorStore/type";
 import EditorInputter from "../../EditorInputter";
-import { A, H1, H2, H3, Img } from "../TagsStyle";
+import { A, Code, H1, H2, H3, Img } from "../TagsStyle";
 import useWrite from "hooks/write/useWrite";
 import { Draggable } from "react-beautiful-dnd";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 interface TEditorItem {
   line: line;
@@ -52,6 +54,12 @@ const EditorItem = ({ line, index }: TEditorItem) => {
             <ul className="tab" key={data.id}>
               <EditorInputter data={data} key={data.id} />
             </ul>
+          );
+        case "code":
+          return (
+            <Code key={data.id}>
+              <EditorInputter data={data} key={data.id} />
+            </Code>
           );
         case "img":
           return (

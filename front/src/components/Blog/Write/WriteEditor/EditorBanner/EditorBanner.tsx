@@ -40,10 +40,10 @@ const EditorBanner = () => {
       <input
         type="file"
         id="banner"
-        onDrop={e => {
+        onDrop={(e) => {
           onDropImg(e);
         }}
-        onChange={e => {
+        onChange={(e) => {
           onChange(e);
         }}
         style={{ width: "0px" }}

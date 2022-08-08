@@ -1,3 +1,5 @@
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import styled from "@emotion/styled";
 import useWrite from "hooks/write";
 import { useEffect } from "react";
@@ -38,6 +40,7 @@ const EditorInputter = ({ data }: { data: line }) => {
     drogOver,
   } = useEditorInputter(data);
 
+  console.log(text);
   return (
     <EditorInputterLine>
       <img
@@ -95,6 +98,21 @@ const EditorInputter = ({ data }: { data: line }) => {
         onChange={(e) => onChangeText(e, data.id)}
         onBlur={onBlur}
       />
+      {data.tag === "code" && (
+        <SyntaxHighlighter
+          showLineNumbers
+          onClick={() => click()}
+          language="javascript"
+          style={docco}
+          wrapLongLines
+          lineProps={{
+            style: { wordBreak: "break-all", whiteSpace: "pre-wrap" },
+          }}
+          customStyle={{ width: "100%", cursor: "text", height: "100%" }}
+        >
+          {text}
+        </SyntaxHighlighter>
+      )}
       {data.id === WriteEditorState.isTagBox &&
         data.id === WriteEditorState.focusLine && <TagBox />}
     </EditorInputterLine>
