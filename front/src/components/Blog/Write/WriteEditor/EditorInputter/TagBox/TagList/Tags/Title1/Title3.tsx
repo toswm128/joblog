@@ -1,6 +1,7 @@
 import { TagContainer } from "../TagsStyle";
 import useWrite from "hooks/write/useWrite";
 import useTags from "../useTags";
+import img from "assets/png/h3.png";
 
 const Title3 = () => {
   const { setTag2H3 } = useWrite();
@@ -11,8 +12,11 @@ const Title3 = () => {
         selectTag(setTag2H3);
       }}
     >
-      <h1>제목3</h1>
-      <span>섹션 제목(소)</span>
+      <img src={img} alt="" />
+      <div>
+        <h1>제목3</h1>
+        <span>섹션 제목(소)</span>
+      </div>
     </TagContainer>
   );
 };

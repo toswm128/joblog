@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { DisabledColor } from "style/color";
 
 export const H1 = styled.h1`
   margin: 0;
@@ -24,7 +25,7 @@ export const H3 = styled.h3`
 export const A = styled.a`
   margin: 0;
   & > div > textarea {
-    color: #6d6d6d;
+    color: ${DisabledColor};
     text-decoration: underline;
   }
 `;

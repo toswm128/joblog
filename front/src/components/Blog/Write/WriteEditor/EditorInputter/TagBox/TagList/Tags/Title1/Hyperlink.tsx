@@ -1,6 +1,7 @@
 import { TagContainer } from "../TagsStyle";
 import useWrite from "hooks/write/useWrite";
 import useTags from "../useTags";
+import img from "assets/png/link.png";
 
 const Hyperlink = () => {
   const { setTag2A } = useWrite();
@@ -12,8 +13,11 @@ const Hyperlink = () => {
         selectTag(setTag2A);
       }}
     >
-      <h1>하이퍼링크</h1>
-      <span>외부 링크</span>
+      <img src={img} alt="" />
+      <div>
+        <h1>하이퍼링크</h1>
+        <span>외부 링크</span>
+      </div>
     </TagContainer>
   );
 };

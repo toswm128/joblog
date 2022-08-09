@@ -15,12 +15,12 @@ const TagBoxContainer = styled.div`
   left: 12px;
   position: absolute;
   width: 300px;
-  min-height: 300px;
+  max-height: 300px;
+  overflow-y: auto;
   top: 33px;
   background-color: ${browserColor};
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
   z-index: 999;
   padding: 8px;
   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.1);
