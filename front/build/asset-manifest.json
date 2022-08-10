@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "/static/js/main.ee18c43f.js",
+    "main.js": "/static/js/main.3d78ac56.js",
     "static/media/jobl_logo.png": "/static/media/jobl_logo.36352a11113b3da6a017.png",
     "index.html": "/index.html",
-    "main.ee18c43f.js.map": "/static/js/main.ee18c43f.js.map"
+    "main.3d78ac56.js.map": "/static/js/main.3d78ac56.js.map"
   },
   "entrypoints": [
-    "static/js/main.ee18c43f.js"
+    "static/js/main.3d78ac56.js"
   ]
 }

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { DisabledColor } from "style/color";
+import { backgroundColor, basicColor, DisabledColor } from "style/color";
 
 export const H1 = styled.h1`
   margin: 0;
@@ -36,6 +36,14 @@ export const Code = styled.div`
     left: 10px;
     z-index: -10;
     opacity: 0;
+  }
+`;
+export const CallOut = styled.div`
+  margin: 0;
+  & > div > textarea {
+    padding: 24px 12px !important;
+    background-color: ${basicColor};
+    border-radius: 4px;
   }
 `;
 export const Img = styled.img`

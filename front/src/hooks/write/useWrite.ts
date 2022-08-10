@@ -26,6 +26,7 @@ import {
   SET_TAG_TO_A,
   DROP_LINE,
   SET_TAG_TO_CODE,
+  SET_TAG_TO_CALL_OUT,
 } from "Store/WriteEditorStore/actions";
 
 const useWrite = () => {
@@ -180,6 +181,15 @@ const useWrite = () => {
     },
     [dispatch]
   );
+  const setTag2CallOut = useCallback(
+    (id: number) => {
+      dispatch({
+        type: SET_TAG_TO_CALL_OUT,
+        payload: id,
+      });
+    },
+    [dispatch]
+  );
 
   const focusNextLine = useCallback(
     (id: number, focusIndex: number) => {
@@ -269,6 +279,7 @@ const useWrite = () => {
     setTag2H3,
     setTag2A,
     setTag2Code,
+    setTag2CallOut,
     focusNextLine,
     focusPrevLine,
     undo,

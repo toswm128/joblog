@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
-import Title1 from "./Tags/Title1/Title1";
-import Title2 from "./Tags/Title1/Title2";
-import Title3 from "./Tags/Title1/Title3";
-import Hyperlink from "./Tags/Title1/Hyperlink";
-import Code from "./Tags/Title1/Code";
+import Title1 from "./Tags/Title1";
+import Title2 from "./Tags/Title2";
+import Title3 from "./Tags/Title3";
+import Hyperlink from "./Tags/Hyperlink";
+import Code from "./Tags/Code";
+import CallOut from "./Tags/CallOut";
 
 const TagList = () => {
   return (
@@ -13,6 +14,7 @@ const TagList = () => {
       <Title3 />
       <Hyperlink />
       <Code />
+      <CallOut />
     </TagListContainer>
   );
 };

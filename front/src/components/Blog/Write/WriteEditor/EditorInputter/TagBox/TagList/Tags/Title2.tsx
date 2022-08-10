@@ -1,6 +1,6 @@
-import { TagContainer } from "../TagsStyle";
+import { TagContainer } from "./TagsStyle";
 import useWrite from "hooks/write/useWrite";
-import useTags from "../useTags";
+import useTags from "./useTags";
 import img from "assets/png/h2.png";
 
 const Title2 = () => {

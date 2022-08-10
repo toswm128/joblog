@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import EditorItem from "./EditorItem/EditorItem";
 import { line } from "Store/WriteEditorStore/type";
+import styled from "@emotion/styled";
 
 const EditorList = () => {
   const { WriteEditorState, reset, dropLine } = useWrite();
@@ -48,12 +49,15 @@ const EditorList = () => {
       >
         <Droppable droppableId="droppable">
           {(provided) => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
+            <EditorListContainer
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+            >
               {dom.map((line: line, key: number) => (
                 <EditorItem key={line.id} line={line} index={key} />
               ))}
               {provided.placeholder}
-            </div>
+            </EditorListContainer>
           )}
         </Droppable>
       </DragDropContext>
@@ -73,5 +77,11 @@ const EditorList = () => {
     </>
   );
 };
+
+const EditorListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+`;
 
 export default EditorList;

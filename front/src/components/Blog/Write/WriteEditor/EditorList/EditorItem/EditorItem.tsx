@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { line } from "Store/WriteEditorStore/type";
 import EditorInputter from "../../EditorInputter";
-import { A, Code, H1, H2, H3, Img } from "../TagsStyle";
+import { A, CallOut, Code, H1, H2, H3, Img } from "../TagsStyle";
 import useWrite from "hooks/write/useWrite";
 import { Draggable } from "react-beautiful-dnd";
 import SyntaxHighlighter from "react-syntax-highlighter";
@@ -43,6 +43,7 @@ const EditorItem = ({ line, index }: TEditorItem) => {
             </H3>
           );
         case "a":
+          console.log("a지나감");
           return (
             <A key={data.id}>
               <EditorInputter data={data} key={data.id} />
@@ -60,6 +61,12 @@ const EditorItem = ({ line, index }: TEditorItem) => {
             <Code key={data.id}>
               <EditorInputter data={data} key={data.id} />
             </Code>
+          );
+        case "callOut":
+          return (
+            <CallOut key={data.id}>
+              <EditorInputter data={data} key={data.id} />
+            </CallOut>
           );
         case "img":
           return (

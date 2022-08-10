@@ -40,7 +40,6 @@ const EditorInputter = ({ data }: { data: line }) => {
     drogOver,
   } = useEditorInputter(data);
 
-  console.log(text);
   return (
     <EditorInputterLine>
       <img
@@ -52,7 +51,9 @@ const EditorInputter = ({ data }: { data: line }) => {
       />
       <ReactTextareaAutosize
         placeholder={
-          data.id === WriteEditorState.focusLine ? "내용을 입력해 주세요" : ""
+          data.id === WriteEditorState.focusLine
+            ? `명령어 사용시 "/"를 입력하세요`
+            : ""
         }
         spellCheck={false}
         // cacheMeasurements
@@ -125,6 +126,9 @@ const EditorInputterLine = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
+  & > textarea {
+    background-color: rgba(0, 0, 0, 0);
+  }
   &:hover {
     & > img {
       opacity: 1;
