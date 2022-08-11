@@ -1,10 +1,24 @@
 import styled from "@emotion/styled";
+import { useRef } from "react";
 import { browserColor } from "style/color";
+import { createNoSubstitutionTemplateLiteral } from "typescript";
+import useEditorInputter from "../useEditorInputter";
 import TagList from "./TagList";
 
-const TagBox = () => {
+interface ITagBox {
+  inputterRef: React.RefObject<HTMLTextAreaElement>;
+}
+
+const TagBox = ({ inputterRef }: ITagBox) => {
+  const t = inputterRef.current?.getBoundingClientRect().top;
+  const poser = () => {
+    if (t && t - window.pageYOffset > 0) {
+      return "-333px";
+    }
+    return "33px";
+  };
   return (
-    <TagBoxContainer tabIndex={0}>
+    <TagBoxContainer style={{ top: poser() }} tabIndex={0}>
       <TagBoxTitle>기본 태그</TagBoxTitle>
       <TagList />
     </TagBoxContainer>
@@ -15,9 +29,9 @@ const TagBoxContainer = styled.div`
   left: 12px;
   position: absolute;
   width: 300px;
-  max-height: 300px;
+  max-height: 320px;
   overflow-y: auto;
-  top: 33px;
+  top: -320px;
   background-color: ${browserColor};
   display: flex;
   flex-direction: column;
