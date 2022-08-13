@@ -22,6 +22,7 @@ const WriteEditorState: WriteEditorStateType = {
   setTexter: false,
   setFocuser: false,
   isTagBox: false,
+  searchWord: undefined,
 };
 
 export default WriteEditorState;

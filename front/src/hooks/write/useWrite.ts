@@ -27,6 +27,7 @@ import {
   DROP_LINE,
   SET_TAG_TO_CODE,
   SET_TAG_TO_CALL_OUT,
+  SEARCH_TAG,
 } from "Store/WriteEditorStore/actions";
 
 const useWrite = () => {
@@ -190,6 +191,15 @@ const useWrite = () => {
     },
     [dispatch]
   );
+  const searchTag = useCallback(
+    (searchWord: string) => {
+      dispatch({
+        type: SEARCH_TAG,
+        payload: searchWord,
+      });
+    },
+    [dispatch]
+  );
 
   const focusNextLine = useCallback(
     (id: number, focusIndex: number) => {
@@ -280,6 +290,7 @@ const useWrite = () => {
     setTag2A,
     setTag2Code,
     setTag2CallOut,
+    searchTag,
     focusNextLine,
     focusPrevLine,
     undo,

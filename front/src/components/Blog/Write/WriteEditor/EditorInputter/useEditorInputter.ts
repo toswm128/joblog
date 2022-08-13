@@ -27,6 +27,7 @@ const useEditorInputter = (data: line) => {
     undo,
     dropImg,
     setImg,
+    searchTag,
     enterInputter,
     clickInputter,
     openTagBox,
@@ -38,8 +39,10 @@ const useEditorInputter = (data: line) => {
     e: React.ChangeEvent<HTMLTextAreaElement>,
     id: number
   ) => {
-    if (e.target.value.startsWith("/")) openTagBox(id);
-    else if (WriteEditorState.isTagBox) closeTagBox();
+    if (e.target.value.startsWith("/")) {
+      openTagBox(id);
+      searchTag(e.target.value.substring(1));
+    } else if (WriteEditorState.isTagBox) closeTagBox();
     setText(e.target.value);
   };
 

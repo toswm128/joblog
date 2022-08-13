@@ -29,6 +29,7 @@ const TagBoxContainer = styled.div`
   left: 12px;
   position: absolute;
   width: 300px;
+  min-height: 320px;
   max-height: 320px;
   overflow-y: auto;
   top: -320px;

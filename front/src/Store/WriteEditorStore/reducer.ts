@@ -13,6 +13,7 @@ import {
   REMOVE_LINE,
   REMOVE_LINE_ONLY,
   RESET,
+  SEARCH_TAG,
   SET_BANNER,
   SET_IMG,
   SET_LINE_TEXT,
@@ -233,6 +234,10 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     produce(state, (draft) => {
       draft.body[action.payload].tag = "callOut";
     }),
+  [SEARCH_TAG]: (state, action) =>
+    produce(state, (draft) => {
+      draft.searchWord = action.payload;
+    }),
   [FOCUS_NEXT_LINE]: (state, action) =>
     produce(state, (draft) => {
       draft.setFocuser = !draft.setFocuser;
@@ -319,5 +324,6 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
   [CLOSE_TAG_BOX]: (state) =>
     produce(state, (draft) => {
       draft.isTagBox = false;
+      draft.searchWord = undefined;
     }),
 });
