@@ -22,6 +22,10 @@ export const SET_TAG_TO_A = "WriteEditor/SET_TAG_TO_A";
 export const SET_TAG_TO_CODE = "WriteEditor/SET_TAG_TO_CODE";
 export const SET_TAG_TO_CALL_OUT = "WriteEditor/SET_TAG_TO_CALL_OUT";
 
+export const FOCUS_NEXT_TAG = "WriteEditor/FOCUS_NEXT_TAG";
+export const FOCUS_PREV_TAG = "WriteEditor/FOCUS_PREV_TAG";
+export const FOCUS_SET_UP_TAG = "WriteEditor/FOCUS_SET_UP_TAG";
+
 export const SEARCH_TAG = "WriteEditor/SEARCH_TAG";
 
 export const FOCUS_NEXT_LINE = "WriteEditor/FOCUS_NEXT_LINE";

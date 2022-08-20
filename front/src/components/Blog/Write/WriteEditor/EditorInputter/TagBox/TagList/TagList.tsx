@@ -6,10 +6,11 @@ import Hyperlink from "./Tags/Hyperlink";
 import Code from "./Tags/Code";
 import CallOut from "./Tags/CallOut";
 import useWrite from "hooks/write/useWrite";
+import { backgroundColor } from "style/color";
 
 const TagList = () => {
   const {
-    WriteEditorState: { searchWord },
+    WriteEditorState: { searchWord, tagBoxFocusIdx },
   } = useWrite();
   const data = [
     { word: "/제목1", Tag: Title1 },
@@ -22,9 +23,28 @@ const TagList = () => {
   const search = () => {
     return searchWord
       ? data.map(
-          ({ word, Tag }, key) => word.includes(searchWord) && <Tag key={key} />
+          ({ word, Tag }, key) =>
+            word.includes(searchWord) && (
+              <div
+                key={key}
+                style={
+                  key === tagBoxFocusIdx ? { background: backgroundColor } : {}
+                }
+              >
+                <Tag key={key} />
+              </div>
+            )
         )
-      : data.map(({ Tag }, key) => <Tag key={key} />);
+      : data.map(({ Tag }, key) => (
+          <div
+            key={key}
+            style={
+              key === tagBoxFocusIdx ? { background: backgroundColor } : {}
+            }
+          >
+            <Tag key={key} />
+          </div>
+        ));
   };
 
   return <TagListContainer>{search()}</TagListContainer>;
