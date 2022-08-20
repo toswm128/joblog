@@ -2,7 +2,7 @@ import useWrite from "hooks/write/useWrite";
 
 const useTags = () => {
   const {
-    WriteEditorState: { isTagBox, tagBoxFocusIdx },
+    WriteEditorState: { tagBoxId, tagBoxFocusIdx },
     setLineText,
     closeTagBox,
     setTag2H1,
@@ -14,35 +14,35 @@ const useTags = () => {
   } = useWrite();
 
   const selectTag = (setTag: (any: any) => any) => {
-    if (typeof isTagBox === "number") {
-      setTag(isTagBox);
-      setLineText("", isTagBox);
+    if (typeof tagBoxId === "number") {
+      setTag(tagBoxId);
+      setLineText("", tagBoxId);
       closeTagBox();
     }
   };
   const selectTagId = () => {
-    if (typeof isTagBox === "number") {
+    if (typeof tagBoxId === "number") {
       switch (tagBoxFocusIdx) {
         case 0:
-          setTag2H1(isTagBox);
+          setTag2H1(tagBoxId);
           break;
         case 1:
-          setTag2H2(isTagBox);
+          setTag2H2(tagBoxId);
           break;
         case 2:
-          setTag2H3(isTagBox);
+          setTag2H3(tagBoxId);
           break;
         case 3:
-          setTag2A(isTagBox);
+          setTag2A(tagBoxId);
           break;
         case 4:
-          setTag2Code(isTagBox);
+          setTag2Code(tagBoxId);
           break;
         case 5:
-          setTag2CallOut(isTagBox);
+          setTag2CallOut(tagBoxId);
           break;
       }
-      setLineText("", isTagBox);
+      setLineText("", tagBoxId);
       closeTagBox();
     }
   };

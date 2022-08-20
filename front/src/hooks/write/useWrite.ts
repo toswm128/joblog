@@ -30,6 +30,7 @@ import {
   SEARCH_TAG,
   FOCUS_PREV_TAG,
   FOCUS_NEXT_TAG,
+  FOCUS_SET_UP_TAG,
 } from "Store/WriteEditorStore/actions";
 
 const useWrite = () => {
@@ -202,6 +203,11 @@ const useWrite = () => {
     },
     [dispatch]
   );
+  const focusSetUpTag = useCallback(() => {
+    dispatch({
+      type: FOCUS_SET_UP_TAG,
+    });
+  }, [dispatch]);
 
   const focusNextLine = useCallback(
     (id: number, focusIndex: number) => {
@@ -305,6 +311,7 @@ const useWrite = () => {
     setTag2Code,
     setTag2CallOut,
     searchTag,
+    focusSetUpTag,
     focusNextLine,
     focusPrevLine,
     undo,

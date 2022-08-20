@@ -322,17 +322,17 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
 
   [OPEN_TAG_BOX]: (state, action) =>
     produce(state, (draft) => {
-      draft.isTagBox = action.payload;
+      draft.tagBoxId = action.payload;
     }),
   [CLOSE_TAG_BOX]: (state) =>
     produce(state, (draft) => {
-      draft.isTagBox = false;
-      draft.searchWord = undefined;
+      draft.tagBoxId = null;
+      draft.searchWord = null;
     }),
 
   [FOCUS_NEXT_TAG]: (state) =>
     produce(state, (draft) => {
-      if (draft.tagBoxFocusIdx === undefined) {
+      if (draft.tagBoxFocusIdx === null) {
         draft.tagBoxFocusIdx = 0;
       } else {
         draft.tagBoxFocusIdx += 1;
@@ -340,7 +340,7 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     }),
   [FOCUS_PREV_TAG]: (state) =>
     produce(state, (draft) => {
-      if (draft.tagBoxFocusIdx === undefined) {
+      if (draft.tagBoxFocusIdx === null) {
         draft.tagBoxFocusIdx = 0;
       } else {
         draft.tagBoxFocusIdx && (draft.tagBoxFocusIdx -= 1);
@@ -348,6 +348,6 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     }),
   [FOCUS_SET_UP_TAG]: (state) =>
     produce(state, (draft) => {
-      draft.tagBoxFocusIdx = undefined;
+      draft.tagBoxFocusIdx = null;
     }),
 });

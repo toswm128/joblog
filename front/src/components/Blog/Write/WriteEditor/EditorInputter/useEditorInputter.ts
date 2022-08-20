@@ -35,6 +35,7 @@ const useEditorInputter = (data: line) => {
     closeTagBox,
     focusNextTag,
     focusPrevTag,
+    focusSetUpTag,
     WriteEditorState,
   } = useWrite();
   const { selectTagId } = useTags();
@@ -46,21 +47,21 @@ const useEditorInputter = (data: line) => {
     if (e.target.value.startsWith("/")) {
       openTagBox(id);
       searchTag(e.target.value.substring(1));
-    } else if (WriteEditorState.isTagBox) closeTagBox();
+    } else if (WriteEditorState.tagBoxId) closeTagBox();
     setText(e.target.value);
   };
 
   const clickTagButton = () => {
     click();
-    WriteEditorState.isTagBox !== false ? closeTagBox() : openTagBox(data.id);
+    WriteEditorState.tagBoxId !== null ? closeTagBox() : openTagBox(data.id);
   };
 
   const onKeyPressEnter = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       if (e.key === "Enter" && e.shiftKey === false) {
-        if (WriteEditorState.tagBoxFocusIdx !== undefined) {
-          console.log("선택");
+        if (WriteEditorState.tagBoxFocusIdx !== null) {
           selectTagId();
+          focusSetUpTag();
         } else {
           setLineText(text, data.id);
           enterInputter(data.id, data.next);
@@ -68,31 +69,41 @@ const useEditorInputter = (data: line) => {
         e.preventDefault();
       }
     },
-    [data.id, data.next, enterInputter, setLineText, text]
+    [
+      data.id,
+      data.next,
+      enterInputter,
+      selectTagId,
+      WriteEditorState.tagBoxFocusIdx,
+      focusSetUpTag,
+      setLineText,
+      text,
+    ]
   );
 
   const onKeyDownArrowUp = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       e.preventDefault();
       if (inputterRef.current && !e.nativeEvent.isComposing) {
-        if (WriteEditorState.isTagBox >= 0) {
+        if (WriteEditorState.tagBoxId !== null) {
           focusPrevTag();
+          console.log(WriteEditorState.tagBoxId);
         } else focusPrevLine(data.id, inputterRef.current.selectionEnd);
       }
     },
-    [data.id, focusPrevLine, focusPrevTag, WriteEditorState.isTagBox]
+    [data.id, focusPrevLine, focusPrevTag, WriteEditorState.tagBoxId]
   );
 
   const onKeyDownArrowDown = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       e.preventDefault();
       if (inputterRef.current && !e.nativeEvent.isComposing) {
-        if (WriteEditorState.isTagBox >= 0) {
+        if (WriteEditorState.tagBoxId !== null) {
           focusNextTag();
         } else focusNextLine(data.id, inputterRef.current.selectionEnd);
       }
     },
-    [data.id, focusNextLine, focusNextTag, WriteEditorState.isTagBox]
+    [data.id, focusNextLine, focusNextTag, WriteEditorState.tagBoxId]
   );
 
   const onKeyDownSpace = useCallback(() => {
@@ -176,13 +187,13 @@ const useEditorInputter = (data: line) => {
     (e: React.FocusEvent<HTMLTextAreaElement, Element>) => {
       if (text !== data.text) setLineText(text, data.id);
       if (
-        !(WriteEditorState.isTagBox === false) &&
+        !(WriteEditorState.tagBoxId === null) &&
         e.currentTarget.nextSibling
       ) {
         !e.currentTarget.nextSibling.contains(e.relatedTarget) && closeTagBox();
       }
     },
-    [data.text, data.id, text, WriteEditorState.isTagBox]
+    [data.text, data.id, text, WriteEditorState.tagBoxId]
   );
 
   const dragOver = useCallback(() => {
