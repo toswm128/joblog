@@ -29,5 +29,6 @@ export type WriteEditorStateType = {
   setTexter: boolean;
   setFocuser: Boolean;
   isTagBox: number | boolean;
-  searchWord: string | undefined;
+  searchWord?: string;
+  tagBoxFocusIdx?: number;
 };

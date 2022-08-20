@@ -28,6 +28,8 @@ import {
   SET_TAG_TO_CODE,
   SET_TAG_TO_CALL_OUT,
   SEARCH_TAG,
+  FOCUS_PREV_TAG,
+  FOCUS_NEXT_TAG,
 } from "Store/WriteEditorStore/actions";
 
 const useWrite = () => {
@@ -273,6 +275,18 @@ const useWrite = () => {
     });
   }, [dispatch]);
 
+  const focusNextTag = useCallback(() => {
+    dispatch({
+      type: FOCUS_NEXT_TAG,
+    });
+  }, [dispatch]);
+
+  const focusPrevTag = useCallback(() => {
+    dispatch({
+      type: FOCUS_PREV_TAG,
+    });
+  }, [dispatch]);
+
   return {
     clickInputter,
     enterInputter,
@@ -300,6 +314,8 @@ const useWrite = () => {
     reset,
     openTagBox,
     closeTagBox,
+    focusNextTag,
+    focusPrevTag,
     WriteEditorState,
   };
 };

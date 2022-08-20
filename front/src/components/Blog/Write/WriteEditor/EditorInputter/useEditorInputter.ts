@@ -3,6 +3,7 @@ import useWrite from "hooks/write";
 import React, { useCallback, useRef, useState } from "react";
 import { useMutation } from "react-query";
 import { line } from "Store/WriteEditorStore/type";
+import useTags from "./TagBox/TagList/Tags/useTags";
 
 const useEditorInputter = (data: line) => {
   const [text, setText] = useState(data.text);
@@ -32,8 +33,11 @@ const useEditorInputter = (data: line) => {
     clickInputter,
     openTagBox,
     closeTagBox,
+    focusNextTag,
+    focusPrevTag,
     WriteEditorState,
   } = useWrite();
+  const { selectTagId } = useTags();
 
   const onChangeText = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
@@ -54,8 +58,13 @@ const useEditorInputter = (data: line) => {
   const onKeyPressEnter = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       if (e.key === "Enter" && e.shiftKey === false) {
-        setLineText(text, data.id);
-        enterInputter(data.id, data.next);
+        if (WriteEditorState.tagBoxFocusIdx !== undefined) {
+          console.log("선택");
+          selectTagId();
+        } else {
+          setLineText(text, data.id);
+          enterInputter(data.id, data.next);
+        }
         e.preventDefault();
       }
     },
@@ -65,19 +74,25 @@ const useEditorInputter = (data: line) => {
   const onKeyDownArrowUp = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       e.preventDefault();
-      if (inputterRef.current && !e.nativeEvent.isComposing)
-        focusPrevLine(data.id, inputterRef.current.selectionEnd);
+      if (inputterRef.current && !e.nativeEvent.isComposing) {
+        if (WriteEditorState.isTagBox >= 0) {
+          focusPrevTag();
+        } else focusPrevLine(data.id, inputterRef.current.selectionEnd);
+      }
     },
-    [data.id, focusPrevLine]
+    [data.id, focusPrevLine, focusPrevTag, WriteEditorState.isTagBox]
   );
 
   const onKeyDownArrowDown = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       e.preventDefault();
-      if (inputterRef.current && !e.nativeEvent.isComposing)
-        focusNextLine(data.id, inputterRef.current.selectionEnd);
+      if (inputterRef.current && !e.nativeEvent.isComposing) {
+        if (WriteEditorState.isTagBox >= 0) {
+          focusNextTag();
+        } else focusNextLine(data.id, inputterRef.current.selectionEnd);
+      }
     },
-    [data.id, focusNextLine]
+    [data.id, focusNextLine, focusNextTag, WriteEditorState.isTagBox]
   );
 
   const onKeyDownSpace = useCallback(() => {

@@ -7,7 +7,10 @@ import {
   DROP_LINE,
   FOCUS_LINE,
   FOCUS_NEXT_LINE,
+  FOCUS_NEXT_TAG,
   FOCUS_PREV_LINE,
+  FOCUS_PREV_TAG,
+  FOCUS_SET_UP_TAG,
   OPEN_TAG_BOX,
   REDO,
   REMOVE_LINE,
@@ -325,5 +328,26 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     produce(state, (draft) => {
       draft.isTagBox = false;
       draft.searchWord = undefined;
+    }),
+
+  [FOCUS_NEXT_TAG]: (state) =>
+    produce(state, (draft) => {
+      if (draft.tagBoxFocusIdx === undefined) {
+        draft.tagBoxFocusIdx = 0;
+      } else {
+        draft.tagBoxFocusIdx += 1;
+      }
+    }),
+  [FOCUS_PREV_TAG]: (state) =>
+    produce(state, (draft) => {
+      if (draft.tagBoxFocusIdx === undefined) {
+        draft.tagBoxFocusIdx = 0;
+      } else {
+        draft.tagBoxFocusIdx && (draft.tagBoxFocusIdx -= 1);
+      }
+    }),
+  [FOCUS_SET_UP_TAG]: (state) =>
+    produce(state, (draft) => {
+      draft.tagBoxFocusIdx = undefined;
     }),
 });
