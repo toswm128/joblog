@@ -114,7 +114,7 @@ const EditorInputter = ({ data }: { data: line }) => {
           {text}
         </SyntaxHighlighter>
       )}
-      {data.id === WriteEditorState.isTagBox &&
+      {data.id === WriteEditorState.tagBoxId &&
         data.id === WriteEditorState.focusLine && (
           <TagBox inputterRef={inputterRef} />
         )}
