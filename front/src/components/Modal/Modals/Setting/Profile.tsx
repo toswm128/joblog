@@ -13,7 +13,7 @@ const Profile = ({ mutate }: { mutate: (file: any) => any }) => {
     const form = new FormData();
     file
       ? form.append("profile", file)
-      : form.append("profile", "http://localhost:5000/image?file=user.png");
+      : form.append("profile", "http://joblog.kro.kr:5000/image?file=user.png");
     mutate(form);
     closeModal();
   };
@@ -35,7 +35,7 @@ const Profile = ({ mutate }: { mutate: (file: any) => any }) => {
             {src ? (
               <img src={src} alt="" />
             ) : (
-              <img src="http://localhost:5000/image?file=user.png" alt="" />
+              <img src="http://joblog.kro.kr:5000/image?file=user.png" alt="" />
             )}
             클릭하여 변경
           </label>
