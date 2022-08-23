@@ -67,7 +67,7 @@ const EditorList = () => {
           console.log(dom);
           title &&
             postBoard(dom, title, banner).then(() => {
-              queryClient.invalidateQueries("blogs");
+              queryClient.refetchQueries("blogs");
               reset();
               navigate("/");
             });
