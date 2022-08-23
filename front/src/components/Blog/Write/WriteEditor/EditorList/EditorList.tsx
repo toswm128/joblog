@@ -6,6 +6,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import EditorItem from "./EditorItem/EditorItem";
 import { line } from "Store/WriteEditorStore/type";
 import styled from "@emotion/styled";
+import DefaultButton from "components/common/Buttons/DefaultButton";
 
 const EditorList = () => {
   const { WriteEditorState, reset, dropLine } = useWrite();
@@ -32,6 +33,7 @@ const EditorList = () => {
       return null;
     }
   });
+  console.log(dom && title && banner ? true : false, dom);
 
   return (
     <>
@@ -61,7 +63,7 @@ const EditorList = () => {
           )}
         </Droppable>
       </DragDropContext>
-      <button
+      <DefaultButton
         onClick={() => {
           dom && title && banner
             ? postBoard(dom, title, banner).then(() => {
@@ -71,9 +73,11 @@ const EditorList = () => {
               })
             : alert("작성 다 하셈");
         }}
+        isAbled={dom && title && banner ? true : false}
+        size={"M"}
       >
-        작성하기
-      </button>
+        <>작성하기</>
+      </DefaultButton>
     </>
   );
 };
