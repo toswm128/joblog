@@ -33,7 +33,6 @@ const EditorList = () => {
       return null;
     }
   });
-  console.log(dom && title && banner ? true : false, dom);
 
   return (
     <>
@@ -65,13 +64,15 @@ const EditorList = () => {
       </DragDropContext>
       <DefaultButton
         onClick={() => {
-          dom && title && banner
-            ? postBoard(dom, title, banner).then(() => {
-                queryClient.invalidateQueries("blogs");
-                reset();
-                navigate("/");
-              })
-            : alert("작성 다 하셈");
+          console.log(dom);
+          dom &&
+            title &&
+            banner &&
+            postBoard(dom, title, banner).then(() => {
+              queryClient.invalidateQueries("blogs");
+              reset();
+              navigate("/");
+            });
         }}
         isAbled={dom && title && banner ? true : false}
         size={"M"}

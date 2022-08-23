@@ -15,7 +15,7 @@ export const BoardContainer = styled.div`
     margin: 0 auto;
     -webkit-user-drag: none;
     &:active {
-      background-color: black;
+      background-color: #2e2e2e;
       height: 80vh;
       object-fit: contain;
     }
