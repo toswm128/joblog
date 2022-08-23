@@ -65,16 +65,14 @@ const EditorList = () => {
       <DefaultButton
         onClick={() => {
           console.log(dom);
-          dom &&
-            title &&
-            banner &&
+          title &&
             postBoard(dom, title, banner).then(() => {
               queryClient.invalidateQueries("blogs");
               reset();
               navigate("/");
             });
         }}
-        isAbled={dom && title && banner ? true : false}
+        isAbled={title ? true : false}
         size={"M"}
       >
         <>작성하기</>
