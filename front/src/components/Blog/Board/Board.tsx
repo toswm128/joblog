@@ -7,7 +7,6 @@ import CommentForm from "./Comment/CommentForm";
 import CommentList from "./Comment/CommentList";
 import Divider from "components/common/Divider";
 import BoardHeader from "./BoardHeader";
-import { useNavigate } from "react-router-dom";
 import NewBlogs from "components/common/NewBlogs";
 import { anotherBreakPoints } from "assets/breakpoints/breakpoints";
 
@@ -16,7 +15,6 @@ interface IBoard {
 }
 
 const Board = ({ idx }: IBoard) => {
-  const navigate = useNavigate();
   const { getBoard, getBlog } = useBlogAPI();
 
   const { isLoading, data: { data: board } = {} } = useQuery(
