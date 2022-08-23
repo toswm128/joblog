@@ -2,6 +2,7 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { line } from "Store/WriteEditorStore/type";
 import {
+  BoardContextCallOutTag,
   BoardContextContainer,
   BoardContextDivTag,
   BoardContextH1Tag,
@@ -78,6 +79,12 @@ const BoardContext = ({ context }: { context: string }) => {
               >
                 {current.text}
               </a>
+            );
+          case "callOut":
+            return (
+              <BoardContextCallOutTag key={current.id}>
+                {current.text}
+              </BoardContextCallOutTag>
             );
           default:
             return null;

@@ -31,10 +31,7 @@ const useBlogAPI = () => {
 
   const postBoard = async (dom: any, title: string, banner: banner) => {
     const formData = new FormData();
-    formData.append(
-      "context",
-      JSON.stringify(dom).replaceAll("\\n", " \\\\n ")
-    );
+    formData.append("context", JSON.stringify(dom));
     formData.append("title", title);
     banner && formData.append("banner", banner);
     try {

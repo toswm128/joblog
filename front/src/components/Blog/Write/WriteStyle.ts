@@ -42,6 +42,7 @@ export const WriteComponent = styled.div`
     padding: 6px 1px;
     /* 고급 */
     font-size: 48px;
+    font-weight: bold;
     border: 0;
     outline: none;
     cursor: text;
