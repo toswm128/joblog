@@ -24,14 +24,15 @@ def create_blog_endpoints(app, services,s3):
         if request.method == 'POST':
             value = request.form
             token = request.headers['Authorization']
+            url = "http://joblog.kro.kr:5000/image?file=joblog_Default_background.png"
             if(token == ""):
                 return jsonify({'result':'failure','msg': '유저 정보 가져오기 실패'}) ,400
-            file = request.files["banner"]
-            fileName = str(uuid.uuid4())+'.'+file.filename.split('.')[1]
-            file.save(os.path.join(app.config["IMAGE_UPLOADS"],fileName))
-            url = "https://joblog-images-buckit.s3.ap-northeast-2.amazonaws.com/images/"+fileName
-            
-            s3.upload_file('static/'+fileName,'joblog-images-buckit','images/'+fileName)
+            if value["banner"] != '':
+                file = request.files["banner"]
+                fileName = str(uuid.uuid4())+'.'+file.filename.split('.')[1]
+                file.save(os.path.join(app.config["IMAGE_UPLOADS"],fileName))
+                url = "https://joblog-images-buckit.s3.ap-northeast-2.amazonaws.com/images/"+fileName
+                s3.upload_file('static/'+fileName,'joblog-images-buckit','images/'+fileName)
             status = blog_service.post_new_blog(value,url,token)
             if status == 400:
                 return jsonify({'msg': '포함되지 않는 데이터가 있습니다'}),400

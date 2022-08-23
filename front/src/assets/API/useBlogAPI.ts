@@ -33,7 +33,7 @@ const useBlogAPI = () => {
     const formData = new FormData();
     formData.append("context", JSON.stringify(dom));
     formData.append("title", title);
-    banner && formData.append("banner", banner);
+    formData.append("banner", banner ? banner : "");
     try {
       const result = await axios.post(`/blog/post`, formData);
       if (result.status === 200) {
