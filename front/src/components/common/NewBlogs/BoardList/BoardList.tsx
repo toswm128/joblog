@@ -35,11 +35,6 @@ const BoardList = ({ blogList, breakpoints, children, isEnd }: IBoardList) => {
       ))}
 
       {!isEnd && flex && children}
-      {/* {!isEnd && flexData && (
-        <BoardFlexContainer>
-          <ScrollLoader flex={flex} />
-        </BoardFlexContainer>
-      )} */}
     </>
   );
 };

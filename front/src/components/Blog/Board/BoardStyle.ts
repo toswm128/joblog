@@ -28,6 +28,7 @@ export const BoardContent = styled.div`
   flex-direction: column;
   max-width: 1006px;
   margin: 0 auto;
+  width: 100%;
 
   /* 미디어 쿼리 */
   @media (max-width: 1395px) {
