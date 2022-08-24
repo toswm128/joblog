@@ -1,13 +1,16 @@
 import styled from "@emotion/styled";
-import { basicColor } from "style/color";
+import { basicColor, DisabledColor } from "style/color";
 
 export const BoardContextContainer = styled.div`
   width: 100%;
+  font-size: 1.125rem;
   white-space: pre-line;
 `;
 
 export const BoardContextDivTag = styled.div`
   width: 100%;
+  font-size: 1.125rem;
+  padding: 6px 2px;
 `;
 
 export const BoardContextUlTag = styled.ul`
@@ -29,7 +32,7 @@ export const BoardContextH3Tag = styled.h3`
 `;
 export const BoardContextATag = styled.a`
   margin: 0;
-  color: #6d6d6d;
+  color: ${DisabledColor};
 `;
 export const BoardContextCallOutTag = styled.div`
   padding: 24px 12px;

@@ -57,7 +57,7 @@ export const WriteComponent = styled.div`
     height: auto;
     padding: 6px 2px;
     /* 고급 */
-    font-size: 16px;
+    font-size: 1.125rem;
     font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
       Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji",
       "Segoe UI Symbol";
