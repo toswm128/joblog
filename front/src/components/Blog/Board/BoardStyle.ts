@@ -26,14 +26,11 @@ export const BoardContent = styled.div`
   /* 레이아웃 */
   display: flex;
   flex-direction: column;
-  max-width: 1006px;
+  max-width: 800px;
   margin: 0 auto;
   width: 100%;
 
   /* 미디어 쿼리 */
-  @media (max-width: 1395px) {
-    max-width: 1006px;
-  }
   @media (max-width: 1052px) {
     max-width: 663px;
   }
@@ -94,5 +91,22 @@ export const BoardContent = styled.div`
     /* 레이아웃 */
     display: flex;
     flex-direction: column;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+`;
+
+export const OtherBlogs = styled.div`
+  max-width: 1006px;
+  margin: 0 auto;
+  width: 100%;
+  @media (max-width: 1395px) {
+    max-width: 1006px;
+  }
+  @media (max-width: 1052px) {
+    max-width: 663px;
+  }
+  @media (max-width: 709px) {
+    max-width: 320px;
   }
 `;

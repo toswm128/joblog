@@ -1,7 +1,7 @@
 import useBlogAPI from "assets/API/useBlogAPI";
 import { useQuery } from "react-query";
 import BoardContext from "./BoardContext";
-import { BoardContainer, BoardContent } from "./BoardStyle";
+import { BoardContainer, BoardContent, OtherBlogs } from "./BoardStyle";
 import Loader from "components/common/Loader";
 import CommentForm from "./Comment/CommentForm";
 import CommentList from "./Comment/CommentList";
@@ -43,6 +43,8 @@ const Board = ({ idx }: IBoard) => {
             </div>
             <CommentForm blogIdx={board.blog.idx} />
             <CommentList commentList={board.comments} />
+          </BoardContent>
+          <OtherBlogs>
             <Divider>
               <>다른 게시글</>
             </Divider>
@@ -51,7 +53,7 @@ const Board = ({ idx }: IBoard) => {
               infiniteFuc={getBlog}
               querykey={"blogs"}
             />
-          </BoardContent>
+          </OtherBlogs>
         </>
       ) : (
         <Loader />
