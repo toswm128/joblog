@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import Profile from "components/common/Profile";
 import LikeButton from "components/common/Buttons/LikeButton";
+import KebabButton from "components/common/Buttons/KebabButton";
 
 interface IBoardHeader {
   idx: string;
@@ -15,6 +16,7 @@ interface IBoardHeader {
   name: string;
   regdate: string;
   likes: likes;
+  isMyBoard: boolean;
 }
 
 const BoardHeader = ({
@@ -25,6 +27,7 @@ const BoardHeader = ({
   name,
   regdate,
   likes,
+  isMyBoard,
 }: IBoardHeader) => {
   const { clickLike } = useBlogAPI();
   const { GetUser } = useAuthAPI();
@@ -53,7 +56,14 @@ const BoardHeader = ({
 
   return (
     <>
-      <div className="title">{title}</div>
+      <div className="title">
+        {title}
+        {isMyBoard && (
+          <KebabButton>
+            <h1>aa</h1>
+          </KebabButton>
+        )}
+      </div>
       <div className="info">
         <Profile
           isMe={false}

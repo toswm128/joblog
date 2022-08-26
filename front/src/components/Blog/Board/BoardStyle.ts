@@ -61,6 +61,9 @@ export const BoardContent = styled.div`
     /* 고급 */
     font-size: 48px;
     font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .info {
