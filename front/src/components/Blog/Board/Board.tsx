@@ -9,19 +9,30 @@ import Divider from "components/common/Divider";
 import BoardHeader from "./BoardHeader";
 import NewBlogs from "components/common/NewBlogs";
 import { anotherBreakPoints } from "assets/breakpoints/breakpoints";
+import useAuthAPI from "hooks/API/useAuthAPI";
+import { useEffect, useState } from "react";
 
 interface IBoard {
   idx: string;
 }
 
 const Board = ({ idx }: IBoard) => {
+  const [isMyBoard, setIsMyBoard] = useState(false);
   const { getBoard, getBlog } = useBlogAPI();
+  const { GetUser } = useAuthAPI();
+  const { data: { data: info } = {} } = useQuery("myInfo", GetUser);
 
   const { isLoading, data: { data: board } = {} } = useQuery(
     `board/${idx}`,
     () => getBoard(idx),
     {}
   );
+
+  useEffect(() => {
+    board?.blog?.userIdx ??
+      info?.idx ??
+      setIsMyBoard(board?.blog?.userIdx === info?.idx);
+  }, [board?.blog, info?.idx]);
 
   return (
     <BoardContainer>
