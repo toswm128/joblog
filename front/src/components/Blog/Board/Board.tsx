@@ -29,8 +29,8 @@ const Board = ({ idx }: IBoard) => {
   );
 
   useEffect(() => {
-    board?.blog?.userIdx ??
-      info?.idx ??
+    board?.blog?.userIdx &&
+      info?.idx &&
       setIsMyBoard(board?.blog?.userIdx === info?.idx);
   }, [board?.blog, info?.idx]);
 

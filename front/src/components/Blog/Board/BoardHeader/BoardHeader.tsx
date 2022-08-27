@@ -41,7 +41,6 @@ const BoardHeader = ({
       setIsLike(!isLike);
     },
   });
-
   const isUserLike = useCallback(() => {
     return likes.some(({ userIdx }) => userIdx === data?.idx);
   }, [likes, data?.idx]);
