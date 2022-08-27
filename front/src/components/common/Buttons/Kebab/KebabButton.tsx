@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import kebab from "assets/png/kebab.png";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { basicColor } from "style/color";
 
 interface IKebabButton {
@@ -8,9 +8,25 @@ interface IKebabButton {
 }
 
 const KebabButton = ({ children }: IKebabButton) => {
+  const modalEl = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleClickOutside = useCallback(
+    ({ target }) => {
+      if (isOpen && !modalEl.current?.contains(target)) setIsOpen(false);
+    },
+    [isOpen]
+  );
+
+  useEffect(() => {
+    window.addEventListener("click", handleClickOutside);
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, [handleClickOutside]);
+
   return (
-    <KebabContainer>
+    <KebabContainer ref={modalEl}>
       <KebabImg src={kebab} onClick={() => setIsOpen(!isOpen)} alt="" />
       {isOpen && <KebabModal>{children}</KebabModal>}
     </KebabContainer>

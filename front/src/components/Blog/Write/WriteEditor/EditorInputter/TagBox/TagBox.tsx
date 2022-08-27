@@ -1,8 +1,5 @@
 import styled from "@emotion/styled";
-import { useRef } from "react";
 import { browserColor } from "style/color";
-import { createNoSubstitutionTemplateLiteral } from "typescript";
-import useEditorInputter from "../useEditorInputter";
 import TagList from "./TagList";
 
 interface ITagBox {

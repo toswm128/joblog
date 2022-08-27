@@ -4,8 +4,6 @@ import EditorInputter from "../../EditorInputter";
 import { A, CallOut, Code, H1, H2, H3, Img } from "../TagsStyle";
 import useWrite from "hooks/write/useWrite";
 import { Draggable } from "react-beautiful-dnd";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 interface TEditorItem {
   line: line;
