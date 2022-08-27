@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import kebab from "assets/png/kebab.png";
 import { useState } from "react";
+import { basicColor } from "style/color";
 
 interface IKebabButton {
   children: JSX.Element;
@@ -28,10 +29,13 @@ const KebabImg = styled.img`
 const KebabModal = styled.div`
   position: absolute;
   z-index: 10;
+  overflow-y: auto;
   width: 200px;
-  height: 300px;
+  max-height: 300px;
   right: 0;
-  background-color: red;
+  border: 1px solid ${basicColor};
+  box-shadow: 3px -3px 10px rgba(0, 0, 0, 0.2);
+  background-color: white;
 `;
 
 export default KebabButton;

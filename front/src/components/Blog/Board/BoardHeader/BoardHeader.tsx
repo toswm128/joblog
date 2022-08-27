@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import Profile from "components/common/Profile";
 import LikeButton from "components/common/Buttons/LikeButton";
-import KebabButton from "components/common/Buttons/KebabButton";
+import BoardSetting from "./BoardSetting";
 
 interface IBoardHeader {
   idx: string;
@@ -57,11 +57,7 @@ const BoardHeader = ({
     <>
       <div className="title">
         {title}
-        {isMyBoard && (
-          <KebabButton>
-            <h1>aa</h1>
-          </KebabButton>
-        )}
+        {isMyBoard && <BoardSetting />}
       </div>
       <div className="info">
         <Profile
