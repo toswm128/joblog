@@ -35,4 +35,8 @@ export const ModalCard = styled.div`
   & > span {
     font-size: 1.3rem;
   }
+  & > div {
+    display: flex;
+    gap: 50px;
+  }
 `;

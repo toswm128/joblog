@@ -5,6 +5,8 @@ import Error from "./Modals/Error/Error";
 import Profile from "./Modals/Setting/Profile";
 import Logout from "./Modals/Setting/Logout";
 import Name from "./Modals/Setting/Name";
+import Delete from "./Modals/Setting/Board/Delete";
+import Put from "./Modals/Setting/Board/Put";
 
 // export const Modals = {
 // };
@@ -23,6 +25,10 @@ const Modal = () => {
         return <Profile {...props} />;
       case "setting/logout":
         return <Logout {...props} />;
+      case "board/setting/delete":
+        return <Delete {...props} />;
+      case "board/setting/put":
+        return <Put {...props} />;
     }
   };
 

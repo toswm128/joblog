@@ -57,7 +57,7 @@ const BoardHeader = ({
     <>
       <div className="title">
         {title}
-        {isMyBoard && <BoardSetting />}
+        {isMyBoard && <BoardSetting idx={idx} />}
       </div>
       <div className="info">
         <Profile

@@ -1,10 +1,8 @@
 import useBlogAPI from "assets/API/useBlogAPI";
 import { myBreakPoints } from "assets/breakpoints/breakpoints";
 import { AxiosError } from "axios";
-import Modal from "components/Modal";
 import NewBlogs from "components/common/NewBlogs";
 import useAuthAPI from "hooks/API/useAuthAPI";
-import useModal from "hooks/modal";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { InfoContainer, UserBoardsContainer } from "../InfoStyle";
