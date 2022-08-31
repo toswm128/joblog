@@ -12,6 +12,7 @@ import {
   FOCUS_PREV_TAG,
   FOCUS_SET_UP_TAG,
   OPEN_TAG_BOX,
+  PUT_SET_UP,
   REDO,
   REMOVE_LINE,
   REMOVE_LINE_ONLY,
@@ -349,5 +350,10 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
   [FOCUS_SET_UP_TAG]: (state) =>
     produce(state, (draft) => {
       draft.tagBoxFocusIdx = null;
+    }),
+  [PUT_SET_UP]: (state, action) =>
+    produce(state, (draft) => {
+      draft.body = action.payload.body;
+      draft.title = action.payload.title;
     }),
 });

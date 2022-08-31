@@ -14,7 +14,11 @@ const Put = ({ putBoard }: { putBoard: any }) => {
           <DefaultButton onClick={() => putBoard()} isAbled={true} size={"L"}>
             <>수정</>
           </DefaultButton>
-          <DefaultButton onClick={() => closeModal()} isAbled={true} size={"L"}>
+          <DefaultButton
+            onClick={() => closeModal()}
+            isAbled={false}
+            size={"L"}
+          >
             <>취소</>
           </DefaultButton>
         </div>

@@ -1,14 +1,9 @@
-import axios from "axios";
 import DefaultButton from "components/common/Buttons/DefaultButton";
 import ModalForm from "components/Modal/ModalForm";
 import useModal from "hooks/modal";
 
-const Delete = () => {
+const Delete = ({ deleteBoard }: { deleteBoard: any }) => {
   const { closeModal } = useModal();
-
-  const deleteBoard = () => {
-    console.log("삭제");
-  };
 
   return (
     <ModalForm>
@@ -22,7 +17,11 @@ const Delete = () => {
           >
             <>삭제</>
           </DefaultButton>
-          <DefaultButton onClick={() => closeModal()} isAbled={true} size={"L"}>
+          <DefaultButton
+            onClick={() => closeModal()}
+            isAbled={false}
+            size={"L"}
+          >
             <>취소</>
           </DefaultButton>
         </div>

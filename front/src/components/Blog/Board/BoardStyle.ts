@@ -95,6 +95,7 @@ export const BoardContent = styled.div`
     display: flex;
     flex-direction: column;
     max-width: 800px;
+    min-width: 781px;
     margin: 0 auto;
   }
 `;
