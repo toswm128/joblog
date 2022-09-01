@@ -63,6 +63,19 @@ class blogModel:
         db.close()
         return result
 
+    def put_blog(self,context,title,url,idx):
+        db = self.db.getDB()
+        cursor = db.cursor()
+        sql = '''
+            UPDATE `joblog`.`blog` SET `context` = %s, `title` = %s, `banner` = %s WHERE (`idx` = %s);
+            '''
+        print(sql)
+        cursor.execute(sql,(context,title,url,idx))
+        result = cursor.fetchall()
+        db.commit()
+        db.close()
+        return result
+
     def post_comment(self,blogId,userId,text):
         db = self.db.getDB()
         cursor = db.cursor()
