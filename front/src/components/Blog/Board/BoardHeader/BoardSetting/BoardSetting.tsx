@@ -1,21 +1,34 @@
 import useBlogAPI from "assets/API/useBlogAPI";
 import KebabButton from "components/common/Buttons/Kebab/KebabButton";
 import KebabItem from "components/common/Buttons/Kebab/KebabItem";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import useModal from "hooks/modal";
 import useWrite from "hooks/write/useWrite";
 import { useNavigate } from "react-router-dom";
+import { AxiosError } from "axios";
 
 const useBoardSetting = (idx: string) => {
   const { putSetUp } = useWrite();
   const { getBoard, deleteBoard } = useBlogAPI();
-  const { closeModal } = useModal();
+  const { closeModal, openModal } = useModal();
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { data: { data: board } = {} } = useQuery(
     `board/${idx}`,
     () => getBoard(idx),
     {}
   );
+  const { mutate } = useMutation(() => deleteBoard(idx), {
+    onSuccess: () => {
+      navigate(`/`);
+      queryClient.invalidateQueries(`blogs`);
+      closeModal();
+    },
+    onError: (error: AxiosError) => {
+      closeModal();
+      openModal("error", { status: error?.response?.status });
+    },
+  });
 
   const putBoard = () => {
     const context = JSON.parse(board?.blog?.context);
@@ -40,9 +53,7 @@ const useBoardSetting = (idx: string) => {
   };
 
   const removeBoard = () => {
-    deleteBoard(idx);
-    navigate("/");
-    closeModal();
+    mutate();
   };
   return { putBoard, removeBoard };
 };

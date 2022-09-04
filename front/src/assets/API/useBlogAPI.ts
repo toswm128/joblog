@@ -55,22 +55,8 @@ const useBlogAPI = () => {
     const formData = new FormData();
     formData.append("idx", idx);
     formData.append("banner", "");
-    try {
-      const result = await axios.delete(`/blog`, { data: formData });
-      if (result.status === 200) {
-        return result;
-      }
-    } catch (e) {
-      const err = e as AxiosError;
-      const status = err.response?.status;
-      switch (status) {
-        case 400:
-          console.log("값 부족");
-          break;
-        case 403:
-          console.log("토큰 없음");
-      }
-    }
+    const result = await axios.delete(`/blog`, { data: formData });
+    return result;
   };
 
   const postComment = async (blogId: number, text: string) => {
