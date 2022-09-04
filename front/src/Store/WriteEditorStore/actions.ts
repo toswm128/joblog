@@ -41,3 +41,5 @@ export const RESET = "WriteEditor/RESET";
 
 export const OPEN_TAG_BOX = "WriteEditor/OPEN_TAG_BOX";
 export const CLOSE_TAG_BOX = "WriteEditor/CLOSE_TAG_BOX";
+
+export const PUT_SET_UP = "WriteEditor/PUT_SET_UP";

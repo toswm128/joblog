@@ -61,6 +61,9 @@ export const BoardContent = styled.div`
     /* 고급 */
     font-size: 48px;
     font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .info {
@@ -92,6 +95,7 @@ export const BoardContent = styled.div`
     display: flex;
     flex-direction: column;
     max-width: 800px;
+    min-width: 781px;
     margin: 0 auto;
   }
 `;

@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import Profile from "components/common/Profile";
 import LikeButton from "components/common/Buttons/LikeButton";
+import BoardSetting from "./BoardSetting";
 
 interface IBoardHeader {
   idx: string;
@@ -15,6 +16,7 @@ interface IBoardHeader {
   name: string;
   regdate: string;
   likes: likes;
+  isMyBoard: boolean;
 }
 
 const BoardHeader = ({
@@ -25,6 +27,7 @@ const BoardHeader = ({
   name,
   regdate,
   likes,
+  isMyBoard,
 }: IBoardHeader) => {
   const { clickLike } = useBlogAPI();
   const { GetUser } = useAuthAPI();
@@ -38,7 +41,6 @@ const BoardHeader = ({
       setIsLike(!isLike);
     },
   });
-
   const isUserLike = useCallback(() => {
     return likes.some(({ userIdx }) => userIdx === data?.idx);
   }, [likes, data?.idx]);
@@ -53,7 +55,10 @@ const BoardHeader = ({
 
   return (
     <>
-      <div className="title">{title}</div>
+      <div className="title">
+        {title}
+        {isMyBoard && <BoardSetting idx={idx} />}
+      </div>
       <div className="info">
         <Profile
           isMe={false}

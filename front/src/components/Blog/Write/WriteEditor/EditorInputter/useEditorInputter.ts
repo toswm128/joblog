@@ -169,7 +169,6 @@ const useEditorInputter = (data: line) => {
 
   const onDropUrl = useCallback(
     (e: React.DragEvent<HTMLTextAreaElement>) => {
-      console.log(e.dataTransfer.files[0]);
       e.preventDefault();
       setDrogOver(false);
       if (e.dataTransfer.files[0] !== undefined) {

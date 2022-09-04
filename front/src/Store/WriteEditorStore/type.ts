@@ -31,4 +31,5 @@ export type WriteEditorStateType = {
   tagBoxId: number | null;
   searchWord: string | null;
   tagBoxFocusIdx: number | null;
+  putId: string;
 };

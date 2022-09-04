@@ -1,15 +1,21 @@
 import useWrite from "hooks/write";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const EditorTitle = () => {
   const [text, setText] = useState("");
-  const { setTitle } = useWrite();
+  const {
+    setTitle,
+    WriteEditorState: { title },
+  } = useWrite();
+  useEffect(() => {
+    title && setText(title);
+  }, []);
   return (
     <input
       type="text"
       className="title"
       placeholder="제목을 입력해주세요..."
-      onChange={e => setText(e.target.value)}
+      onChange={(e) => setText(e.target.value)}
       value={text}
       onBlur={() => setTitle(text)}
     />

@@ -34,22 +34,29 @@ const useBlogAPI = () => {
     formData.append("context", JSON.stringify(dom));
     formData.append("title", title);
     formData.append("banner", banner ? banner : "");
-    try {
-      const result = await axios.post(`/blog/post`, formData);
-      if (result.status === 200) {
-        return result;
-      }
-    } catch (e) {
-      const err = e as AxiosError;
-      const status = err.response?.status;
-      switch (status) {
-        case 400:
-          console.log("값 부족");
-          break;
-        case 403:
-          console.log("토큰 없음");
-      }
-    }
+    const result = await axios.post(`/blog`, formData);
+    return result;
+  };
+  const putBoard = async (
+    dom: any,
+    title: string,
+    idx: string,
+    banner: banner
+  ) => {
+    const formData = new FormData();
+    formData.append("context", JSON.stringify(dom));
+    formData.append("title", title);
+    formData.append("idx", idx);
+    formData.append("banner", banner ? banner : "");
+    const result = await axios.put(`/blog`, formData);
+    return result;
+  };
+  const deleteBoard = async (idx: string) => {
+    const formData = new FormData();
+    formData.append("idx", idx);
+    formData.append("banner", "");
+    const result = await axios.delete(`/blog`, { data: formData });
+    return result;
   };
 
   const postComment = async (blogId: number, text: string) => {
@@ -111,6 +118,8 @@ const useBlogAPI = () => {
     getBlog,
     getBoard,
     postBoard,
+    putBoard,
+    deleteBoard,
     postComment,
     GetBlog2UserIdx,
     postImg,

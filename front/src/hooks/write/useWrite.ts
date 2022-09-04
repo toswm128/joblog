@@ -31,6 +31,7 @@ import {
   FOCUS_PREV_TAG,
   FOCUS_NEXT_TAG,
   FOCUS_SET_UP_TAG,
+  PUT_SET_UP,
 } from "Store/WriteEditorStore/actions";
 
 const useWrite = () => {
@@ -293,6 +294,16 @@ const useWrite = () => {
     });
   }, [dispatch]);
 
+  const putSetUp = useCallback(
+    (body, title, id) => {
+      dispatch({
+        type: PUT_SET_UP,
+        payload: { body, title, id },
+      });
+    },
+    [dispatch]
+  );
+
   return {
     clickInputter,
     enterInputter,
@@ -323,6 +334,7 @@ const useWrite = () => {
     closeTagBox,
     focusNextTag,
     focusPrevTag,
+    putSetUp,
     WriteEditorState,
   };
 };
