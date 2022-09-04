@@ -355,5 +355,6 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
     produce(state, (draft) => {
       draft.body = action.payload.body;
       draft.title = action.payload.title;
+      draft.putId = action.payload.id;
     }),
 });

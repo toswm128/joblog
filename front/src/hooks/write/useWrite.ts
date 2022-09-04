@@ -293,11 +293,12 @@ const useWrite = () => {
       type: FOCUS_PREV_TAG,
     });
   }, [dispatch]);
+
   const putSetUp = useCallback(
-    (body, title) => {
+    (body, title, id) => {
       dispatch({
         type: PUT_SET_UP,
-        payload: { body, title },
+        payload: { body, title, id },
       });
     },
     [dispatch]

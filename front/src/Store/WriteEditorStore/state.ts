@@ -24,6 +24,7 @@ const WriteEditorState: WriteEditorStateType = {
   tagBoxId: null,
   searchWord: null,
   tagBoxFocusIdx: null,
+  putId: "",
 };
 
 export default WriteEditorState;

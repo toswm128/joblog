@@ -51,6 +51,34 @@ const useBlogAPI = () => {
       }
     }
   };
+  const putBoard = async (
+    dom: any,
+    title: string,
+    idx: string,
+    banner: banner
+  ) => {
+    const formData = new FormData();
+    formData.append("context", JSON.stringify(dom));
+    formData.append("title", title);
+    formData.append("idx", idx);
+    formData.append("banner", banner ? banner : "");
+    try {
+      const result = await axios.put(`/blog/post`, formData);
+      if (result.status === 200) {
+        return result;
+      }
+    } catch (e) {
+      const err = e as AxiosError;
+      const status = err.response?.status;
+      switch (status) {
+        case 400:
+          console.log("값 부족");
+          break;
+        case 403:
+          console.log("토큰 없음");
+      }
+    }
+  };
 
   const postComment = async (blogId: number, text: string) => {
     try {
@@ -111,6 +139,7 @@ const useBlogAPI = () => {
     getBlog,
     getBoard,
     postBoard,
+    putBoard,
     postComment,
     GetBlog2UserIdx,
     postImg,

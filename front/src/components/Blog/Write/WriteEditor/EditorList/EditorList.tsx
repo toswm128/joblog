@@ -10,8 +10,8 @@ import DefaultButton from "components/common/Buttons/DefaultButton";
 
 const EditorList = () => {
   const { WriteEditorState, reset, dropLine } = useWrite();
-  const { body, head, title, banner } = WriteEditorState;
-  const { postBoard } = useBlogAPI();
+  const { body, head, title, banner, putId } = WriteEditorState;
+  const { postBoard, putBoard } = useBlogAPI();
   const queryClient = useQueryClient();
   const dom: any[] = [];
   const navigate = useNavigate();
@@ -62,21 +62,39 @@ const EditorList = () => {
           )}
         </Droppable>
       </DragDropContext>
-      <DefaultButton
-        onClick={() => {
-          console.log(dom);
-          title &&
-            postBoard(dom, title, banner).then(() => {
-              queryClient.refetchQueries("blogs");
-              reset();
-              navigate("/");
-            });
-        }}
-        isAbled={title ? true : false}
-        size={"M"}
-      >
-        <>작성하기</>
-      </DefaultButton>
+      {WriteEditorState.putId ? (
+        <DefaultButton
+          onClick={() => {
+            console.log(dom);
+            title &&
+              putBoard(dom, title, putId, banner).then(() => {
+                queryClient.refetchQueries("blogs");
+                reset();
+                navigate("/");
+              });
+          }}
+          isAbled={title ? true : false}
+          size={"M"}
+        >
+          <>수정하기</>
+        </DefaultButton>
+      ) : (
+        <DefaultButton
+          onClick={() => {
+            console.log(dom);
+            title &&
+              postBoard(dom, title, banner).then(() => {
+                queryClient.refetchQueries("blogs");
+                reset();
+                navigate("/");
+              });
+          }}
+          isAbled={title ? true : false}
+          size={"M"}
+        >
+          <>작성하기</>
+        </DefaultButton>
+      )}
     </>
   );
 };

@@ -4,15 +4,19 @@ import KebabItem from "components/common/Buttons/Kebab/KebabItem";
 import { useQuery } from "react-query";
 import useModal from "hooks/modal";
 import useWrite from "hooks/write/useWrite";
+import { useNavigate } from "react-router-dom";
 
 const useBoardSetting = (idx: string) => {
   const { putSetUp } = useWrite();
   const { getBoard } = useBlogAPI();
+  const { closeModal } = useModal();
+  const navigate = useNavigate();
   const { data: { data: board } = {} } = useQuery(
     `board/${idx}`,
     () => getBoard(idx),
     {}
   );
+
   const putBoard = () => {
     const context = JSON.parse(board?.blog?.context);
     const body = context.map((item: any, key: any) => {
@@ -30,8 +34,11 @@ const useBoardSetting = (idx: string) => {
 
       return item;
     });
-    putSetUp(body, board?.blog?.title);
+    putSetUp(body, board?.blog?.title, idx);
+    navigate("/write");
+    closeModal();
   };
+
   const deleteBoard = () => {
     console.log("delte");
   };
