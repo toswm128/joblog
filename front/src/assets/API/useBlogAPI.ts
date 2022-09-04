@@ -34,22 +34,8 @@ const useBlogAPI = () => {
     formData.append("context", JSON.stringify(dom));
     formData.append("title", title);
     formData.append("banner", banner ? banner : "");
-    try {
-      const result = await axios.post(`/blog`, formData);
-      if (result.status === 200) {
-        return result;
-      }
-    } catch (e) {
-      const err = e as AxiosError;
-      const status = err.response?.status;
-      switch (status) {
-        case 400:
-          console.log("값 부족");
-          break;
-        case 403:
-          console.log("토큰 없음");
-      }
-    }
+    const result = await axios.post(`/blog`, formData);
+    return result;
   };
   const putBoard = async (
     dom: any,
@@ -62,22 +48,8 @@ const useBlogAPI = () => {
     formData.append("title", title);
     formData.append("idx", idx);
     formData.append("banner", banner ? banner : "");
-    try {
-      const result = await axios.put(`/blog`, formData);
-      if (result.status === 200) {
-        return result;
-      }
-    } catch (e) {
-      const err = e as AxiosError;
-      const status = err.response?.status;
-      switch (status) {
-        case 400:
-          console.log("값 부족");
-          break;
-        case 403:
-          console.log("토큰 없음");
-      }
-    }
+    const result = await axios.put(`/blog`, formData);
+    return result;
   };
   const deleteBoard = async (idx: string) => {
     const formData = new FormData();

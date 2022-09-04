@@ -1,6 +1,4 @@
 import useWrite from "hooks/write";
-import { useQueryClient } from "react-query";
-import { useNavigate } from "react-router-dom";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import EditorItem from "./EditorItem/EditorItem";
 import { line } from "Store/WriteEditorStore/type";
