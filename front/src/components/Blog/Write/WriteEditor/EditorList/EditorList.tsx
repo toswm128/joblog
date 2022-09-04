@@ -1,4 +1,3 @@
-import useBlogAPI from "assets/API/useBlogAPI";
 import useWrite from "hooks/write";
 import { useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
@@ -6,15 +5,14 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import EditorItem from "./EditorItem/EditorItem";
 import { line } from "Store/WriteEditorStore/type";
 import styled from "@emotion/styled";
-import DefaultButton from "components/common/Buttons/DefaultButton";
+import Submit from "./Submit/Submit";
 
 const EditorList = () => {
-  const { WriteEditorState, reset, dropLine } = useWrite();
-  const { body, head, title, banner, putId } = WriteEditorState;
-  const { postBoard, putBoard } = useBlogAPI();
-  const queryClient = useQueryClient();
+  const {
+    WriteEditorState: { body, head },
+    dropLine,
+  } = useWrite();
   const dom: any[] = [];
-  const navigate = useNavigate();
 
   let next: number | null;
   let snext: number | null;
@@ -62,39 +60,7 @@ const EditorList = () => {
           )}
         </Droppable>
       </DragDropContext>
-      {WriteEditorState.putId ? (
-        <DefaultButton
-          onClick={() => {
-            console.log(dom);
-            title &&
-              putBoard(dom, title, putId, banner).then(() => {
-                queryClient.refetchQueries("blogs");
-                reset();
-                navigate("/");
-              });
-          }}
-          isAbled={title ? true : false}
-          size={"M"}
-        >
-          <>수정하기</>
-        </DefaultButton>
-      ) : (
-        <DefaultButton
-          onClick={() => {
-            console.log(dom);
-            title &&
-              postBoard(dom, title, banner).then(() => {
-                queryClient.refetchQueries("blogs");
-                reset();
-                navigate("/");
-              });
-          }}
-          isAbled={title ? true : false}
-          size={"M"}
-        >
-          <>작성하기</>
-        </DefaultButton>
-      )}
+      <Submit dom={dom} />
     </>
   );
 };
