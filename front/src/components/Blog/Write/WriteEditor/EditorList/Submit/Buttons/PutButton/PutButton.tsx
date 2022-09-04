@@ -1,8 +1,10 @@
 import useBlogAPI from "assets/API/useBlogAPI";
+import { AxiosError } from "axios";
 import DefaultButton from "components/common/Buttons/DefaultButton";
 import useWrite from "hooks/write/useWrite";
-import { useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
+import useModal from "hooks/modal/useModal";
 
 const PutButton = ({ dom }: { dom: any[] }) => {
   const {
@@ -12,15 +14,23 @@ const PutButton = ({ dom }: { dom: any[] }) => {
   const { putBoard } = useBlogAPI();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { openModal } = useModal();
+
+  const { mutate } = useMutation(() => putBoard(dom, title, putId, banner), {
+    onSuccess: () => {
+      reset();
+      navigate(`/board/${putId}`);
+      queryClient.invalidateQueries(`board/${putId}`);
+    },
+    onError: (error: AxiosError) => {
+      openModal("error", { status: error?.response?.status });
+    },
+  });
+
   return (
     <DefaultButton
       onClick={() => {
-        title &&
-          putBoard(dom, title, putId, banner).then(() => {
-            queryClient.refetchQueries("blogs");
-            reset();
-            navigate("/");
-          });
+        title && mutate();
       }}
       isAbled={title ? true : false}
       size={"M"}
