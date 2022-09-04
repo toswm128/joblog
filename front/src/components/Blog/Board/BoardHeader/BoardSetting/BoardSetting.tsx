@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const useBoardSetting = (idx: string) => {
   const { putSetUp } = useWrite();
-  const { getBoard } = useBlogAPI();
+  const { getBoard, deleteBoard } = useBlogAPI();
   const { closeModal } = useModal();
   const navigate = useNavigate();
   const { data: { data: board } = {} } = useQuery(
@@ -39,10 +39,12 @@ const useBoardSetting = (idx: string) => {
     closeModal();
   };
 
-  const deleteBoard = () => {
-    console.log("delte");
+  const removeBoard = () => {
+    deleteBoard(idx);
+    navigate("/");
+    closeModal();
   };
-  return { putBoard, deleteBoard };
+  return { putBoard, removeBoard };
 };
 
 interface IBoardSetting {
@@ -50,7 +52,7 @@ interface IBoardSetting {
 }
 
 const BoardSetting = ({ idx }: IBoardSetting) => {
-  const { putBoard, deleteBoard } = useBoardSetting(idx);
+  const { putBoard, removeBoard } = useBoardSetting(idx);
   const { openModal } = useModal();
   return (
     <KebabButton>
@@ -59,7 +61,7 @@ const BoardSetting = ({ idx }: IBoardSetting) => {
           <>수정하기</>
         </KebabItem>
         <KebabItem
-          onClick={() => openModal("board/setting/delete", { deleteBoard })}
+          onClick={() => openModal("board/setting/delete", { removeBoard })}
         >
           <>삭제하기</>
         </KebabItem>

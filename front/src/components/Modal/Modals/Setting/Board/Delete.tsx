@@ -2,7 +2,7 @@ import DefaultButton from "components/common/Buttons/DefaultButton";
 import ModalForm from "components/Modal/ModalForm";
 import useModal from "hooks/modal";
 
-const Delete = ({ deleteBoard }: { deleteBoard: any }) => {
+const Delete = ({ removeBoard }: { removeBoard: any }) => {
   const { closeModal } = useModal();
 
   return (
@@ -11,7 +11,7 @@ const Delete = ({ deleteBoard }: { deleteBoard: any }) => {
         <span>정말 삭제 하겠습니까?</span>
         <div>
           <DefaultButton
-            onClick={() => deleteBoard()}
+            onClick={() => removeBoard()}
             isAbled={true}
             size={"L"}
           >
