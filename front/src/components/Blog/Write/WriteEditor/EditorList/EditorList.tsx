@@ -6,6 +6,7 @@ import EditorItem from "./EditorItem/EditorItem";
 import { line } from "Store/WriteEditorStore/type";
 import styled from "@emotion/styled";
 import Submit from "./Submit/Submit";
+import CancelButton from "./Submit/Buttons/CancelButton";
 
 const EditorList = () => {
   const {
@@ -60,7 +61,10 @@ const EditorList = () => {
           )}
         </Droppable>
       </DragDropContext>
-      <Submit dom={dom} />
+      <Buttons>
+        <Submit dom={dom} />
+        <CancelButton />
+      </Buttons>
     </>
   );
 };
@@ -69,6 +73,12 @@ const EditorListContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
 
 export default EditorList;
