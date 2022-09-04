@@ -35,7 +35,7 @@ const useBlogAPI = () => {
     formData.append("title", title);
     formData.append("banner", banner ? banner : "");
     try {
-      const result = await axios.post(`/blog/post`, formData);
+      const result = await axios.post(`/blog`, formData);
       if (result.status === 200) {
         return result;
       }
@@ -63,7 +63,7 @@ const useBlogAPI = () => {
     formData.append("idx", idx);
     formData.append("banner", banner ? banner : "");
     try {
-      const result = await axios.put(`/blog/post`, formData);
+      const result = await axios.put(`/blog`, formData);
       if (result.status === 200) {
         return result;
       }

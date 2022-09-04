@@ -319,6 +319,7 @@ export default createReducer<WriteEditorStateType>(WriteEditorState, {
       draft.focusIndex = 999999;
       draft.setTexter = false;
       draft.setFocuser = false;
+      draft.putId = "";
     }),
 
   [OPEN_TAG_BOX]: (state, action) =>

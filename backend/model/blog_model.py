@@ -76,6 +76,19 @@ class blogModel:
         db.close()
         return result
 
+    def delete_blog(self,idx):
+        db = self.db.getDB()
+        cursor = db.cursor()
+        sql = '''
+            DELETE FROM `joblog`.`blog` WHERE (`idx` = %s);
+            '''
+        print(sql)
+        cursor.execute(sql,(idx))
+        result = cursor.fetchall()
+        db.commit()
+        db.close()
+        return result
+
     def post_comment(self,blogId,userId,text):
         db = self.db.getDB()
         cursor = db.cursor()

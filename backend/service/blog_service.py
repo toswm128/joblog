@@ -25,6 +25,14 @@ class blogService:
             return blog
         else:
             return 400
+    def delete_blog(self,value,token):
+        userIdx = self.tools.get_data(token)['idx']
+        if userIdx and value['idx']:
+            idx = value['idx']
+            blog = self.blog_model.delete_blog(idx)
+            return blog
+        else:
+            return 400
 
     def get_Blog(self,page,limit):
         new_page = int(page)
