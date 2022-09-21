@@ -1,8 +1,6 @@
 import BoardList from "components/common/NewBlogs/BoardList";
-import { NewBlogsContainer } from "components/common/NewBlogs/MainPageStyle";
 import { useState } from "react";
 import { useInfiniteQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
 import MainLoader from "../Loader/MainLoader";
 import ViewObserver from "../ViewObserver";
 import useModal from "hooks/modal";
@@ -33,7 +31,7 @@ const NewBlogs = ({ querykey, breakpoints, infiniteFuc }: INewBlogs) => {
   );
 
   return (
-    <div>
+    <>
       {isLoading || isError ? (
         <MainLoader />
       ) : (
@@ -50,7 +48,7 @@ const NewBlogs = ({ querykey, breakpoints, infiniteFuc }: INewBlogs) => {
           </BoardList>
         </>
       )}
-    </div>
+    </>
   );
 };
 
