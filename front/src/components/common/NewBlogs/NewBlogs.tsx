@@ -44,7 +44,9 @@ const NewBlogs = ({ querykey, breakpoints, infiniteFuc }: INewBlogs) => {
             }, data?.pages[0])}
             isEnd={isEnd}
           >
-            <ViewObserver observerFuc={fetchNextPage} />
+            <>
+              <ViewObserver observerFuc={fetchNextPage} />
+            </>
           </BoardList>
         </>
       )}
