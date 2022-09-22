@@ -4,7 +4,11 @@ import ModalForm from "components/Modal/ModalForm";
 import useModal from "hooks/modal";
 import { useState } from "react";
 
-const Profile = ({ mutate }: { mutate: (file: any) => any }) => {
+interface IProfileModal {
+  mutate: (file: any) => any;
+}
+
+const useProfileModal = ({ mutate }: IProfileModal) => {
   const [file, setFile] = useState<File>();
   const [src, setSrc] = useState("");
   const { closeModal } = useModal();
@@ -26,6 +30,11 @@ const Profile = ({ mutate }: { mutate: (file: any) => any }) => {
     }
   };
 
+  return { src, onClick, onChange };
+};
+
+const Profile = ({ mutate }: IProfileModal) => {
+  const { src, onClick, onChange } = useProfileModal({ mutate });
   return (
     <ModalForm>
       <>
@@ -50,7 +59,7 @@ const Profile = ({ mutate }: { mutate: (file: any) => any }) => {
   );
 };
 
-const ModalContent = styled.div`
+const ModalContent = styled.main`
   & > label {
     display: flex;
     flex-direction: column;
