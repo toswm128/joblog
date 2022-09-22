@@ -34,7 +34,12 @@ const BoardList = ({ blogList, breakpoints, children, isEnd }: IBoardList) => {
         <BoardFlex blogFlex={current} key={key} />
       ))}
 
-      {!isEnd && flex && children}
+      {!isEnd && flex && (
+        <>
+          <ScrollLoader flex={flex} />
+          {children}
+        </>
+      )}
     </>
   );
 };
